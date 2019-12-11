@@ -40,8 +40,9 @@ First of all clone the github repository
     $ git clone https://github.com/CPNV-ES/Joutes-2020
 
 
-Then install all the dependecies
+Then install all the dependencies
 
+    $ cd Joutes-2020
     $ composer install
     $ npm install
 
@@ -64,6 +65,9 @@ The project is almost up and running, in the .env file you'll need to configure 
     DB_USERNAME=homestead
     DB_PASSWORD=secret
 
-Now you can create the DB
+   (username and password vary according to your Db server)
 
-    $php artisan migrate
+Next, you have to create and seed the DB:
+
+    $ php artisan migrate
+    $ php artisan db:seed
