@@ -13,7 +13,6 @@ class Tournament extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
-     * @author Doran Kayoumi
      */
     public function event()
     {
@@ -25,7 +24,6 @@ class Tournament extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      *
-     * @author Doran Kayoumi
      */
     public function sport()
     {
