@@ -1,5 +1,7 @@
 <?php
 
+use App\Team;
+use App\Tournament;
 use Illuminate\Database\Seeder;
 
 class Joutes2019Seeder extends Seeder
@@ -30,10 +32,11 @@ class Joutes2019Seeder extends Seeder
 
         $this->basics();
         $this->tournamentsList();
-        //$this->BeachVolley();
-        //$this->Basket();
-        //$this->UniHockey();
-        //$this->Badminton();
+        $this->teams();
+        $this->BeachVolley();
+        $this->Basket();
+        $this->UniHockey();
+        $this->Badminton();
     }
 
     // Common stuff
@@ -169,6 +172,86 @@ class Joutes2019Seeder extends Seeder
         $tournament->event()->associate($this->event);
         $tournament->save();
         echo "OK\n";
+    }
+
+    private function teams()
+    {
+        echo "Création des équipes...";
+        echo "\nde badminton";
+        $badmintonTournament = Tournament::where('name', 'like', '%Badmin%')->first();
+
+        (new Team(['name' => 'Badboys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Super Nanas', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'CPVN Crew', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Magical Girls', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'OliverTwist', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Big fat boys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Minions', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Tchôoo', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Olakétal', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'MAlexandri', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Youpi', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Mouarf', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Soft Dog Meteors', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Volleywood ', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'art-Time Snakes', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Magaical Girls', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'OliverTwist', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Big fat boys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Minions boys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Tchôoo men', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Olakétal teammmm', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Dylan gang', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Yakow', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'NotWorking', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Error404', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Super superman', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'CPVN gang', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Magical hood', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'OliverTwinnn', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Big fat girls', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Brrrrrooooo', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Yomen', 'tournament_id' => $badmintonTournament->id]))->save();
+
+        echo "\nde beach volley";
+        $beachVolleyTournament = Tournament::where('name', 'like', '%Beach%')->first();
+
+        (new Team(['name' => 'Siomer', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Salsadi', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Monoster', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Picalo', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Dellit', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Btooom', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Stalgia', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Clattonia', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Danrell', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'RunAGround', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Believer', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Plouf', 'tournament_id' => $beachVolleyTournament->id]))->save();
+
+        echo "\nde basket";
+        $basketTournament = Tournament::where('name', 'like', '%Basket%')->first();
+
+        (new Team(['name' => 'SuperStar', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Masting', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Clafier', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Robert2Poche', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Alexandri', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'FanGirls', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Les Otakus', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Les Hotoman', 'tournament_id' => $basketTournament->id]))->save();
+
+        echo "\nde UniHockey";
+        $uniHockeyTournament = Tournament::where('name', 'like', '%hockey%')->first();
+
+        (new Team(['name' => 'Gamers', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Over2000', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Shinigami', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Rocketteurs', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Maya Labeille', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Lonvoyant', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'RoyalGang', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'The Dwarf', 'tournament_id' => $uniHockeyTournament->id]))->save();
     }
 
     private function Badminton()
