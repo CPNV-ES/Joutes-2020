@@ -21,35 +21,26 @@ Un utilisateur averti peut cloner le repo Git, suivre la procédure d'installati
 ## Réalisation
 ### Plan d'intervention
 
-```
-/**
-* Maintenant, on parle technique...
-* Lister tous les changements que l'on pense devoir faire
-* Exemple:
-*  - Ajout du champ 'lastTechnicalCheck' dans la table vehicles
-*  - Regénération du modèle
-*  - Ajout d'une méthode 'isDueForCheck' au modèle (tous les 3 ans)
-*  - Modification de la vue qui liste les véhicules
-*  - ...
-*/
-```
+1. Mise en place du fonctionnement page d'accueil (events), de son controller et de ses routes et ressources.
+(Terminé, le 17.12.2019)
 
-(Terminé, le ...)
+2. Installation de mdbootstrap 
+(Terminé, le 17.12.2019)
+
+3. Mise en place de la structure scss, (main, base, components, layout)
+(En cours...)
+
+4. Design HTML basique (strucutre de base) de la page d'accueil
+
 
 ### Exécution
 
-```
-/**
-* Description de ce qui s'est vraiment passé. On repart du plan d'intervention.
-* Exemple
-*  - Ajout du champ 'lastTechnicalCheck' dans la table vehicles -> 15min
-*  - Regénération du modèle -> 10min
-*  - Ajout d'une méthode 'isDueForCheck' au modèle -> 30min
-*  - Modification de la vue qui liste les véhicules -> 10 min
-*  - La période de validité du contrôle technique dépend de l'année de
-*    mise en service du véhicule ! -> il faut aussi gérer l'année -> +2 heures
-*/
-```
+1. (17.12) Ajouts de routes et resources, ajout du controller des events, ajout des fonctions dans le model des events, afichage de la page event.
+
+2. (17.12) Installation de mdbootstrap dans les nodes_modules, ajout d'asset dans le webpack.mix.js pour les dépendance css et js de mdbootstrap.
+
+3. (17.12) Arborèscence des dossiers scss établie, fichier actuellement manquants.
+
 
 ### Tests
 
