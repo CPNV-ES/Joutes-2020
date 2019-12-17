@@ -13,7 +13,6 @@ class Court extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
-     * @author Doran Kayoumi
      */
     public function sport(){
         return $this->belongsTo(Sport::class);
