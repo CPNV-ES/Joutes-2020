@@ -12,9 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .copyDirectory('node_modules/mdbootstrap/js', 'public/js/mdbootstrap')
-    .copyDirectory('node_modules/font-awesome/css', 'public/font-awesome/css')
-    .copyDirectory('node_modules/font-awesome/fonts', 'public/font-awesome/fonts')
-    .sass('resources/sass/main.scss', 'public/css')
-    .copy('node_modules/mdbootstrap/css/bootstrap.min.css', 'public/css')
-    .copy('node_modules/mdbootstrap/css/mdb.min.css', 'public/css');
+    .copyDirectory('node_modules/mdbootstrap', 'public/mdbootstrap')
+    .copyDirectory('node_modules/@fortawesome/fontawesome-free/css', 'public/font-awesome/css')
+    .copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/font-awesome/webfonts')
+    .sass('resources/sass/main.scss', 'public/css');
