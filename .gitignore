@@ -1,6 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
+/public/mdbootstrap
+/public/css
+/public/js
+/public/font-awesome
 /storage/*.key
 /vendor
 .env
