@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Pool;
+use App\Tournament;
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
@@ -13,11 +15,12 @@ class TournamentController extends Controller
 
     public function store(Request $request)
     {
-        return redirect()->action('TournamentController@edit', ['id' => 2]);
+        $tournament = Tournament::create($request->all());
+        return redirect()->action('TournamentController@edit', ['tournament' => $tournament]);
     }
 
-    public function edit(Request $request)
+    public function edit(Tournament $tournament)
     {
-
+        return view('tournament.edit')->with('tournament', $tournament);
     }
 }
