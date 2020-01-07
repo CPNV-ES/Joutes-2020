@@ -5,6 +5,7 @@
 /public/css
 /public/js
 /public/font-awesome
+/public/mix-manifest.json
 /storage/*.key
 /vendor
 .env
