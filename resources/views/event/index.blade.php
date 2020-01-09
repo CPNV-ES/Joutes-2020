@@ -21,7 +21,7 @@
 					<div class="box">
 						<div class="imgBox">
 							<a href="{{route('events.tournaments.index', $event->id)}}" title="Voir l'événement">
-								<!-- <img src="{{ url('event_img/'.$event->img) }}" alt="Image de l'événement">
+								<!-- <img src="{{ url('event_img/'.$event->img) }}" alt="Image de l'événement"> -->
 								<div class="title name"> {{$event->name}} </div>
 							</a>
 						</div>
