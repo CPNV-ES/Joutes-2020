@@ -2,7 +2,7 @@
 @extends('layout')
 
 @section('content')
-	<div class="container boxList">
+	<div class="container">
 		<h1>
 			Evénements
 			@if(Auth::check())
@@ -12,36 +12,38 @@
 			@endif
 		</h1>
 
-		<input type="search" placeholder="Recherche" class="search form-control">
-
-		<div class="row searchIn">
+		<div class="row">
 
 			@foreach ($events as $event)
-				<div class="col-md-4 hideSearch">
-					<div class="box">
-						<div class="imgBox">
-							<a href="{{route('events.tournaments.index', $event->id)}}" title="Voir l'événement">
-								<!-- <img src="{{ url('event_img/'.$event->img) }}" alt="Image de l'événement"> -->
-								<div class="title name"> {{$event->name}} </div>
-							</a>
-						</div>
+                <a href="{{route('events.tournaments.index', $event->id)}}" title="Voir l'événement">
+                    <div class="card">
+                        @if($event->img != null)
+                            <img class="card-img" src="{{ asset('images/joutes.jpg') }}" alt="Image de l'événement">
+                        @else
+                            <!-- Get uploaded image -->
+                        @endif
 
-						@if(Auth::check())
-							@if(Auth::user()->role == 'administrator')
-								<div class="infos">
-									<a href="{{route('events.edit', $event->id)}}" title="Éditer le événement" class="edit"><i class="fa fa-pencil fa-lg action" aria-hidden="true"></i></a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{$event->name}} </h5>
 
-									{{-- {{ Form::open(array('url' => route('events.destroy', $event->id), 'method' => 'delete')) }}
-										<button type="button" class="button-delete" data-name="{{ $event->name }}" data-type="tournament">
-						                    <i class="fa fa-trash-o fa-lg action" aria-hidden="true"></i>
-						                </button>
-									{{ Form::close() }} --}}
-								</div>
-							@endif
-						@endif
+                            @if(Auth::check())
+                                @if(Auth::user()->role == 'administrator')
+                                    <div class="infos">
+                                        <a href="{{route('events.edit', $event->id)}}" title="Éditer le événement" class="edit"><i class="fa fa-pencil fa-lg action" aria-hidden="true"></i></a>
 
-					</div>
-				</div>
+                                        {{-- {{ Form::open(array('url' => route('events.destroy', $event->id), 'method' => 'delete')) }}
+                                            <button type="button" class="button-delete" data-name="{{ $event->name }}" data-type="tournament">
+                                                <i class="fa fa-trash-o fa-lg action" aria-hidden="true"></i>
+                                            </button>
+                                        {{ Form::close() }} --}}
+                                    </div>
+                                @endif
+                            @endif
+
+                        </div>
+                    </div>
+                </a>
+
 			@endforeach
 			@if(count($events) == 0)
 				<div class="col-md-12">Aucun événement pour l'instant...</div>

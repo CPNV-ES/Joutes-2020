@@ -1,8 +1,25 @@
 //////////////////
 //// Navbar edits
 
-.sidebar li:hover{
-    background-color: black !important;
+#sidebar ul li > a:hover{
+    background-color: $main-green !important;
+}
+
+#sidebar ul li > a:hover {
+    background-color: $main-green !important;
+    color:inherit;
+    border-bottom: none;
+}
+
+#sidebar ul li.active > a:hover{
+    background-color: $main-green !important;
+    color:inherit;
+}
+
+#sidebar ul li.active > a:hover {
+    background-color: $main-green !important;
+    color:inherit;
+    border-bottom: none;
 }
 
 .navbar-bottom{
@@ -13,7 +30,7 @@
 }
 
 .btnCollapseNavbar{
-    background-color: #212121 !important;
+    background-color: $main-component !important;
     margin: -12px 2px 0px 0px;
     height: 50px;
     width: 50px;
@@ -21,12 +38,12 @@
 
 .btnCollapseNavbar:hover{
     color: inherit;
-    background-color: #9ee493 !important;
+    background-color: $main-green !important;
 }
 
 .btnCollapseNavbar:focus{
     color: inherit;
-    background-color: #9ee493 !important;
+    background-color: $main-green !important;
 }
 
 .btnCollapseNavbar i{

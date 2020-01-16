@@ -5,6 +5,9 @@
 //////////////////
 //// Base
 
+//Colors
+@import 'base/colors';
+
 // Colorlib Navbar template
 @import 'base/colorLibBase';
 
@@ -16,13 +19,18 @@
 //////////////////
 //// Components
 
-//logos and images
+// Logos and images
 @import 'components/logos';
 
+// Cards
+@import 'components/cards';
 
 
 
 //////////////////
 //// Layout
+
+//Animations
+@import 'layout/animations';
 
 
