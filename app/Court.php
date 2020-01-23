@@ -14,7 +14,8 @@ class Court extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      */
-    public function sport(){
+    public function sport()
+    {
         return $this->belongsTo(Sport::class);
     }
 
