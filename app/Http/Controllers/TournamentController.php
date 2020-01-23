@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-    //Display the tournament info
+    //Display all the tournaments
     public function index()
     {
         $tournaments = Tournament::all()->sortBy("start_date");
+        $tournamentFromEvent = false;
 
         foreach ($tournaments as $tournament) {
             if (empty($tournament->img)) {
@@ -21,35 +22,19 @@ class TournamentController extends Controller
             }
         }
 
-        return view('tournament.index', array(
-            "tournaments" => $tournaments,
-            "fromEvent" => false
-        ));
+        return view('tournaments.index', compact('tournaments', 'tournamentFromEvent'));
     }
+
+
 
     //Display a specific tournament
     public function show(Request $request, $id)
     {
         $tournament = Tournament::find($id);
+        $pools = $tournament->getPoolsByTournamentId($tournament);
+        $maxStage = $pools->max('stage');
 
-        if ($request->ajax())
-        {
-            // Check if the tournament is Full, no more teams are accepted
-            if ($request->input("isFull") == "isFull") {
-                if (($tournament->isComplete()) || ($tournament == null)) return 1;
-                else return 0;
-            }
-        }
+        return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));
 
-        $pools = $tournament->pools;
-        $totalStage = 0;
-        foreach ($pools as $pool) {
-            if($pool->stage > $totalStage){
-                $totalStage = $pool->stage;
-            }
-        }
-        return view('tournament.show')->with('tournament', $tournament)
-                                      ->with('pools', $pools)
-                                      ->with('totalStage', $totalStage);
     }
 }

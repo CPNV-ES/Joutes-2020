@@ -10,10 +10,10 @@
             </div>
 
             <div class="col-11 ml-n2">
-                @if ($fromEvent)
+                @if ($tournamentFromEvent)
                     <h1>
                         Tournois de l'évenement {{ $event->name }}
-                        @if(Auth::check() && $fromEvent)
+                        @if(Auth::check() && $tournamentFromEvent)
                             @if(Auth::user()->role == 'administrator')
                                 <a href="{{route('events.tournaments.create', $event->id)}}" class="greenBtn" title="Créer un tournoi">Ajouter</i></a>
                             @endif

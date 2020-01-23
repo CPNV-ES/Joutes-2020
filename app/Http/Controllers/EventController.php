@@ -20,27 +20,13 @@ class EventController extends Controller
 
         $events = Event::all()->sortByDesc("id");
 
-        // check is it's an api request
-        if ($request->is('api/*')) {
-            return $events;
-        }
-
-        // return a list of events using ajax
-        if ($request->ajax()) {
-            $list = array();
-            for ($i=0; $i < sizeof($events); $i++) {
-                    $list[$events[$i]->id] = $events[$i]->name;
-            }
-            return $list;
-        }
-
         foreach ($events as $event) {
             if (empty($event->img)) {
                 $event->img = 'default.jpg';
             }
         }
 
-        return view('event.index')->with('events', $events);
+        return view('events.index')->with('events', $events);
 
     }
 }

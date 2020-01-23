@@ -31,7 +31,7 @@
 
 		<div class="row">
 			<div class="col-lg-6">
-				<table id="tournament-teams-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+				<table id="" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th>Liste des équipes participantes</th>
@@ -64,7 +64,7 @@
 			</div>
 
 			<div class="col-lg-6">
-				<table id="tournament-courts-table" class="table table-striped table-bordered translate" cellspacing="0" width="100%">
+				<table id="" class="table table-striped table-bordered translate" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th>Liste des terrains</th>
@@ -86,52 +86,55 @@
 				</table>
 				<a href="{{ route('courts.create', ['id_sport' => $tournament->sport->id]) }}" class="greenBtn" title="Créer un tournoi">Ajouter</i></a>
 			</div>
-		</div>
+        </div>
 
-		<h2>Visualisation du tournoi</h2>
+        <div class="row mt-5">
 
-		<!-- Stages and pools -->
-		@if (sizeof($tournament->pools) > 0)
+            <h2>Visualisation du tournoi</h2>
 
-			<table class="table pools">
-				<thead>
-					<tr>
-						<th class="sizedTh"></th>
-						@for ($i = 1; $i <= $totalStage; $i++)
+            <!-- Stages and pools -->
+            @if (sizeof($tournament->pools) > 0)
 
-							<th class="nav-item">
-								Phase {{$i}}
-							</th>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="sizedTh"></th>
+                            @for ($i = 1; $i <= $maxStage; $i++)
 
-						@endfor
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th class="verticalText"><span>Poules</span></th>
-						@for ($i = 1; $i <= $totalStage; $i++)
-							<td class="noPadding">
-								<table id="pools-table" class="table-hover table-striped table-bordered" width="100%" data-tournament="{{$tournament->id}}">
-									<tbody>
-										@foreach ($pools as $pool)
-											@if ($pool->stage == $i)
-											<tr>
-												<td data-id="{{$pool->id}}" class="clickable">{{$pool->poolName}}</td>
-											</tr>
-											@endif
-										@endforeach
-									</tbody>
-								</table>
-							</td>
-						@endfor
-					</tr>
+                                <th class="nav-item">
+                                    Phase {{$i}}
+                                </th>
+
+                            @endfor
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="verticalText"><span>Poules</span></th>
+                            @for ($i = 1; $i <= $maxStage; $i++)
+                                <td class="noPadding">
+                                    <table id="pools-table" class="table-hover table-striped table-bordered" width="100%" data-tournament="{{$tournament->id}}">
+                                        <tbody>
+                                            @foreach ($pools as $pool)
+                                                @if ($pool->stage == $i)
+                                                <tr>
+                                                    <td data-id="{{$pool->id}}" class="clickable">{{$pool->poolName}}</td>
+                                                </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </td>
+                            @endfor
+                        </tr>
 
 
-				</tbody>
-			</table>
-		@else
-			Indisponible pour le moment ...
-		@endif
+                    </tbody>
+                </table>
+            @else
+                Indisponible pour le moment ...
+            @endif
 
+        </div>
 
 @stop

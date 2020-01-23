@@ -19,7 +19,7 @@
 
         <!-- Side Navbar -->
         <div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
+			<nav id="sidebar" class="sideNavbar">
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btnCollapseNavbar">
 	                    <i class="fa fa-bars fa-lg"></i>
@@ -33,6 +33,7 @@
                 <ul class="list-unstyled components mb-5">
                     <li class="@if(Route::is('events.index')) active @endif"><a href="{{ route('events.index') }}"> <i class="fa fa-calendar" aria-hidden="true"></i> Evénements</a></li>
                     <li class="@if(Route::is('tournaments.index')) active @endif"><a href="{{ route('tournaments.index') }}"> <i class="fa fa-trophy" aria-hidden="true"></i> Tournois</a></li>
+
                     @if(Auth::check())
                         @if(Auth::user()->role->slug =='ADMIN')
                             <li class="@if(Route::is('sports.index')) active @endif"><a href="{{ route('sports.index') }}"> <i class="fa fa-futbol-o" aria-hidden="true"></i> Sports</a></li>
@@ -44,10 +45,12 @@
                             <li class="@if(Route::is('administration.index')) active @endif"><a href="{{ route('administration.index') }}" class="btn-administration-a"> <input type="button" class="btn btn-administration" value="Administration"></a></li>
 
                         @endif
+
                         @if(Auth::user()->role == 'participant')
                             <li class="@if(Route::is('profile.index')) active @endif"><a href="{{ route('profile.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                         @endif
-                    @endif
+                        @endif
+
                 </ul>
 
                 <div class="navbar-bottom">

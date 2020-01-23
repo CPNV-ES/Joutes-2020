@@ -20,20 +20,7 @@ class EventTournamentController extends Controller
 
         $event = Event::findOrFail($event_id);
         $tournaments = $event->tournaments;
-
-        // return a list of tournaments for a selected event using ajax
-        if ($request->ajax()) {
-            $list = array();
-            for ($i=0; $i < sizeof($tournaments); $i++) {
-                $isMaxLimit = $tournaments[$i]->isComplete(); // tournament complete
-                $list[] = ['id' => $tournaments[$i]->id, 'name' => $tournaments[$i]->name, 'start_date' => $tournaments[$i]->start_date, 'end_date' => $tournaments[$i]->end_date, 'isMaxLimiTeams' => $isMaxLimit];
-                }
-            return $list;
-
-        }
-
-        $event = Event::findOrFail($event_id);
-        $tournaments = $event->tournaments;
+        $tournamentFromEvent = true;
 
         foreach ($tournaments as $tournament) {
             if (empty($tournament->img)) {
@@ -41,12 +28,8 @@ class EventTournamentController extends Controller
             }
         }
 
-        return view('tournament.index', array(
-            "tournaments" => $tournaments,
-            "fromEvent" => true,
-            "event" => $event
-        ));
 
+        return view('tournaments.index', compact('tournaments', 'tournamentFromEvent', 'event'));
     }
 
 }

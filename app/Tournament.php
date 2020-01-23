@@ -62,22 +62,6 @@ class Tournament extends Model
     }
 
 
-
-
-    //Get specific pool
-    public function pool($id)
-    {
-        // get tournament pools
-        $pools = $this->pools;
-
-        // look for wanted pool
-        foreach ($pools as $pool) {
-            if ($pool->id == $id) {
-                return $pool;
-            }
-        }
-    }
-
     public function results() {
         $pools = $this->pools;
         $filtered = null;
@@ -94,6 +78,10 @@ class Tournament extends Model
 
 
 
+    public function getPoolsByTournamentId($tournament){
+        $pools = $tournament->pools;
+        return $pools;
+    }
 
 
 
