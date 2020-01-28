@@ -11,12 +11,16 @@
 |
 */
 
+use App\Http\Controllers\ResultTournamentControllers;
+
 Route::get('/', function () {
     return redirect()->route('events.index');
 });
 
 
 Route::resource('events', 'EventController', ['only' => ['index', 'show']]);
-Route::resource('tournaments', 'TournamentControllers', ['only' => ['index', 'show']]);
+Route::resource('tournaments', 'TournamentController', ['only' => ['index', 'show']]);
 Route::resource('events.tournaments', 'EventTournamentController', [ 'only' => ['index', 'show']]);
 Route::resource('courts', 'CourtController');
+
+Route::get('tournaments/{id}/results/{pool_id}', 'ResultTournamentControllers@show');
