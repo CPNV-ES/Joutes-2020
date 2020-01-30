@@ -1,11 +1,20 @@
-//////////////////
+//////////////////////
 //// Navbar edits
+//
 
 .sideNavbar {
-    position: fixed !important;
     bottom: 0;
     top: 0;
+    z-index: 1;
 }
+
+.navContent{
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    width: 250px;
+}
+
 
 #sidebar ul li > a:hover{
     background-color: $main-green !important;
@@ -14,7 +23,7 @@
 #sidebar ul li > a:hover {
     background-color: $main-green !important;
     color:inherit;
-    border-bottom: none;
+    border-bottom: 1px solid $main-green;
 }
 
 #sidebar ul li.active > a:hover{
@@ -25,14 +34,16 @@
 #sidebar ul li.active > a:hover {
     background-color: $main-green !important;
     color:inherit;
-    border-bottom: none;
+    border-bottom: 1px solid $main-green;
 }
 
 .navbar-bottom{
     text-align: center;
-    position: fixed;
     bottom: 65px;
-    width: 13%;
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    width: 250px;
 }
 
 .btnCollapseNavbar{
@@ -47,14 +58,14 @@
     background-color: $main-green !important;
 }
 
-.btnCollapseNavbar:focus{
-    color: inherit;
-    background-color: $main-green !important;
-}
 
 .btnCollapseNavbar i{
     color: white  !important;
 }
 
 
-
+@media (max-width: 991.98px){
+    #sidebar .custom-menu {
+        margin-right: -50px !important;
+    }
+}

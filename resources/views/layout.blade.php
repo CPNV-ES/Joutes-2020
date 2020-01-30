@@ -15,69 +15,70 @@
     </head>
 
 
-    <body>
+    <body class="preload">
 
         <!-- Side Navbar -->
         <div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="sideNavbar">
-				<div class="custom-menu">
-					<button type="button" id="sidebarCollapse" class="btn btnCollapseNavbar">
-	                    <i class="fa fa-bars fa-lg"></i>
-                        <span class="sr-only">Toggle Menu</span>
-	                </button>
+                <div class="navContent">
+                    <div class="custom-menu">
+                        <button type="button" id="sidebarCollapse" class="btn btnCollapseNavbar">
+                            <i class="fa fa-bars fa-lg"></i>
+                            <span class="sr-only">Toggle Menu</span>
+                        </button>
+                    </div>
+
+                    <a class="navbar-brand" href="{{ route('events.index') }}">
+                        <img class="joutesLogo" src="{{ asset('images/logo.png') }}" alt>
+                    </a>
+                    <ul class="list-unstyled components mb-5">
+                        <li class="@if(Route::is('events.index')) active @endif"><a href="{{ route('events.index') }}"> <i class="fa fa-calendar" aria-hidden="true"></i> Evénements</a></li>
+                        <li class="@if(Route::is('tournaments.index')) active @endif"><a href="{{ route('tournaments.index') }}"> <i class="fa fa-trophy" aria-hidden="true"></i> Tournois</a></li>
+
+                        @if(Auth::check())
+                            @if(Auth::user()->role->slug =='ADMIN')
+                                <li class="@if(Route::is('sports.index')) active @endif"><a href="{{ route('sports.index') }}"> <i class="fa fa-futbol-o" aria-hidden="true"></i> Sports</a></li>
+                                <li class="@if(Route::is('courts.index')) active @endif"><a href="{{ route('courts.index') }}"> <i class="fa fa-map-marker" aria-hidden="true"></i> Terrains</a></li>
+                                <li class="@if(Route::is('teams.index')) active @endif"><a href="{{ route('teams.index') }}"> <i class="fa fa-users" aria-hidden="true"></i> Equipes</a></li>
+                                <li class="@if(Route::is('participants.index')) active @endif"><a href="{{ route('participants.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Participants</a></li>
+
+                                <!-- Administation Button -->
+                                <li class="@if(Route::is('administration.index')) active @endif"><a href="{{ route('administration.index') }}" class="btn-administration-a"> <input type="button" class="btn btn-administration" value="Administration"></a></li>
+
+                            @endif
+
+                            @if(Auth::user()->role == 'participant')
+                                <li class="@if(Route::is('profile.index')) active @endif"><a href="{{ route('profile.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                            @endif
+                            @endif
+
+                    </ul>
+
+                    <div class="navbar-bottom">
+                        <div class="versiontag"><strong style="color:red;">Work in progress</strong></div>
+                        <div class="versiontag">Version 2020</div>
+                        <div class="copyright">© CPNV - 2020</div>
+
+                        <!--<div class="devs">
+                            <a href="#" class="show-devs">Développeurs</a>
+
+                            <div class="dev-names hide">
+                                <a href="#" class="dev">Davide Carboni</a>
+                                <a href="#" class="dev">Doran Kayoumi</a>
+                                <a href="#" class="dev">Loïc Dessaules</a>
+                                <a href="#" class="dev">Antoine Dessauges</a>
+                                <a href="#" class="dev">Jérémy Gfeller</a>
+                                <a href="#" class="dev">Senistan Jegarajasingam</a>
+                                <a href="#" class="dev">Quentin Rossier</a>
+                            </div>
+
+                        </div>-->
+                    </div>
                 </div>
-
-                <a class="navbar-brand" href="{{ route('events.index') }}">
-                    <img class="joutesLogo" src="{{ asset('images/logo.png') }}" alt>
-                </a>
-                <ul class="list-unstyled components mb-5">
-                    <li class="@if(Route::is('events.index')) active @endif"><a href="{{ route('events.index') }}"> <i class="fa fa-calendar" aria-hidden="true"></i> Evénements</a></li>
-                    <li class="@if(Route::is('tournaments.index')) active @endif"><a href="{{ route('tournaments.index') }}"> <i class="fa fa-trophy" aria-hidden="true"></i> Tournois</a></li>
-
-                    @if(Auth::check())
-                        @if(Auth::user()->role->slug =='ADMIN')
-                            <li class="@if(Route::is('sports.index')) active @endif"><a href="{{ route('sports.index') }}"> <i class="fa fa-futbol-o" aria-hidden="true"></i> Sports</a></li>
-                            <li class="@if(Route::is('courts.index')) active @endif"><a href="{{ route('courts.index') }}"> <i class="fa fa-map-marker" aria-hidden="true"></i> Terrains</a></li>
-                            <li class="@if(Route::is('teams.index')) active @endif"><a href="{{ route('teams.index') }}"> <i class="fa fa-users" aria-hidden="true"></i> Equipes</a></li>
-                            <li class="@if(Route::is('participants.index')) active @endif"><a href="{{ route('participants.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Participants</a></li>
-
-                            <!-- Administation Button -->
-                            <li class="@if(Route::is('administration.index')) active @endif"><a href="{{ route('administration.index') }}" class="btn-administration-a"> <input type="button" class="btn btn-administration" value="Administration"></a></li>
-
-                        @endif
-
-                        @if(Auth::user()->role == 'participant')
-                            <li class="@if(Route::is('profile.index')) active @endif"><a href="{{ route('profile.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-                        @endif
-                        @endif
-
-                </ul>
-
-                <div class="navbar-bottom">
-                    <div class="versiontag"><strong style="color:red;">Work in progress</strong></div>
-                    <div class="versiontag">Version 2020</div>
-                    <div class="copyright">© CPNV - 2020</div>
-
-                    <!--<div class="devs">
-                        <a href="#" class="show-devs">Développeurs</a>
-
-                        <div class="dev-names hide">
-                            <a href="#" class="dev">Davide Carboni</a>
-                            <a href="#" class="dev">Doran Kayoumi</a>
-                            <a href="#" class="dev">Loïc Dessaules</a>
-                            <a href="#" class="dev">Antoine Dessauges</a>
-                            <a href="#" class="dev">Jérémy Gfeller</a>
-                            <a href="#" class="dev">Senistan Jegarajasingam</a>
-                            <a href="#" class="dev">Quentin Rossier</a>
-                        </div>
-
-                    </div>-->
-                </div>
-
     	    </nav>
 
             <!-- Page Content  -->
-            <div id="content" class="p-4 p-md-5 pt-5">
+            <div id="content" class="p-4 p-md-5 pt-5 ml-l-5 ml-md-5 ml-sm-5">
 
                 @yield('content')
 
@@ -93,7 +94,8 @@
     </body>
 
     <script>
-
-
+        $(window).load(function() {
+            $("body").removeClass("preload");
+        });
     </script>
 </html>

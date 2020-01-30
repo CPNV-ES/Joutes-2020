@@ -1,21 +1,34 @@
-<!-- @author Dessaules Loïc -->
 
 @extends('layout')
 
 @section('content')
-	<div class="container singleTournament">
+	<div class="container">
 
-		<a href=""><i class="fa fa-4x fa-arrow-circle-left return" aria-hidden="true"></i></a>
+        <div class="row">
+            <div class="col-1 ml-n5">
+                <a href="{{ route('events.index') }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+            </div>
 
-		<h1 class="tournamentName">
-			{{ $tournament->name }}
-			@if (Auth::check() && (Auth::user()->role == 'administrator' || Auth::user()->role == 'writer'))
-				<a href="{{ route('tournaments.schedule.index', $tournament->id) }}" class="greenBtn big-screen" title="Affichage écran géant">Affichage écran geant</i></a>
-			@endif
-		@if ( Auth::check() && (Auth::user()->role == "administrator"))
-			<a href="{{route('tournaments.export', $tournament->id)}}" class="greenBtn">Exporter en CSV les équipes et participants</a>
-		@endif
-		</h1>
+            <div class="col-11 ml-n2">
+                <h1 class="tournamentName">
+                    {{ $tournament->name }}
+                    @if (Auth::check() && (Auth::user()->role == 'administrator' || Auth::user()->role == 'writer'))
+                        <a href="{{ route('tournaments.schedule.index', $tournament->id) }}" class="greenBtn big-screen" title="Affichage écran géant">Affichage écran geant</i></a>
+                    @endif
+                    @if ( Auth::check() && (Auth::user()->role == "administrator"))
+                        <a href="{{route('tournaments.export', $tournament->id)}}" class="greenBtn">Exporter en CSV les équipes et participants</a>
+                    @endif
+
+                </h1>
+
+                <hr>
+
+               <input type="search" placeholder="Recherche" class="search form-control">
+
+            </div>
+
+        </div>
+
 
 		<div class="right">
 			<div>

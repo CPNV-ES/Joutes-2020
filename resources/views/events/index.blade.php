@@ -3,14 +3,20 @@
 
 @section('content')
 	<div class="container">
-		<h1>
-			Evénements
-			@if(Auth::check())
-				@if(Auth::user()->role == 'administrator')
-					<a href="{{route('events.create')}}" class="greenBtn" title="Créer un événement">Ajouter</i></a>
-				@endif
-			@endif
-		</h1>
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1>
+                    Evénements
+                    @if(Auth::check())
+                        @if(Auth::user()->role == 'administrator')
+                            <a href="{{route('events.create')}}" class="greenBtn" title="Créer un événement">Ajouter</i></a>
+                        @endif
+                    @endif
+                </h1>
+
+                <hr>
+            </div>
+        </div>
 
 		<div class="row">
 
