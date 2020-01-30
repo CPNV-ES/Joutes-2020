@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Tournament extends Model
 {
     public $timestamps = false;
-    protected $fillable = array('name', 'start_date', 'end_date', 'start_time', 'event_id','max_teams'); // -> We have to define all data we use on our sport table (For use ->all())
     protected $dates = ['start_date', 'end_date']; //need to user convert format date
 
     /**
@@ -17,7 +16,7 @@ class Tournament extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'start_date', 'img', 'event_id', 'sport_id', 'end_date', 'max_teams'
+        'name', 'start_date', 'end_date', 'start_time', 'img', 'event_id', 'sport_id', 'end_date', 'max_teams'
     ];
 
     /**
@@ -45,18 +44,6 @@ class Tournament extends Model
     public function pools()
     {
         return $this->hasMany(Pool::class);
-    }
-
-
-    /**
-     * Create a new belongs to many relationship instance between Tournament and Pool
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     *
-     */
-    public function pools()
-    {
-        return $this->hasMany('App\Pool');
     }
 
 
