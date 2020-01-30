@@ -1,5 +1,6 @@
 <?php
 
+use App\GameType;
 use App\Team;
 use App\Tournament;
 use Illuminate\Database\Seeder;
@@ -267,6 +268,10 @@ class Joutes2019Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Championnat\n";
@@ -276,8 +281,8 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '16:00',
             'poolName' => 'The Battle',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 13,
             'stage' => 1,
             'isFinished' => 0
@@ -360,6 +365,10 @@ class Joutes2019Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Championnat\n";
@@ -369,8 +378,8 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '16:00',
             'poolName' => 'The Championship',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
             'isFinished' => 0
@@ -429,6 +438,10 @@ class Joutes2019Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Championnat\n";
@@ -438,8 +451,8 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '16:00',
             'poolName' => 'NBA',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
             'isFinished' => 0
@@ -511,6 +524,10 @@ class Joutes2019Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Stage 1 = 2 poules de 6 équipes\n";
@@ -520,8 +537,8 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'A',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 6,
             'stage' => 1,
             'isFinished' => 0
@@ -534,7 +551,7 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'B',
-            'mode_id' => 1,
+            'mode_id' => $poolModeId,
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 1,
@@ -595,7 +612,7 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'Winners',
-            'mode_id' => 1,
+            'mode_id' => $poolModeId,
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
@@ -609,7 +626,7 @@ class Joutes2019Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'Cool',
-            'mode_id' => 1,
+            'mode_id' => $poolModeId,
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,

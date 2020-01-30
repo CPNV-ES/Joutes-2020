@@ -1,19 +1,39 @@
+//////////////////
+//// MAIN SCSS
 //
-.content {
-    min-height: 100vh;
-    height: auto;
-    transition: all 0.2s ease-in-out;
-  }
 
-  .button-collapse {
-    position: fixed;
-    left: 10px;
-    top: 10px;
-    z-index: 10;
-  }
+//////////////////
+//// Base
 
-  @media(min-width: 1440px) {
-    .content {
-      padding-left: 250px;
-    }
-  }
+// Colors
+@import 'base/colors';
+
+// Colorlib Navbar template
+@import 'base/colorLibBase';
+
+// Navbar edits on ColorLib template
+@import 'base/navEdits';
+
+
+
+//////////////////
+//// Components
+
+// Logos and images
+@import 'components/logos';
+
+// Cards
+@import 'components/cards';
+
+
+
+//////////////////
+//// Layout
+
+// General settings
+@import 'layout/generalSettings';
+
+//Animations
+@import 'layout/animations';
+
+
