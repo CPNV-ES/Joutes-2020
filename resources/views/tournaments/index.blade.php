@@ -72,6 +72,7 @@
 				<div class="col-md-12">Aucun tournoi pour l'instant...</div>
 			@endif
 		</div>
+        {{-- Modal form to create a tournament --}}
         @include('tournaments.create')
 	</div>
 @stop

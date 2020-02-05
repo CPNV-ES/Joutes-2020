@@ -8,7 +8,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form>
+            <form action="{{ route('tournaments.store') }}" method="POST">
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="tournamentName">Nom du tournoi</label>
@@ -45,7 +46,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-main">Créer</button>
+                    <button type="submit" class="btn btn-main">Créer</button>
                 </div>
             </form>
         </div>
