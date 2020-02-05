@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-    public function create(Request $request)
-    {
-        return view('tournaments.create');
-    }
-
     public function store(Request $request)
     {
         $tournament = Tournament::create($request->all());

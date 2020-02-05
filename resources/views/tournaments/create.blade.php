@@ -8,14 +8,46 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="tournamentName">Nom du tournoi</label>
-                <input type="text" id="tournamentName" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-main">Créer</button>
-            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="tournamentName">Nom du tournoi</label>
+                        <input type="text" class="form-control" id="tournamentName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromDate">Date de début</label>
+                        <input type="text" class="form-control" id="fromDate" aria-describedby="fromDateHelp">
+                        <small id="fromDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
+                            hh:mm</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="toDate">Date de fin</label>
+                        <input type="text" class="form-control" id="toDate" aria-describedby="toDateHelp">
+                        <small id="toDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
+                            hh:mm</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sportSelect">Sport</label>
+                        <select class="form-control" id="sportSelect">
+                            @foreach ($sports as $sport)
+                                <option value="{{ $sport->id }}">{{ $sport->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nrOfTeams">Nombre d'équipes</label>
+                        <input type="number" class="form-control" id="nrOfTeams" min="1" max="99999999999">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-main">Créer</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
