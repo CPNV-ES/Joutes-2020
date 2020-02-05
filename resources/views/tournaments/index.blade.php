@@ -15,8 +15,10 @@
                         Tournois de l'évenement {{ $event->name }}
                         @if(Auth::check() && $tournamentFromEvent)
                             @if(Auth::user()->role == 'administrator')
-                                <a href="{{route('events.tournaments.create', $event->id)}}" class="greenBtn" title="Créer un tournoi">Ajouter</i></a>
-                            @endif
+                                <button type="button" class="btn btn-main" data-toggle="modal" data-backdrop="static" data-target="#createTournamentModal">
+                                    Créer un tournoi
+                                </button>
+                             @endif
                         @endif
                     </h1>
                 @else
@@ -70,6 +72,6 @@
 				<div class="col-md-12">Aucun tournoi pour l'instant...</div>
 			@endif
 		</div>
-
+        @include('tournaments.create')
 	</div>
 @stop

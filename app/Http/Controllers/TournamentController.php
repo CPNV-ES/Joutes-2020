@@ -12,7 +12,7 @@ class TournamentController extends Controller
 {
     public function create(Request $request)
     {
-        return view('tournament.create');
+        return view('tournaments.create');
     }
 
     public function store(Request $request)
@@ -23,7 +23,7 @@ class TournamentController extends Controller
 
     public function edit(Tournament $tournament)
     {
-        return view('tournament.edit')->with('tournament', $tournament);
+        return view('tournaments.edit')->with('tournament', $tournament);
     }
 
     //Display all the tournaments

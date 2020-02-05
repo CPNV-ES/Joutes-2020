@@ -1,0 +1,14 @@
+//////////////////
+//// BUTTONS
+//
+
+.btn-main {
+    background-color: $main-green;
+    border-color: $main-green;
+    color: white;
+
+    &:hover {
+        color: white;
+        background-color: $main-green;
+    }
+}
