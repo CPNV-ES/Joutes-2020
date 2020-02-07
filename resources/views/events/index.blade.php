@@ -18,7 +18,7 @@
             </div>
         </div>
 
-		<div class="row">
+		<div class="row ml-4">
 
 			@foreach ($events as $event)
                 <a href="{{route('events.tournaments.index', $event->id)}}" title="Voir l'événement">

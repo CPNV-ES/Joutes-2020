@@ -23,4 +23,8 @@ Route::resource('courts', 'CourtController');
 Route::resource('sports', 'SportController');
 Route::resource('teams', 'TeamController');
 Route::resource('participants', 'ParticipantController');
-Route::resource('administrations', 'AdministrationController');
+
+//Administration resources
+Route::resource('administrations', 'Admin\AdministrationController');
+Route::resource('roles', 'Admin\RoleController');
+

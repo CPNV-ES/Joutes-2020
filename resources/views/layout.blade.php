@@ -43,7 +43,7 @@
                                 <li class="@if(Route::is('participants.index')) active @endif"><a href="{{ route('participants.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Participants</a></li>
 
                                 <!-- Administation Button -->
-                                <li class="@if(Route::is('administrations.index')) active @endif"><a href="{{ route('administrations.index') }}" class="btn-administration-a"> <input type="button" class="btn btn-administration" value="Administration"></a></li>
+                                <li class="@if(Route::is('administrations.index')) active @endif"><a href="{{ route('administrations.index') }}" class="btn-administration"> <input type="button" class="btn btn-main grow" value="Administration"></a></li>
 
                             @endif
 

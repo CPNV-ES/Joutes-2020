@@ -30,7 +30,7 @@
 
         </div>
 
-		<div class="row">
+		<div class="row ml-4">
 
             @foreach ($tournaments as $tournament)
 
