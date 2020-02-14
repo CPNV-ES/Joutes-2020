@@ -11,6 +11,8 @@
 
             <div class="col-11 ml-n2">
                 @if ($tournamentFromEvent)
+                    {{-- Modal form to create a tournament --}}
+                    @include('tournaments.create')
                     <h1>
                         Tournois de l'évenement {{ $event->name }}
                         @if(Auth::check() && $tournamentFromEvent)
@@ -72,7 +74,5 @@
 				<div class="col-md-12">Aucun tournoi pour l'instant...</div>
 			@endif
 		</div>
-        {{-- Modal form to create a tournament --}}
-        @include('tournaments.create')
 	</div>
 @stop

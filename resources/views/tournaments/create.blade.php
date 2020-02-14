@@ -13,35 +13,37 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="tournamentName">Nom du tournoi</label>
-                        <input type="text" class="form-control" id="tournamentName">
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
 
                     <div class="form-group">
-                        <label for="fromDate">Date de début</label>
-                        <input type="text" class="form-control" id="fromDate" aria-describedby="fromDateHelp">
-                        <small id="fromDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
+                        <label for="start_date">Date de début</label>
+                        <input type="text" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
+                        <small id="startDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
                             hh:mm</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="toDate">Date de fin</label>
-                        <input type="text" class="form-control" id="toDate" aria-describedby="toDateHelp">
-                        <small id="toDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
+                        <label for="end_date">Date de fin</label>
+                        <input type="text" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
+                        <small id="endDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
                             hh:mm</small>
                     </div>
 
                     <div class="form-group">
                         <label for="sportSelect">Sport</label>
-                        <select class="form-control" id="sportSelect">
+                        <select class="form-control" id="sportSelect" name="sport_id">
                             @foreach ($sports as $sport)
                                 <option value="{{ $sport->id }}">{{ $sport->name }}</option>
                             @endforeach
                         </select>
                     </div>
 
+                    <input type="hidden" id="event_id" name="event_id" value="{{ $event->id }}">
+
                     <div class="form-group">
-                        <label for="nrOfTeams">Nombre d'équipes</label>
-                        <input type="number" class="form-control" id="nrOfTeams" min="1" max="99999999999">
+                        <label for="max_teams">Nombre d'équipes</label>
+                        <input type="number" class="form-control" id="max_teams" name="max_teams" min="1" max="99999999999">
                     </div>
                 </div>
                 <div class="modal-footer">

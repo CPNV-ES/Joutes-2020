@@ -16,7 +16,7 @@ class Tournament extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'start_date', 'end_date', 'start_time', 'img', 'event_id', 'sport_id', 'end_date', 'max_teams'
+        'name', 'start_date', 'end_date', 'event_id', 'sport_id', 'end_date', 'max_teams'
     ];
 
     /**

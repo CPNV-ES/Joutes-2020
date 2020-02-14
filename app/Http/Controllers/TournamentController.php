@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTournamentRequest;
 use App\Tournament;
 use App\Pool;
+use App\Sport;
 use App\Team;
 
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-    public function store(Request $request)
+    public function store(CreateTournamentRequest $request)
     {
         $tournament = Tournament::create($request->all());
         return redirect()->action('TournamentController@edit', ['tournament' => $tournament]);
