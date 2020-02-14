@@ -2,14 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTournamentRequest;
 use App\Tournament;
 use App\Pool;
+use App\Sport;
 use App\Team;
 
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
+    public function store(CreateTournamentRequest $request)
+    {
+        $tournament = Tournament::create($request->all());
+        return redirect()->action('TournamentController@edit', ['tournament' => $tournament]);
+    }
+
+    public function edit(Tournament $tournament)
+    {
+        return view('tournaments.edit')->with('tournament', $tournament);
+    }
+
     //Display all the tournaments
     public function index()
     {
@@ -24,8 +37,6 @@ class TournamentController extends Controller
 
         return view('tournaments.index', compact('tournaments', 'tournamentFromEvent'));
     }
-
-
 
     //Display a specific tournament
     public function show(Request $request, $id)

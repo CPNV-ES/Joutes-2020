@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Sport;
 
 class EventTournamentController extends Controller
 {
@@ -21,6 +22,7 @@ class EventTournamentController extends Controller
         $event = Event::findOrFail($event_id);
         $tournaments = $event->tournaments;
         $tournamentFromEvent = true;
+        $sports = Sport::all();
 
         foreach ($tournaments as $tournament) {
             if (empty($tournament->img)) {
@@ -29,7 +31,7 @@ class EventTournamentController extends Controller
         }
 
 
-        return view('tournaments.index', compact('tournaments', 'tournamentFromEvent', 'event'));
+        return view('tournaments.index', compact('tournaments', 'tournamentFromEvent', 'event', 'sports'));
     }
 
 }

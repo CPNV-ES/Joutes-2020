@@ -7,8 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Tournament extends Model
 {
     public $timestamps = false;
-    protected $fillable = array('name', 'start_date', 'end_date', 'start_time', 'event_id','max_teams'); // -> We have to define all data we use on our sport table (For use ->all())
     protected $dates = ['start_date', 'end_date']; //need to user convert format date
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'start_date', 'end_date', 'event_id', 'sport_id', 'end_date', 'max_teams'
+    ];
 
     /**
      * Create a new belongs to relationship instance between Tournament and Event
@@ -24,24 +33,17 @@ class Tournament extends Model
     /**
      * Create a new belongs to relationship instance between Tournament and Sport
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      *
      */
     public function sport()
     {
-        return $this->belongsTo('App\Sport');
+        return $this->belongsTo(Sport::class);
     }
 
-
-    /**
-     * Create a new belongs to many relationship instance between Tournament and Pool
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     *
-     */
     public function pools()
     {
-        return $this->hasMany('App\Pool');
+        return $this->hasMany(Pool::class);
     }
 
 
