@@ -6,17 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Tournament;
 use App\Pool;
-use App\Team;
+use App\Contender;
 
 class ResultTournamentControllers extends Controller
 {
-    public function show($id , $pool_id){
-
-        $tournament = Tournament::find($id);
+    public function show(Request $request){
+        $tournament = Tournament::find($request->route('id'));
         $pools = $tournament->getPoolsByTournamentId($tournament);
         $maxStage = $pools->max('stage');
-        $team =
 
-        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools'));
+        $pool = Pool::find($request->route('pool_id'));
+        $contenders = $pool->contenders;
+        //dd($pool->rankings());
+
+        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'contenders'));
     }
 }

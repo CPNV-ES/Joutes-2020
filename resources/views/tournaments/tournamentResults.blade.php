@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="container">
-        <h1>Tournoi de : {{$tournament->name}}</h1>
+        <h1>Tournoi de {{$tournament->name}} - Phase 1 - A</h1>
         <div class="text-center">
             <h2>Matchs et Résultats</h2>
-            <h3>Date : {{$tournament->start_date->format('d.m.Y')}}</h3>
+            <h4>Date : {{$tournament->start_date->format('d.m.Y')}}</h4>
             <div class="row justify-content-center">
                 <table class="table">
                     <tbody class="text">
@@ -36,15 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="col">1</th>
-                        <th scope="col">supernana</th>
-                        <th scope="col">6</th>
-                        <th scope="col">3</th>
-                        <th scope="col">0</th>
-                        <th scope="col">0</th>
-                        <th scope="col">23</th>
-                    </tr>
+                    @foreach($contenders as $contender)
+                        <tr>
+                            <th scope="col">1</th>
+                            <th scope="col">{{$contender->team->name}}</th>
+                            <th scope="col">6</th>
+                            <th scope="col">3</th>
+                            <th scope="col">0</th>
+                            <th scope="col">0</th>
+                            <th scope="col">23</th>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

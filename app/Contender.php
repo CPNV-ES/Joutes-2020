@@ -8,8 +8,13 @@ class Contender extends Model
 {
     public $timestamps = false;
 
-    public function teams()
+    public function team()
     {
-        return $this->belongsToMany('App\Team');
+        return $this->belongsTo(Team::class);
     }
+
+    public function pool() {
+        return $this->belongsTo(Pool::class, 'pool_id');
+    }
+
 }
