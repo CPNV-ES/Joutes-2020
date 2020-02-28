@@ -17,8 +17,17 @@ class ResultTournamentControllers extends Controller
 
         $pool = Pool::find($request->route('pool_id'));
         $contenders = $pool->contenders;
-        //dd($pool->rankings());
 
-        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'contenders'));
+        $rankings = $pool->rankings();
+
+        $ranking_completed = true;
+        foreach ($rankings as $ranking) {
+            if ($ranking["team_id"] == -1) {
+                $ranking_completed = false;
+                break;
+            }
+        }
+
+        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed'));
     }
 }
