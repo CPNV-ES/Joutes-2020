@@ -13,16 +13,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
 
-    //copy mdbootstrap files
-    // css
-    .copy('node_modules/mdbootstrap/css/bootstrap.min.css', 'public/lib/mdbootstrap/css')
-    .copy('node_modules/mdbootstrap/css/mdb.min.css', 'public/lib/mdbootstrap/css')
-
     // js
-    .copy('node_modules/mdbootstrap/js/jquery.min.js', 'public/lib/mdbootstrap/js')
-    .copy('node_modules/mdbootstrap/js/popper.min.js', 'public/lib/mdbootstrap/js')
-    .copy('node_modules/mdbootstrap/js/bootstrap.min.js', 'public/lib/mdbootstrap/js')
-    .copy('node_modules/mdbootstrap/js/mdb.min.js', 'public/lib/mdbootstrap/js')
+    .copy('node_modules/jquery/dist/jquery.min.js', 'public/lib/jquery')
 
     //font awesome
     .copyDirectory('node_modules/@fortawesome/fontawesome-free/css', 'public/lib/font-awesome/css')
