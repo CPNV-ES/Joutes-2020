@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTournamentRequest;
+use App\Http\Requests\UpdateTournamentRequest;
 use App\Tournament;
 use App\Pool;
 use App\Sport;
@@ -20,7 +21,8 @@ class TournamentController extends Controller
 
     public function edit(Tournament $tournament)
     {
-        return view('tournaments.edit')->with('tournament', $tournament);
+        $sports = Sport::all();
+        return view('tournaments.edit')->with(compact('tournament', 'sports'));
     }
 
     //Display all the tournaments
@@ -36,6 +38,18 @@ class TournamentController extends Controller
         }
 
         return view('tournaments.index', compact('tournaments', 'tournamentFromEvent'));
+    }
+
+    public function update(UpdateTournamentRequest $request, Tournament $tournament)
+    {
+        $tournament->fill($request->all());
+
+        $tournament->start_date = $request->input('start_date').$request->input('start_hour');
+        $tournament->end_date = $request->input('end_date').$request->input('end_hour');
+
+        $tournament->save();
+
+        return redirect()->route('tournaments.show', ['tournament' => $tournament->id]);
     }
 
     //Display a specific tournament
