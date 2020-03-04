@@ -16,18 +16,30 @@
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
 
-                    <div class="form-group">
-                        <label for="start_date">Date de début</label>
-                        <input type="text" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
-                        <small id="startDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
-                            hh:mm</small>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label for="start_date">Date de début</label>
+                            <input type="date" class="form-control col-m-6" name="start_date" id="start_date">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="start_hour">Heure de début</label>
+                            <input type="time" class="form-control col-m-6" name="start_hour" id="start_hour" step="1">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="end_date">Date de fin</label>
-                        <input type="text" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
-                        <small id="endDateHelp" class="form-text text-muted">Doit être formatté comme suit : JJ/MM/AAAA
-                            hh:mm</small>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="end_date">Date de fin</label>
+                                <input type="date" class="form-control" name="end_date" id="end_date">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="end_hour">Heure de fin</label>
+                            <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour" step="1">
+                        </div>
                     </div>
 
                     <div class="form-group">

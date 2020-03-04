@@ -14,7 +14,14 @@ class TournamentController extends Controller
 {
     public function store(CreateTournamentRequest $request)
     {
-        $tournament = Tournament::create($request->all());
+        $tournament = new Tournament();
+        $tournament->fill($request->all());
+
+        $tournament->start_date = $request->input('start_date').$request->input('start_hour');
+        $tournament->end_date = $request->input('end_date').$request->input('end_hour');
+
+        $tournament->save();
+        
         return redirect()->action('TournamentController@edit', ['tournament' => $tournament]);
     }
 
