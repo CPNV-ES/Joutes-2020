@@ -8,8 +8,8 @@
         <title>Joutes</title>
 
         <link href="{{ asset('/lib/font-awesome/css/all.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('/lib/mdbootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('/lib/mdbootstrap/css/mdb.min.css') }}" rel="stylesheet" type="text/css" />
+        {{-- <link href="{{ asset('/lib/mdbootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/lib/mdbootstrap/css/mdb.min.css') }}" rel="stylesheet" type="text/css" /> --}}
         <link href="{{ asset('/css/main.css') }}" rel="stylesheet" type="text/css" />
 
     </head>
@@ -43,7 +43,7 @@
                                 <li class="@if(Route::is('participants.index')) active @endif"><a href="{{ route('participants.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Participants</a></li>
 
                                 <!-- Administation Button -->
-                                <li class="@if(Route::is('administrations.index')) active @endif"><a href="{{ route('administrations.index') }}" class="btn-administration-a"> <input type="button" class="btn btn-administration" value="Administration"></a></li>
+                                <li class="@if(Route::is('administrations.index')) active @endif"><a href="{{ route('administrations.index') }}" class="btn-administration"> <input type="button" class="btn btn-main grow" value="Administration"></a></li>
 
                             @endif
 
@@ -85,10 +85,10 @@
             </div>
 		</div>
 
-        <script src="{{ asset('/lib/mdbootstrap/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('/lib/mdbootstrap/js/popper.min.js') }}"></script>
+        <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
+        {{-- <script src="{{ asset('/lib/mdbootstrap/js/popper.min.js') }}"></script>
         <script src="{{ asset('/lib/mdbootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('/lib/mdbootstrap/js/mdb.min.js') }}"></script>
+        <script src="{{ asset('/lib/mdbootstrap/js/mdb.min.js') }}"></script> --}}
         <script src="{{ asset('/js/app.js') }}"></script>
 
     </body>

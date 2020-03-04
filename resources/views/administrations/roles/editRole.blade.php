@@ -1,4 +1,4 @@
-<!-- @author Yvann Butticaz --> 
+<!-- @author Yvann Butticaz -->
 @extends('layout')
 
 @section('content')
@@ -25,7 +25,7 @@
 
 
         {{ Form::open(array('url' => route('roles.update', $role->id), 'method' => 'put',  'id' => 'formRole')) }}
-            
+
             <div class="form-group">
                 {{ Form::label('slug', 'Slug : ') }}
                 {{ Form::text('slug', $role->slug, array('class' => 'form-control')) }}

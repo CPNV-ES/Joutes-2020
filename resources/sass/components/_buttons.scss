@@ -11,4 +11,16 @@
         color: white;
         background-color: $main-green;
     }
+
+    &:focus {
+        box-shadow: none !important;
+    }
 }
+
+
+.btn-administration{
+    text-align: center;
+    font-size: large;
+}
+
+
