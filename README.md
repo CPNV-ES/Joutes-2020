@@ -85,3 +85,9 @@ Finally, seed the DB
 $ php artisan migrate
 $ php artisan db:seed
 ```
+
+## Dev login
+In order to be logged as a developper, run this command
+```bash
+    php artisan make:devLogin <username>
+```
