@@ -5,21 +5,60 @@
         <h1>{{ $tournament->name }}</h1>
         <div class="stages-container">
             <div class="stage">
-                @if(count($tournament->pools) > 0)
-                    <h2>Phase 1</h2>
-                    <div class="pools-container">
-                        <div class="pool">
-                            <button class="btn">Add pool</button>
-                        </div>
+                <div class="pools-container">
+                    <div class="editForm col-6">
+                        <form action="{{ route('tournaments.update', $tournament->id) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group">
+                                <label for="name">Nom du tournoi</label>
+                            <input type="text" class="form-control" name="name" id="name" value="{{ $tournament->name }}">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <label for="start_date">Date de début</label>
+                                    <input type="date" class="form-control col-m-6" name="start_date" id="start_date" value="{{ $tournament->start_date->format('Y-m-d') }}">
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="start_hour">Heure de début</label>
+                                    <input type="time" class="form-control col-m-6" name="start_hour" id="start_hour" value="{{ $tournament->start_date->format('H:i:s') }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="end_date">Date de fin</label>
+                                        <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $tournament->end_date->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="end_hour">Heure de fin</label>
+                                    <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour" value="{{ $tournament->end_date->format('H:i:s') }}">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sport">Sport</label>
+                                <select class="form-control" id="sportSelect" name="sport_id">
+                                    @foreach ($sports as $sport)
+                                        @if ($tournament->sport->name == $sport->name)
+                                            <option value="{{ $sport->id }}" selected>{{ $sport->name }}</option>
+                                        @else
+                                            <option value="{{ $sport->id }}">{{ $sport->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="max_teams">Nombre d'équipes</label>
+                                <input type="number" class="form-control" name="max_teams" id="max_teams" value="{{ $tournament->max_teams }}">
+                            </div>
+                            <button type="submit" class="btn btn-main">Sauvegarder</button>
+                        </form>
                     </div>
-                @else
-                    <h2>Phase ttttt</h2>
-                    <div class="pools-container">
-                        <div class="pool">
-                            <button class="btn">Add pool</button>
-                        </div>
-                    </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>

@@ -22,8 +22,6 @@
                 @endif
 
                 <hr>
-
-               <input type="search" placeholder="Recherche" class="search form-control">
             </div>
 
         </div>
