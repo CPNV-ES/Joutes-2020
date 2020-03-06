@@ -2,12 +2,22 @@
 
 @section('content')
     <div class="container">
-        <h1>{{ $tournament->name }}</h1>
+
+        <div class="row">
+            <div class="col-1 ml-n5">
+                <a href="{{ route('tournaments.show', $tournament) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-11 ml-n2">
+                <h1>{{ $tournament->name }}</h1>
+                <hr>
+            </div>
+        </div>
+
         <div class="stages-container">
             <div class="stage">
                 <div class="pools-container">
                     <div class="editForm col-6">
-                        <form action="{{ route('tournaments.update', $tournament->id) }}" method="post">
+                        <form action="{{ route('tournaments.update', $tournament) }}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="PUT">
                             <div class="form-group">

@@ -29,7 +29,6 @@ class CreateTournamentRequest extends FormRequest
             'end_date' => 'required|date|after_or_equal:start_date',
             'sport_id' => 'required|exists:sports,id',
             'max_teams' => 'required|min:2',
-            'event_id' => 'required|exists:events,id'
         ];
     }
 }

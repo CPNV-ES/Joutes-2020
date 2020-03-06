@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="col-6">
-    <form action="{{ route('tournaments.store') }}" method="POST">
+    <form action="{{ route('events.tournaments.store', $event->id) }}" method="POST">
         @csrf
         <div class="modal-body">
             <div class="form-group">
@@ -45,8 +45,6 @@
                     @endforeach
                 </select>
             </div>
-    
-            <input type="hidden" id="event_id" name="event_id" value="{{ $event->id }}">
     
             <div class="form-group">
                 <label for="max_teams">Nombre d'équipes</label>

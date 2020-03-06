@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 
-Route::resource('events', 'EventController', ['only' => ['index', 'show']]);
+Route::resource('events', 'EventController');
 Route::resource('tournaments', 'TournamentController');
-Route::resource('events.tournaments', 'EventTournamentController', [ 'only' => ['index', 'show']]);
+Route::resource('events.tournaments', 'TournamentController');
 Route::resource('courts', 'CourtController');
 Route::resource('sports', 'SportController');
 Route::resource('teams', 'TeamController');
