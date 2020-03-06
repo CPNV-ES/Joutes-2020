@@ -12,13 +12,19 @@ use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-    public function store(CreateTournamentRequest $request)
+    public function create(Request $request)
+    {
+        $sports = Sport::all();
+        return view('tournaments.create')->with(compact('sports'));
+    }
+
+    public function store(Event $event, CreateTournamentRequest $request)
     {
         $tournament = new Tournament();
         $tournament->fill($request->all());
 
-        $tournament->start_date = $request->input('start_date').$request->input('start_hour');
-        $tournament->end_date = $request->input('end_date').$request->input('end_hour');
+        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour');
+        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour');
 
         $tournament->save();
         

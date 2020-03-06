@@ -11,17 +11,11 @@
 
             <div class="col-11 ml-n2">
                 @if ($tournamentFromEvent)
-                    {{-- Modal form to create a tournament --}}
-                    @include('tournaments.create')
                     <h1>
                         Tournois de l'évenement {{ $event->name }}
-                        @if(Auth::check() && $tournamentFromEvent)
-                            @if(Auth::user()->role == 'administrator')
-                                <button type="button" class="btn btn-main" data-toggle="modal" data-backdrop="static" data-target="#createTournamentModal">
-                                    Créer un tournoi
-                                </button>
-                             @endif
-                        @endif
+                        <button type="button" class="btn btn-main" onclick="location.href='{{ route('tournaments.create') }}'">
+                            Créer un tournoi
+                        </button>
                     </h1>
                 @else
                     <h1>Tournois</h1>
