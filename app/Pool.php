@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Pool extends Model
 {
@@ -17,20 +18,21 @@ class Pool extends Model
         return $this->hasManyThrough(Game::class, Contender::class, 'pool_id', 'contender1_id');
     }
 
-    public function rankings() {
-        $teams = $this->teams;
-        $games = $this->games;
 
-        //dd($games[0]->contender1_id);
+    public function rankings() {
+        $teams = $this->teams();
+        $games = $this->games;
+        //dd($this->teams);
 
         $rankings = array();
-
         foreach ($games as $game) {
-
             if (empty($game->contender1_id)) {
+
+
 
                 // Create the implicite name
                 $impliciteContender1Name = $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender1->fromPool->poolName;
+
 
                 $contender1exists = false;
 
@@ -40,6 +42,7 @@ class Pool extends Model
                         $contender1exists = true;
                     }
                 }
+
 
                 // Add on the rankings array
                 if(!$contender1exists){
@@ -54,6 +57,8 @@ class Pool extends Model
                     );
                 }
             }
+            //dd($game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender1->fromPool->poolName);
+
             if (empty($game->contender2->team)) {
                 // Create the implicite name
                 $impliciteContender2Name = $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender2->fromPool->poolName;
@@ -77,6 +82,7 @@ class Pool extends Model
                     );
                 }
             }
+
 
             if (!empty($teams)) {
                 foreach ($teams as $id => $team) {
@@ -164,6 +170,19 @@ class Pool extends Model
         return $this->sort($rankings);
     }
 
+    private function teams(){
+        $teams = array();
+        foreach ($this->games as $game) {
+            if(!empty($game->contender1->team)){
+                $teams[$game->contender1->team->id] = $game->contender1->team->name;
+            }
+            if(!empty($game->contender2->team)){
+                $teams[$game->contender2->team->id] = $game->contender2->team->name;
+            }
+        }
+        return $teams;
+    }
+
     private function sort($rankings_row){
         $rankings_sort = array();
         foreach($rankings_row as $key=>$value) {
@@ -173,8 +192,15 @@ class Pool extends Model
         # sort by score desc and then +/- desc
         //array_multisort($rankings_sort['score'], SORT_DESC, $rankings_sort['+-'], SORT_DESC, $rankings_row);
 
-        //dd($rankings_row);
         return $rankings_row;
+    }
+
+    public function isEditable(){
+        if(Auth::check()){
+            $role = Auth::user()->role;
+            if($role == "writer" || $role == "administrator") return ($this->isFinished == 0);
+        }
+        return false;
     }
 
 }

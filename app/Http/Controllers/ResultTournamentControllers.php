@@ -17,6 +17,7 @@ class ResultTournamentControllers extends Controller
 
         $pool = Pool::find($request->route('pool_id'));
         $contenders = $pool->contenders;
+        $games = $pool->games->sortBy("start_time");
 
         $rankings = $pool->rankings();
 
@@ -28,6 +29,15 @@ class ResultTournamentControllers extends Controller
             }
         }
 
-        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed'));
+        $games_completed = true;
+        foreach ($games as $game) {
+            if ($game->score_contender1 === null || $game->score_contender2 === null) {
+                $games_completed = false;
+                break;
+            }
+        }
+        //dd($pool->rankings());
+
+        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games'));
     }
 }

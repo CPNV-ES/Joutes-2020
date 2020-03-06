@@ -20,4 +20,16 @@ class Game extends Model
     public function pool() {
         return $this->contender1->pool;
     }
+
+    public function court() {
+        return $this->belongsTo('App\Court');
+    }
+
+    public function team1() {
+        return $this->contender1->team;
+    }
+
+    public function team2() {
+        return $this->contender2->team;
+    }
 }
