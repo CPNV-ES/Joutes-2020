@@ -8,8 +8,6 @@
         <title>Joutes</title>
 
         <link href="{{ asset('/lib/font-awesome/css/all.min.css') }}" rel="stylesheet" type="text/css" />
-        {{-- <link href="{{ asset('/lib/mdbootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('/lib/mdbootstrap/css/mdb.min.css') }}" rel="stylesheet" type="text/css" /> --}}
         <link href="{{ asset('/css/main.css') }}" rel="stylesheet" type="text/css" />
 
     </head>
@@ -55,6 +53,9 @@
                     </ul>
 
                     <div class="navbar-bottom">
+                        @if(Session::get('isDev') == true)
+                            <div class="devLogin"><strong style="color:red;">Logged as Developper</strong></div>
+                        @endif
                         <div class="versiontag"><strong style="color:red;">Work in progress</strong></div>
                         <div class="versiontag">Version 2020</div>
                         <div class="copyright">© CPNV - 2020</div>
@@ -86,9 +87,6 @@
 		</div>
 
         <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
-        {{-- <script src="{{ asset('/lib/mdbootstrap/js/popper.min.js') }}"></script>
-        <script src="{{ asset('/lib/mdbootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('/lib/mdbootstrap/js/mdb.min.js') }}"></script> --}}
         <script src="{{ asset('/js/app.js') }}"></script>
 
     </body>
