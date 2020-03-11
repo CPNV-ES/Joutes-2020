@@ -34,6 +34,7 @@
                                         <td class="action"><i class="fa fa-lg fa-clock-o editTime" aria-hidden="true"></i></td>
                                     @endif
                                 @else
+
                                      <!-- teams - no score -->
                                     @if(!isset($game->score_contender1) || !isset($game->score_contender2))
                                         <td class="separator sepTime ">{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}</td>
@@ -83,6 +84,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @for ($i = 0; $i < sizeof($pool->rankings()); $i++)
                         <tr data-id="{{ $pool->rankings()[$i]["team_id"] }}" data-rank="{{$i+1}}">
                             <td>{{$i+1}}</td>

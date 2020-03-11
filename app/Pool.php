@@ -22,7 +22,6 @@ class Pool extends Model
     public function rankings() {
         $teams = $this->teams();
         $games = $this->games;
-        //dd($this->teams);
 
         $rankings = array();
         foreach ($games as $game) {
@@ -57,7 +56,6 @@ class Pool extends Model
                     );
                 }
             }
-            //dd($game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender1->fromPool->poolName);
 
             if (empty($game->contender2->team)) {
                 // Create the implicite name
@@ -189,8 +187,8 @@ class Pool extends Model
             $rankings_sort['score'][$key] = $value['score'];
             $rankings_sort['+-'][$key] = $value['+-'];
         }
-        # sort by score desc and then +/- desc
-        //array_multisort($rankings_sort['score'], SORT_DESC, $rankings_sort['+-'], SORT_DESC, $rankings_row);
+
+        array_multisort($rankings_sort['score'], SORT_DESC, $rankings_sort['+-'], SORT_DESC, $rankings_row);
 
         return $rankings_row;
     }
