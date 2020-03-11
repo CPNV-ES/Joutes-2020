@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
-
+use App\Sport;
 
 class EventController extends Controller
 {
@@ -28,5 +28,20 @@ class EventController extends Controller
 
         return view('events.index')->with('events', $events);
 
+    }
+
+    public function show(Request $request, Event $event)
+    {
+        $tournaments = $event->tournaments;
+
+        $sports = Sport::all();
+
+        foreach ($tournaments as $tournament) {
+            if (empty($tournament->img)) {
+                $tournament->img = 'default.jpg';
+            }
+        }
+
+        return view('events.show', compact('tournaments', 'event', 'sports'));
     }
 }

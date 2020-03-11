@@ -21,7 +21,7 @@
 		<div class="row ml-4">
 
 			@foreach ($events as $event)
-                <a href="{{route('events.tournaments.index', $event->id)}}" title="Voir l'événement">
+                <a href="{{route('events.show', $event->id)}}" title="Voir l'événement">
                     <div class="card">
                         @if($event->img != null)
                             <img class="card-img" src="{{ asset('images/joutes.jpg') }}" alt="Image de l'événement">

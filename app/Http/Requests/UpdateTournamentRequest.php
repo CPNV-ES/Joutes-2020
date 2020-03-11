@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTournamentRequest extends FormRequest
+class UpdateTournamentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,10 @@ class CreateTournamentRequest extends FormRequest
             'name' => 'required|max:45',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'start_hour' => 'required',
+            'end_hour' => 'required',
             'sport_id' => 'required|exists:sports,id',
-            'max_teams' => 'required|min:2',
+            'max_teams' => 'required|min:1|max:99999999999',
         ];
     }
 }

@@ -15,6 +15,10 @@ mix.js('resources/js/app.js', 'public/js')
 
     // js
     .copy('node_modules/jquery/dist/jquery.min.js', 'public/lib/jquery')
+    
+    //Bootstrap
+    .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/lib/bootstrap')
+    .copy('node_modules/bootstrap/dist/js/bootstrap.min.js', 'public/lib/bootstrap')
 
     //font awesome
     .copyDirectory('node_modules/@fortawesome/fontawesome-free/css', 'public/lib/font-awesome/css')

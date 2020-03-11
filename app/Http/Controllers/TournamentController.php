@@ -2,25 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Http\Requests\CreateTournamentRequest;
+use App\Http\Requests\UpdateTournamentRequest;
 use App\Tournament;
-use App\Pool;
 use App\Sport;
-use App\Team;
 
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-    public function store(CreateTournamentRequest $request)
+    public function create(Request $request, Event $event)
     {
-        $tournament = Tournament::create($request->all());
-        return redirect()->action('TournamentController@edit', ['tournament' => $tournament]);
+        $sports = Sport::all();
+        return view('tournaments.create')->with(compact('sports', 'event'));
+    }
+
+    public function store(CreateTournamentRequest $request, Event $event)
+    {
+        $tournament = new Tournament();
+        $tournament->fill($request->all() + ['event_id' => $event->id]);
+
+        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour');
+        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour');
+
+        $tournament->save();
+        
+        return redirect()->route('tournaments.edit', ['tournament' => $tournament]);
     }
 
     public function edit(Tournament $tournament)
     {
-        return view('tournaments.edit')->with('tournament', $tournament);
+        $sports = Sport::all();
+        return view('tournaments.edit')->with(compact('tournament', 'sports'));
     }
 
     //Display all the tournaments
@@ -36,6 +50,18 @@ class TournamentController extends Controller
         }
 
         return view('tournaments.index', compact('tournaments', 'tournamentFromEvent'));
+    }
+
+    public function update(UpdateTournamentRequest $request, Tournament $tournament)
+    {
+        $tournament->fill($request->all());
+
+        $tournament->start_date = $request->input('start_date').$request->input('start_hour');
+        $tournament->end_date = $request->input('end_date').$request->input('end_hour');
+
+        $tournament->save();
+
+        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
     //Display a specific tournament

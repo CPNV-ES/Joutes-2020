@@ -18,12 +18,12 @@
                     @if ( Auth::check() && (Auth::user()->role == "administrator"))
                         <a href="{{route('tournaments.export', $tournament->id)}}" class="greenBtn">Exporter en CSV les équipes et participants</a>
                     @endif
-
+                    <button type="button" class="btn btn-main" onclick="location.href='{{ route('tournaments.edit', $tournament) }}'">
+                        Éditer le tournoi
+                    </button>
                 </h1>
 
                 <hr>
-
-               <input type="search" placeholder="Recherche" class="search form-control">
 
             </div>
 
