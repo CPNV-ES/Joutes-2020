@@ -23,4 +23,4 @@ Route::resource('tournaments', 'TournamentController', ['only' => ['index', 'sho
 Route::resource('events.tournaments', 'EventTournamentController', [ 'only' => ['index', 'show']]);
 Route::resource('courts', 'CourtController');
 
-Route::get('tournaments/{id}/results/{pool_id}', 'ResultTournamentControllers@show');
+Route::get('tournaments/{tournament}/results/{pool}', 'ResultTournamentControllers@show');

@@ -22,66 +22,13 @@ class Pool extends Model
     public function rankings() {
         $teams = $this->teams();
         $games = $this->games;
-
         $rankings = array();
-        foreach ($games as $game) {
-            if (empty($game->contender1_id)) {
 
 
-
-                // Create the implicite name
-                $impliciteContender1Name = $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender1->fromPool->poolName;
+        foreach ($games as $key=>$game) {
 
 
-                $contender1exists = false;
-
-                // detect if we already have this name
-                for ($i=0; $i < sizeof($rankings); $i++) {
-                    if($rankings[$i]['team'] == $impliciteContender1Name){
-                        $contender1exists = true;
-                    }
-                }
-
-
-                // Add on the rankings array
-                if(!$contender1exists){
-                    $rankings[] = array(
-                        "team_id" 	=> -1,
-                        "team" 		=> $impliciteContender1Name,
-                        "score" 	=> 0,
-                        "W" 		=> 0,
-                        "L" 		=> 0,
-                        "D" 		=> 0,
-                        "+-" 		=> 0
-                    );
-                }
-            }
-
-            if (empty($game->contender2->team)) {
-                // Create the implicite name
-                $impliciteContender2Name = $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender2->fromPool->poolName;
-                $contender2exists = false;
-
-                for ($i=0; $i < sizeof($rankings); $i++) {
-                    if($rankings[$i]['team'] == $impliciteContender2Name){
-                        $contender2exists = true;
-                    }
-                }
-
-                if(!$contender2exists){
-                    $rankings[] = array(
-                        "team_id" 	=> -1,
-                        "team" 		=> $impliciteContender2Name,
-                        "score" 	=> 0,
-                        "W" 		=> 0,
-                        "L"	 		=> 0,
-                        "D"			=> 0,
-                        "+-" 		=> 0
-                    );
-                }
-            }
-
-
+            // for classement ----------------------------------------------------------
             if (!empty($teams)) {
                 foreach ($teams as $id => $team) {
                     $score 		 = 0;
@@ -162,10 +109,10 @@ class Pool extends Model
                         );
                     }
                 }
-            }
-        }
-
-        return $this->sort($rankings);
+            }//dd($rankings);
+        }//dd($rankings);
+        $rankings = sizeof($rankings) > 0 ? $this->sort($rankings) : array();
+        return $rankings;
     }
 
     private function teams(){
@@ -187,7 +134,6 @@ class Pool extends Model
             $rankings_sort['score'][$key] = $value['score'];
             $rankings_sort['+-'][$key] = $value['+-'];
         }
-
         array_multisort($rankings_sort['score'], SORT_DESC, $rankings_sort['+-'], SORT_DESC, $rankings_row);
 
         return $rankings_row;

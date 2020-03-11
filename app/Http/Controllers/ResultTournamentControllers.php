@@ -10,12 +10,10 @@ use App\Contender;
 
 class ResultTournamentControllers extends Controller
 {
-    public function show(Request $request){
-        $tournament = Tournament::find($request->route('id'));
+    public function show(Tournament $tournament, Pool $pool){
         $pools = $tournament->getPoolsByTournamentId($tournament);
         $maxStage = $pools->max('stage');
 
-        $pool = Pool::find($request->route('pool_id'));
         $contenders = $pool->contenders;
         $games = $pool->games->sortBy("start_time");
 
@@ -38,6 +36,6 @@ class ResultTournamentControllers extends Controller
         }
         //dd($pool->rankings());
 
-        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games'));
+        return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings'));
     }
 }

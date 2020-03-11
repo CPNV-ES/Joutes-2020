@@ -70,7 +70,7 @@
         </div>
         <div class="text-center">
             <h2>Classement actuel</h2>
-            @if(sizeof($pool->rankings()) > 0)
+            @if(sizeof($rankings) > 0)
             <table class="table">
                 <thead class="black white-text">
                     <tr>
@@ -84,16 +84,15 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    @for ($i = 0; $i < sizeof($pool->rankings()); $i++)
-                        <tr data-id="{{ $pool->rankings()[$i]["team_id"] }}" data-rank="{{$i+1}}">
+                    @for ($i = 0; $i < sizeof($rankings); $i++)
+                        <tr data-id="{{ $rankings[$i]["team_id"] }}" data-rank="{{$i+1}}">
                             <td>{{$i+1}}</td>
-                            <td>{{$pool->rankings()[$i]["team"]}}</td>
-                            <td>{{$pool->rankings()[$i]["score"]}}</td>
-                            <td>{{$pool->rankings()[$i]["W"]}}</td>
-                            <td>{{$pool->rankings()[$i]["L"]}}</td>
-                            <td>{{$pool->rankings()[$i]["D"]}}</td>
-                            <td>{{$pool->rankings()[$i]["+-"]}}</td>
+                            <td>{{$rankings[$i]["team"]}}</td>
+                            <td>{{$rankings[$i]["score"]}}</td>
+                            <td>{{$rankings[$i]["W"]}}</td>
+                            <td>{{$rankings[$i]["L"]}}</td>
+                            <td>{{$rankings[$i]["D"]}}</td>
+                            <td>{{$rankings[$i]["+-"]}}</td>
                         </tr>
                     @endfor
                 </tbody>
