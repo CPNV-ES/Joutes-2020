@@ -26,7 +26,7 @@ class DevLogin
                 else
                     \Redirect::guest('login');
             else
-                return redirect('http://intranet.cpnv.ch/connexion');
+                \Redirect::to('events');
         } else error_log("Prod");
         return $next($request);
     }
