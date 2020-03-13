@@ -103,7 +103,18 @@
 
         <div class="row mt-5">
 
-            <h2>Visualisation du tournoi</h2>
+            <div class="col-11 ml-n2">
+                <h2>Visualisation du tournoi
+                    <button type="button" class="btn btn-main" onclick="location.href='{{ route('tournaments.pools.create', $tournament) }}'">
+                      Ajouter une poule
+                    </button>
+                </h2>
+                <hr>
+            </div>
+        </div>
+
+
+            
 
             <!-- Stages and pools -->
             @if (sizeof($tournament->pools) > 0)
