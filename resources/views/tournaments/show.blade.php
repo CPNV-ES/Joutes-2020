@@ -6,7 +6,7 @@
 
         <div class="row">
             <div class="col-1 ml-n5">
-                <a href="{{ route('events.index') }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+                <a href="{{ route('events.show', $tournament->event) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
             </div>
 
             <div class="col-11 ml-n2">
