@@ -3,6 +3,7 @@
 use App\GameType;
 use App\Team;
 use App\Tournament;
+use App\Role;
 use Illuminate\Database\Seeder;
 
 class Joutes2019Seeder extends Seeder
@@ -38,6 +39,7 @@ class Joutes2019Seeder extends Seeder
         $this->Basket();
         $this->UniHockey();
         $this->Badminton();
+        $this->roles();
     }
 
     // Common stuff
@@ -685,5 +687,24 @@ class Joutes2019Seeder extends Seeder
         (new \App\Game(['date' => '2017-06-27', 'start_time' => '15:20', 'contender1_id' => $firstcontender + 8, 'contender2_id' => $firstcontender + 10, 'court_id' => $firstcourt+1]))->save();
 
 
+    }
+
+
+    private function roles()
+    {
+        echo "Création des roles utilisateurs\n";
+        // Admin
+        $role = new \App\Role(['name' => 'Administrateur','slug' => 'ADMIN',]);
+        $role->save();
+
+        // Gestionnaire
+        $role = new \App\Role(['name' => 'Gestionnaire','slug' => 'GEST',]);
+        $role->save();
+
+        // Élève
+        $role = new \App\Role(['name' => 'Student','slug' => 'STUD',]);
+        $role->save();
+   
+        echo "OK\n";
     }
 }
