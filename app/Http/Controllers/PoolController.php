@@ -22,5 +22,13 @@ class PoolController extends Controller
   {
     $pool = new Pool();
     $pool->fill($request->all() + ['tournament_id' => $tournament->id]);
+
+    $pool->start_time = $request->input('start_time');
+    $pool->end_time = $request->input('end_time');
+    $pool->isFinished = false;
+
+    $pool->save();
+
+    return redirect()->route('tournaments.show', ['tournament' => $tournament]);
   }
 }
