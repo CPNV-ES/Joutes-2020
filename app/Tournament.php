@@ -79,12 +79,4 @@ class Tournament extends Model
     }
 
 
-
-    public function getPoolsByTournamentId($tournament){
-        $pools = $tournament->pools;
-        return $pools;
-    }
-
-
-
 }

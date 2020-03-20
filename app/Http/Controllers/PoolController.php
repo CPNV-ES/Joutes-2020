@@ -34,7 +34,7 @@ class PoolController extends Controller
 
   public function show(Request $request, Tournament $tournament, Pool $pool)
   {
-    $pools = $tournament->getPoolsByTournamentId($tournament);
+    $pools = $tournament->pools;
     $maxStage = $pools->max('stage');
 
     $contenders = $pool->contenders;
