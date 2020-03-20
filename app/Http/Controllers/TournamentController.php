@@ -41,7 +41,6 @@ class TournamentController extends Controller
     public function index()
     {
         $tournaments = Tournament::all()->sortBy("start_date");
-        $tournamentFromEvent = false;
 
         foreach ($tournaments as $tournament) {
             if (empty($tournament->img)) {
@@ -49,7 +48,7 @@ class TournamentController extends Controller
             }
         }
 
-        return view('tournaments.index', compact('tournaments', 'tournamentFromEvent'));
+        return view('tournaments.index', compact('tournaments'));
     }
 
     public function update(UpdateTournamentRequest $request, Tournament $tournament)
