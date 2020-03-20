@@ -54,7 +54,7 @@
                     </ul>
 
                     <div class="navbar-bottom">
-                        @if(Session::get('isDev') == true)
+                        @if(Session::get('isDev'))
                             <div class="devLogin"><strong style="color:red;">Logged as Developper</strong></div>
                         @endif
                         <div class="versiontag"><strong style="color:red;">Work in progress</strong></div>
