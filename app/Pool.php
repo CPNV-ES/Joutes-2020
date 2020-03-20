@@ -117,8 +117,8 @@ class Pool extends Model
                         );
                     }
                 }
-            }//dd($rankings);
-        }//dd($rankings);
+            }
+        }
         $rankings = sizeof($rankings) > 0 ? $this->sort($rankings) : array();
         return $rankings;
     }
