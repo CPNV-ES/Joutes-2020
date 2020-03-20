@@ -1,0 +1,47 @@
+//////////////////
+//// MAIN SCSS
+//
+
+//////////////////
+//// Base
+
+// Colors
+@import 'base/colors';
+
+// Colorlib Navbar template
+@import 'base/colorLibBase';
+
+// Navbar edits on ColorLib template
+@import 'base/navEdits';
+
+
+
+//////////////////
+//// Components
+
+// Logos and images
+@import 'components/logos';
+
+// Cards
+@import 'components/cards';
+
+// Buttons
+@import 'components/buttons';
+
+// Tables
+@import 'components/tables';
+
+// Forms
+@import 'components/forms';
+
+
+//////////////////
+//// Layout
+
+// General settings
+@import 'layout/generalSettings';
+
+//Animations
+@import 'layout/animations';
+
+

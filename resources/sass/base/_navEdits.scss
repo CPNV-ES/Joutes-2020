@@ -1,0 +1,71 @@
+//////////////////////
+//// Navbar edits
+//
+
+.sideNavbar {
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.navContent{
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    width: 250px;
+}
+
+
+#sidebar ul li > a:hover{
+    background-color: $main-green !important;
+}
+
+#sidebar ul li > a:hover {
+    background-color: $main-green !important;
+    color:inherit;
+    border-bottom: 1px solid $main-green;
+}
+
+#sidebar ul li.active > a:hover{
+    background-color: $main-green !important;
+    color:inherit;
+}
+
+#sidebar ul li.active > a:hover {
+    background-color: $main-green !important;
+    color:inherit;
+    border-bottom: 1px solid $main-green;
+}
+
+.navbar-bottom{
+    text-align: center;
+    bottom: 65px;
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    width: 250px;
+}
+
+.btnCollapseNavbar{
+    background-color: $main-component !important;
+    margin: -12px 2px 0px 0px;
+    height: 50px;
+    width: 50px;
+}
+
+.btnCollapseNavbar:hover{
+    color: inherit;
+    background-color: $main-green !important;
+}
+
+
+.btnCollapseNavbar i{
+    color: white  !important;
+}
+
+
+@media (max-width: 991.98px){
+    #sidebar .custom-menu {
+        margin-right: -50px !important;
+    }
+}

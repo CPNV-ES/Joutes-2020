@@ -1,0 +1,26 @@
+//////////////////
+//// BUTTONS
+//
+
+.btn-main {
+    background-color: $main-green;
+    border-color: $main-green;
+    color: white;
+
+    &:hover {
+        color: white;
+        background-color: $main-green;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+    }
+}
+
+
+.btn-administration{
+    text-align: center;
+    font-size: large;
+}
+
+
