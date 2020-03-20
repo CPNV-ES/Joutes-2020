@@ -143,7 +143,7 @@
                                                             @if ($pool->stage == $i)
                                                                 <tr>
                                                                     <td data-id="{{$pool->id}}" class="clickable">
-                                                                        <a href="/tournaments/{{$tournament->id}}/results/{{$pool->id}}">
+                                                                    <a href="{{ route('tournaments.pools.show', [$tournament, $pool]) }}">
                                                                             {{$pool->poolName}}
                                                                         </a>
                                                                     </td>

@@ -31,4 +31,33 @@ class PoolController extends Controller
 
     return redirect()->route('tournaments.show', ['tournament' => $tournament]);
   }
+
+  public function show(Request $request, Tournament $tournament, Pool $pool)
+  {
+    $pools = $tournament->getPoolsByTournamentId($tournament);
+    $maxStage = $pools->max('stage');
+
+    $contenders = $pool->contenders;
+    $games = $pool->games->sortBy("start_time");
+
+    $rankings = $pool->rankings();
+
+    $ranking_completed = true;
+    foreach ($rankings as $ranking) {
+        if ($ranking["team_id"] == -1) {
+            $ranking_completed = false;
+            break;
+        }
+    }
+
+    $games_completed = true;
+    foreach ($games as $game) {
+        if ($game->score_contender1 === null || $game->score_contender2 === null) {
+            $games_completed = false;
+            break;
+        }
+    }
+
+    return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings'));
+  }
 }
