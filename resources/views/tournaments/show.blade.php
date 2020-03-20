@@ -87,8 +87,8 @@
 						@if(count($tournament->sport->courts) > 0)
 							@foreach ($tournament->sport->courts as $court)
 					  		<tr>
-								<td class="clickable">{{$court->name}}</td>
-							</tr>
+                                <td class="clickable">{{$court->name}}</td>
+                            </tr>
 							@endforeach
 						@else
 							<tr>
@@ -138,15 +138,19 @@
                             @for ($i = 1; $i <= $maxStage; $i++)
                                 <td class="noPadding">
                                     <table id="pools-table" class="table-hover table-striped table-bordered" width="100%" data-tournament="{{$tournament->id}}">
-                                        <tbody>
-                                            @foreach ($pools as $pool)
-                                                @if ($pool->stage == $i)
-                                                <tr>
-                                                    <td data-id="{{$pool->id}}" class="clickable">{{$pool->poolName}}</td>
-                                                </tr>
-                                                @endif
-                                            @endforeach
-                                        </tbody>
+                                                @foreach ($pools as $pool)
+                                                        <tbody>
+                                                            @if ($pool->stage == $i)
+                                                                <tr>
+                                                                    <td data-id="{{$pool->id}}" class="clickable">
+                                                                        <a href="/tournaments/{{$tournament->id}}/results/{{$pool->id}}">
+                                                                            {{$pool->poolName}}
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+                                                @endforeach
                                     </table>
                                 </td>
                             @endfor

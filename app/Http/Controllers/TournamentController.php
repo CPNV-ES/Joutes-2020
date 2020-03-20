@@ -28,7 +28,7 @@ class TournamentController extends Controller
 
         $tournament->save();
         
-        return redirect()->route('tournaments.edit', ['tournament' => $tournament]);
+        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
     public function edit(Tournament $tournament)
@@ -64,9 +64,8 @@ class TournamentController extends Controller
     }
 
     //Display a specific tournament
-    public function show(Request $request, $id)
+    public function show(Tournament $tournament)
     {
-        $tournament = Tournament::find($id);
         $pools = $tournament->getPoolsByTournamentId($tournament);
         $maxStage = $pools->max('stage');
 

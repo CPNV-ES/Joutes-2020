@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ResultTournamentControllers;
+
 Route::get('/', function () {
     return redirect()->route('events.index');
 });
@@ -29,3 +31,5 @@ Route::resource('tournaments.pools', 'PoolController');
 Route::resource('administrations', 'Admin\AdministrationController');
 Route::resource('roles', 'Admin\RoleController');
 
+
+Route::get('tournaments/{tournament}/results/{pool}', 'ResultTournamentControllers@show');
