@@ -18,7 +18,7 @@ class DevLogin
     public function handle($request, Closure $next)
     {
         if (env('USER_ID', false))
-        {
+        {   
             $user = User::find(env('USER_ID'));
             if ($user){
                 if (Auth::attempt(['username' => $user->first_name, 'password' => 'Pa$$w0rd'])){
