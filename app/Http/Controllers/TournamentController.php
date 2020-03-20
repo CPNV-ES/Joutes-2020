@@ -28,7 +28,7 @@ class TournamentController extends Controller
 
         $tournament->save();
         
-        return redirect()->route('tournaments.edit', ['tournament' => $tournament]);
+        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
     public function edit(Tournament $tournament)
