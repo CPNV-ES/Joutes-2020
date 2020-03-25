@@ -73,7 +73,8 @@
 							</tr>
 					  	@endif
 					</tbody>
-				</table>
+                </table>
+                <a href="{{ route('tournaments.teams.create', $tournament) }}" class="greenBtn" title="Créer un tournoi">Ajouter</i></a>
 			</div>
 
 			<div class="col-lg-6">
