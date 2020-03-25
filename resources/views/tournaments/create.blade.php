@@ -18,7 +18,7 @@
 
             <div class="col-6">
                 <label for="start_hour">Heure de début</label>
-                <input type="time" class="form-control col-m-6" name="start_hour" id="start_hour" step="1">
+                <input type="time" class="form-control col-m-6" name="start_hour" id="start_hour">
             </div>
         </div>
 
@@ -32,7 +32,7 @@
 
             <div class="col-6">
                 <label for="end_hour">Heure de fin</label>
-                <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour" step="1">
+                <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour">
             </div>
         </div>
 
