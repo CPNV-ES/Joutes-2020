@@ -58,6 +58,6 @@ class PoolController extends Controller
         }
     }
 
-    return view('tournaments/tournamentResults', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings'));
+    return view('pools.show', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings'));
   }
 }
