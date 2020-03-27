@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\CreateRoleRequest;
 
 class RoleController extends Controller
 {
@@ -17,7 +18,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('administrations.roles.indexRole')->with('roles', $roles);
+        return view('administrations.roles.index')->with('roles', $roles);
     }
 
     /**
@@ -27,7 +28,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('administrations.roles.createRole');
+        return view('administrations.roles.create');
     }
 
     /**
@@ -36,7 +37,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRoleRequest $request)
     {
         /* LARAVEL VALIDATION */
         // create the validation rules
@@ -49,7 +50,7 @@ class RoleController extends Controller
 
         //if validation fails
         if ($validator->fails()) {
-            return view('administrations.roles.createRole')->withErrors($validator->errors());
+            return view('administrations.roles.create')->withErrors($validator->errors());
 
         } else {
             $newRole = new Role();
@@ -81,7 +82,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        return view('administrations.roles.editRole')->with('role', $role);
+        return view('administrations.roles.edit')->with('role', $role);
     }
 
     /**
@@ -91,11 +92,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateRoleRequest $request, Role $role)
     {
-        $role = Role::find($id);
-
-
         /* CUSTOM SPECIFIC VALIDATION */
         $customError = null;
         // Check if the name already exists AND is not the same between the form POST and the DB
@@ -115,7 +113,7 @@ class RoleController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails() || !empty($customError)) {
-            return view('administrations.roles.editRole')->withErrors($validator->errors())->with('role', $role)->with('customError', $customError);
+            return view('administrations.roles.edit')->withErrors($validator->errors())->with('role', $role)->with('customError', $customError);
         } else {
             $role->update($request->all());
             return redirect()->route('roles.index');
@@ -128,10 +126,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($role)
     {
-        $roleToDelete = Role::findOrFail($id);
-        $roleToDelete->delete();
+        $roleToDelete = Role::findOrFail($role);
+        $roleToDelete->delete();    
         return redirect()->route('roles.index');
     }
 }
