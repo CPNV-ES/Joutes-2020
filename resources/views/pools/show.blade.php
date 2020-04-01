@@ -98,7 +98,17 @@
                 </tbody>
             </table>
             @else
-                Indisponible
+                <form action=" {{ route('pools.contenders.store', $pool) }} " method="post">
+                    @csrf
+                    <div class="form-group">
+                        <select id="teams" name="team_id">
+                            @foreach ($teams as $team)
+                                <option value="{{ $team->id }}">{{ $team->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-main">+</button>
+                </form>
             @endif
         </div>
     </div>

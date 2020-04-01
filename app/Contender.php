@@ -8,6 +8,10 @@ class Contender extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'pool_id', 'team_id'
+    ];
+
     public function team()
     {
         return $this->belongsTo(Team::class);

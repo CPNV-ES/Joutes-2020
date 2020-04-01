@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GameType;
 use App\Http\Requests\CreatePoolRequest;
 use App\Pool;
+use App\Team;
 use App\PoolMode;
 use App\Tournament;
 use Illuminate\Http\Request;
@@ -58,6 +59,8 @@ class PoolController extends Controller
         }
     }
 
-    return view('pools.show', compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings'));
+    $teams = $tournament->getTeamsNotInAPool();
+
+    return view('pools.show')->with(compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teams'));
   }
 }
