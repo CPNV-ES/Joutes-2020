@@ -98,17 +98,19 @@
                 </tbody>
             </table>
             @else
+                @if($pool->stage == 1 && count($teamsNotInAPool) > 0)
                 <form action=" {{ route('pools.contenders.store', $pool) }} " method="post">
                     @csrf
                     <div class="form-group">
                         <select id="teams" name="team_id">
-                            @foreach ($teams as $team)
+                            @foreach ($teamsNotInAPool as $team)
                                 <option value="{{ $team->id }}">{{ $team->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <button type="submit" class="btn btn-main">+</button>
                 </form>
+                @endif
             @endif
         </div>
     </div>
