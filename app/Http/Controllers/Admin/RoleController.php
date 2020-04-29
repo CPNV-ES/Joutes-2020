@@ -39,27 +39,14 @@ class RoleController extends Controller
      */
     public function store(CreateRoleRequest $request)
     {
-        /* LARAVEL VALIDATION */
-        // create the validation rules
-        $rules = array(
-            'slug' => 'required|min:2|max:4|unique:roles,slug',
-            'nom' => 'max:45'
-        );
+        
+        $newRole = new Role();
+        $newRole->slug = $request->input("slug");
+        $newRole->name = $request->input("name");
+        $newRole->save();
 
-        $validator = Validator::make($request->all(), $rules);
-
-        //if validation fails
-        if ($validator->fails()) {
-            return view('administrations.roles.create')->withErrors($validator->errors());
-
-        } else {
-            $newRole = new Role();
-            $newRole->slug = $request->input("slug");
-            $newRole->name = $request->input("name");
-            $newRole->save();
-
-            return redirect()->route('roles.index');
-        }
+        return redirect()->route('roles.index');
+ 
     }
 
     /**
