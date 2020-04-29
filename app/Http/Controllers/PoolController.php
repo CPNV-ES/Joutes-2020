@@ -60,7 +60,8 @@ class PoolController extends Controller
     }
 
     $teamsNotInAPool = $tournament->getTeamsNotInAPool();
+    $poolsInPreviousStage = $pool->poolsInPreviousStage();
 
-    return view('pools.show')->with(compact('tournament', 'maxStage', 'pools', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool'));
+    return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
   }
 }

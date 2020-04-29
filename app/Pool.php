@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Pool extends Model
 {
@@ -26,6 +27,14 @@ class Pool extends Model
         return $this->hasManyThrough(Game::class, Contender::class, 'pool_id', 'contender1_id');
     }
 
+    public function poolsInPreviousStage()
+    {
+        $pools = DB::table('pools')
+            ->where('tournament_id', '=', $this->tournament->id)
+            ->where('stage', '=', $this->stage - 1)
+            ->get();
+        return $pools;
+    }
 
     public function rankings() {
         $teams = $this->teams();
