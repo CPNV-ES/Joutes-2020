@@ -70,7 +70,7 @@ class SportController extends Controller
     public function edit($id)
     {
         $sports = Sport::all();
-        dd($sports);
+
         return view('sports.edit')->with(compact('sport'));
     }
 
