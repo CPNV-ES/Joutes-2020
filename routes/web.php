@@ -22,8 +22,11 @@ Route::resource('events.tournaments', 'TournamentController');
 Route::resource('courts', 'CourtController');
 Route::resource('sports', 'SportController');
 Route::resource('teams', 'TeamController');
+Route::resource('tournaments.teams', 'TeamController');
 Route::resource('participants', 'ParticipantController');
 Route::resource('tournaments.pools', 'PoolController');
+Route::resource('contenders', 'ContenderController');
+Route::resource('pools.contenders', 'ContenderController');
 
 //Administration resources
 Route::resource('administrations', 'Admin\AdministrationController');

@@ -73,7 +73,10 @@
 							</tr>
 					  	@endif
 					</tbody>
-				</table>
+                </table>
+                @if(count($tournament->teams) < $tournament->max_teams)
+                <a href="{{ route('tournaments.teams.create', $tournament) }}" class="greenBtn" title="Ajouter une équipe au tournoi">Ajouter</i></a>
+                @endif
 			</div>
 
 			<div class="col-lg-6">
