@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maquette tournoi</title>
+    <script>
+        /*
+            Principe:
+            - Chaque poule contient deux listes d'équipes: les entrantes et les sortantes (classement)
+            - On donne un id aux équipes sortantes et aux équipes de départ
+            - Chaque équipe 'entrante' a un champ 'data-previous' qui contient l'id d'une équipe sortante
+            - Au survol d'une équipe avec la souris, on lit le previous et on la met en évidence avec une classe 'highlight'
+         */
+        document.addEventListener('DOMContentLoaded',function() {
+            Array.from(document.getElementsByClassName("team")).forEach(function(element) {
+                element.addEventListener('mouseover', function (evt) {
+                    previous = document.getElementById(evt.target.dataset.previous)
+                    previous.classList.add('highlight')
+                    evt.target.classList.add('highlight')
+                });
+                element.addEventListener('mouseout', function (evt) {
+                    previous = document.getElementById(evt.target.dataset.previous)
+                    previous.classList.remove('highlight')
+                    evt.target.classList.remove('highlight')
+                });
+            });
+        })
+    </script>
+    <style>
+        .highlight {
+            background-color: pink;
+        }
+        .tournament {
+            border: solid 3px blue;
+            padding: 2px;
+            margin: 2px;
+            display: flex;
+            flex-direction: row;
+        }
+        .phase {
+            border: solid 2px red;
+            padding: 2px;
+            margin: 2px;
+            display: flex;
+            flex-direction: column;
+        }
+        .pool {
+            border: solid 1px green;
+            padding: 2px;
+            margin: 2px;
+            display: flex;
+            flex-direction: row;
+        }
+        .teamlist {
+            border: solid 1px black;
+            padding: 2px;
+            margin: 2px;
+            display: flex;
+            flex-direction: column;
+        }
+        .team {
+            border: solid 1px gray;
+            padding: 2px;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+<div title="tournament" class="tournament">
+    Tournoi<br>
+    <div title="Teams" class="teamlist">Equipes
+        <div title="Team" class="team" id="team0_01">Team</div>
+        <div title="Team" class="team" id="team0_02">Team</div>
+        <div title="Team" class="team" id="team0_03">Team</div>
+        <div title="Team" class="team" id="team0_04">Team</div>
+        <div title="Team" class="team" id="team0_05">Team</div>
+        <div title="Team" class="team" id="team0_06">Team</div>
+        <div title="Team" class="team" id="team0_07">Team</div>
+        <div title="Team" class="team" id="team0_08">Team</div>
+        <div title="Team" class="team" id="team0_09">Team</div>
+        <div title="Team" class="team" id="team0_10">Team</div>
+        <div title="Team" class="team" id="team0_11">Team</div>
+        <div title="Team" class="team" id="team0_12">Team</div>
+        <div title="Team" class="team" id="team0_13">Team</div>
+        <div title="Team" class="team" id="team0_14">Team</div>
+        <div title="Team" class="team" id="team0_15">Team</div>
+        <div title="Team" class="team" id="team0_16">Team</div>
+        <div title="Team" class="team" id="team0_17">Team</div>
+        <div title="Team" class="team" id="team0_18">Team</div>
+        <div title="Team" class="team" id="team0_19">Team</div>
+        <div title="Team" class="team" id="team0_20">Team</div>
+        <div title="Team" class="team" id="team0_21">Team</div>
+        <div title="Team" class="team" id="team0_22">Team</div>
+        <div title="Team" class="team" id="team0_23">Team</div>
+        <div title="Team" class="team" id="team0_24">Team</div>
+        <div title="Team" class="team" id="team0_25">Team</div>
+        <div title="Team" class="team" id="team0_26">Team</div>
+        <div title="Team" class="team" id="team0_27">Team</div>
+        <div title="Team" class="team" id="team0_28">Team</div>
+        <div title="Team" class="team" id="team0_29">Team</div>
+        <div title="Team" class="team" id="team0_30">Team</div>
+        <div title="Team" class="team" id="team0_31">Team</div>
+        <div title="Team" class="team" id="team0_32">Team</div>
+    </div>
+    <div title="phase1" class="phase">
+        Phase 1
+        <div title="poule 1_1" class="pool">Poule 1_1<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_01">Team</div><div title="Team" class="team" data-previous="team0_09">Team</div><div title="Team" class="team" data-previous="team0_17">Team</div><div title="Team" class="team" data-previous="team0_25">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_01">Team</div><div title="Team" class="team" id="team1_09">Team</div><div title="Team" class="team" id="team1_17">Team</div><div title="Team" class="team" id="team1_25">Team</div></div></div>
+        <div title="poule 1_2" class="pool">Poule 1_2<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_02">Team</div><div title="Team" class="team" data-previous="team0_10">Team</div><div title="Team" class="team" data-previous="team0_18">Team</div><div title="Team" class="team" data-previous="team0_26">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_02">Team</div><div title="Team" class="team" id="team1_10">Team</div><div title="Team" class="team" id="team1_18">Team</div><div title="Team" class="team" id="team1_26">Team</div></div></div>
+        <div title="poule 1_3" class="pool">Poule 1_3<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_03">Team</div><div title="Team" class="team" data-previous="team0_11">Team</div><div title="Team" class="team" data-previous="team0_19">Team</div><div title="Team" class="team" data-previous="team0_27">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_03">Team</div><div title="Team" class="team" id="team1_11">Team</div><div title="Team" class="team" id="team1_19">Team</div><div title="Team" class="team" id="team1_27">Team</div></div></div>
+        <div title="poule 1_4" class="pool">Poule 1_4<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_04">Team</div><div title="Team" class="team" data-previous="team0_12">Team</div><div title="Team" class="team" data-previous="team0_20">Team</div><div title="Team" class="team" data-previous="team0_28">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_04">Team</div><div title="Team" class="team" id="team1_12">Team</div><div title="Team" class="team" id="team1_20">Team</div><div title="Team" class="team" id="team1_28">Team</div></div></div>
+        <div title="poule 1_5" class="pool">Poule 1_5<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_05">Team</div><div title="Team" class="team" data-previous="team0_13">Team</div><div title="Team" class="team" data-previous="team0_21">Team</div><div title="Team" class="team" data-previous="team0_29">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_05">Team</div><div title="Team" class="team" id="team1_13">Team</div><div title="Team" class="team" id="team1_21">Team</div><div title="Team" class="team" id="team1_29">Team</div></div></div>
+        <div title="poule 1_6" class="pool">Poule 1_6<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_06">Team</div><div title="Team" class="team" data-previous="team0_14">Team</div><div title="Team" class="team" data-previous="team0_22">Team</div><div title="Team" class="team" data-previous="team0_30">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_06">Team</div><div title="Team" class="team" id="team1_14">Team</div><div title="Team" class="team" id="team1_22">Team</div><div title="Team" class="team" id="team1_30">Team</div></div></div>
+        <div title="poule 1_7" class="pool">Poule 1_7<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_07">Team</div><div title="Team" class="team" data-previous="team0_15">Team</div><div title="Team" class="team" data-previous="team0_23">Team</div><div title="Team" class="team" data-previous="team0_31">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_07">Team</div><div title="Team" class="team" id="team1_15">Team</div><div title="Team" class="team" id="team1_23">Team</div><div title="Team" class="team" id="team1_31">Team</div></div></div>
+        <div title="poule 1_8" class="pool">Poule 1_8<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team0_08">Team</div><div title="Team" class="team" data-previous="team0_16">Team</div><div title="Team" class="team" data-previous="team0_24">Team</div><div title="Team" class="team" data-previous="team0_32">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team" id="team1_08">Team</div><div title="Team" class="team" id="team1_16">Team</div><div title="Team" class="team" id="team1_24">Team</div><div title="Team" class="team" id="team1_32">Team</div></div></div>
+    </div>
+    <div title="phase2" class="phase">
+        Phase 2
+        <div title="poule 2_1" class="pool">Poule 2_1<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_01">Team</div><div title="Team" class="team" data-previous="team1_09">Team</div><div title="Team" class="team" data-previous="team1_17">Team</div><div title="Team" class="team" data-previous="team1_25">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_2" class="pool">Poule 2_2<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_02">Team</div><div title="Team" class="team" data-previous="team1_10">Team</div><div title="Team" class="team" data-previous="team1_18">Team</div><div title="Team" class="team" data-previous="team1_26">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_3" class="pool">Poule 2_3<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_03">Team</div><div title="Team" class="team" data-previous="team1_11">Team</div><div title="Team" class="team" data-previous="team1_19">Team</div><div title="Team" class="team" data-previous="team1_27">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_4" class="pool">Poule 2_4<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_04">Team</div><div title="Team" class="team" data-previous="team1_12">Team</div><div title="Team" class="team" data-previous="team1_20">Team</div><div title="Team" class="team" data-previous="team1_28">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_5" class="pool">Poule 2_5<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_05">Team</div><div title="Team" class="team" data-previous="team1_13">Team</div><div title="Team" class="team" data-previous="team1_21">Team</div><div title="Team" class="team" data-previous="team1_29">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_6" class="pool">Poule 2_6<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_06">Team</div><div title="Team" class="team" data-previous="team1_14">Team</div><div title="Team" class="team" data-previous="team1_22">Team</div><div title="Team" class="team" data-previous="team1_30">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_7" class="pool">Poule 2_7<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_07">Team</div><div title="Team" class="team" data-previous="team1_15">Team</div><div title="Team" class="team" data-previous="team1_23">Team</div><div title="Team" class="team" data-previous="team1_31">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 2_8" class="pool">Poule 2_8<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team1_08">Team</div><div title="Team" class="team" data-previous="team1_16">Team</div><div title="Team" class="team" data-previous="team1_24">Team</div><div title="Team" class="team" data-previous="team1_32">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+    </div>
+    <div title="phase2" class="phase">
+        Phase 3
+        <div title="poule 3_1" class="pool">Poule 3_1<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 3_2" class="pool">Poule 3_2<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 3_3" class="pool">Poule 3_3<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 3_4" class="pool">Poule 3_4<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div><div title="Team" class="team" data-previous="team2_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+    </div>
+    <div title="phase2" class="phase">
+        Phase 3
+        <div title="poule 4_1" class="pool">Poule 4_1<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team3_">Team</div><div title="Team" class="team" data-previous="team3_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 4_2" class="pool">Poule 4_2<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team3_">Team</div><div title="Team" class="team" data-previous="team3_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 4_3" class="pool">Poule 4_3<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team3_">Team</div><div title="Team" class="team" data-previous="team3_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+        <div title="poule 4_4" class="pool">Poule 4_4<div title="Teams In" class="teamlist">In<div title="Team" class="team" data-previous="team3_">Team</div><div title="Team" class="team" data-previous="team3_">Team</div></div><div title="Teams Out" class="teamlist">Out<div title="Team" class="team">Team</div><div title="Team" class="team">Team</div></div></div>
+    </div>
+</div>
+</body>
+</html>
