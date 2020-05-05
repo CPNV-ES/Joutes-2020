@@ -69,9 +69,9 @@ class SportController extends Controller
      */
     public function edit($id)
     {
-        $sports = Sport::all();
+        $sports = Sport::findOrFail($id);
 
-        return view('sports.edit')->with(compact('sport'));
+        return view('sports.edit')->with(compact('sports'));
     }
 
     /**
@@ -83,7 +83,7 @@ class SportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sports = new Sport();
+        $sports->fill($request->all());
 
         $sports->name = $request->input('name');
         $sports->description = $request->input('description');
@@ -103,9 +103,12 @@ class SportController extends Controller
      */
     public function destroy($id)
     {
-        $sports = Sport::find($id);
+        dd($id);
+        $sports = Sport::findOrFail($id);
         $sports->delete();
 
-        return redirect()->route('sports.index', ['sports' => $sports]);
+        return "done";
+        //return redirect()->route('sports.index');
+
     }
 }

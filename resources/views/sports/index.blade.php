@@ -29,17 +29,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($sports as $sport)
+                            @foreach ($sports as $sports)
                                 <tr data-id=" data-rank=">
-                                    <td>{{$sport->name}}</td>
-                                    <td>{{$sport->description}}</td>
-                                    <td>{{$sport->min_participant}}</td>
-                                    <td>{{$sport->max_participant}}</td>
+                                    <td>{{$sports->name}}</td>
+                                    <td>{{$sports->description}}</td>
+                                    <td>{{$sports->min_participant}}</td>
+                                    <td>{{$sports->max_participant}}</td>
                                     <td>
-                                        <a href="{{ route('sports.edit', $sport) }}" class="btn-create"><input type="button" class="btn btn-main grow" value="Edit"></a>
-                                        <button type="button" class="btn btn-main" onclick="">
-                                                Delete
-                                        </button>
+                                        <a href="{{ route('sports.edit', $sports) }}" class="btn-edit"><input type="button" class="btn btn-main grow" value="Edit"></a>
+                                        <a href="{{ route('sports.destroy', $sports) }}" class="btn-delete"><input type="button" class="btn btn-main grow" value="Delete"></a>
                                     </td>
                                 </tr>
                             @endforeach

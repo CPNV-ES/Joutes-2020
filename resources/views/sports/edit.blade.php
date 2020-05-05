@@ -16,7 +16,7 @@
     <div class="container">
 
         <div class="col-8">
-            <form action="" method="POST">
+            <form action="{{route('sports.update', $sports)}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="tournamentName">Sports</label>
