@@ -16,8 +16,9 @@
     <div class="container">
 
         <div class="col-8">
-            <form action="{{route('sports.update', $sports)}}" method="post">
-                @csrf
+            <form action="{{route('sports.update', $sports)}}" method="POST" enctype="multipart/form-data">
+                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
                     <label for="tournamentName">Sports</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$sports->name}}">
@@ -39,7 +40,7 @@
                         <input type="number" class="form-control" id="max_teams" name="max_teams" min="1" max="99999999999" value="{{$sports->max_participant}}">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-main">Edit</button>
+                <button type="submit" class="btn btn-main">save</button>
             </form>
         </div>
     </div>

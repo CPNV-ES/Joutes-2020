@@ -81,9 +81,10 @@ class SportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $sports)
     {
-        $sports->fill($request->all());
+
+        $sports = Sport::find($sports);
 
         $sports->name = $request->input('name');
         $sports->description = $request->input('description');
@@ -101,14 +102,12 @@ class SportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($sport)
     {
-        dd($id);
-        $sports = Sport::findOrFail($id);
+        $sports = Sport::findOrFail($sport);
         $sports->delete();
 
-        return "done";
-        //return redirect()->route('sports.index');
+        return redirect()->route('sports.index');
 
     }
 }

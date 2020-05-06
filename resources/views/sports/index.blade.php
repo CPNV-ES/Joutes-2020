@@ -29,15 +29,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($sports as $sports)
+                            @foreach ($sports as $sport)
                                 <tr data-id=" data-rank=">
-                                    <td>{{$sports->name}}</td>
-                                    <td>{{$sports->description}}</td>
-                                    <td>{{$sports->min_participant}}</td>
-                                    <td>{{$sports->max_participant}}</td>
+                                    <td>{{$sport->name}}</td>
+                                    <td>{{$sport->description}}</td>
+                                    <td>{{$sport->min_participant}}</td>
+                                    <td>{{$sport->max_participant}}</td>
                                     <td>
-                                        <a href="{{ route('sports.edit', $sports) }}" class="btn-edit"><input type="button" class="btn btn-main grow" value="Edit"></a>
-                                        <a href="{{ route('sports.destroy', $sports) }}" class="btn-delete"><input type="button" class="btn btn-main grow" value="Delete"></a>
+                                        <a href="{{ route('sports.edit', $sport) }}" class="btn-edit"><input type="button" class="btn btn-main grow" value="Edit"></a>
+                                        <form action="{{ route('sports.destroy', $sport) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" class="btn btn-main grow" name="_method" value="Delete"/>
+                                            <button style="padding:0px; border: 0px" type="submit" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $sport->name }} ?")'>
+                                                <input type="button" class="btn btn-main grow" value="Delete"/>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
