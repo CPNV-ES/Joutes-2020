@@ -36,10 +36,14 @@
                                     <td>{{$sport->min_participant}}</td>
                                     <td>{{$sport->max_participant}}</td>
                                     <td>
-                                        <a href="{{ route('sports.edit', $sport) }}" class="btn-create"><input type="button" class="btn btn-main grow" value="Edit"></a>
-                                        <button type="button" class="btn btn-main" onclick="">
-                                                Delete
-                                        </button>
+                                        <a href="{{ route('sports.edit', $sport) }}" class="btn-edit"><input type="button" class="btn btn-main grow" value="Edit"></a>
+                                        <form action="{{ route('sports.destroy', $sport) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" class="btn btn-main grow" name="_method" value="Delete"/>
+                                            <button style="padding:0px; border: 0px" type="submit" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $sport->name }} ?")'>
+                                                <input type="button" class="btn btn-main grow" value="Delete"/>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
