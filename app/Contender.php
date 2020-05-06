@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Contender extends Model
 {
@@ -25,4 +26,10 @@ class Contender extends Model
         return $this->belongsTo(Pool::class, 'pool_id');
     }
 
+    public function alreadyInserted() {
+        return DB::table('contenders')
+            ->where('rank_in_pool', '=', $this->rank_in_pool)
+            ->where('pool_id', '=', $this->pool_id)
+            ->where('pool_from_id', '=', $this->pool_from_id)->exists();
+    }
 }
