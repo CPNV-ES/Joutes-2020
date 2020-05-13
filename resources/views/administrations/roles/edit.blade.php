@@ -38,7 +38,7 @@
                     <input type="hidden" name="_method" value="PUT">
                     <div class="form-group">
                         <label for="slug">Slug</label>
-                        <input type="text" class="form-control" name="slug" placeholder="Ajouter un slug" value="{{ $role->slug }}">
+                        <input type="text" disabled class="form-control" name="slug" placeholder="Ajouter un slug" value="{{ $role->slug }}">
                     </div>
                     <div class="form-group">
                         <label for="Nom">Nom</label>
