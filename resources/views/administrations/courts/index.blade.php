@@ -49,7 +49,7 @@
                                             <i class="fas fa-edit fa-lg" aria-hidden="true"></i>
                                         </a>
                                     
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                                             <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                         </button>
                                      
@@ -61,6 +61,32 @@
 
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>       
+                    <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <form action="{{ route('courts.destroy', $court->id) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Supprimer</button> 
+                    </form>
+                </div>
             </div>
         </div>
     </div>

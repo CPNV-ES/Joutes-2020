@@ -45,4 +45,10 @@ class CourtController extends Controller
         
         return redirect()->route('courts.index');
     }
+
+    public function destroy(Request $request, Court $court)
+    {
+        $court->delete();
+        return redirect()->route('courts.index');
+    }
 }
