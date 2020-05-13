@@ -51,7 +51,7 @@
                             
                             <div class="form-group">
                                 <label for="sport">Sport</label>
-                                <select class="form-control" id="sportSelect" name="sport_id">
+                                <select class="form-control" id="sport" name="sport_id">
                                     @foreach ($sports as $sport)
                                         @if ($tournament->sport->name == $sport->name)
                                             <option value="{{ $sport->id }}" selected>{{ $sport->name }}</option>
