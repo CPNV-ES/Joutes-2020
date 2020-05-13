@@ -8,6 +8,10 @@ class Court extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'sport_id', 'name', 'acronym'
+    ];
+
     /**
      * Create a new belongs to relationship instance between Court and Sport
      *
