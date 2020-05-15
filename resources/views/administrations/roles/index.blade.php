@@ -47,14 +47,14 @@
                                         <a href="{{ route('roles.edit', $role->id)}}" title="Éditer le role" class="edit" style="margin-right: 10%;">
                                             <i class="fas fa-edit fa-lg" aria-hidden="true"></i>
                                         </a>
-                                    
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                        </button>
+                                        @if($role->isUsed() == null)
+                                            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                            </button>
+                                        @endIf
                                      
                                     </div>
                                 </td>
-
                             </tr>
                         @endforeach
 
@@ -66,13 +66,13 @@
 
     
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
                 <i class="fas fa-times-circle fa-4x" style="color: red;"></i>       
-                <h5 class="modal-title pl-3 pt-3" id="exampleModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
+                <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
