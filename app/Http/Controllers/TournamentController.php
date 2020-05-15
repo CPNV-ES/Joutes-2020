@@ -21,10 +21,11 @@ class TournamentController extends Controller
     public function store(CreateTournamentRequest $request, Event $event)
     {
         $tournament = new Tournament();
-        $tournament->fill($request->all() + ['event_id' => $event->id]);
+        $tournament->fill($request->all());
+        $tournament->event()->associate($event);
 
-        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour');
-        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour');
+        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
+        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
 
         $tournament->save();
         
@@ -55,8 +56,8 @@ class TournamentController extends Controller
     {
         $tournament->fill($request->all());
 
-        $tournament->start_date = $request->input('start_date').$request->input('start_hour');
-        $tournament->end_date = $request->input('end_date').$request->input('end_hour');
+        $tournament->start_date = $request->input('start_date').$request->input('start_hour').':00';
+        $tournament->end_date = $request->input('end_date').$request->input('end_hour').':00';
 
         $tournament->save();
 

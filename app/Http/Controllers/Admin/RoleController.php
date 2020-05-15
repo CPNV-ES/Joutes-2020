@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\CreateRoleRequest;
+use App\Http\Requests\EditRoleRequest;
 
 class RoleController extends Controller
 {
@@ -17,7 +19,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('administrations.roles.indexRole')->with('roles', $roles);
+        return view('administrations.roles.index')->with('roles', $roles);
     }
 
     /**
@@ -27,7 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('administrations.roles.createRole');
+        return view('administrations.roles.create');
     }
 
     /**
@@ -36,29 +38,16 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRoleRequest $request)
     {
-        /* LARAVEL VALIDATION */
-        // create the validation rules
-        $rules = array(
-            'slug' => 'required|min:2|max:4|unique:roles,slug',
-            'nom' => 'max:45'
-        );
+        
+        $newRole = new Role();
+        $newRole->slug = $request->input("slug");
+        $newRole->name = $request->input("name");
+        $newRole->save();
 
-        $validator = Validator::make($request->all(), $rules);
-
-        //if validation fails
-        if ($validator->fails()) {
-            return view('administrations.roles.createRole')->withErrors($validator->errors());
-
-        } else {
-            $newRole = new Role();
-            $newRole->slug = $request->input("slug");
-            $newRole->name = $request->input("name");
-            $newRole->save();
-
-            return redirect()->route('roles.index');
-        }
+        return redirect()->route('roles.index');
+ 
     }
 
     /**
@@ -78,10 +67,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $role = Role::find($id);
-        return view('administrations.roles.editRole')->with('role', $role);
+        return view('administrations.roles.edit')->with('role', $role);
     }
 
     /**
@@ -89,37 +77,13 @@ class RoleController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditRoleRequest $request, Role $role)
     {
-        $role = Role::find($id);
+        $role->fill($request->all());
+        $role->save();
 
-
-        /* CUSTOM SPECIFIC VALIDATION */
-        $customError = null;
-        // Check if the name already exists AND is not the same between the form POST and the DB
-        // This way, we can edit just the description and save the same name, but we cannot save the same name as an other sport on DB
-        if($role->slug != $request->input('slug') && Role::where('slug', '=', $request->input('slug'))->exists()){
-            $customError = 'le role "'.$request->input('slug').'"'.' existe déjà.';
-        }
-
-
-        /* LARAVEL VALIDATION */
-        // create the validation rules
-        $rules = array(
-            'slug' => 'required|min:2|max:4',
-            'nom' => 'max:45'
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails() || !empty($customError)) {
-            return view('administrations.roles.editRole')->withErrors($validator->errors())->with('role', $role)->with('customError', $customError);
-        } else {
-            $role->update($request->all());
-            return redirect()->route('roles.index');
-        }
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -128,10 +92,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($role)
     {
-        $roleToDelete = Role::findOrFail($id);
-        $roleToDelete->delete();
+        $roleToDelete = Role::findOrFail($role);
+
+        if ($roleToDelete->isUsed() == null){
+            $roleToDelete->delete();    
+        }  
+
         return redirect()->route('roles.index');
     }
 }

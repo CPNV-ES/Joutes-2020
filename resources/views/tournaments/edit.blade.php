@@ -32,7 +32,7 @@
 
                                 <div class="col-6">
                                     <label for="start_hour">Heure de début</label>
-                                    <input type="time" class="form-control col-m-6" name="start_hour" id="start_hour" value="{{ $tournament->start_date->format('H:i:s') }}">
+                                    <input type="time" class="form-control col-m-6" name="start_hour" id="start_hour" value="{{ $tournament->start_date->format('H:i') }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -45,13 +45,13 @@
 
                                 <div class="col-6">
                                     <label for="end_hour">Heure de fin</label>
-                                    <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour" value="{{ $tournament->end_date->format('H:i:s') }}">
+                                    <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour" value="{{ $tournament->end_date->format('H:i') }}">
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="sport">Sport</label>
-                                <select class="form-control" id="sportSelect" name="sport_id">
+                                <select class="form-control" id="sport" name="sport_id">
                                     @foreach ($sports as $sport)
                                         @if ($tournament->sport->name == $sport->name)
                                             <option value="{{ $sport->id }}" selected>{{ $sport->name }}</option>

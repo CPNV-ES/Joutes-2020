@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Tournament extends Model
 {
@@ -78,5 +79,14 @@ class Tournament extends Model
         return $filtered;
     }
 
+    public function getTeamsNotInAPool()
+    {
+        $teamsNotInAPool = DB::table('contenders')
+            ->rightJoin('teams', 'teams.id', '=', 'contenders.team_id')
+            ->whereNull('contenders.team_id')
+            ->where('tournament_id', '=', $this->id)
+            ->get();
 
+        return $teamsNotInAPool;
+    }
 }

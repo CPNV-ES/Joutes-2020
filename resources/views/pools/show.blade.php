@@ -5,7 +5,35 @@
     <div class="container">
         <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
         <div class="text-center">
-            <h2>Matchs et Résultats</h2>
+            <h2>Matches et Résultats</h2>
+            @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
+            <h2>Définition des équipes</h2>
+            <table>
+                <tr>
+                    <th>Issu de la poule</th>
+                    <th>Classé</th>
+                </tr>
+                <tr>
+                    <form action="{{ route('pools.contenders.store', $pool->id) }}" method="post">
+                        @csrf
+                        <td>
+                            <select name="pool_from_id" id="pool_from_id">
+                                @foreach ($poolsInPreviousStage as $poolInPreviousStage)
+                                <option value="{{ $poolInPreviousStage->id }}">{{ $poolInPreviousStage->poolName }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="rank_in_pool" id="rank_in_pool" min="1">
+                            
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-main">+</button>
+                        </td>
+                    </form>
+                </tr>
+            </table>
+            @endif
             <h4>Date : {{$tournament->start_date->format('d.m.Y')}}</h4>
             <div class="row justify-content-center">
                 <table class="table">
@@ -98,7 +126,19 @@
                 </tbody>
             </table>
             @else
-                Indisponible
+                @if($pool->stage == 1 && count($teamsNotInAPool) > 0)
+                <form action="{{ route('pools.contenders.store', $pool->id) }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <select id="teams" name="team_id">
+                            @foreach ($teamsNotInAPool as $team)
+                                <option value="{{ $team->id }}">{{ $team->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-main">+</button>
+                </form>
+                @endif
             @endif
         </div>
     </div>
