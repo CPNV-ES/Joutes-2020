@@ -31,4 +31,4 @@ Route::resource('pools.contenders', 'ContenderController');
 //Administration resources
 Route::resource('administrations', 'Admin\AdministrationController');
 Route::resource('roles', 'Admin\RoleController');
-
+Route::resource('courts', 'Admin\CourtController');

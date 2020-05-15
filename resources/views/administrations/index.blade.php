@@ -24,6 +24,15 @@
                     </div>
                 </div>
             </a>
+
+            <a href="{{ route('courts.index') }}">
+                <div class="card">
+                    <img class="card-img" src="" alt="Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Terrains</h5>
+                    </div>
+                </div>
+            </a>
         </div>
 
     </div>
