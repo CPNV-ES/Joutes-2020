@@ -120,7 +120,7 @@
             
 
             <!-- Stages and pools -->
-            @if (sizeof($tournament->pools) > 0)
+            {{-- @if (sizeof($tournament->pools) > 0)
 
                 <table class="table">
                     <thead>
@@ -164,8 +164,141 @@
                 </table>
             @else
                 Indisponible pour le moment ...
-            @endif
+            @endif --}}
+
+
 
         </div>
 
+        <script>
+            var canvas
+            var ctx
+            /*
+                Principe:
+                - Chaque poule contient deux listes d'équipes: les entrantes et les sortantes (classement)
+                - On donne un id aux équipes sortantes et aux équipes de départ
+                - Chaque équipe 'entrante' a un champ 'data-previous' qui contient l'id d'une équipe sortante
+                - Au survol d'une équipe avec la souris, on lit le previous et on la met en évidence avec une classe 'highlight'
+             */
+            document.addEventListener('DOMContentLoaded', function () {
+                Array.from(document.getElementsByClassName("team")).forEach(function (element) {
+                    element.addEventListener('mouseover', function (evt) {
+                        previous = document.getElementById(evt.target.dataset.previous)
+                        previous.classList.add('highlight')
+                        evt.target.classList.add('highlight')
+                        connect(previous.getBoundingClientRect(),evt.target.getBoundingClientRect())
+                    });
+                    element.addEventListener('mouseout', function (evt) {
+                        previous = document.getElementById(evt.target.dataset.previous)
+                        previous.classList.remove('highlight')
+                        evt.target.classList.remove('highlight')
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    });
+                });
+    
+                canvas = document.getElementById("canvas");
+                ctx = canvas.getContext("2d");
+                area = tournament.getBoundingClientRect()
+                canvas.width = area.width
+                canvas.height = area.height
+            })
+    
+            function connect(r1,r2)
+            {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
+                ctx.moveTo(r1.x + r1.width/2, r1.y+r1.height/2);
+                ctx.lineTo(r2.x + r2.width/2, r2.y+r2.height/2);
+                ctx.stroke();
+            }
+    
+        </script>
+        <style>
+            .highlight {
+                background-color: pink;
+            }
+    
+            .tournament {
+                border: solid 3px blue;
+                padding: 2px;
+                margin: 2px;
+                display: flex;
+                flex-direction: row;
+            }
+    
+            .phase {
+                border: solid 2px red;
+                padding: 2px;
+                margin: 2px;
+                display: flex;
+                flex-direction: column;
+            }
+    
+            .pool {
+                border: solid 1px green;
+                padding: 2px;
+                margin: 2px;
+                display: flex;
+                flex-direction: row;
+            }
+    
+            .teamlist {
+                border: solid 1px black;
+                padding: 2px;
+                margin: 2px;
+                display: flex;
+                flex-direction: column;
+            }
+    
+            .team {
+                border: solid 1px gray;
+                padding: 2px;
+                margin: 2px;
+            }
+    
+            #canvas {
+                position: absolute;
+                border: 1px solid red;
+                z-index: -1;
+            }
+        </style>
+
+<body>
+    <canvas id="canvas" width=300 height=300></canvas>
+    <div id="tournament" title="tournament" class="tournament">
+        Tournoi<br>
+        <div title="Teams" class="teamlist">Equipes
+            {{-- <div title="Team" class="team" id="team0_01">Team</div> --}}
+            @foreach ($tournament->teams as $team)
+                <div title="Team" class="team" id="{{ $team->id }}">{{ $team->name }}</div>
+            @endforeach
+        </div>
+
+        @for ($i = 1; $i <= $maxStage; $i++)
+            Phase {{ $i }}
+
+            @foreach ($pools as $pool)
+                @if($pool->stage == $i)
+                    <div title="poule {{ $pool->stage }}_{{ $i }}" class="pool">{{ $pool->name }}
+                        <div title="Teams In" class="teamlist">In
+                            @foreach ($tournament->teams as $team)
+                                @foreach ($pool->contenders as $contender)
+                                    @if($contender->team_id == $team->id)
+                                        <div title="Team" class="team" data-previous="{{ $team->id }}">{{ $team->name }}</div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        </div>
+                        <div title="Teams Out" class="teamlist">Out
+                            <div title="Team" class="team" id="team1_01">Team</div>
+                            <div title="Team" class="team" id="team1_09">Team</div>
+                            <div title="Team" class="team" id="team1_17">Team</div>
+                            <div title="Team" class="team" id="team1_25">Team</div>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        @endfor
+    </div>
+</body>
 @stop
