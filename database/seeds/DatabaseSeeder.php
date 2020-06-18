@@ -11,5 +11,6 @@ class DatabaseSeeder extends Seeder{
     public function run()
     {
         $this->call(Joutes2019Seeder::class);
+        $this->call(FakeResultPoolState::class);
     }
 }
