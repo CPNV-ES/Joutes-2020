@@ -274,31 +274,24 @@
             @endforeach
         </div>
 
-        @for ($i = 1; $i <= $maxStage; $i++)
-            Phase {{ $i }}
+        @foreach ($tournament->getStages() as $stage)
+            Phase {{ $stage }}
 
-            @foreach ($pools as $pool)
-                @if($pool->stage == $i)
-                    <div title="poule {{ $pool->stage }}_{{ $i }}" class="pool">{{ $pool->name }}
-                        <div title="Teams In" class="teamlist">In
-                            @foreach ($tournament->teams as $team)
-                                @foreach ($pool->contenders as $contender)
-                                    @if($contender->team_id == $team->id)
-                                        <div title="Team" class="team" data-previous="{{ $team->id }}">{{ $team->name }}</div>
-                                    @endif
-                                @endforeach
-                            @endforeach
-                        </div>
-                        <div title="Teams Out" class="teamlist">Out
-                            <div title="Team" class="team" id="team1_01">Team</div>
-                            <div title="Team" class="team" id="team1_09">Team</div>
-                            <div title="Team" class="team" id="team1_17">Team</div>
-                            <div title="Team" class="team" id="team1_25">Team</div>
-                        </div>
-                    </div>
-                @endif
+            @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
+              <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
+                  <div title="Teams In" class="teamlist"><a href="{{ route('pools.show', [$tournament->id, $pool]) }}">{{ $pool->poolName }}</a>
+                    @foreach ($pool->contenders as $contender)
+                        <div title="Team" class="team" data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</div>
+                    @endforeach
+                  </div>
+                <div title="Teams Out" class="teamlist">Classement
+                    @for ($i = 1; $i <= $pool->poolSize; $i++)
+                      <div title="Team" class="team" id="{{ $pool->id.'-'.$i }}">{{ $i }}</div>
+                    @endfor
+                  </div>
+              </div>
             @endforeach
-        @endfor
+        @endforeach
     </div>
 </body>
 @stop
