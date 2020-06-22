@@ -29,12 +29,3 @@ document.addEventListener('DOMContentLoaded', function () {
     canvas.width = area.width
     canvas.height = area.height
 })
-
-function connect(r1,r2)
-{
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.moveTo(r1.x + r1.width/2, r1.y+r1.height/2);
-    ctx.lineTo(r2.x + r2.width/2, r2.y+r2.height/2);
-    ctx.stroke();
-}
