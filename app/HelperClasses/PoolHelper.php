@@ -17,6 +17,8 @@ class PoolHelper
                 return "En cours";
             case 3:
                 return "Terminée";
+            default:
+                return "inconnu";
         }
     }
 }
