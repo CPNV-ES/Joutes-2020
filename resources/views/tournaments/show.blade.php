@@ -116,56 +116,40 @@
             </div>
         </div>
 
-
-            
-
-            <!-- Stages and pools -->
-            @if (sizeof($tournament->pools) > 0)
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="sizedTh"></th>
-                            @for ($i = 1; $i <= $maxStage; $i++)
-
-                                <th class="nav-item">
-                                    Phase {{$i}}
-                                </th>
-
-                            @endfor
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="verticalText"><span>Poules</span></th>
-                            @for ($i = 1; $i <= $maxStage; $i++)
-                                <td class="noPadding">
-                                    <table id="pools-table" class="table-hover table-striped table-bordered" width="100%" data-tournament="{{$tournament->id}}">
-                                                @foreach ($pools as $pool)
-                                                        <tbody>
-                                                            @if ($pool->stage == $i)
-                                                                <tr>
-                                                                    <td data-id="{{$pool->id}}" class="clickable">
-                                                                    <a href="{{ route('tournaments.pools.show', [$tournament, $pool]) }}">
-                                                                            {{$pool->poolName}}
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        </tbody>
-                                                @endforeach
-                                    </table>
-                                </td>
-                            @endfor
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            @else
-                Indisponible pour le moment ...
-            @endif
-
         </div>
 
+<body>
+    <canvas id="canvas" width=300 height=300></canvas>
+    <div id="tournament" title="tournament" class="tournament">
+        Tournoi<br>
+        <div title="Teams" class="teamlist">Equipes
+            {{-- <div title="Team" class="team" id="team0_01">Team</div> --}}
+            @foreach ($tournament->teams as $team)
+                <div title="Team" class="team" id="{{ $team->id }}">{{ $team->name }}</div>
+            @endforeach
+        </div>
+
+        @foreach ($tournament->getStages() as $stage)
+            Phase {{ $stage }}
+
+            <div>
+              @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
+                <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
+                    <div title="Teams In" class="teamlist"><a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}">{{ $pool->poolName }}</a>
+                      @foreach ($pool->contenders as $contender)
+                        <div title="Team" class="team" data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</div>
+                      @endforeach
+                    </div>
+                    <div title="Teams Out" class="teamlist">Classement
+                      @for ($i = 1; $i <= $pool->poolSize; $i++)
+                        <div title="Team" class="team" id="{{ $pool->id.'-'.$i }}">{{ $i }}</div>
+                      @endfor
+                    </div>
+                </div>
+              @endforeach
+            </div>
+        @endforeach
+    </div>
+</body>
+<script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop

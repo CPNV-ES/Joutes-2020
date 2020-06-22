@@ -20,6 +20,16 @@ class Tournament extends Model
         'name', 'start_date', 'end_date', 'event_id', 'sport_id', 'end_date', 'max_teams'
     ];
 
+    public function getStages()
+    {
+      return $this->pools()->distinct('stage')->orderBy('stage')->pluck('stage')->toArray();
+    }
+
+    public function getPoolsOfStage($tournamentId, $stageNumber)
+    {
+      return Pool::where('stage', '=', $stageNumber)->where('tournament_id', '=', $tournamentId)->get();
+    }
+
     /**
      * Create a new belongs to relationship instance between Tournament and Event
      *
