@@ -100,7 +100,7 @@ In order to be logged as a developper, run this command
 
 Docker allows you to develop without needing to have PHP or Composer installed on your host environment.
 
-All you need to do is to install Docker **and** Docker Compose. [Check the official documentation for instructions.](https://docs.docker.com/)
+All you need to do is install Docker **and** Docker Compose. [Check the official documentation for instructions.](https://docs.docker.com/)
 
 ## Make the containers work
 
