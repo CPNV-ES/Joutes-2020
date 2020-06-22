@@ -116,152 +116,7 @@
             </div>
         </div>
 
-
-            
-
-            <!-- Stages and pools -->
-            {{-- @if (sizeof($tournament->pools) > 0)
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="sizedTh"></th>
-                            @for ($i = 1; $i <= $maxStage; $i++)
-
-                                <th class="nav-item">
-                                    Phase {{$i}}
-                                </th>
-
-                            @endfor
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="verticalText"><span>Poules</span></th>
-                            @for ($i = 1; $i <= $maxStage; $i++)
-                                <td class="noPadding">
-                                    <table id="pools-table" class="table-hover table-striped table-bordered" width="100%" data-tournament="{{$tournament->id}}">
-                                                @foreach ($pools as $pool)
-                                                        <tbody>
-                                                            @if ($pool->stage == $i)
-                                                                <tr>
-                                                                    <td data-id="{{$pool->id}}" class="clickable">
-                                                                    <a href="{{ route('tournaments.pools.show', [$tournament, $pool]) }}">
-                                                                            {{$pool->poolName}}
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        </tbody>
-                                                @endforeach
-                                    </table>
-                                </td>
-                            @endfor
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            @else
-                Indisponible pour le moment ...
-            @endif --}}
-
-
-
         </div>
-
-        <script>
-            var canvas
-            var ctx
-            /*
-                Principe:
-                - Chaque poule contient deux listes d'équipes: les entrantes et les sortantes (classement)
-                - On donne un id aux équipes sortantes et aux équipes de départ
-                - Chaque équipe 'entrante' a un champ 'data-previous' qui contient l'id d'une équipe sortante
-                - Au survol d'une équipe avec la souris, on lit le previous et on la met en évidence avec une classe 'highlight'
-             */
-            document.addEventListener('DOMContentLoaded', function () {
-                Array.from(document.getElementsByClassName("team")).forEach(function (element) {
-                    element.addEventListener('mouseover', function (evt) {
-                        previous = document.getElementById(evt.target.dataset.previous)
-                        previous.classList.add('highlight')
-                        evt.target.classList.add('highlight')
-                        connect(previous.getBoundingClientRect(),evt.target.getBoundingClientRect())
-                    });
-                    element.addEventListener('mouseout', function (evt) {
-                        previous = document.getElementById(evt.target.dataset.previous)
-                        previous.classList.remove('highlight')
-                        evt.target.classList.remove('highlight')
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    });
-                });
-    
-                canvas = document.getElementById("canvas");
-                ctx = canvas.getContext("2d");
-                area = tournament.getBoundingClientRect()
-                canvas.width = area.width
-                canvas.height = area.height
-            })
-    
-            function connect(r1,r2)
-            {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.beginPath();
-                ctx.moveTo(r1.x + r1.width/2, r1.y+r1.height/2);
-                ctx.lineTo(r2.x + r2.width/2, r2.y+r2.height/2);
-                ctx.stroke();
-            }
-    
-        </script>
-        <style>
-            .highlight {
-                background-color: pink;
-            }
-    
-            .tournament {
-                border: solid 3px blue;
-                padding: 2px;
-                margin: 2px;
-                display: flex;
-                flex-direction: row;
-            }
-    
-            .phase {
-                border: solid 2px red;
-                padding: 2px;
-                margin: 2px;
-                display: flex;
-                flex-direction: column;
-            }
-    
-            .pool {
-                border: solid 1px green;
-                padding: 2px;
-                margin: 2px;
-                display: flex;
-                flex-direction: row;
-            }
-    
-            .teamlist {
-                border: solid 1px black;
-                padding: 2px;
-                margin: 2px;
-                display: flex;
-                flex-direction: column;
-            }
-    
-            .team {
-                border: solid 1px gray;
-                padding: 2px;
-                margin: 2px;
-            }
-    
-            #canvas {
-                position: absolute;
-                border: 1px solid red;
-                z-index: -1;
-            }
-        </style>
 
 <body>
     <canvas id="canvas" width=300 height=300></canvas>
@@ -279,7 +134,7 @@
 
             @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
               <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
-                  <div title="Teams In" class="teamlist"><a href="{{ route('pools.show', [$tournament->id, $pool]) }}">{{ $pool->poolName }}</a>
+                  <div title="Teams In" class="teamlist"><a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}">{{ $pool->poolName }}</a>
                     @foreach ($pool->contenders as $contender)
                         <div title="Team" class="team" data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</div>
                     @endforeach
@@ -294,4 +149,5 @@
         @endforeach
     </div>
 </body>
+<script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop
