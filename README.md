@@ -37,6 +37,8 @@ We're using Node so we can easily manage all of our JavaScript dependencies (Gul
 
 # Installation
 
+**As an alternative, you can set up the project with Docker. See instructions below.**
+
 First of all, clone the GitHub repository
 
 ```bash
@@ -91,3 +93,40 @@ In order to be logged as a developper, run this command
 ```bash
     php artisan make:devLogin <username>
 ```
+
+# Docker
+
+## Set up
+
+Docker allows you to develop without needing to have PHP or Composer installed on your host environment.
+
+All you need to do is to install Docker **and** Docker Compose. [Check the official documentation for instructions.](https://docs.docker.com/)
+
+## Make the containers work
+
+The instructions to get a container up and running is very similar to how you would do it *normally*.
+
+Make sure to have a `.env` file in the root of the project because it will get copied. Just use the `.env.example` file and rename it. You don't need to change anything.
+
+```bash
+# Note that you may (or may not) need to run the commands as sudo depending on your configuration.
+
+# You do not need to pass the --build argument if you didn't change the Dockerfile.
+sudo docker-compose up -d --build
+
+sudo docker-compose exec web composer install
+
+sudo docker-compose exec web npm install
+
+sudo docker-compose exec web php artisan key:generate
+
+sudo docker-compose exec web php artisan config:cache
+
+sudo docker-compose exec web php artisan migrate
+
+sudo docker-compose exec web php artisan db:seed
+
+sudo docker-compose exec web npm run watch
+```
+
+When you are done for the day, it is recommended that you run `sudo docker-compose down`. When you want to start the project again, run `sudo docker-compose up`.

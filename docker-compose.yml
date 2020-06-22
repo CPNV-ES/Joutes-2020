@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - 8000:8000
+    volumes:
+        - ./:/joutes
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_DATABASE: joutes
+      DB_USERNAME: joutes
+      DB_PASSWORD: joutes
+        
+  db:
+    image: mariadb:10.3
+    environment:
+      MYSQL_DATABASE: joutes
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: joutes
+      MYSQL_PASSWORD: joutes
+    volumes:
+      - "joutes-db:/var/lib/mysql"
+
+volumes:
+  joutes-db:
