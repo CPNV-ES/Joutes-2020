@@ -11,7 +11,6 @@ RUN apt-get update -y && apt-get install -y libmcrypt-dev openssl
 RUN docker-php-ext-install pdo_mysql pdo mbstring
 
 WORKDIR /joutes
-COPY . /joutes
 
 VOLUME [ "/joutes" ]
 
