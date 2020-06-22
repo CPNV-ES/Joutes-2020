@@ -618,7 +618,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 0
+            'isFinished' => 1
         ]);
         $pool->save();
         $firstpoolStage2 = $pool->id; // we'll need that to put teams into pools
@@ -632,7 +632,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 0
+            'isFinished' => 1
         ]))->save();
 
         (new \App\Contender(['pool_id' => $firstpoolStage2,'pool_from_id' => $firstpoolStage1, 'rank_in_pool' => 1]))->save();
@@ -704,7 +704,7 @@ class Joutes2019Seeder extends Seeder
         // Élève
         $role = new \App\Role(['name' => 'Student','slug' => 'STUD',]);
         $role->save();
-   
+
         echo "OK\n";
     }
 }
