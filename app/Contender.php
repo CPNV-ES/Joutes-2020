@@ -32,4 +32,12 @@ class Contender extends Model
             ->where('pool_id', '=', $this->pool_id)
             ->where('pool_from_id', '=', $this->pool_from_id)->exists();
     }
+
+    //check if pool_from_id is empty
+    public static function isAllEmpty($contenders){
+        foreach ($contenders as $contender){
+            if (!empty($contender->pool_from_id)) return false;
+        }
+        return true;
+    }
 }

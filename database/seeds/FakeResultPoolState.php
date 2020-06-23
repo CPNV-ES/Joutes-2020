@@ -49,30 +49,6 @@ class FakeResultPoolState extends Seeder
                     'mode_id' => 1,
                     'game_type_id' => 1,
                 ),
-            3 =>
-                array (
-                    'start_time' => '09:30',
-                    'end_time' => '11:45',
-                    'poolName' => 'Prêt à débuter',
-                    'stage' => 2,
-                    'poolSize' => 4,
-                    'poolState' => 1,
-                    'tournament_id' => 6,
-                    'mode_id' => 1,
-                    'game_type_id' => 1,
-                ),
-            4 =>
-                array (
-                    'start_time' => '09:30',
-                    'end_time' => '11:45',
-                    'poolName' => 'En préparation',
-                    'stage' => 1,
-                    'poolSize' => 8,
-                    'poolState' => 0,
-                    'tournament_id' => 5,
-                    'mode_id' => 1,
-                    'game_type_id' => 1,
-                )
         ));
         DB::table('teams')->insert(array (
             //create differentes teams
@@ -218,34 +194,6 @@ class FakeResultPoolState extends Seeder
                     'rank_in_pool' => null,
                     'pool_id' => 10,
                     'team_id' => 66,
-                    'pool_from_id' => 9,
-                ),
-            12 =>
-                array (
-                    'rank_in_pool' => null,
-                    'pool_id' => 11,
-                    'team_id' => 63,
-                    'pool_from_id' => 8,
-                ),
-            13 =>
-                array (
-                    'rank_in_pool' => null,
-                    'pool_id' => 11,
-                    'team_id' => 64,
-                    'pool_from_id' => 8,
-                ),
-            14 =>
-                array (
-                    'rank_in_pool' => null,
-                    'pool_id' => 11,
-                    'team_id' => 67,
-                    'pool_from_id' => 9,
-                ),
-            15 =>
-                array (
-                    'rank_in_pool' => null,
-                    'pool_id' => 11,
-                    'team_id' => 68,
                     'pool_from_id' => 9,
                 ),
         ));
@@ -431,67 +379,6 @@ class FakeResultPoolState extends Seeder
                     'contender1_id' => 83,
                     'contender2_id' => 84,
                     'court_id' => 17,
-                ),
-            //pret a debuter
-            18 =>
-                array (
-                    'score_contender1' => null,
-                    'score_contender2' => null,
-                    'date' => '2020-06-18',
-                    'start_time' => '09:30',
-                    'contender1_id' => 85,
-                    'contender2_id' => 86,
-                    'court_id' => 18,
-                ),
-            19 =>
-                array (
-                    'score_contender1' => null,
-                    'score_contender2' => null,
-                    'date' => '2020-06-18',
-                    'start_time' => '09:30',
-                    'contender1_id' => 85,
-                    'contender2_id' => 87,
-                    'court_id' => 18,
-                ),
-            20 =>
-                array (
-                    'score_contender1' => null,
-                    'score_contender2' => null,
-                    'date' => '2020-06-18',
-                    'start_time' => '09:30',
-                    'contender1_id' => 85,
-                    'contender2_id' => 88,
-                    'court_id' => 18,
-                ),
-            21 =>
-                array (
-                    'score_contender1' => null,
-                    'score_contender2' => null,
-                    'date' => '2020-06-18',
-                    'start_time' => '09:30',
-                    'contender1_id' => 86,
-                    'contender2_id' => 87,
-                    'court_id' => 18,
-                ),
-            22 =>
-                array (
-                    'score_contender1' => null,
-                    'score_contender2' => null,
-                    'date' => '2020-06-18',
-                    'start_time' => '09:30',
-                    'contender1_id' => 86,
-                    'contender2_id' => 88,
-                    'court_id' => 18,
-                ),
-            23 =>
-                array (
-                    'score_contender1' => null,
-                    'score_contender2' => null,
-                    'date' => '2020-06-18',
-                    'start_time' => '09:30',
-                    'contender1_id' => 87,
-                    'contender2_id' => 88,
-                    'court_id' => 18,
                 ),
         ));
     }
