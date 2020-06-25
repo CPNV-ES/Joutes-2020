@@ -118,7 +118,7 @@
                     @for ($i = 0; $i < sizeof($rankings); $i++)
                         <tr data-id="{{ $rankings[$i]["team_id"] }}" data-rank="{{$i+1}}">
                             <td>{{$i+1}}</td>
-                            <td>{{$rankings[$i]["team"]->id}}</td>
+                            <td>{{$rankings[$i]["team"]}}</td>
                             <td>{{$rankings[$i]["score"]}}</td>
                             <td>{{$rankings[$i]["W"]}}</td>
                             <td>{{$rankings[$i]["L"]}}</td>
