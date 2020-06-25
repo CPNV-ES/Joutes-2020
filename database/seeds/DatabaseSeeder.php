@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder{
      */
     public function run()
     {
-        $this->call(Joutes2019Seeder::class);
+        $this->call(Joutes2020Seeder::class);
         $this->call(FakeResultPoolState::class);
     }
 }

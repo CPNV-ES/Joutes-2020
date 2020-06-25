@@ -76,11 +76,13 @@
                                         @endif
                                     @else
                                         <!--teams and score -->
-                                        <td class="contender1">{{$game->contender1->team->name}}</td>
-                                        <td class="score1">{{$game->score_contender1}}</td>
-                                        <td class="separator"> - </td>
-                                        <td class="score2">{{$game->score_contender2}}</td>
-                                        <td class="contender2">{{$game->contender2->team->name}}</td>
+                                        <tr style="background-color: #9ee493d7; color: white">
+                                            <td class="contender1">{{$game->contender1->team->name}}</td>
+                                            <td class="score1">{{$game->score_contender1}}</td>
+                                            <td class="separator"> - </td>
+                                            <td class="score2">{{$game->score_contender2}}</td>
+                                            <td class="contender2">{{$game->contender2->team->name}}</td>
+                                        </tr>
                                         @if($pool->isEditable())
                                             <td class="action"><i class="fa fa-lg fa-trophy editScore" aria-hidden="true"></i></td>
                                         @endif
