@@ -26,7 +26,7 @@ class PoolController extends Controller
 
     $pool->start_time = $request->input('start_time');
     $pool->end_time = $request->input('end_time');
-    $pool->isFinished = false;
+    $pool->poolState = 0;
 
     $pool->save();
 
