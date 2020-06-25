@@ -76,7 +76,7 @@
                                         @endif
                                     @else
                                         <!--teams and score -->
-                                        <tr style="background-color: #9ee493d7; color: white">
+                                        <tr style="background-color: #9ee493d7;">
                                             <td class="contender1">{{$game->contender1->team->name}}</td>
                                             <td class="score1">{{$game->score_contender1}}</td>
                                             <td class="separator"> - </td>
