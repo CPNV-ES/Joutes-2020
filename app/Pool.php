@@ -37,7 +37,7 @@ class Pool extends Model
     }
 
     public function rankings() {
-        $teams = $this->teams();
+        $teams = $this->listTeams();
         $games = $this->games;
         $rankings = array();
 
@@ -133,21 +133,22 @@ class Pool extends Model
     }
 
     public function teams(){
-        // $teams = array();
-        // foreach ($this->games as $game) {
-        //     if(!empty($game->contender1->team)){
-        //         $teams[$game->contender1->team->id] = $game->contender1->team->name;
-        //     }
-        //     if(!empty($game->contender2->team)){
-        //         $teams[$game->contender2->team->id] = $game->contender2->team->name;
-        //     }
-        // }
-        // return $teams;
-
         $teams = DB::table('contenders')
             ->where('pool_id', '=', $this->id)
             ->get();
-        // dd($teams);
+        return $teams;
+    }
+
+    public function listTeams() {
+      $teams = array();
+        foreach ($this->games as $game) {
+            if(!empty($game->contender1->team)){
+                $teams[$game->contender1->team->id] = $game->contender1->team->name;
+            }
+            if(!empty($game->contender2->team)){
+                $teams[$game->contender2->team->id] = $game->contender2->team->name;
+            }
+        }
         return $teams;
     }
 
