@@ -1,14 +1,10 @@
-FROM php:7.2.5-fpm
+FROM php:7.4.7-fpm-alpine
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-ADD https://nodejs.org/dist/v12.18.1/node-v12.18.1-linux-x64.tar.xz /usr/local
-RUN tar -xf /usr/local/node-v12.18.1-linux-x64.tar.xz -C /usr/local && rm -rf /usr/local/node-v12.18.1-linux-x64.tar.xz
+RUN apk add --no-cache libmcrypt-dev openssl
 
-ENV PATH=/usr/local/node-v12.18.1-linux-x64/bin:${PATH}
+RUN apk add --no-cache composer npm
 
-RUN apt-get update -y && apt-get install -y libmcrypt-dev openssl
-
-RUN docker-php-ext-install pdo_mysql pdo mbstring
+RUN docker-php-ext-install pdo_mysql pdo
 
 WORKDIR /joutes
 
