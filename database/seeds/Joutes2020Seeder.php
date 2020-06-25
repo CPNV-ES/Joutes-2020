@@ -6,7 +6,7 @@ use App\Tournament;
 use App\Role;
 use Illuminate\Database\Seeder;
 
-class Joutes2019Seeder extends Seeder
+class Joutes2020Seeder extends Seeder
 {
     private $eventid;
 
@@ -287,7 +287,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 13,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -384,7 +384,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -457,7 +457,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -543,7 +543,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 6,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -557,7 +557,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]))->save();
 
         $nbTeams = 0;
@@ -618,7 +618,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 1
+            'poolState' => 1
         ]);
         $pool->save();
         $firstpoolStage2 = $pool->id; // we'll need that to put teams into pools
@@ -632,7 +632,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 1
+            'poolState' => 1
         ]))->save();
 
         (new \App\Contender(['pool_id' => $firstpoolStage2,'pool_from_id' => $firstpoolStage1, 'rank_in_pool' => 1]))->save();
