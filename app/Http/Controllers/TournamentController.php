@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Contender;
 use App\Event;
 use App\Http\Requests\CreateTournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
+use App\Pool;
 use App\Tournament;
 use App\Sport;
 
@@ -69,6 +71,8 @@ class TournamentController extends Controller
     {
         $pools = $tournament->pools;
         $maxStage = $pools->max('stage');
+
+        $tournament->getStages();
 
         return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));
 
