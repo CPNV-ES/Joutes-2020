@@ -122,12 +122,12 @@
     <canvas id="canvas" width=300 height=300></canvas>
     <div id="tournament" title="tournament" class="tournament">
         Tournoi<br>
-        <div title="Teams" class="teamlist">Equipes
-            {{-- <div title="Team" class="team" id="team0_01">Team</div> --}}
+        {{-- <div title="Teams" class="teamlist">Equipes
+            {{-- <div title="Team" class="team" id="team0_01">Team</div>
             @foreach ($tournament->teams as $team)
                 <div title="Team" class="team" id="{{ $team->id }}">{{ $team->name }}</div>
             @endforeach
-        </div>
+        </div> --}}
 
         @foreach ($tournament->getStages() as $stage)
             Phase {{ $stage }}
