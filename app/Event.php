@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
     public $timestamps = false;
-
 
     //Get event tournaments
     public function tournaments() {
