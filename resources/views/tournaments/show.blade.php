@@ -119,8 +119,6 @@
         </div>
 
 <body>
-    <canvas id="canvas" width=300 height=300></canvas>
-    <table id="tournament" title="tournament" class="tournament">
         {{--Tournoi<br>
          <div title="Teams" class="teamlist">Equipes
             {{-- <div title="Team" class="team" id="team0_01">Team</div>
@@ -134,7 +132,7 @@
 
         @foreach ($tournament->getStages() as $stage)
             Phase {{ $stage }}
-
+            <div>
 
             <table id="" class="table table-bordered table-hover">
                 @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
@@ -175,8 +173,7 @@
                 @endforeach
             </table>
         @endforeach
-    </table>
-
+        </div>
 
 </body>
 <script src="{{ asset('js/tournamentView.js') }}"></script>
