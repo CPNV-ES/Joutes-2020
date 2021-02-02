@@ -30,7 +30,7 @@
     border: solid 1px black;
     padding: 2px;
     margin: 2px;
-    width: auto;
+    width: 20%;
 }
 
 .team {
@@ -43,4 +43,8 @@
     position: absolute;
     border: 1px solid red;
     z-index: -1;
+}
+
+.tableTeamList {
+    width: 25%;
 }

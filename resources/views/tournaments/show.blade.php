@@ -134,8 +134,8 @@
             Phase {{ $stage }}
             <div>
 
-            <table id="" class="table table-bordered table-hover">
                 @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
+            <table id="" class="tableTeamList table table-bordered ">
                 <thead>
                     <tr>
                         <th title="Teams In" class="teamlist"><a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a> </th>
@@ -145,7 +145,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            <table id="" class="table table-bordered">
+                            <table id="" class="table table-bordered table-hover">
 
                                  @foreach ($pool->contenders as $contender)
                                 <tr title="Team" class="team" data-previous="{{ $contender->previousId() }}">
@@ -172,8 +172,9 @@
                 </tbody>
                 @endforeach
             </table>
-        @endforeach
         </div>
+            <br>
+        @endforeach
 
 </body>
 <script src="{{ asset('js/tournamentView.js') }}"></script>
