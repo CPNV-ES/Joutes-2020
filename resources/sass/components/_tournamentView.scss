@@ -3,7 +3,6 @@
 }
 
 .tournament {
-    border: solid 3px blue;
     padding: 2px;
     margin: 2px;
     display: flex;
@@ -11,11 +10,11 @@
 }
 
 .phase {
-    border: solid 2px red;
     padding: 2px;
     margin: 2px;
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
 }
 
 .pool {
@@ -30,10 +29,29 @@
     border: solid 1px black;
     padding: 2px;
     margin: 2px;
-    width: 20%;
+    width: 50%;
 }
 
 .team {
+    border: solid 1px gray;
+    padding: 2px;
+    margin: 2px;
+}
+
+.teamName {
+    border: solid 1px gray;
+    padding: 2px;
+    margin: 2px;
+    background-color: #9ee493d7;
+}
+
+.teamRank {
+    border: solid 1px gray;
+    padding: 2px;
+    margin: 2px;
+}
+
+.rank {
     border: solid 1px gray;
     padding: 2px;
     margin: 2px;
@@ -46,5 +64,9 @@
 }
 
 .tableTeamList {
+    width: 100%;
+}
+
+.phase {
     width: 25%;
 }
