@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateEventRequest;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Sport;
@@ -16,6 +18,9 @@ class EventController extends Controller
      *
      * @author Doran Kayoumi, Davide Carboni
      */
+
+    protected $table = 'events';
+
     public function index(Request $request) {
 
         $events = Event::all()->sortByDesc("id");
@@ -43,5 +48,23 @@ class EventController extends Controller
         }
 
         return view('events.show', compact('tournaments', 'event', 'sports'));
+    }
+
+    public function create(Request $request) {
+
+        return view('events.create');
+
+    }
+
+    public function store(CreateEventRequest $request)
+    {
+
+        $newEvent = new Event();
+        $newEvent->name = $request->input("name");
+        $newEvent->img = $request->input("img");
+        $newEvent->save();
+
+        return redirect()->route('events.index');
+
     }
 }
