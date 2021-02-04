@@ -144,18 +144,23 @@
                 <tbody>
                     <tr>
                         <td>
-                            <table title="Teams In"  class="table table-bordered teamlist" >
+                            <table title="Teams In"  class="table table-bordered teamlist tableStyle" >
 
                                  @foreach ($pool->contenders as $contender)
+                                    @foreach ($tournament->teams as $team)
+
+                                        @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
                                 <tr >
-                                    <td title="Team" class="team" id="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                    <td title="Team" class="team colorBackground" id="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
                                 </tr>
+                                        @endif
+                                    @endforeach
                                 @endforeach
 
                             </table>
                         </td>
                         <td>
-                            <table title="Teams Out"class="table table-bordered teamlist rankList">
+                            <table title="Teams Out"class="table table-bordered teamlist tableStyle">
                                 @for ($i = 1; $i <= $pool->poolSize; $i++)
                                     <tr>
                                         <td title="Team" class="team" id="{{ $pool->id.'-'.$i }}">{{ $i }}</td>
@@ -168,11 +173,14 @@
             </table>
                     </div>
                 @endforeach
+        </div>
 
             @else
-                <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
 
+                    <div class="phase">
                     @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
+
+                            <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
                         <table id="" class="tableTeamList table table-bordered ">
                             <thead>
                             <tr>
@@ -183,18 +191,37 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <table id="" class="table table-bordered teamlist">
-
+                                    <table id="" class="table table-bordered teamlist tableStyle">
+                                        @php $teamName = ""; @endphp
                                         @foreach ($pool->contenders as $contender)
-                                            <tr>
-                                                <td title="Team" class="team" data-previous="{{ $contender->previousId() }}" >{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
-                                            </tr>
+                                            @foreach ($tournament->teams as $keyTeam => $team)
+                                                @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
+                                                    @php $teamName = $team->name @endphp
+
+                                                        <tr>
+                                                            <td title="Team" class="team colorBackground" data-previous="{{ $contender->previousId() }}" >{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                        </tr>
+
+                                                @endif
+                                            @endforeach
+                                            @foreach ($tournament->teams as $keyTeam => $team)
+                                                @if ($team->name != \App\Helpers\ContenderHelper::contenderDisplayName($contender))
+                                                    @if (\App\Helpers\ContenderHelper::contenderDisplayName($contender) != $teamName)
+                                                        @if ($keyTeam === 0)
+
+                                                            <tr>
+                                                                <td title="Team" class="team " data-previous="{{ $contender->previousId() }}" >{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                         @endforeach
 
                                     </table>
                                 </td>
                                 <td>
-                                    <table id="" class="table table-bordered teamlist rankList">
+                                    <table id="" class="table table-bordered teamlist tableStyle">
                                         @for ($i = 1; $i <= $pool->poolSize; $i++)
                                             <tr>
                                                 <td title="Team" class="rank teamlist" id="{{ $pool->id.'-'.$i }}">{{ $i }}</td>
@@ -205,10 +232,11 @@
                             </tr>
                             </tbody>
                         </table>
+                            </div>
                     @endforeach
                 </div>
         @endif
-    </div>
+
         @endforeach
     </div>
 

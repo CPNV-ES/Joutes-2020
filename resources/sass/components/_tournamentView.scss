@@ -1,6 +1,4 @@
-.highlight {
-    background-color: pink;
-}
+
 
 .tournament {
     padding: 2px;
@@ -37,19 +35,6 @@
     margin: 2px;
 }
 
-.teamName {
-    border: solid 1px gray;
-    padding: 2px;
-    margin: 2px;
-    background-color: #9ee493d7;
-}
-
-.teamRank {
-    border: solid 1px gray;
-    padding: 2px;
-    margin: 2px;
-}
-
 .rank {
     border: solid 1px gray;
     padding: 2px;
@@ -70,6 +55,14 @@
     width: 25%;
 }
 
-.rankList {
+.tableStyle {
     width: 100%;
+}
+
+.colorBackground {
+    background-color: #9ee493d7;
+}
+
+.highlight {
+    background-color: pink;
 }
