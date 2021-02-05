@@ -119,13 +119,6 @@
         </div>
 
 <body>
-        {{--Tournoi<br>
-         <div title="Teams" class="teamlist">Equipes
-            {{-- <div title="Team" class="team" id="team0_01">Team</div>
-            @foreach ($tournament->teams as $team)
-                <div title="Team" class="team" id="{{ $team->id }}">{{ $team->name }}</div>
-            @endforeach
-        </div> --}}
 
 
     <div  id="tournament" title="tournament" class="tournament">
@@ -193,6 +186,8 @@
                                 <td>
                                     <table id="" class="table table-bordered teamlist tableStyle">
                                         @php $teamName = ""; @endphp
+
+                                        {{-- Part of display for Visualisation to display name of team --}}
                                         @foreach ($pool->contenders as $contender)
                                             @foreach ($tournament->teams as $keyTeam => $team)
                                                 @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
@@ -204,6 +199,7 @@
 
                                                 @endif
                                             @endforeach
+                                        {{-- Part of the display for Visualisation when no team name is displayed --}}
                                             @foreach ($tournament->teams as $keyTeam => $team)
                                                 @if ($team->name != \App\Helpers\ContenderHelper::contenderDisplayName($contender))
                                                     @if (\App\Helpers\ContenderHelper::contenderDisplayName($contender) != $teamName)
