@@ -5,9 +5,19 @@
 <div class="col-6">
     <form action="{{ route('events.tournaments.store', $event->id) }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="tournamentName">Nom du tournoi</label>
-            <input type="text" class="form-control" id="name" name="name">
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="tournamentName">Nom du tournoi</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="col-6">
+                <label for="sportSelect">Sport</label>
+                <select class="form-control" id="sportSelect" name="sport_id">
+                    @foreach ($sports as $sport)
+                        <option value="{{ $sport->id }}">{{ $sport->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="form-group row">
@@ -34,15 +44,6 @@
                 <label for="end_hour">Heure de fin</label>
                 <input type="time" class="form-control col-m-6" name="end_hour" id="end_hour">
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="sportSelect">Sport</label>
-            <select class="form-control" id="sportSelect" name="sport_id">
-                @foreach ($sports as $sport)
-                <option value="{{ $sport->id }}">{{ $sport->name }}</option>
-                @endforeach
-            </select>
         </div>
 
         <div class="form-group">
