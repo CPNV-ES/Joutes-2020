@@ -8,16 +8,28 @@
         <div class="form-group row">
             <div class="col-6">
                 <label for="tournamentName">Nom du tournoi</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="tournamentName" name="name">
             </div>
             <div class="col-6">
                 <label for="sportSelect">Sport</label>
                 <select class="form-control" id="sportSelect" name="sport_id">
+                    <option>-- Choisissez --</option>
                     @foreach ($sports as $sport)
                         <option value="{{ $sport->id }}">{{ $sport->name }}</option>
                     @endforeach
                 </select>
             </div>
+        </div>
+
+        <div class="form-group ">
+            <label for="tournamentSelect">Précédents tournois</label>
+            <select class="form-control" id="tournamentSelect" name="tournament_id">
+                <option>-- Choisissez --</option>
+                @foreach ($tournaments as $tournament)
+
+                    <option value="{{ $tournament->id }}">{{ $tournament->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-group row">

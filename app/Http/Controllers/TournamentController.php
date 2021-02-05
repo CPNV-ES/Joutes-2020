@@ -17,7 +17,8 @@ class TournamentController extends Controller
     public function create(Request $request, Event $event)
     {
         $sports = Sport::all();
-        return view('tournaments.create')->with(compact('sports', 'event'));
+        $tournaments = Tournament::all();
+        return view('tournaments.create')->with(compact('sports', 'event', 'tournaments' ));
     }
 
     public function store(CreateTournamentRequest $request, Event $event)
@@ -30,7 +31,7 @@ class TournamentController extends Controller
         $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
 
         $tournament->save();
-        
+
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
