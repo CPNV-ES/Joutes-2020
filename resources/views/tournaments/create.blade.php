@@ -12,8 +12,8 @@
             </div>
             <div class="col-6">
                 <label for="sportSelect">Sport</label>
-                <select class="form-control" id="sportSelect" name="sport_id">
-                    <option>-- Choisissez --</option>
+                <select class="form-control" id="sportSelect" name="sportSelect" onchange="selection();" name="sport_id">
+                    <option value="Choose">-- Choisissez --</option>
                     @foreach ($sports as $sport)
                         <option value="{{ $sport->id }}">{{ $sport->name }}</option>
                     @endforeach
@@ -25,10 +25,11 @@
             <label for="tournamentSelect">Précédents tournois</label>
             <select class="form-control" id="tournamentSelect" name="tournament_id">
                 <option>-- Choisissez --</option>
-                @foreach ($tournaments as $tournament)
+
+                {{--@foreach ($tournaments as $tournament)
 
                     <option value="{{ $tournament->id }}">{{ $tournament->name }}</option>
-                @endforeach
+                @endforeach --}}
             </select>
         </div>
 
@@ -66,4 +67,37 @@
     </form>
 </div>
 
+<script>
+    var tournaments = {!! json_encode($tournaments ) !!}
+    console.log(tournaments);
+    function selection() {
+        var liste = document.getElementById('sportSelect');
+        var valeur = liste.options[liste.selectedIndex].value;
+        console.log(tournaments[0].name);
+
+
+
+        var catOptions = "";
+        if(valeur == "Choose"){
+            catOptions += "<option>--- Choisissez ---</option>";
+            document.getElementById("tournamentSelect").innerHTML = catOptions;
+        }
+        else {
+            for (i = 0; i < tournaments.length; i++) {
+
+                if (tournaments[i].sport_id == valeur) {
+
+                    console.log(tournaments[i].sport_id);
+                    console.log(valeur);
+
+                    console.log('Its ok')
+
+                    catOptions += "<option value='" + tournaments[i].id + "' >" + tournaments[i].name + "</option>";
+                }
+            }
+            document.getElementById("tournamentSelect").innerHTML = catOptions;
+        }
+    }
+
+</script>
 @stop
