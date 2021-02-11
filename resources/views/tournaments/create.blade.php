@@ -21,16 +21,17 @@
             </div>
         </div>
 
-        <div class="form-group ">
-            <label for="tournamentSelect">Précédents tournois</label>
-            <select class="form-control" id="tournamentSelect" name="tournament_id">
-                <option>-- Choisissez --</option>
-
-                {{--@foreach ($tournaments as $tournament)
-
-                    <option value="{{ $tournament->id }}">{{ $tournament->name }}</option>
-                @endforeach --}}
-            </select>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="tournamentSelect">Précédents tournois</label>
+                <select class="form-control" id="tournamentSelect" name="tournament_id">
+                    <option>-- Choisissez --</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label>Copier le précédents tournois </label>
+                <button type="submit" class="btn btn-main" style="width: 100%">Copier</button>
+            </div>
         </div>
 
         <div class="form-group row">
