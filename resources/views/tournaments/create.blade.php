@@ -20,7 +20,7 @@
                 </select>
             </div>
         </div>
-
+        <form id="FormCopy" action="{{ route('events.tournaments.copy', $event->id) }}" method="POST">
         <div class="form-group row">
             <div class="col-6">
                 <label for="tournamentSelect">Précédents tournois</label>
@@ -30,10 +30,10 @@
             </div>
             <div class="col-6">
                 <label>Copier le précédents tournois </label>
-                <button type="submit" class="btn btn-main" style="width: 100%">Copier</button>
+                <button type="submit" form="FormCopy"  class="btn btn-main" style="width: 100%">Copier</button>
             </div>
         </div>
-
+        </form>
         <div class="form-group row">
             <div class="col-6">
                 <label for="start_date">Date de début</label>

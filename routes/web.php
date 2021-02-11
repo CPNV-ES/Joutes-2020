@@ -16,8 +16,10 @@ Route::get('/', function () {
 });
 
 
+
 Route::resource('events', 'EventController');
 Route::resource('tournaments', 'TournamentController');
+Route::post('/events/{event}/tournaments/copy',  'TournamentController@copy')->name('events.tournaments.copy');
 Route::resource('events.tournaments', 'TournamentController');
 Route::resource('courts', 'CourtController');
 Route::resource('sports', 'SportController');

@@ -35,6 +35,21 @@ class TournamentController extends Controller
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
+    public function copy(CreateTournamentRequest $request)
+    {
+        $tournament = Tournament::find($request->input('tournamentSelect'));
+
+        /*$tournament->fill($request->all());
+        $tournament->event()->associate($event);
+
+        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
+        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
+
+        $tournament->save();
+*/
+        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
+    }
+
     public function edit(Tournament $tournament)
     {
         $sports = Sport::all();
@@ -78,4 +93,7 @@ class TournamentController extends Controller
         return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));
 
     }
+
+
+
 }
