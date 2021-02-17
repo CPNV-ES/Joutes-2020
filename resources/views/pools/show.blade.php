@@ -3,7 +3,14 @@
 @section('content')
 
     <div class="container">
-        <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
+        <div class="row">
+            <div class="col-1 ml-n5">
+                <a href="{{ route('tournaments.show', $tournament) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-11 ml-n2">
+                <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
+            </div>
+        </div>
         <div class="text-center">
             <h2>Matches et Résultats</h2>
             <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
