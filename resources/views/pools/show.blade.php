@@ -137,8 +137,8 @@
                 </table>
             @elseif(\App\Contender::isAllEmpty($contenders))
                 <h2>Liste des participants</h2>
-                @foreach ($rankings as $ranking)
-                    <h6 style="color: black" value="{{ $ranking["team_id"] }}">{{ $ranking["team"] }}</h6>
+                @foreach ($contenders as $contender)
+                    <h6 style="color: black" value="{{ $contender->team_id}}">{{ $contender->team->name}}</h6>
                 @endforeach
             @else
                 <h2>Liste des participants</h2>
