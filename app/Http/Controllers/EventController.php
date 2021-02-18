@@ -30,7 +30,6 @@ class EventController extends Controller
                 $event->img = 'default.jpg';
             }
         }
-
         return view('events.index')->with('events', $events);
 
     }

@@ -30,7 +30,7 @@ class TournamentController extends Controller
         $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
 
         $tournament->save();
-        
+
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
@@ -50,7 +50,6 @@ class TournamentController extends Controller
                 $tournament->img = 'default.jpg';
             }
         }
-
         return view('tournaments.index', compact('tournaments'));
     }
 
