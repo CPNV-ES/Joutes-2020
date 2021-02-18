@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group row">
                 <div class="col-6">
-                    <label for="tournamentName">Nom du tournoi</label>
+                    <label for="name">Nom du tournoi</label>
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="col-6">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-6">
                     <label>Copier le précédents tournois </label>
-                    <button type="submit"  class="btn btn-main" style="width: 100%">Copier</button>
+                    <button type="submit" name="action" value="copy" class="btn btn-main" style="width: 100%">Copier</button>
                 </div>
             </div>
             <div class="form-group row">

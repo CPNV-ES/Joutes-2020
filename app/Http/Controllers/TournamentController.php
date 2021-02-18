@@ -18,10 +18,69 @@ class TournamentController extends Controller
     {
         $sports = Sport::all();
         $tournaments = Tournament::all();
-        return view('tournaments.create')->with(compact('sports', 'event', 'tournaments' ));
+        return view('tournaments.create')->with(compact('sports', 'event', 'tournaments'));
     }
 
     public function store(CreateTournamentRequest $request, Event $event)
+    {
+        switch ($request->input('action')) {
+            case 'save' :
+                $tournament = new Tournament();
+                $tournament->fill($request->all());
+                $tournament->event()->associate($event);
+
+                $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
+                $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
+
+                $tournament->save();
+
+                break;
+            case 'copy' :
+                $tournament = new Tournament();
+                $selectedTournament = Tournament::find($request->input('tournament_id'));
+
+                $tournament->fill($request->all());
+
+                $tournament->img = $selectedTournament->img;
+                $tournament->max_teams = $selectedTournament->max_teams;
+                $tournament->event()->associate($event);
+
+                $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
+                $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
+
+                $tournament->save();
+
+                // Zone to copy pools
+                $tournamentId = $tournament->id;
+                $oldPools = Pool::all();
+                //dd($oldPools);
+
+                foreach ($oldPools as $oldPool){
+                    if($oldPool->tournament_id == $request->input('tournament_id')) {
+                        $pool = new Pool();
+                        $pool->start_time = $oldPool->start_time;
+                        $pool->end_time = $oldPool->end_time;
+                        $pool->poolName = $oldPool->poolName;
+                        $pool->stage = $oldPool->stage;
+                        $pool->poolSize = $oldPool->poolSize;
+                        $pool->poolState = 0;
+
+                        $pool->mode_id = $oldPool->mode_id;
+                        $pool->game_type_id = $oldPool->game_type_id;
+
+                        $pool->tournament_id = $tournamentId;
+
+                        $pool->save();
+                    }
+                }
+
+                break;
+        }
+
+        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
+    }
+
+    public function copy(CreateTournamentRequest $request, Event $event)
     {
         $tournament = new Tournament();
         $tournament->fill($request->all());
@@ -32,21 +91,6 @@ class TournamentController extends Controller
 
         $tournament->save();
 
-        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
-    }
-
-    public function copy(CreateTournamentRequest $request)
-    {
-        $tournament = Tournament::find($request->input('tournamentSelect'));
-
-        /*$tournament->fill($request->all());
-        $tournament->event()->associate($event);
-
-        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
-        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
-
-        $tournament->save();
-*/
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
@@ -93,7 +137,4 @@ class TournamentController extends Controller
         return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));
 
     }
-
-
-
 }
