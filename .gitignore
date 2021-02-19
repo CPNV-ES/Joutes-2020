@@ -21,3 +21,5 @@ npm-debug.log
 yarn-error.log
 .idea
 *_icescrum_api.js*
+
+docs/timesheets/_icescrum_api.js

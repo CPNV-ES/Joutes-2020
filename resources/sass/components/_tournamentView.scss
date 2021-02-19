@@ -1,9 +1,6 @@
-.highlight {
-    background-color: pink;
-}
+
 
 .tournament {
-    border: solid 3px blue;
     padding: 2px;
     margin: 2px;
     display: flex;
@@ -11,15 +8,14 @@
 }
 
 .phase {
-    border: solid 2px red;
     padding: 2px;
     margin: 2px;
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
 }
 
 .pool {
-    border: solid 1px green;
     padding: 2px;
     margin: 2px;
     display: flex;
@@ -30,11 +26,16 @@
     border: solid 1px black;
     padding: 2px;
     margin: 2px;
-    display: flex;
-    flex-direction: column;
+    width: 50%;
 }
 
 .team {
+    border: solid 1px gray;
+    padding: 2px;
+    margin: 2px;
+}
+
+.rank {
     border: solid 1px gray;
     padding: 2px;
     margin: 2px;
@@ -44,4 +45,24 @@
     position: absolute;
     border: 1px solid red;
     z-index: -1;
+}
+
+.tableTeamList {
+    width: 100%;
+}
+
+.phase {
+    width: 25%;
+}
+
+.tableStyle {
+    width: 100%;
+}
+
+.colorBackground {
+    background-color: #9ee493d7;
+}
+
+.highlight {
+    background-color: pink;
 }
