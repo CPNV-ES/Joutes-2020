@@ -15,6 +15,7 @@ Route::get('/', function () {
     return redirect()->route('events.index');
 });
 
+Route::post('pools/contenders/unlink','ContenderController@detachContender');
 
 Route::resource('events', 'EventController');
 Route::resource('tournaments', 'TournamentController');
@@ -25,8 +26,9 @@ Route::resource('teams', 'TeamController');
 Route::resource('tournaments.teams', 'TeamController');
 Route::resource('participants', 'ParticipantController');
 Route::resource('tournaments.pools', 'PoolController');
-Route::resource('contenders', 'ContenderController');
+// Route::resource('contenders', 'ContenderController');
 Route::resource('pools.contenders', 'ContenderController');
+Route::resource('games', 'GameController');
 
 //Administration resources
 Route::resource('administrations', 'Admin\AdministrationController');

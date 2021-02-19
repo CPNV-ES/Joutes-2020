@@ -65,4 +65,5 @@ class PoolController extends Controller
 
     return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
   }
+ 
 }

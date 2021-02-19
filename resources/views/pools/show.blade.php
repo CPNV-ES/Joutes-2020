@@ -2,6 +2,7 @@
 
 @section('content')
 
+    
     <div class="container">
         <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
         <div class="text-center">
@@ -74,6 +75,7 @@
                                         @if($pool->isEditable())
                                             <td class="action"><i class="fa fa-lg fa-clock-o editTime" aria-hidden="true"></i> <i class="editScore fa fa-trophy fa-lg" aria-hidden="true"></i></td>
                                         @endif
+                                        
                                     @else
                                         <!--teams and score -->
                                         <tr style="background-color: #DCDCDC;">
@@ -130,13 +132,26 @@
                 </table>
             @elseif(\App\Contender::isAllEmpty($contenders))
                 <h2>Liste des participants</h2>
+                <table class="table">
                 @foreach ($rankings as $ranking)
-                    <h6 style="color: black" value="{{ $ranking["team_id"] }}">{{ $ranking["team"] }}</h6>
+                    <tr>
+                        <td><h6 style="color: black" value="{{ $ranking['team_id'] }}">{{ $ranking["team"] }}</h6></td>
+                        <td>
+                            <form action="{{ route('pools.contenders.destroy', [$ranking['team_id'], $pool->id]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <td><button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                </button></td>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
+                </table>
             @else
                 <h2>Liste des participants</h2>
                 @foreach($contenders as $contender)
-                    <h6 style="color: black" value="{{$contender[" pool_from_id"]}}">{{$contender->rank_in_pool .($contender->rank_in_pool == 1 ? "er " : 'ème ') . "de "  . $contender->fromPool->poolName}}</h6>
+                    <h6 style="color: black" value="{{$contender[' pool_from_id']}}">{{$contender->rank_in_pool .($contender->rank_in_pool == 1 ? "er " : 'ème ') . "de "  . $contender->fromPool->poolName}}</h6>
                 @endforeach
             @endif
             @if($pool->stage == 1 && count($teamsNotInAPool) > 0)
