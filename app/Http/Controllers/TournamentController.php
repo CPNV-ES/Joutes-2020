@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateTournamentRequest;
 use App\Pool;
 use App\Tournament;
 use App\Sport;
+use App\Game;
 
 use Illuminate\Http\Request;
 
@@ -53,7 +54,8 @@ class TournamentController extends Controller
                 // Zone to copy pools
                 $tournamentId = $tournament->id;
                 $oldPools = Pool::all();
-                //dd($oldPools);
+                //$oldContenders = Contender::all();
+                //$oldGames = Game::all();
 
                 foreach ($oldPools as $oldPool){
                     if($oldPool->tournament_id == $request->input('tournament_id')) {
@@ -71,6 +73,30 @@ class TournamentController extends Controller
                         $pool->tournament_id = $tournamentId;
 
                         $pool->save();
+                        var $C1;
+                        /*foreach ($oldContenders as $oldContender){
+                            if($oldContender->pool_id == $oldPool->id) {
+                                $contender = new Contender();
+                                $contender->pool_id = $pool->id;
+
+                                $contender->save();
+                                foreach ($oldGames as $oldGame){
+                                    if($oldGame->contender1_id == $oldContender->id){
+                                        $game = new Game();
+                                        $game->date = $request->input('start_date');
+                                        $game->start_time = $oldGame->start_time;
+                                        $game->contender1_id = $contender->id;
+                                        $game->contender2_id = $contender->id;
+                                        $game->court_id = $oldGame->court_id;
+
+                                        $game->save();
+                                    }
+                                }
+
+                            }
+
+
+                        }*/
                     }
                 }
 
@@ -80,19 +106,6 @@ class TournamentController extends Controller
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
-    public function copy(CreateTournamentRequest $request, Event $event)
-    {
-        $tournament = new Tournament();
-        $tournament->fill($request->all());
-        $tournament->event()->associate($event);
-
-        $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
-        $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
-
-        $tournament->save();
-
-        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
-    }
 
     public function edit(Tournament $tournament)
     {
