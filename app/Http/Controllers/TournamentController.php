@@ -73,7 +73,7 @@ class TournamentController extends Controller
                         $pool->tournament_id = $tournamentId;
 
                         $pool->save();
-                        var $C1;
+                        $C1 = 0;
                         /*foreach ($oldContenders as $oldContender){
                             if($oldContender->pool_id == $oldPool->id) {
                                 $contender = new Contender();
