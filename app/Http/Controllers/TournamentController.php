@@ -54,9 +54,10 @@ class TournamentController extends Controller
                 // Zone to copy pools
                 $tournamentId = $tournament->id;
                 $oldPools = Pool::all();
-                //$oldContenders = Contender::all();
-                //$oldGames = Game::all();
+                $oldContenders = Contender::all();
+                $oldGames = Game::all();
 
+                $diff = 0;
                 foreach ($oldPools as $oldPool){
                     if($oldPool->tournament_id == $request->input('tournament_id')) {
                         $pool = new Pool();
@@ -73,31 +74,46 @@ class TournamentController extends Controller
                         $pool->tournament_id = $tournamentId;
 
                         $pool->save();
-                        $C1 = 0;
-                        /*foreach ($oldContenders as $oldContender){
+                        // voir pour stocker dans un tableau
+
+                        $contenderId = [];
+                        $oldContenderId = [];
+
+                        foreach ($oldContenders as $oldContender){
                             if($oldContender->pool_id == $oldPool->id) {
+
+                                array_push($oldContenderId, $oldContender->id);
                                 $contender = new Contender();
                                 $contender->pool_id = $pool->id;
 
                                 $contender->save();
-                                foreach ($oldGames as $oldGame){
-                                    if($oldGame->contender1_id == $oldContender->id){
-                                        $game = new Game();
-                                        $game->date = $request->input('start_date');
-                                        $game->start_time = $oldGame->start_time;
-                                        $game->contender1_id = $contender->id;
-                                        $game->contender2_id = $contender->id;
-                                        $game->court_id = $oldGame->court_id;
-
-                                        $game->save();
-                                    }
+                                $diff = $contender->id - $oldContender->id;
+                                array_push($contenderId, $contender->id);
+                            }
+                        }
+                    }
+                }
+                foreach ($oldGames as $oldGame) {
+                        for($i = 0; $i < count($oldContenderId); $i++ ){
+                            if ($oldGame->contender1_id == $oldContenderId[$i]) {
+                                $firstContender = $diff + $oldContenderId[$i];
+                                for($y = $i+1; $y < count($contenderId); $y++){
+                                    $game = new Game();
+                                    $game->date = $request->input('start_date');
+                                    $game->start_time = $oldGame->start_time;
+                                    $game->contender1_id = $firstContender;
+                                    $game->contender2_id = $contenderId[$y];
+                                    $game->court_id = $oldGame->court_id;
+                                    $game->save();
                                 }
+
 
                             }
 
+                        }
 
-                        }*/
-                    }
+
+
                 }
 
                 break;
