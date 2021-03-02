@@ -46,18 +46,33 @@
                                 <!-- No teams - no score -->
                                 @if (empty($game->contender1->team) || empty($game->contender2->team))
 
-                                    @if (empty($game->contender1->team))
+                                    @if ((empty($game->contender1->team))&&(isset($game->contender1->fromPool->poolName)))
                                         <td class="contender1">{{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender1->fromPool->poolName }}</td>
-                                    @else
+                                    @elseif(isset($game->contender1->team->name))
                                         <td class="contender1">{{ $game->contender1->team->name }}</td>
+                                    @else
+                                    <td>
+                                    <select id="inputState" class="form-control">
+                                        <option selected>Choisir team</option>
+                                        <option>...</option>
+                                    </select>
+                                    </td>
                                     @endif
                                     <td class="separator sepTime">{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}</td>
                                     <td class="score2">{{ $game->court->name }}</td>
 
-                                    @if (empty($game->contender2->team))
+                                    @if ((empty($game->contender2->team))&&(isset($game->contender2->fromPool->poolName)))
                                         <td class="contender2">{{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender2->fromPool->poolName }}</td>
-                                    @else
+                                    @elseif(isset($game->contender2->team->name))
                                         <td class="contender2">{{ $game->contender2->team->name }}</td>
+
+                                    @else
+                                    <td>
+                                    <select id="inputState" class="form-control">
+                                        <option selected>Choisir team</option>
+                                        <option>...</option>
+                                    </select>
+                                    </td>
                                     @endif
 
                                     @if($pool->isEditable())
@@ -137,6 +152,7 @@
                     <tr>
                         <td><h6 style="color: black" value="{{ $ranking['team_id'] }}">{{ $ranking["team"] }}</h6></td>
                         <td>
+                        @if(isset($pool->id))
                             <form action="{{ route('pools.contenders.destroy', [$ranking['team_id'], $pool->id]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
@@ -144,6 +160,7 @@
                                     <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                 </button></td>
                             </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
