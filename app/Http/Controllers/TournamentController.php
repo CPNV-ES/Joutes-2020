@@ -37,6 +37,7 @@ class TournamentController extends Controller
 
                 break;
             case 'copy' :
+                // Duplicate Tournament
                 $tournament = new Tournament();
                 $selectedTournament = Tournament::find($request->input('tournament_id'));
 
@@ -51,13 +52,14 @@ class TournamentController extends Controller
 
                 $tournament->save();
 
-                // Zone to copy pools
                 $tournamentId = $tournament->id;
+
                 $oldPools = Pool::all();
                 $oldContenders = Contender::all();
                 $oldGames = Game::all();
 
                 $diff = 0;
+                // Duplicate Pool
                 foreach ($oldPools as $oldPool){
                     if($oldPool->tournament_id == $request->input('tournament_id')) {
                         $pool = new Pool();
@@ -79,6 +81,7 @@ class TournamentController extends Controller
                         $contenderId = [];
                         $oldContenderId = [];
 
+                        // Duplicate Contenders
                         foreach ($oldContenders as $oldContender){
                             if($oldContender->pool_id == $oldPool->id) {
 
@@ -93,6 +96,7 @@ class TournamentController extends Controller
                         }
                     }
                 }
+                // Duplicate Game
                 foreach ($oldGames as $oldGame) {
                         for($i = 0; $i < count($oldContenderId); $i++ ){
                             if ($oldGame->contender1_id == $oldContenderId[$i]) {
