@@ -2,7 +2,13 @@
 
 @section('content')
 
-    
+    <?php 
+        $mainArray = array ();
+        foreach ($pool->teams as $team){
+            array_push($mainArray,[$team->id,$team->name]);
+        }
+                        
+    ?>
     <div class="container">
         <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
         <div class="text-center">
@@ -54,7 +60,9 @@
                                     <td>
                                     <select id="inputState" class="form-control">
                                         <option selected>Choisir team</option>
-                                        <option>...</option>
+                                        @foreach($mainArray as $value)
+                                            <option>{{ $value[1] }}</option>
+                                        @endforeach
                                     </select>
                                     </td>
                                     @endif
@@ -70,7 +78,9 @@
                                     <td>
                                     <select id="inputState" class="form-control">
                                         <option selected>Choisir team</option>
-                                        <option>...</option>
+                                        @foreach($mainArray as $value)
+                                            <option>{{ $value[1] }}</option>
+                                        @endforeach
                                     </select>
                                     </td>
                                     @endif
@@ -148,22 +158,35 @@
             @elseif(\App\Contender::isAllEmpty($contenders))
                 <h2>Liste des participants</h2>
                 <table class="table">
-                @foreach ($rankings as $ranking)
+
+                
+                   
+                    
+               
+                @for($i = 0;$i < $pool->poolSize; $i++ )
                     <tr>
-                        <td><h6 style="color: black" value="{{ $ranking['team_id'] }}">{{ $ranking["team"] }}</h6></td>
                         <td>
-                        @if(isset($pool->id))
-                            <form action="{{ route('pools.contenders.destroy', [$ranking['team_id'], $pool->id]) }}" method="POST">
+                            <h6 style="color: black">
+                                @if(isset($mainArray[$i][1]))
+                                    {{ $mainArray[$i][1] }}
+                                @else
+                                    !Vide!
+                                @endif
+                            </h6>
+                            </td>
+                        <td>
+                        @if((isset($pool->id)) && (isset($mainArray[$i][0])))
+                            <form action="{{ route('pools.contenders.destroy', [$mainArray[$i][0], $pool->id]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
                                 <td><button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                                     <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                 </button></td>
                             </form>
-                            @endif
+                        @endif
                         </td>
                     </tr>
-                @endforeach
+                @endfor
                 </table>
             @else
                 <h2>Liste des participants</h2>
