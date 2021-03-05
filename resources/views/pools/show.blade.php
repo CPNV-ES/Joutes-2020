@@ -181,7 +181,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <form action="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}" method="POST">
+                    <form action="{{ route('tournaments.pools.destroy', [$tournament, $pool]) }}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-danger">Supprimer</button>

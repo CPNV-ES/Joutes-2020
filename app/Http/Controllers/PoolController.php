@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contender;
 use App\GameType;
 use App\Http\Requests\CreatePoolRequest;
 use App\Pool;
@@ -64,5 +65,11 @@ class PoolController extends Controller
 
 
     return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
+  }
+
+  public function destroy(Tournament $tournament, Pool $pool){
+      $pool->delete();
+
+      return redirect()->route('tournaments.show', ['tournament' => $tournament]);
   }
 }

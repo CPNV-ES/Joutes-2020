@@ -133,10 +133,7 @@ class Pool extends Model
     }
 
     public function teams(){
-        $teams = DB::table('contenders')
-            ->where('pool_id', '=', $this->id)
-            ->get();
-        return $teams;
+        return $this->belongsToMany('App\Team','Contenders');
     }
 
     public function listTeams() {
