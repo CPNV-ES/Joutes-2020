@@ -164,8 +164,8 @@
                     </tr>
                 </tbody>
             </table>
-                        <form action="{{ route('tournaments.pools.close', $pool->id) }}" method="POST">
-                            <input type="submit" class="btn btn-main" value="Terminer">
+                        <form action="{{ route('tournaments.pools.close',[$pool->tournament, $pool->id]) }}" method="POST">
+                            <input type="submit" class="btn btn-main closeButton" value="Terminer">
                         </form>
                     </div>
                 @endforeach
@@ -231,8 +231,8 @@
                             </tr>
                             </tbody>
                         </table>
-                                <form action="{{ route('tournaments.pools.close', $pool->id) }}" method="POST">
-                                    <input type="submit" class="btn btn-main" value="Terminer">
+                                <form action="{{ route('tournaments.pools.close', [$pool->tournament, $pool->id]) }}" method="POST">
+                                    <input type="submit" class="btn btn-main closeButton" value="Terminer">
                                 </form>
                             </div>
                     @endforeach
