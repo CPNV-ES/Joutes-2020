@@ -28,7 +28,7 @@ Route::resource('teams', 'TeamController');
 Route::resource('tournaments.teams', 'TeamController');
 Route::resource('participants', 'ParticipantController');
 Route::resource('tournaments.pools', 'PoolController');
-Route::post('/tournaments/{tournament}/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
+Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
 // Route::resource('contenders', 'ContenderController');
 Route::resource('pools.contenders', 'ContenderController');
 Route::resource('games', 'GameController');
