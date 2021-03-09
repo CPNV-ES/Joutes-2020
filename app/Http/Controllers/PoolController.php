@@ -75,8 +75,8 @@ class PoolController extends Controller
 
         $pool->save();
 
-        $tournament = Tournament::find($pool->tournament_id);
+        //$tournament = Tournament::find($pool->tournament_id);
 
-        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
+        return back()->with('success', 'La pool a bien été fermée');
     }
 }
