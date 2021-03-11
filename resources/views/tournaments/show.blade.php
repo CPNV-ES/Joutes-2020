@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+    @php $AllGameFinished = true @endphp
     <div class="container">
 
         <div class="row">
@@ -150,6 +151,9 @@
                                         <table title="Teams In" class="table table-bordered teamlist tableStyle">
 
                                             @foreach ($pool->contenders as $contender)
+                                                @if($pool->games)
+
+                                                @endif
                                                 @foreach ($tournament->teams as $team)
 
                                                     @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
@@ -176,7 +180,18 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">Terminer la pool</a>
+                            @foreach($pool->games as $game)
+                                @if($game->score_contender1 === null or $game->score_contender2 === null)
+                                    @php $AllGameFinished = false @endphp
+                                @endif
+                            @endforeach
+                            @if($AllGameFinished)
+                                <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                   class="btn btn-main closeButton">Terminer la pool</a>
+                            @else
+                                <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                   class="disabled btn btn-main closeButton">Terminer la pool</a>
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -190,7 +205,8 @@
                             <table id="" class="tableTeamList table table-bordered ">
                                 <thead>
                                 <tr>
-                                    <th title="Teams In" class="teamlist"><a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                    <th title="Teams In" class="teamlist"><a
+                                            href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
                                     </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
@@ -245,7 +261,18 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">Terminer la pool</a>
+                            @foreach($pool->games as $game)
+                                @if($game->score_contender1 === null or $game->score_contender2 === null)
+                                    @php $AllGameFinished = false @endphp
+                                @endif
+                            @endforeach
+                            @if($AllGameFinished)
+                                <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                   class="btn btn-main closeButton">Terminer la pool</a>
+                            @else
+                                <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                   class="disabled btn btn-main closeButton">Terminer la pool</a>
+                            @endif
                         </div>
                     @endforeach
                 </div>
