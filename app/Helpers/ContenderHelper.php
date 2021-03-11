@@ -11,7 +11,7 @@ class ContenderHelper
   {
     if ($contender->team) {
       return $contender->team->name;
-    } else {
+    } elseif(isset($contender->fromPool->poolName)) {
       return $contender->rank_in_pool.' de '.$contender->fromPool->poolName;
     }
   }
