@@ -63,7 +63,7 @@
 
             <div class="form-group">
                 <label for="max_teams">Nombre d'équipes</label>
-                <input type="number" class="form-control" id="max_teams" name="max_teams" min="1" max="99999999999">
+                <input type="number" class="form-control" id="max_teams" name="max_teams" value="1" min="1" max="99999999999">
             </div>
             <button type="submit" name="action" value="save" class="btn btn-main">Créer</button>
         </form>
