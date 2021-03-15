@@ -25,11 +25,6 @@ class Tournament extends Model
       return $this->pools()->distinct('stage')->orderBy('stage')->pluck('stage')->toArray();
     }
 
-    public function getPoolsOfStage($tournamentId, $stageNumber)
-    {
-      return Pool::where('stage', '=', $stageNumber)->where('tournament_id', '=', $tournamentId)->get();
-    }
-
     /**
      * Create a new belongs to relationship instance between Tournament and Event
      *
