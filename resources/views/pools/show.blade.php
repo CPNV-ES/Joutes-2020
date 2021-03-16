@@ -2,18 +2,18 @@
 
 @section('content')
 
-    <?php 
+    <?php
         $mainArray = array ();
         foreach ($pool->teams as $team){
             array_push($mainArray,[$team->id,$team->name]);
         }
-                        
+
     ?>
     <div class="container">
         <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
         <div class="text-center">
             <h2>Matches et Résultats</h2>
-            <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
+            <h4>État: {{ $pool->pool_states->name }}</h4>
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
             <h2>Définition des équipes</h2>
             <table>
@@ -100,7 +100,7 @@
                                         @if($pool->isEditable())
                                             <td class="action"><i class="fa fa-lg fa-clock-o editTime" aria-hidden="true"></i> <i class="editScore fa fa-trophy fa-lg" aria-hidden="true"></i></td>
                                         @endif
-                                        
+
                                     @else
                                         <!--teams and score -->
                                         <tr style="background-color: #DCDCDC;">
@@ -159,10 +159,10 @@
                 <h2>Liste des participants</h2>
                 <table class="table">
 
-                
-                   
-                    
-               
+
+
+
+
                 @for($i = 0;$i < $pool->poolSize; $i++ )
                     <tr>
                         <td>
@@ -200,7 +200,7 @@
             <form action="{{ route('pools.contenders.store', $pool->id) }}" method="post">
                 @csrf
                 <table class="table">
-                    
+
                     <tr>
                         <td>
                             <select id="teams" name="team_id" class="form-control">
@@ -214,7 +214,7 @@
                     </td>
                     </tr>
                 </table>
-                
+
             </form>
             @endif
         </div>
