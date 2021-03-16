@@ -21,4 +21,16 @@ class PoolHelper
                 return "inconnu";
         }
     }
+
+    public static function isFull($pool)
+    {
+        $nbContenders = 0;
+        foreach ($pool->contenders as $contender){
+            if($contender->pool_id === $pool->id) ++$nbContenders;
+        }
+        if($pool->poolSize === $nbContenders){
+            return true;
+        }
+        return false;
+    }
 }

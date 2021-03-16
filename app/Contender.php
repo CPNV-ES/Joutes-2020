@@ -50,4 +50,5 @@ class Contender extends Model
         return true;
     }
 
+
 }

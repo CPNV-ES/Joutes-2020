@@ -20,6 +20,9 @@
         <div class="text-center">
             <h2>Matches et Résultats</h2>
             <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
+            @if(\App\HelperClasses\PoolHelper::isFull($pool))
+                <h4>Stage Pool</h4>
+            @endif
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
             <h2>Définition des équipes</h2>
             <table>
