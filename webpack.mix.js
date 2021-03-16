@@ -16,7 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
     // js
     .copy('node_modules/jquery/dist/jquery.min.js', 'public/lib/jquery')
     .copy('resources/js/tournamentView.js', 'public/js')
-    
+
     //Bootstrap
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/lib/bootstrap')
     .copy('node_modules/bootstrap/dist/js/bootstrap.min.js', 'public/lib/bootstrap')

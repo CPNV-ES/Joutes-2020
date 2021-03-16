@@ -34,6 +34,14 @@ class PoolController extends Controller
     return redirect()->route('tournaments.show', ['tournament' => $tournament]);
   }
 
+  public function update(Request $request, Tournament $tournament, Pool $pool)
+  {
+      $pool->fill($request->all());
+      $pool->save();
+
+      return redirect()->route('tournaments.pools.show', [$tournament, $pool]);
+  }
+
   public function show(Request $request, Tournament $tournament, Pool $pool)
   {
     $pools = $tournament->pools;
@@ -68,8 +76,8 @@ class PoolController extends Controller
   }
 
   public function destroy(Tournament $tournament, Pool $pool){
-      $pool->delete();
 
+      $pool->delete();
       return redirect()->route('tournaments.show', ['tournament' => $tournament]);
   }
 }
