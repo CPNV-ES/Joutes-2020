@@ -20,8 +20,8 @@
         <div class="text-center">
             <h2>Matches et Résultats</h2>
             <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
-            @if(\App\HelperClasses\PoolHelper::isFull($pool))
-                <h4>Stage Pool</h4>
+            @if((\App\HelperClasses\PoolHelper::isFull($pool)) && ($pool->poolState == 0))
+                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante</button>
             @endif
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
             <h2>Définition des équipes</h2>
@@ -211,7 +211,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}}}" method="POST">
+                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
                         @csrf
                         <input type="text" name="poolName">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -222,5 +222,30 @@
             </div>
         </div>
     </div>
-    <script src="{{asset( "js/poolEdition.js")}}"></script>
+    <!-- Modal StagePool -->
+    <div class="modal fade" id="stagePoolModal" tabindex="-1" role="dialog" aria-labelledby="stagePoolModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="stagePoolModalLabel">Êtes-vous sûr de vouloir faire ça?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input hidden type="number" value="{{$pool->poolState + 1}}" name="poolState">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <button type="submit" class="btn btn-success">Ok !</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
