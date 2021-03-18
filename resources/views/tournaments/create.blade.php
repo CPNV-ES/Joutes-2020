@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-6">
                     <label>Copier le précédents tournois </label>
-                    <button type="submit" name="action" value="copy" class="btn btn-main" style="width: 100%">Copier</button>
+                    <button type="submit" name="action" id="copyTournament" value="copy" class="btn btn-main" style="width: 100%">Copier</button>
                 </div>
             </div>
             <div class="form-group row">
