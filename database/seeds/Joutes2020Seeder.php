@@ -21,10 +21,10 @@ class Joutes2020Seeder extends Seeder
         $user = \Config::get('database.connections.mysql.username');
         $pass = \Config::get('database.connections.mysql.password');
 
-        $this->event = \App\Event::where('name', 'like', '%2019%')->first();
+        $this->event = \App\Event::where('name', 'like', '%2020%')->first();
         if ($this->event) die ("L'événement existe déjà\n");
 
-        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'sports.jpg']);
+        $this->event = new \App\Event(['name' => 'Joutes 2020', 'img' => 'sports.jpg']);
         $this->event->save();
 
         // make room
@@ -33,6 +33,7 @@ class Joutes2020Seeder extends Seeder
         \Illuminate\Support\Facades\DB::statement('delete from pools;');
 
         $this->basics();
+        $this->poolState();
         $this->tournamentsList();
         $this->teams();
         $this->BeachVolley();
@@ -287,7 +288,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 13,
             'stage' => 1,
-            'poolState' => 0
+            'pool_states_id' => 1
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -384,7 +385,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'poolState' => 0
+            'pool_states_id' => 1
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -457,7 +458,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'poolState' => 0
+            'pool_states_id' => 1
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -543,7 +544,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 6,
             'stage' => 1,
-            'poolState' => 0
+            'pool_states_id' => 1
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -557,7 +558,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 1,
-            'poolState' => 0
+            'pool_states_id' => 1
         ]))->save();
 
         $nbTeams = 0;
@@ -618,7 +619,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'poolState' => 1
+            'pool_states_id' => 2
         ]);
         $pool->save();
         $firstpoolStage2 = $pool->id; // we'll need that to put teams into pools
@@ -632,7 +633,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'poolState' => 1
+            'pool_states_id' => 2
         ]))->save();
 
         (new \App\Contender(['pool_id' => $firstpoolStage2,'pool_from_id' => $firstpoolStage1, 'rank_in_pool' => 1]))->save();
@@ -704,6 +705,28 @@ class Joutes2020Seeder extends Seeder
         // Élève
         $role = new \App\Role(['name' => 'Student','slug' => 'STUD',]);
         $role->save();
+
+        echo "OK\n";
+    }
+    private function poolState()
+    {
+        echo "Création des pool states\n";
+
+        // En Préparation
+        $poolState = new \App\PoolState(['name' => 'En Préparation','slug' => 'PREPA',]);
+        $poolState->save();
+
+        // Prête à débuter
+        $poolState = new \App\PoolState(['name' => 'Prête à débuter','slug' => 'READY',]);
+        $poolState->save();
+
+        // En cours
+        $poolState = new \App\PoolState(['name' => 'En cours','slug' => 'PROGR',]);
+        $poolState->save();
+
+        // Terminée
+        $poolState = new \App\PoolState(['name' => 'Terminée','slug' => 'DONE',]);
+        $poolState->save();
 
         echo "OK\n";
     }

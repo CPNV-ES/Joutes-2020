@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameIsfinishedPoolsTable extends Migration
+class CreatePoolStates extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class RenameIsfinishedPoolsTable extends Migration
      */
     public function up()
     {
-        Schema::table('pools', function (Blueprint $table) {
-            $table->renameColumn('isFinished','poolState');
+        Schema::create('pool_states', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 50);
+            $table->string('slug', 5);
         });
     }
 
@@ -25,6 +27,6 @@ class RenameIsfinishedPoolsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pool_states');
     }
 }

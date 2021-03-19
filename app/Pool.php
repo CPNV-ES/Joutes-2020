@@ -11,7 +11,7 @@ class Pool extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'start_time', 'end_time', 'poolName', 'stage', 'poolSize', 'tournament_id', 'mode_id', 'game_type_id'
+      'start_time', 'end_time', 'poolName', 'stage', 'poolSize', 'tournament_id', 'mode_id', 'game_type_id', 'pool_states_id'
     ];
     //TODO manage poolState with database slugs
     public function tournament()
@@ -22,9 +22,17 @@ class Pool extends Model
     {
         return $this->hasMany(Contender::class);
     }
-    //TODO add relation with game_type
+
     public function mode(){
         return $this->belongsTo(PoolMode::class);
+    }
+
+    public function pool_states(){
+        return $this->belongsTo(PoolState::class);
+    }
+
+    public function game_type(){
+        return $this->belongsTo(GameType::class);
     }
 
     public function games(){

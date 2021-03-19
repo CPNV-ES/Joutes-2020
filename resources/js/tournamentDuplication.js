@@ -1,4 +1,5 @@
 sportSelect.addEventListener('change', selection);
+copyTournament.addEventListener('click', emptyInput);
 
 function selection() {
 
@@ -22,4 +23,11 @@ function selection() {
         }
 
     }
+}
+
+function emptyInput()
+{
+    $input = document.getElementById("max_teams");
+    $input.disabled = true;
+    $input.value = 12
 }

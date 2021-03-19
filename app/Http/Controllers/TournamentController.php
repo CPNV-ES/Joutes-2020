@@ -7,6 +7,7 @@ use App\Event;
 use App\Http\Requests\CreateTournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
 use App\Pool;
+use App\PoolState;
 use App\Tournament;
 use App\Sport;
 use App\Game;
@@ -58,41 +59,48 @@ class TournamentController extends Controller
                 // Duplicate Pool
                 foreach ($oldPools as $oldPool) {
                     $pool = new Pool();
+                    $state = PoolState::where('slug', 'PREPA')->first();
                     $pool->start_time = $oldPool->start_time;
                     $pool->end_time = $oldPool->end_time;
                     $pool->poolName = $oldPool->poolName;
                     $pool->stage = $oldPool->stage;
                     $pool->poolSize = $oldPool->poolSize;
-                    $pool->poolState = 0; //TODO Use slug
-
+                    $pool->pool_states()->associate($state);
                     $pool->mode()->associate($oldPool->mode);
-                    $pool->game_type_id = $oldPool->game_type_id;
+                    $pool->game_type()->associate($oldPool->game_type);
 
-                    $pool->tournament_id = $tournament->id;
+                    $pool->tournament()->associate($tournament);
 
                     $pool->save();
-                    // voir pour stocker dans un tableau
 
-                    $contenderId = [];
-                    $oldContenderId = [];
+                    $contenderArray = [];
 
                     // Duplicate Contenders
                     foreach ($oldPool->contenders as $oldContender) {
-                        if ($oldContender->pool_id == $oldPool->id) {
 
-                            array_push($oldContenderId, $oldContender->id);
-                            $contender = new Contender();
-                            $contender->pool_id = $pool->id;
+                        $contender = new Contender();
+                        $contender->pool()->associate($pool);
 
-                            $contender->save();
-                            $diff = $contender->id - $oldContender->id;
-                            array_push($contenderId, $contender->id);
-                        }
+                        $contender->save();
+                        array_push($contenderArray, $contender);
+
                     }
 
+                    // Duplicate Game
+                    $i = 0;
+                    foreach ($oldPool->games as $oldGame) {
+                        for ($y = $i + 1; $y < count($contenderArray); $y++) {
+                            $game = new Game();
+                            $game->date = $request->input('start_date');
+                            $game->start_time = $oldGame->start_time;
+                            $game->contender1()->associate($contenderArray[$i]);
+                            $game->contender2()->associate($contenderArray[$y]);
+                            $game->court()->associate($oldGame->court_id);
+                            $game->save();
+                        }
+                        $i++;
+                    }
                 }
-                //TODO Duplicate Games
-
 
                 break;
         }
