@@ -80,9 +80,8 @@
 
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5 ml-l-5 ml-md-5 ml-sm-5">
-
+                @include('flash-message')
                 @yield('content')
-
             </div>
 		</div>
 

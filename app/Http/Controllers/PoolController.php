@@ -36,6 +36,15 @@ class PoolController extends Controller
 
   public function update(Request $request, Tournament $tournament, Pool $pool)
   {
+
+      if($request->input("changeStatePool") && !($pool->isReady())){
+          return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "La poule n'est pas encore prête");
+      }
+
+      if(!$pool->isEditable()){
+          return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "Le changement n'as pas été effectué");
+      }
+
       $pool->fill($request->all());
       $pool->save();
 

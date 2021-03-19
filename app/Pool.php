@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\PoolState;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -155,12 +156,22 @@ class Pool extends Model
         return $rankings_row;
     }
 
+    //TODO: Move this method into a laravel policy
     public function isEditable(){
         if(Auth::check()){
-            $role = Auth::user()->role;
-            if($role == "writer" || $role == "administrator") return ($this->isFinished == 0);
+            $role = Auth::user()->role->getSlug();
+            if($role == "GEST" || $role == "ADMIN") return ($this->isFinished == 0);
         }
         return false;
+    }
+
+    /**
+     * Return true if it's ready to begin
+     * @return bool
+     */
+    public function isReady()
+    {
+        return ($this->poolSize == $this->contenders()->count()) && ($this->poolState == PoolState::Prep);
     }
 
 }

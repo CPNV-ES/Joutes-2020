@@ -19,8 +19,8 @@
         </div>
         <div class="text-center">
             <h2>Matches et Résultats</h2>
-            <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
-            @if((\App\HelperClasses\PoolHelper::isFull($pool)) && ($pool->poolState == 0))
+            <h4>État: {{\App\Enums\PoolState::poolStateName($pool->poolState)}}</h4>
+            @if($pool->isReady() && $pool->isEditable())
                 <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante</button>
             @endif
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
@@ -116,7 +116,7 @@
             </div>
         </div>
         <div class="text-center">
-            @if($pool->poolState >= 2)
+            @if($pool->poolState >= \App\Enums\PoolState::Inprog)
                 <h2>Classement actuel</h2>
                 <table class="table">
                     <thead class="black white-text">
@@ -239,10 +239,10 @@
                 <div class="modal-footer">
                     <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
                         @csrf
-                        <input hidden type="number" value="{{$pool->poolState + 1}}" name="poolState">
+                        <input hidden type="number" value="1" name="poolState">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         <input type="hidden" name="_method" value="PATCH">
-                        <button type="submit" class="btn btn-success">Ok !</button>
+                        <button type="submit" name="changeStatePool" class="btn btn-success">Ok !</button>
                     </form>
                 </div>
             </div>
