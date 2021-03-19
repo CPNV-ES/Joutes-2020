@@ -14,8 +14,10 @@
         <div class="text-center">
             <h2>Matches et Résultats</h2>
             <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
+           
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
             <h2>Définition des équipes</h2>
+            
             <table>
                 <tr>
                     <th>Issu de la poule</th>
@@ -46,8 +48,43 @@
             <div class="row justify-content-center">
                 <table class="table">
                     <tbody class="text">
+                    @if ($pool->poolState == 0)
+                    <tr>
+                    <form action="{{ route('pools.contenders.store', $pool->id) }}" method="post">
+                        @csrf
+                        <td><input type="time" id="appt" name="appt"></td>
+                        <td>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choisir 1ère team </option>
+                                    @foreach($mainArray as $value)
+                                        <option>{{ $value[1] }}</option>
+                                    @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choisir 2ème team</option>
+                                @foreach($mainArray as $value)
+                                    <option>{{ $value[1] }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choisir lieu</option>
+                                
+                                @foreach($courts as $value)
+                                    <option>{{ $value[1] }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td><button type="submit" class="btn btn-main">Ajouter</button></td>
+                    </form>
+                    </tr>
+                    @endif
                     @if(count($games) > 0)
                         @foreach ($games as $game)
+                            
                             <tr data-game="{{$game->id}}">
                                 <!-- No teams - no score -->
                                 @if (empty($game->contender1->team) || empty($game->contender2->team))
@@ -219,4 +256,5 @@
             @endif
         </div>
     </div>
+    <script src="{{ asset('js/poolShow.js') }}"></script>
 @stop

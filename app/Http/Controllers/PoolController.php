@@ -8,6 +8,7 @@ use App\Pool;
 use App\Team;
 use App\PoolMode;
 use App\Tournament;
+use App\Court;
 use Illuminate\Http\Request;
 
 class PoolController extends Controller
@@ -40,7 +41,7 @@ class PoolController extends Controller
 
     $contenders = $pool->contenders;
     $games = $pool->games->sortBy("start_time");
-
+    $courts = Court::all();
     $rankings = $pool->rankings();
 
     $ranking_completed = true;
@@ -63,7 +64,7 @@ class PoolController extends Controller
     $poolsInPreviousStage = $pool->poolsInPreviousStage();
 
 
-    return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
+    return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage','courts'));
   }
  
 }
