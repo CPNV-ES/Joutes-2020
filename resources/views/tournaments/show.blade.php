@@ -138,9 +138,19 @@
                             <table id="" class="tableTeamList table table-bordered ">
                                 <thead>
                                 <tr>
-                                    <th title="Teams In" class="teamlist"><a
-                                            href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                    <th title="Teams In" class="teamlist">
+                                        <td>
+                                            <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                        </td>
                                     </th>
+                                    
+                                </tr>
+                                <tr>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
                                 </thead>
@@ -150,9 +160,6 @@
                                         <table title="Teams In" class="table table-bordered teamlist tableStyle">
 
                                             @foreach ($pool->contenders as $contender)
-                                                @if($pool->games)
-
-                                                @endif
                                                 @foreach ($tournament->teams as $team)
 
                                                     @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
@@ -179,6 +186,9 @@
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    @endforeach
+                </div>
                             @foreach($pool->games as $keyGame =>  $game)
                                 @if ($keyGame === 0)
                                     @if($game->score_contender1 === null or $game->score_contender2 === null and $pool->pool_states->slug == "PROGR" )
@@ -259,18 +269,18 @@
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
                             @foreach($pool->games as $keyGame =>  $game)
                                 @if ($keyGame === 0)
                                     @if($game->score_contender1 === null or $game->score_contender2 === null or $pool->pool_states->slug == "PROGR" )
                                         <a href="{{ route('tournaments.pools.close', $pool) }}"
                                            class="disabled btn btn-main closeButton">Terminer la pool</a>
                                     @else
-                                        <a href="{{ route('tournaments.pools.close', $pool) }}"
                                            class="btn btn-main closeButton">Terminer la pool</a>
+                                        <a href="{{ route('tournaments.pools.close', $pool) }}"
                                     @endif
                                 @endif
                             @endforeach
-                        </div>
                     @endforeach
                 </div>
             @endif

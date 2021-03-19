@@ -125,7 +125,6 @@ class TournamentController extends Controller
                 $tournament->img = 'default.jpg';
             }
         }
-
         return view('tournaments.index', compact('tournaments'));
     }
 

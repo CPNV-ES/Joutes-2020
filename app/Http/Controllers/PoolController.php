@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contender;
 use App\GameType;
 use App\Http\Requests\CreatePoolRequest;
 use App\Pool;
@@ -35,10 +36,27 @@ class PoolController extends Controller
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
-    public function show(Request $request, Tournament $tournament, Pool $pool)
-    {
-        $pools = $tournament->pools;
-        $maxStage = $pools->max('stage');
+  public function update(Request $request, Tournament $tournament, Pool $pool)
+  {
+
+      if($request->input("changeStatePool") && !($pool->isReady())){
+          return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "La poule n'est pas encore prête");
+      }
+
+      if(!$pool->isEditable()){
+          return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "Le changement n'as pas été effectué");
+      }
+
+      $pool->fill($request->all());
+      $pool->save();
+
+      return redirect()->route('tournaments.pools.show', [$tournament, $pool]);
+  }
+
+  public function show(Request $request, Tournament $tournament, Pool $pool)
+  {
+    $pools = $tournament->pools;
+    $maxStage = $pools->max('stage');
 
         $contenders = $pool->contenders;
         $games = $pool->games->sortBy("start_time");
@@ -81,4 +99,12 @@ class PoolController extends Controller
 
         return back()->with('success', 'La pool a bien été fermée');
     }
+    return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
+  }
+
+  public function destroy(Tournament $tournament, Pool $pool){
+
+      $pool->delete();
+      return redirect()->route('tournaments.show', ['tournament' => $tournament]);
+  }
 }

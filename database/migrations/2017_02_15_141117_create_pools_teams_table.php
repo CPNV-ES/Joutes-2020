@@ -20,9 +20,9 @@ class CreatePoolsTeamsTable extends Migration
             $table->integer('team_id')->unsigned()->nullable();
             $table->integer('pool_from_id')->unsigned()->nullable();
 
-            $table->foreign('pool_id')->references('id')->on('pools');
+            $table->foreign('pool_id')->references('id')->on('pools')->onDelete('cascade');
             $table->foreign('team_id')->references('id')->on('teams');
-            $table->foreign('pool_from_id')->references('id')->on('pools');
+            $table->foreign('pool_from_id')->references('id')->on('pools')->onDelete('cascade');;
         });
 
     }

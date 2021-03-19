@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\PoolState;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,7 @@ class Pool extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'start_time', 'end_time', 'poolName', 'stage', 'poolSize', 'tournament_id', 'mode_id', 'game_type_id', 'pool_states_id'
+      'start_time', 'end_time', 'poolName', 'stage', 'poolState' ,'poolSize', 'tournament_id', 'mode_id', 'game_type_id'
     ];
     //TODO manage poolState with database slugs
     public function tournament()
@@ -150,13 +151,8 @@ class Pool extends Model
 
     public function listTeams() {
       $teams = array();
-        foreach ($this->games as $game) {
-            if(!empty($game->contender1->team)){
-                $teams[$game->contender1->team->id] = $game->contender1->team->name;
-            }
-            if(!empty($game->contender2->team)){
-                $teams[$game->contender2->team->id] = $game->contender2->team->name;
-            }
+        foreach ($this->contenders as $contender) {
+            $teams[$contender->team_id] = $contender->team->name;
         }
         return $teams;
     }
@@ -172,13 +168,23 @@ class Pool extends Model
         return $rankings_row;
     }
 
+    //TODO: Move this method into a laravel policy
     public function isEditable(){
         if(Auth::check()){
-            $role = Auth::user()->role;
-            if($role == "writer" || $role == "administrator") return ($this->isFinished == 0);
+            $role = Auth::user()->role->getSlug();
+            if($role == "GEST" || $role == "ADMIN") return ($this->isFinished == 0);
         }
         return false;
     }
     //TODO Create a function to see if the pool is
+
+    /**
+     * Return true if it's ready to begin
+     * @return bool
+     */
+    public function isReady()
+    {
+        return ($this->poolSize == $this->contenders()->count()) && ($this->poolState == PoolState::Prep);
+    }
 
 }
