@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GameType;
 use App\Http\Requests\CreatePoolRequest;
 use App\Pool;
+use App\PoolState;
 use App\Team;
 use App\PoolMode;
 use App\Tournament;
@@ -70,8 +71,9 @@ class PoolController extends Controller
     public function close(Pool $pool)
     {
         $pool = Pool::find($pool->id);
+        $state = PoolState::where('slug', 'DONE')->first();
 
-        $pool->poolState = 3;
+        $pool->pool_states()->associate($state);
 
         $pool->save();
 
