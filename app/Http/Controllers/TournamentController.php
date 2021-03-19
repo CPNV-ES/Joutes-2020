@@ -7,6 +7,7 @@ use App\Event;
 use App\Http\Requests\CreateTournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
 use App\Pool;
+use App\PoolState;
 use App\Tournament;
 use App\Sport;
 use App\Game;
@@ -22,7 +23,7 @@ class TournamentController extends Controller
         return view('tournaments.create')->with(compact('sports', 'event', 'tournaments'));
     }
 
-    public function store(CreateTournamentRequest $request, Event $event)
+    public function store(CreateTournamentRequest $request, $event)
     {
         switch ($request->input('action')) {
             case 'save' :
@@ -30,8 +31,8 @@ class TournamentController extends Controller
                 $tournament->fill($request->all());
                 $tournament->event()->associate($event);
 
-                $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
-                $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
+                $tournament->start_date = $request->input('start_date') . ' ' . $request->input('start_hour') . ':00';
+                $tournament->end_date = $request->input('end_date') . ' ' . $request->input('end_hour') . ':00';
 
                 $tournament->save();
 
@@ -47,77 +48,58 @@ class TournamentController extends Controller
                 $tournament->max_teams = $selectedTournament->max_teams;
                 $tournament->event()->associate($event);
 
-                $tournament->start_date = $request->input('start_date').' '.$request->input('start_hour').':00';
-                $tournament->end_date = $request->input('end_date').' '.$request->input('end_hour').':00';
+                $tournament->start_date = $request->input('start_date') . ' ' . $request->input('start_hour') . ':00';
+                $tournament->end_date = $request->input('end_date') . ' ' . $request->input('end_hour') . ':00';
 
                 $tournament->save();
 
-                $tournamentId = $tournament->id;
-
-                $oldPools = Pool::all();
-                $oldContenders = Contender::all();
-                $oldGames = Game::all();
+                $oldPools = $selectedTournament->pools;
 
                 $diff = 0;
                 // Duplicate Pool
-                foreach ($oldPools as $oldPool){
-                    if($oldPool->tournament_id == $request->input('tournament_id')) {
-                        $pool = new Pool();
-                        $pool->start_time = $oldPool->start_time;
-                        $pool->end_time = $oldPool->end_time;
-                        $pool->poolName = $oldPool->poolName;
-                        $pool->stage = $oldPool->stage;
-                        $pool->poolSize = $oldPool->poolSize;
-                        $pool->poolState = 0;
+                foreach ($oldPools as $oldPool) {
+                    $pool = new Pool();
+                    $state = PoolState::where('slug', 'PREPA')->first();
+                    $pool->start_time = $oldPool->start_time;
+                    $pool->end_time = $oldPool->end_time;
+                    $pool->poolName = $oldPool->poolName;
+                    $pool->stage = $oldPool->stage;
+                    $pool->poolSize = $oldPool->poolSize;
+                    $pool->pool_states()->associate($state);
+                    $pool->mode()->associate($oldPool->mode);
+                    $pool->game_type()->associate($oldPool->game_type);
 
-                        $pool->mode_id = $oldPool->mode_id;
-                        $pool->game_type_id = $oldPool->game_type_id;
+                    $pool->tournament()->associate($tournament);
 
-                        $pool->tournament_id = $tournamentId;
+                    $pool->save();
 
-                        $pool->save();
-                        // voir pour stocker dans un tableau
+                    $contenderArray = [];
 
-                        $contenderId = [];
-                        $oldContenderId = [];
+                    // Duplicate Contenders
+                    foreach ($oldPool->contenders as $oldContender) {
 
-                        // Duplicate Contenders
-                        foreach ($oldContenders as $oldContender){
-                            if($oldContender->pool_id == $oldPool->id) {
+                        $contender = new Contender();
+                        $contender->pool()->associate($pool);
 
-                                array_push($oldContenderId, $oldContender->id);
-                                $contender = new Contender();
-                                $contender->pool_id = $pool->id;
+                        $contender->save();
+                        array_push($contenderArray, $contender);
 
-                                $contender->save();
-                                $diff = $contender->id - $oldContender->id;
-                                array_push($contenderId, $contender->id);
-                            }
-                        }
                     }
-                }
-                // Duplicate Game
-                foreach ($oldGames as $oldGame) {
-                        for($i = 0; $i < count($oldContenderId); $i++ ){
-                            if ($oldGame->contender1_id == $oldContenderId[$i]) {
-                                $firstContender = $diff + $oldContenderId[$i];
-                                for($y = $i+1; $y < count($contenderId); $y++){
-                                    $game = new Game();
-                                    $game->date = $request->input('start_date');
-                                    $game->start_time = $oldGame->start_time;
-                                    $game->contender1_id = $firstContender;
-                                    $game->contender2_id = $contenderId[$y];
-                                    $game->court_id = $oldGame->court_id;
-                                    $game->save();
-                                }
 
-
-                            }
-
+                    // Duplicate Game
+                    $i = 0;
+                    foreach ($oldPool->games as $oldGame) {
+                        for ($y = $i + 1; $y < count($contenderArray); $y++) {
+                            $game = new Game();
+                            $game->date = $request->input('start_date');
+                            $game->start_time = $oldGame->start_time;
+                            $game->contender1()->associate($contenderArray[$i]);
+                            $game->contender2()->associate($contenderArray[$y]);
+                            $game->court()->associate($oldGame->court_id);
+                            $game->save();
                         }
-
-
-
+                        $i++;
+                    }
                 }
 
                 break;
@@ -151,8 +133,8 @@ class TournamentController extends Controller
     {
         $tournament->fill($request->all());
 
-        $tournament->start_date = $request->input('start_date').$request->input('start_hour').':00';
-        $tournament->end_date = $request->input('end_date').$request->input('end_hour').':00';
+        $tournament->start_date = $request->input('start_date') . $request->input('start_hour') . ':00';
+        $tournament->end_date = $request->input('end_date') . $request->input('end_hour') . ':00';
 
         $tournament->save();
 
