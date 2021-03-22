@@ -139,19 +139,8 @@
                                 <thead>
                                 <tr>
                                     <th title="Teams In" class="teamlist">
-                                    <td>
                                         <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm rounded-0" type="button"
-                                                data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </td>
-                                    </th>
-
-                                </tr>
-                                <tr>
+                                       </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
                                 </thead>
