@@ -140,7 +140,7 @@
                                 <tr>
                                     <th title="Teams In" class="teamlist">
                                         <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
-                                       </th>
+                                    </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
                                 </thead>
@@ -179,12 +179,15 @@
                         </div>
                         @foreach($pool->games as $keyGame =>  $game)
                             @if ($keyGame === 0)
-                                @if($game->score_contender1 === null or $game->score_contender2 === null or $pool->poolState == 2)
+                                @if($game->score_contender1 === null && $game->score_contender2 === null)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
                                        class="disabled btn btn-main closeButton">Terminer la pool</a>
-                                @else
+                                @elseif($pool->poolState == 2)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
                                        class="btn btn-main closeButton">Terminer la pool</a>
+                                @else
+                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                       class="disabled btn btn-main closeButton">Terminer la pool</a>
                                 @endif
                             @endif
                         @endforeach
@@ -261,12 +264,15 @@
                         </div>
                         @foreach($pool->games as $keyGame =>  $game)
                             @if ($keyGame === 0)
-                                @if($game->score_contender1 === null or $game->score_contender2 === null or $pool->poolState == 2)
+                                @if($game->score_contender1 === null && $game->score_contender2 === null)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
                                        class="disabled btn btn-main closeButton">Terminer la pool</a>
-                                @else
+                                @elseif($pool->poolState == 2)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
                                        class="btn btn-main closeButton">Terminer la pool</a>
+                                @else
+                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                       class="disabled btn btn-main closeButton">Terminer la pool</a>
                                 @endif
                             @endif
                         @endforeach
