@@ -107,7 +107,7 @@
                     </tbody>
                 </table>
                 <a href="{{ route('courts.create', ['id_sport' => $tournament->sport->id]) }}" class="greenBtn"
-                   title="Créer un tournoi">Ajouter</i></a>
+                   title="Créer un tournoi">Ajouter</a>
             </div>
         </div>
 
@@ -139,16 +139,17 @@
                                 <thead>
                                 <tr>
                                     <th title="Teams In" class="teamlist">
-                                        <td>
-                                            <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                        </td>
+                                    <td>
+                                        <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm rounded-0" type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
                                     </th>
-                                    
+
                                 </tr>
                                 <tr>
                                     <th title="Teams Out" class="teamlist">Classement</th>
@@ -187,21 +188,20 @@
                                 </tbody>
                             </table>
                         </div>
-                    @endforeach
-                </div>
-                            @foreach($pool->games as $keyGame =>  $game)
-                                @if ($keyGame === 0)
-                                    @if($game->score_contender1 === null or $game->score_contender2 === null and $pool->pool_states->slug == "PROGR" )
-                                        <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                           class="disabled btn btn-main closeButton">Terminer la pool</a>
-                                    @else
-                                        <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                           class="btn btn-main closeButton">Terminer la pool</a>
-                                    @endif
+                        @foreach($pool->games as $keyGame =>  $game)
+                            @if ($keyGame === 0)
+                                @if($game->score_contender1 === null or $game->score_contender2 === null or $pool->poolState == 2)
+                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                       class="disabled btn btn-main closeButton">Terminer la pool</a>
+                                @else
+                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                       class="btn btn-main closeButton">Terminer la pool</a>
                                 @endif
-                            @endforeach
-                        </div>
+                            @endif
+                        @endforeach
                     @endforeach
+
+
                 </div>
 
             @else
@@ -270,25 +270,22 @@
                                 </tbody>
                             </table>
                         </div>
-                            @foreach($pool->games as $keyGame =>  $game)
-                                @if ($keyGame === 0)
-                                    @if($game->score_contender1 === null or $game->score_contender2 === null or $pool->pool_states->slug == "PROGR" )
-                                        <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                           class="disabled btn btn-main closeButton">Terminer la pool</a>
-                                    @else
-                                           class="btn btn-main closeButton">Terminer la pool</a>
-                                        <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                    @endif
+                        @foreach($pool->games as $keyGame =>  $game)
+                            @if ($keyGame === 0)
+                                @if($game->score_contender1 === null or $game->score_contender2 === null or $pool->poolState == 2)
+                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                       class="disabled btn btn-main closeButton">Terminer la pool</a>
+                                @else
+                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
+                                       class="btn btn-main closeButton">Terminer la pool</a>
                                 @endif
-                            @endforeach
+                            @endif
+                        @endforeach
                     @endforeach
                 </div>
-            @endif
 
-        @endforeach
-    </div>
-
-
+    @endif
+    @endforeach
     </body>
     <script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop

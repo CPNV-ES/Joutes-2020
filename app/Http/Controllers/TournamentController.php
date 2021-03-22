@@ -7,7 +7,6 @@ use App\Event;
 use App\Http\Requests\CreateTournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
 use App\Pool;
-use App\PoolState;
 use App\Tournament;
 use App\Sport;
 use App\Game;
@@ -59,13 +58,12 @@ class TournamentController extends Controller
                 // Duplicate Pool
                 foreach ($oldPools as $oldPool) {
                     $pool = new Pool();
-                    $state = PoolState::where('slug', 'PREPA')->first();
                     $pool->start_time = $oldPool->start_time;
                     $pool->end_time = $oldPool->end_time;
                     $pool->poolName = $oldPool->poolName;
                     $pool->stage = $oldPool->stage;
                     $pool->poolSize = $oldPool->poolSize;
-                    $pool->pool_states()->associate($state);
+                    $pool->poolState = 0;
                     $pool->mode()->associate($oldPool->mode);
                     $pool->game_type()->associate($oldPool->game_type);
 

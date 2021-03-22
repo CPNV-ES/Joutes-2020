@@ -95,12 +95,9 @@ class PoolController extends Controller
 
         $pool->save();
 
-        //$tournament = Tournament::find($pool->tournament_id);
 
         return back()->with('success', 'La pool a bien été fermée');
     }
-    return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
-  }
 
   public function destroy(Tournament $tournament, Pool $pool){
 
