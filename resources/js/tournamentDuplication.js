@@ -28,6 +28,5 @@ function selection() {
 function emptyInput()
 {
     $input = document.getElementById("max_teams");
-    $input.disabled = true;
     $input.value = 12
 }
