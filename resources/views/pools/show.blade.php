@@ -196,7 +196,7 @@
                             <form action="{{ route('pools.contenders.destroy', [$mainArray[$i][0], $pool->id]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                <button type="submit" class="btn btn-danger">
                                     <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                 </button>
                             </form>
