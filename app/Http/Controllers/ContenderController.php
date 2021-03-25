@@ -28,6 +28,16 @@ class ContenderController extends Controller
 
         return redirect()->route('tournaments.pools.show', [$pool->tournament, $pool]);
     }
+
+    public function update(Request $request,$pool_id, $contender)
+    {
+        $contender = Contender::find($contender);
+        $contender->team_id = $request->input('team_id');
+        $contender->save();
+
+        return redirect()->back();
+    }
+
     public function destroy($team_id,$pool_id)
     {
         $pool = Pool::findOrFail($pool_id);

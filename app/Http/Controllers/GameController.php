@@ -38,7 +38,14 @@ class GameController extends Controller
     public function store(Request $request)
     {
         
-
+        $game = new Game();
+        $game->date = $request->input('date');
+        $game->start_time = $request->input('start_time');
+        $game->contender1_id = $request->input('firstContender');
+        $game->contender2_id = $request->input('secondContender');
+        $game->court_id = $request->input('location');
+        $game->save();
+        return redirect()->back();
     }
 
     /**

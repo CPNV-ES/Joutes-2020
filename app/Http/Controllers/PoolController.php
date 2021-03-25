@@ -41,6 +41,7 @@ class PoolController extends Controller
 
     $contenders = $pool->contenders;
     $games = $pool->games->sortBy("start_time");
+    
     $courts = Court::all();
     $rankings = $pool->rankings();
 
