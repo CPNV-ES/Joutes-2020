@@ -146,6 +146,8 @@ class TournamentController extends Controller
 
         $tournament->getStages();
 
+
+
         return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));
 
     }

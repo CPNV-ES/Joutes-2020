@@ -93,9 +93,6 @@ class PoolController extends Controller
 
         $pool->save();
 
-        //TODO see how the rank are calculated if exist
-        //TODO create a function to calculate the rank
-
         return back()->with('success', 'La pool a bien été fermée');
     }
 
