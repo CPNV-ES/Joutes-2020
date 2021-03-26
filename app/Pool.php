@@ -28,10 +28,6 @@ class Pool extends Model
         return $this->belongsTo(PoolMode::class);
     }
 
-    public function pool_states(){
-        return $this->belongsTo(PoolState::class);
-    }
-
     public function game_type(){
         return $this->belongsTo(GameType::class);
     }
