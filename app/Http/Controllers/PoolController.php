@@ -104,19 +104,21 @@ class PoolController extends Controller
         }
 
         $tournament = Tournament::find($pool->tournament_id);
-        $poolWinner = $tournament->getPoolsOfStage($tournament->id, 2)->first();
+        $poolsWinner = $tournament->getPoolsOfStage($tournament->id, 2);
 
         $i = 0;
-        foreach ($poolWinner->contenders as $contender) {
-            if ($contender->fromPool->id == $pool->id) {
-                $team = Team::find($rankings[$i]["team_id"]);
-                $contender->team()->associate($team->id);
+        foreach ($poolsWinner as $poolWinner) {
+            foreach ($poolWinner->contenders as $contender) {
+                if ($contender->fromPool->id == $pool->id) {
+                    $team = Team::find($rankings[$i]["team_id"]);
+                    $contender->team()->associate($team->id);
 
-                $contender->save();
+                    $contender->save();
 
-                $i++;
+                    $i++;
+                }
+
             }
-
         }
 
 
