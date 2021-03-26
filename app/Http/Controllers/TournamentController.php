@@ -72,17 +72,23 @@ class TournamentController extends Controller
                     $pool->save();
 
                     $contenderArray = [];
+                    $diff = $pool->id - $oldPool->id;
+
 
                     // Duplicate Contenders
                     foreach ($oldPool->contenders as $oldContender) {
 
                         $contender = new Contender();
 
-                        //TODO add duplicate of pool_from_id
-
                         $contender->pool()->associate($pool);
 
+                        if($oldContender->pool_from_id !== null){
+                            $contender->pool_from_id = $oldContender->pool_from_id + $diff;
+                        }
+                        
                         $contender->save();
+
+
                         array_push($contenderArray, $contender);
 
                     }
