@@ -88,52 +88,37 @@ class PoolController extends Controller
     public function close(Pool $pool)
     {
         $pool = Pool::find($pool->id);
-
         $pool->poolState = 3;
-
         $pool->save();
 
         $rankings = $pool->rankings();
 
-
         foreach ($pool->contenders as $contender) {
             for ($i = 0; $i < sizeof($rankings); $i++) {
-                if($contender->team->name == $rankings[$i]["team"]) {
+                if ($contender->team->name == $rankings[$i]["team"]) {
                     $key = $i;
                 }
             }
-
             $contender->rank_in_pool = $key + 1;
-
             $contender->save();
         }
 
-
-        /*$tournament = Tournament::find($pool->tournament_id);
+        $tournament = Tournament::find($pool->tournament_id);
         $poolWinner = $tournament->getPoolsOfStage($tournament->id, 2)->first();
 
-        dd($pool->teams);
+        $i = 0;
+        foreach ($poolWinner->contenders as $contender) {
+            if ($contender->fromPool->id == $pool->id) {
+                $team = Team::find($rankings[$i]["team_id"]);
+                $contender->team()->associate($team->id);
 
-
-
-
-
-        $rankings = $pool->rankings();
-
-        for ($i = 0; $i < 2; $i++) {
-            foreach ($poolWinner->contenders as $contender) {
-
-                //dd($pool);
-                if ($contender->fromPool->id == $pool->id) {
-                    $team = Team::find($rankings[$i]["team_id"]);
-                    $contender->team()->associate($team->id);
-                }
-
-                //dd($contender);
                 $contender->save();
 
+                $i++;
             }
-        }*/
+
+        }
+
 
         return back()->with('success', 'La pool a bien été fermée');
     }
