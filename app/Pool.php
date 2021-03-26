@@ -146,9 +146,14 @@ class Pool extends Model
     }
 
     public function listTeams() {
-      $teams = array();
-        foreach ($this->contenders as $contender) {
-            $teams[$contender->team_id] = $contender->team->name;
+        $teams = array();
+        foreach ($this->games as $game) {
+            if(!empty($game->contender1->team)){
+                $teams[$game->contender1->team->id] = $game->contender1->team->name;
+            }
+            if(!empty($game->contender2->team)){
+                $teams[$game->contender2->team->id] = $game->contender2->team->name;
+            }
         }
         return $teams;
     }

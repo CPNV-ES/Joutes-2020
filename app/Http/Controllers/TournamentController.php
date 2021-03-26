@@ -85,7 +85,7 @@ class TournamentController extends Controller
                         if($oldContender->pool_from_id !== null){
                             $contender->pool_from_id = $oldContender->pool_from_id + $diff;
                         }
-                        
+
                         $contender->save();
 
 
