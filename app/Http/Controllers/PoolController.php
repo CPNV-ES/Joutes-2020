@@ -35,27 +35,27 @@ class PoolController extends Controller
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }
 
-  public function update(Request $request, Tournament $tournament, Pool $pool)
-  {
+    public function update(Request $request, Tournament $tournament, Pool $pool)
+    {
 
-      if($request->input("changeStatePool") && !($pool->isReady())){
-          return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "La poule n'est pas encore prête");
-      }
+        if ($request->input("changeStatePool") && !($pool->isReady())) {
+            return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "La poule n'est pas encore prête");
+        }
 
-      if(!$pool->isEditable()){
-          return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "Le changement n'as pas été effectué");
-      }
+        if (!$pool->isEditable()) {
+            return redirect()->route('tournaments.pools.show', [$tournament, $pool])->with("error", "Le changement n'as pas été effectué");
+        }
 
-      $pool->fill($request->all());
-      $pool->save();
+        $pool->fill($request->all());
+        $pool->save();
 
-      return redirect()->route('tournaments.pools.show', [$tournament, $pool]);
-  }
+        return redirect()->route('tournaments.pools.show', [$tournament, $pool]);
+    }
 
-  public function show(Request $request, Tournament $tournament, Pool $pool)
-  {
-    $pools = $tournament->pools;
-    $maxStage = $pools->max('stage');
+    public function show(Request $request, Tournament $tournament, Pool $pool)
+    {
+        $pools = $tournament->pools;
+        $maxStage = $pools->max('stage');
 
         $contenders = $pool->contenders;
         $games = $pool->games->sortBy("start_time");
@@ -93,12 +93,55 @@ class PoolController extends Controller
 
         $pool->save();
 
+        $rankings = $pool->rankings();
+
+
+        foreach ($pool->contenders as $contender) {
+            for ($i = 0; $i < sizeof($rankings); $i++) {
+                if($contender->team->name == $rankings[$i]["team"]) {
+                    $key = $i;
+                }
+            }
+
+            $contender->rank_in_pool = $key + 1;
+
+            $contender->save();
+        }
+
+
+        /*$tournament = Tournament::find($pool->tournament_id);
+        $poolWinner = $tournament->getPoolsOfStage($tournament->id, 2)->first();
+
+        dd($pool->teams);
+
+
+
+
+
+        $rankings = $pool->rankings();
+
+        for ($i = 0; $i < 2; $i++) {
+            foreach ($poolWinner->contenders as $contender) {
+
+                //dd($pool);
+                if ($contender->fromPool->id == $pool->id) {
+                    $team = Team::find($rankings[$i]["team_id"]);
+                    $contender->team()->associate($team->id);
+                }
+
+                //dd($contender);
+                $contender->save();
+
+            }
+        }*/
+
         return back()->with('success', 'La pool a bien été fermée');
     }
 
-  public function destroy(Tournament $tournament, Pool $pool){
+    public function destroy(Tournament $tournament, Pool $pool)
+    {
 
-      $pool->delete();
-      return redirect()->route('tournaments.show', ['tournament' => $tournament]);
-  }
+        $pool->delete();
+        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
+    }
 }

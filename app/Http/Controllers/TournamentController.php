@@ -77,6 +77,9 @@ class TournamentController extends Controller
                     foreach ($oldPool->contenders as $oldContender) {
 
                         $contender = new Contender();
+
+                        //TODO add duplicate of pool_from_id
+
                         $contender->pool()->associate($pool);
 
                         $contender->save();

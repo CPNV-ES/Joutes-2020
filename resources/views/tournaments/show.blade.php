@@ -148,30 +148,19 @@
                                 <tr>
                                     <td>
                                         <table title="Teams In" class="table table-bordered teamlist tableStyle">
-                                            @php
-                                                $rankings = $pool->rankings();
-                                                $i = 0;
-                                            @endphp
-                                            @foreach ($pool->contenders as $contender)
-                                                @if($pool->poolState != 3)
+                                            @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
 
-                                                    @foreach ($tournament->teams as $team)
 
-                                                        @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
-                                                            <tr>
-                                                                <td title="Team" class="team colorBackground"
-                                                                    id="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                @elseif($pool->poolState == 3)
-                                                    <tr>
-                                                        <td title="Team" class="team colorBackground"
-                                                            id="{{ $contender->previousId() }}">{{$rankings[$i]["team"]}}</td>
-                                                    </tr>
+                                                @foreach ($tournament->teams as $team)
 
-                                                @endif
-                                                @php $i++; @endphp
+                                                    @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
+                                                        <tr>
+                                                            <td title="Team" class="team colorBackground"
+                                                                id="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+
                                             @endforeach
 
                                         </table>
@@ -230,46 +219,36 @@
                                         <table id="" class="table table-bordered teamlist tableStyle">
 
                                             @php
-                                                $rankings = $pool->rankings();
-                                                $i = 0;
                                                 $teamName = "";
                                             @endphp
 
                                             {{-- Part of display for Visualisation to display name of team --}}
-                                            @foreach ($pool->contenders as $contender)
-                                                @if($pool->poolState != 3)
-                                                    @foreach ($tournament->teams as $keyTeam => $team)
-                                                        @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
-                                                            @php $teamName = $team->name @endphp
+                                            @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
 
-                                                            <tr>
-                                                                <td title="Team" class="team colorBackground"
-                                                                    data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
-                                                            </tr>
+                                                @foreach ($tournament->teams as $keyTeam => $team)
+                                                    @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
+                                                        @php $teamName = $team->name @endphp
 
-                                                        @endif
-                                                    @endforeach
-                                                    @foreach ($tournament->teams as $keyTeam => $team)
-                                                        @if ($team->name != \App\Helpers\ContenderHelper::contenderDisplayName($contender))
-                                                            @if (\App\Helpers\ContenderHelper::contenderDisplayName($contender) != $teamName)
-                                                                @if ($keyTeam === 0)
+                                                        <tr>
+                                                            <td title="Team" class="team colorBackground"
+                                                                data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                        </tr>
 
-                                                                    <tr>
-                                                                        <td title="Team" class="team "
-                                                                            data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
-                                                                    </tr>
-                                                                @endif
+                                                    @endif
+                                                @endforeach
+                                                @foreach ($tournament->teams as $keyTeam => $team)
+                                                    @if ($team->name != \App\Helpers\ContenderHelper::contenderDisplayName($contender))
+                                                        @if (\App\Helpers\ContenderHelper::contenderDisplayName($contender) != $teamName)
+                                                            @if ($keyTeam === 0)
+
+                                                                <tr>
+                                                                    <td title="Team" class="team "
+                                                                        data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                                </tr>
                                                             @endif
                                                         @endif
-                                                    @endforeach
-                                                @elseif($pool->poolState == 3)
-                                                    <tr>
-                                                        <td title="Team" class="team colorBackground"
-                                                            data-previous="{{ $contender->previousId() }}">{{$rankings[$i]["team"]}}</td>
-                                                    </tr>
-
-                                                @endif
-                                                @php $i++; @endphp
+                                                    @endif
+                                                @endforeach
                                             @endforeach
 
                                         </table>
