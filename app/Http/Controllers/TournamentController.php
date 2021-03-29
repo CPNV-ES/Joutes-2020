@@ -97,12 +97,12 @@ class TournamentController extends Controller
                     // Duplicate Game
                     $i = 0;
                     foreach ($oldPool->games as $oldGame) {
-                        for ($y = $i + 1; $y < count($contenderArray); $y++) {
+                        if($i + 1 < count($contenderArray)) {
                             $game = new Game();
                             $game->date = $request->input('start_date');
                             $game->start_time = $oldGame->start_time;
                             $game->contender1()->associate($contenderArray[$i]);
-                            $game->contender2()->associate($contenderArray[$y]);
+                            $game->contender2()->associate($contenderArray[$i + 1]);
                             $game->court()->associate($oldGame->court_id);
                             $game->save();
                         }

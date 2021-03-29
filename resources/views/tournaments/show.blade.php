@@ -233,7 +233,6 @@
                                                             <td title="Team" class="team colorBackground"
                                                                 data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
                                                         </tr>
-
                                                     @endif
                                                 @endforeach
                                                 @foreach ($tournament->teams as $keyTeam => $team)
