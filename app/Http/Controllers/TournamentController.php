@@ -81,6 +81,7 @@ class TournamentController extends Controller
                         $contender = new Contender();
 
                         $contender->pool()->associate($pool);
+                        $contender->rank_in_pool = $oldContender->rank_in_pool;
 
                         if ($oldContender->pool_from_id !== null) {
                             $contender->pool_from_id = $oldContender->pool_from_id + $diff;
