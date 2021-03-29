@@ -36,11 +36,11 @@
                 <form action="{{ route('events.store') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="slug">Slug</label>
+                        <label for="name">Nom</label>
                         <input type="text" class="form-control" name="name" placeholder="Ajouter un nom">
                     </div>
                     <div class="form-group">
-                        <label for="Nom">Nom</label>
+                        <label for="img">Image</label>
                         <input type="text" class="form-control" name="img" placeholder="Ajouter une image">
                     </div>
 
