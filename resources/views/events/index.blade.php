@@ -9,7 +9,7 @@
                     Evénements
                     @if(Auth::check())
                         @if(Auth::user()->role->slug == 'ADMIN')
-                            <a href="{{route('events.create')}}" class="greenBtn" title="Créer un événement">Ajouter</i></a>
+                            <a href="{{route('events.create')}}" class="btn btn-main" title="Créer un événement">Ajouter</i></a>
                         @endif
                     @endif
                 </h1>
