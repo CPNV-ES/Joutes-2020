@@ -8,7 +8,8 @@
         <div class="text-center">
             <h2>Matches et Résultats</h2>
             <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
-           
+            
+            <!-- Si pool n'est plus en préparation -->
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
             <h2>Définition des équipes</h2>
             
@@ -38,10 +39,12 @@
                 </tr>
             </table>
             @endif
+            <!-- -------------------------------- -->
             <h4>Date : {{$tournament->start_date->format('d.m.Y')}}</h4>
             <div class="row justify-content-center">
                 <table class="table" id="data_table">
                     <tbody class="text">
+                    <!-- Formulaire d'ajout de match si le match est en préparation -->
                     @if ($pool->poolState == 0)
                     <tr>
                     <form action="{{ route('games.store')}}" method="post">
