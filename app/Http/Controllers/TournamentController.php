@@ -81,8 +81,9 @@ class TournamentController extends Controller
                         $contender = new Contender();
 
                         $contender->pool()->associate($pool);
+                        $contender->rank_in_pool = $oldContender->rank_in_pool;
 
-                        if($oldContender->pool_from_id !== null){
+                        if ($oldContender->pool_from_id !== null) {
                             $contender->pool_from_id = $oldContender->pool_from_id + $diff;
                         }
 
@@ -96,18 +97,19 @@ class TournamentController extends Controller
                     // Duplicate Game
                     $i = 0;
                     foreach ($oldPool->games as $oldGame) {
-                        for ($y = $i + 1; $y < count($contenderArray); $y++) {
+                        if($i + 1 < count($contenderArray)) {
                             $game = new Game();
                             $game->date = $request->input('start_date');
                             $game->start_time = $oldGame->start_time;
                             $game->contender1()->associate($contenderArray[$i]);
-                            $game->contender2()->associate($contenderArray[$y]);
+                            $game->contender2()->associate($contenderArray[$i + 1]);
                             $game->court()->associate($oldGame->court_id);
                             $game->save();
                         }
                         $i++;
                     }
                 }
+
 
                 break;
         }
@@ -154,7 +156,6 @@ class TournamentController extends Controller
         $maxStage = $pools->max('stage');
 
         $tournament->getStages();
-
 
 
         return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));

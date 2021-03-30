@@ -40,7 +40,6 @@ class Joutes2020Seeder extends Seeder
         $this->UniHockey();
         $this->Badminton();
         $this->roles();
-        $this->poolState();
     }
 
     // Common stuff
@@ -288,7 +287,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 13,
             'stage' => 1,
-            'pool_states_id' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -385,7 +384,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'pool_states_id' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -458,7 +457,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'pool_states_id' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -544,7 +543,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 6,
             'stage' => 1,
-            'pool_states_id' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -558,7 +557,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 1,
-            'pool_states_id' => 0
+            'poolState' => 0
         ]))->save();
 
         $nbTeams = 0;
@@ -619,7 +618,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'pool_states_id' => 1
+            'poolState' => 1
         ]);
         $pool->save();
         $firstpoolStage2 = $pool->id; // we'll need that to put teams into pools
@@ -633,7 +632,7 @@ class Joutes2020Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'pool_states_id' => 1
+            'poolState' => 1
         ]))->save();
 
         (new \App\Contender(['pool_id' => $firstpoolStage2,'pool_from_id' => $firstpoolStage1, 'rank_in_pool' => 1]))->save();
@@ -705,28 +704,6 @@ class Joutes2020Seeder extends Seeder
         // Élève
         $role = new \App\Role(['name' => 'Student','slug' => 'STUD',]);
         $role->save();
-
-        echo "OK\n";
-    }
-    private function poolState()
-    {
-        echo "Création des pool states\n";
-
-        // En Préparation
-        $poolState = new \App\PoolState(['name' => 'En Préparation','slug' => 'PREPA',]);
-        $poolState->save();
-
-        // Prête à débuter
-        $poolState = new \App\PoolState(['name' => 'Prête à débuter','slug' => 'READY',]);
-        $poolState->save();
-
-        // En cours
-        $poolState = new \App\PoolState(['name' => 'En cours','slug' => 'PROGR',]);
-        $poolState->save();
-
-        // Terminée
-        $poolState = new \App\PoolState(['name' => 'Terminée','slug' => 'DONE',]);
-        $poolState->save();
 
         echo "OK\n";
     }

@@ -26,7 +26,7 @@
                     <select class="form-control" id="tournamentSelect" name="tournament_id">
                         <option data-choose="0">-- Choisissez --</option>
                         @foreach ($tournaments as $tournament)
-                            <option class="d-none" data-sport="{{ $tournament->sport->id }}" value="{{ $tournament->id }}">{{ $tournament->name }}</option>
+                            <option class="d-none" data-sport="{{ $tournament->sport->id }}" value="{{ $tournament->id }}">{{ $tournament->name }} --- {{ $tournament->event->name  }}</option>
                         @endforeach
                     </select>
                 </div>
