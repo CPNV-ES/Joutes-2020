@@ -89,10 +89,15 @@
                     </form>
                     </tr>
                     @endif
+
                     @if(count($games) > 0)
+                    
                         @foreach ($games as $game)
-                            
+                        <form action="{{ route('games.update', $game->id) }}" method="POST">
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                        <input type="hidden" name="_method" value="PUT">
                             <tr data-game="{{$game->id}}">
+                                
                                 <!-- No teams - no score -->
                                 @if (empty($game->contender1->team) || empty($game->contender2->team))
                                 <td class="separator sepTime " id="time{{ $game->id }}">{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}</td>
@@ -101,9 +106,9 @@
                                     @elseif($game->contender1->getName()!=null)
                                         <td class="contender1" id="contender1_row{{ $game->id }}">{{ $game->contender1->team->name }}</td>
                                     @else
-                                        <td>! VIDE !</td>
+                                        <td id="contender1_row{{ $game->id }}">! VIDE !</td>
                                     @endif
-                                    <td style="display:none" id="firstContenderEdit{{ $game->id }}"><select class="form-control">
+                                    <td style="display:none" id="firstContenderEdit{{ $game->id }}"><select name="firstContenderEdited" class="form-control">
                                         <option selected>Choisir 1ère team </option>
                                             @foreach($pool->contenders as $contender)
                                                 @if($contender->getName()!=null)
@@ -113,7 +118,7 @@
                                     </select></td>
                                     <td class="separator"> - </td>
                                     <td style="display:none" id="secondContenderEdit{{ $game->id }}">
-                                    <select class="form-control">
+                                    <select class="form-control" name="secondContenderEdited">
                                         <option selected>Choisir 1ère team </option>
                                             @foreach($pool->contenders as $contender)
                                                 @if($contender->getName()!=null)
@@ -126,11 +131,11 @@
                                     @elseif(isset($game->contender2->team->name))
                                         <td class="contender2" id="contender2_row{{ $game->id }}">{{ $game->contender2->team->name }}</td>
                                     @else
-                                        <td>! VIDE !</td>
+                                        <td id="contender2_row{{ $game->id }}">! VIDE !</td>
                                     @endif
                                     <td class="score2" id="court{{ $game->id }}">{{ $game->court->name }}</td>
                                     <td id="courtEdit{{ $game->id }}" style="display:none">
-                                        <select name="location"  class="form-control">
+                                        <select name="location"  class="form-control" name="courtEdited">
                                         
                                             <option selected>Choisir lieu</option>
                                             
@@ -142,26 +147,26 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td id="edit_button{{$game->id}}"><button type="submit" class="btn btn-success" id="edit_button{{$game->id}}" onclick="edit_row('{{ $game->id }}')">
+
+                                    <td id="edit_button{{$game->id}}"><button type="button" class="btn btn-success edit_button" id="edit_button{{$game->id}}" onclick="edit_row('{{ $game->id }}')">
                                             <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                                         </button>
                                     </td>
                                     <td id="save_button{{ $game->id }}" style="display:none">
-                                        <i class="fas fa-save"></i>
-                                    </td>
+                                            <button type="submit" class="btn">
+                                            <i class="fas fa-save"></i>
+                                            </button>
+                                        </td>
                                     
                                 @else
-
                                      <!-- teams - no score -->
                                     @if(!isset($game->score_contender1) || !isset($game->score_contender2))
                                         <td class="separator sepTime " id="time{{ $game->id }}">{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}</td>
                                         @if($game->contender1->getName() != null)
                                         <td class="contender1 " id="contender1_row{{ $game->id }}">{{$game->contender1->team->name}}</td>
-                                        @else
-                                        <td class="contender1 " id="contender1_row{{ $game->id }}">! VIDE !</td>
                                         @endif
                                         <td  style="display:none" id="firstContenderEdit{{ $game->id }}">
-                                            <select class="form-control">
+                                            <select class="form-control" name="firstContenderEdited">
                                                 <option selected>Choisir 1ère team </option>
                                                     @foreach($pool->contenders as $contender)
                                                         @if($contender->getName()!=null)
@@ -172,7 +177,7 @@
                                         </td>
                                         <td class="separator"> - </td>
                                         <td style="display:none" id="secondContenderEdit{{ $game->id }}">
-                                            <select class="form-control">
+                                            <select class="form-control" name="secondContenderEdited">
                                                 <option selected>Choisir 1ère team </option>
                                                     @foreach($pool->contenders as $contender)
                                                         @if($contender->getName()!=null)
@@ -183,12 +188,10 @@
                                         </td>
                                         @if($game->contender2->getName()!= null)
                                         <td class="contender2" id="contender2_row{{ $game->id }}">{{$game->contender2->team->name}}</td>
-                                        @else
-                                        <td class="contender2 " id="contender2_row{{ $game->id }}">! VIDE !</td>
                                         @endif
                                         <td class="score2 " id="court{{ $game->id }}">{{ $game->court->name }}</td>
                                         <td id="courtEdit{{$game->id }}" style="display:none">
-                                            <select name="location"  class="form-control">
+                                            <select name="location"  class="form-control" name="courtEdited">
                                         
                                             <option selected>Choisir lieu</option>
                                                 
@@ -203,12 +206,14 @@
                                         @if($pool->isEditable())
                                             <td class="action"><i class="fa fa-lg fa-clock-o editTime" aria-hidden="true"></i> <i class="editScore fa fa-trophy fa-lg" aria-hidden="true"></i></td>
                                         @endif
-                                        <td id="edit_button{{$game->id}}"><button type="submit" class="btn btn-success" id="edit_button{{$game->id}}" onclick="edit_row('{{ $game->id }}')">
+                                        <td id="edit_button{{$game->id}}"><button type="button" class="btn btn-success edit_button" id="edit_button{{$game->id}}" onclick="edit_row('{{ $game->id }}')">
                                             <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                                             </button>
                                         </td>
                                         <td id="save_button{{ $game->id }}" style="display:none">
+                                            <button type="submit" class="btn">
                                             <i class="fas fa-save"></i>
+                                            </button>
                                         </td>
                                         
                                     @else
@@ -226,7 +231,9 @@
                                     @endif
                                 @endif
                             </tr>
+                            </form>
                         @endforeach
+                        
                     @else
 
                         Aucun match pour l'instant ...
