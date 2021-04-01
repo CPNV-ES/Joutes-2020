@@ -230,12 +230,7 @@
                                                 @if($contender->team_id == null)
                                                     <tr>
                                                         <td title="Team" class="team">
-                                                            @if($i > sizeof($pool->contenders)/2)
-                                                                {{ $i / 2 }}
-                                                            @else
-                                                                {{ $i }}
-                                                            @endif
-                                                            de {{ $contender->fromPool->poolName }}
+                                                            {{ $contender->rank_in_pool }} de {{ $contender->fromPool->poolName }}
                                                         </td>
                                                     </tr>
                                                     @php $i++; @endphp
