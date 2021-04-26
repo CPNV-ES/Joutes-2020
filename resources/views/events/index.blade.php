@@ -24,7 +24,7 @@
                 <a href="{{route('events.show', $event->id)}}" title="Voir l'événement">
                     <div class="card">
                         @if($event->img != null)
-                            <img class="card-img" src="{{ asset('images/joutes.jpg') }}" alt="Image de l'événement">
+                            <img class="card-img" src="images/joutes/{{ $event->img }}" alt="Image de l'événement">
                         @else
                             <!-- Get uploaded image -->
                         @endif
