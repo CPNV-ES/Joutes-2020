@@ -20,7 +20,7 @@ class CreateEventRequest extends FormRequest
     {
         return [
             'name' => 'required|min:10|max:255|unique:events,name',
-            'img' => 'required|min:5|max:45',
+            'file' => 'required',
         ];
 
     }
@@ -32,8 +32,7 @@ class CreateEventRequest extends FormRequest
             'name.min' => 'Le nom est trop petit, 10 caractères min',
             'name.max' => 'Le nom est trop grand, 255 caractères max',
             'name.unique' => 'Ce nom existe déjà',
-            'img.required' => 'Veuillez entrer une image',
-            'img.max' => 'L\'image n\'est pas conforme ',
+            'file.required' => 'Veuillez choisir une image avant de passez à la suite',
         ];
     }
 }
