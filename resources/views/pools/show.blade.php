@@ -91,11 +91,13 @@
                     @endif
 
                     @if(count($games) > 0)
-                    
+                    <form action="{{ route('games.update','2') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="_method" value="PUT">
                         @foreach ($games as $game)
-                        <form action="{{ route('games.update', $game->id) }}" method="POST">
-                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                        <input type="hidden" name="_method" value="PUT">
+                        
+                      
+                        
                             <tr data-game="{{$game->id}}">
                                 
                                 <!-- No teams - no score -->
@@ -108,7 +110,7 @@
                                     @else
                                         <td id="contender1_row{{ $game->id }}">! VIDE !</td>
                                     @endif
-                                    <td style="display:none" id="firstContenderEdit{{ $game->id }}"><select name="firstContenderEdited" class="form-control">
+                                    <td style="display:none" id="firstContenderEdit{{ $game->id }}"><select name="firstContenderEdited[{{$game->id}}]" class="form-control">
                                         <option selected>Choisir 1ère team </option>
                                             @foreach($pool->contenders as $contender)
                                                 @if($contender->getName()!=null)
@@ -118,7 +120,7 @@
                                     </select></td>
                                     <td class="separator"> - </td>
                                     <td style="display:none" id="secondContenderEdit{{ $game->id }}">
-                                    <select class="form-control" name="secondContenderEdited">
+                                    <select class="form-control" name="secondContenderEdited[{{$game->id}}]">
                                         <option selected>Choisir 1ère team </option>
                                             @foreach($pool->contenders as $contender)
                                                 @if($contender->getName()!=null)
@@ -135,7 +137,7 @@
                                     @endif
                                     <td class="score2" id="court{{ $game->id }}">{{ $game->court->name }}</td>
                                     <td id="courtEdit{{ $game->id }}" style="display:none">
-                                        <select name="location"  class="form-control" name="courtEdited">
+                                        <select name="location"  class="form-control" name="courtEdited[{{$game->id}}]">
                                         
                                             <option selected>Choisir lieu</option>
                                             
@@ -148,15 +150,8 @@
                                         </select>
                                     </td>
 
-                                    <td id="edit_button{{$game->id}}"><button type="button" class="btn btn-success edit_button" id="edit_button{{$game->id}}" onclick="edit_row('{{ $game->id }}')">
-                                            <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td id="save_button{{ $game->id }}" style="display:none">
-                                            <button type="submit" class="btn">
-                                            <i class="fas fa-save"></i>
-                                            </button>
-                                        </td>
+                               
+                                    
                                     
                                 @else
                                      <!-- teams - no score -->
@@ -231,9 +226,15 @@
                                     @endif
                                 @endif
                             </tr>
-                            </form>
-                        @endforeach
+                            
                         
+                        @endforeach
+                        <td id="save_button{{ $game->id }}" style="display:none">
+                            <button type="submit" class="btn">
+                            <i class="fas fa-save"></i>
+                            </button>
+                        </td>
+                    </form>
                     @else
 
                         Aucun match pour l'instant ...
