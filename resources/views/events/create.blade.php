@@ -28,24 +28,18 @@
 	            @endforeach
 	        </div>
         @endif
-
-
 		<div class="row ml-4">
 			<div class="col-10">
-
-                <form action="{{ route('events.store') }}" method="post">
+                <form action="{{ route('events.store')  }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Nom</label>
-                        <input type="text" class="form-control" name="name" placeholder="Ajouter un nom">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Ajouter un nom">
                     </div>
-                    <div class="form-group">
-                        <label for="img">Image</label>
-                        <input type="text" class="form-control" name="img" placeholder="Ajouter une image">
-                    </div>
-
+                    <input name="file" type="file"  accept="image/*" />
                     <button type="submit" class="btn btn-main">Ajouter</button>
                 </form>
+
 			</div>
 		</div>
 
