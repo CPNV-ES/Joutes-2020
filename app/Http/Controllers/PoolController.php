@@ -36,6 +36,8 @@ class PoolController extends Controller
 
   public function show(Request $request, Tournament $tournament, Pool $pool)
   {
+    $state = array('inprep','ready','inprogress','finished');
+
     $pools = $tournament->pools;
     $maxStage = $pools->max('stage');
 
@@ -44,6 +46,8 @@ class PoolController extends Controller
     
     $courts = Court::all();
     $rankings = $pool->rankings();
+
+   
 
     $ranking_completed = true;
     foreach ($rankings as $ranking) {
@@ -65,7 +69,7 @@ class PoolController extends Controller
     $poolsInPreviousStage = $pool->poolsInPreviousStage();
 
 
-    return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage','courts'));
+    return view('pools.show.'.$state[$pool->poolState])->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage','courts'));
   }
  
 }
