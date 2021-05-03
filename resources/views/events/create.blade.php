@@ -36,7 +36,9 @@
                         <label for="name">Nom</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Ajouter un nom">
                     </div>
-                    <input name="picture" type="file"  accept="image/png, image/jpeg " />
+                    <input name="picture" id="drop-area" type="file"  accept="image/png, image/jpeg" >
+                    <div id="img-preview"></div>
+                    <br>
                     <button type="submit" class="btn btn-main">Ajouter</button>
                 </form>
 
@@ -44,5 +46,5 @@
 		</div>
 
     </div>
-
+    <script src="{{ asset('js/DropZone.js') }}"></script>
 @stop
