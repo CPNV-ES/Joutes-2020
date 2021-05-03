@@ -59,7 +59,7 @@ class EventController extends Controller
     {
         $image = $request->file('file');
 
-        $imageName = $image->getClientOriginalName();
+        $imageName = time()."_".$image->getClientOriginalName();
 
         $image->move(public_path('images/joutes'), $imageName);
 
