@@ -36,7 +36,7 @@
                         <label for="name">Nom</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Ajouter un nom">
                     </div>
-                    <input name="file" type="file"  accept="image/*" />
+                    <input name="picture" type="file"  accept="image/png, image/jpeg " />
                     <button type="submit" class="btn btn-main">Ajouter</button>
                 </form>
 

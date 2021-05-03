@@ -57,7 +57,7 @@ class EventController extends Controller
 
     public function store(CreateEventRequest $request)
     {
-        $image = $request->file('file');
+        $image = $request->file('picture');
 
         $imageName = time()."_".$image->getClientOriginalName();
 
