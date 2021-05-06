@@ -81,11 +81,16 @@ class GameController extends Controller
     {
         foreach ($request->input("game") as $value) {
             $game = Game::findOrFail($value["game_id"]);
-            $game->start_time = $value["editedTime"];
-            $game->contender1_id = $value["editedContender1"];
-            $game->contender2_id = $value["editedContender2"];
-            $game->court_id = $value["editedCourt"];
-            $game->save();
+            if($value["isDeleted"] == 1){
+                $game->delete();
+            } else{
+                $game->start_time = $value["editedTime"];
+                $game->contender1_id = $value["editedContender1"];
+                $game->contender2_id = $value["editedContender2"];
+                $game->court_id = $value["editedCourt"];
+                $game->save();
+            }
+            
         }
         return redirect()->back();
     }

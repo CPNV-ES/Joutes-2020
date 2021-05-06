@@ -24,16 +24,13 @@
                         @csrf
                         <table class="table" id="data_table">
                             <tbody class="text">
-                              
                                     <tr>
-
-
                                         <input type="hidden" name="date"
                                             value="{{ $tournament->start_date->format('Y-m-d') }}">
-                                        <td><input type="time" id="appt" name="start_time"></td>
+                                        <td><input type="time" id="appt" name="start_time" required></td>
                                         <td>
-                                            <select name="firstContender" id="inputState" class="form-control">
-                                                <option disabled selected>Choisir 1ère team </option>
+                                            <select required name="firstContender" id="inputState" class="form-control">
+                                                <option disabled selected value="">Choisir 1ère team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->getName() != null)
                                                         <option value="{{ $contender->id }}">{{ $contender->getName() }}
@@ -44,8 +41,8 @@
                                         </td>
                                         <td class="separator"> - </td>
                                         <td>
-                                            <select name="secondContender" id="inputState" class="form-control">
-                                                <option disabled selected>Choisir 2ème team</option>
+                                            <select required name="secondContender" id="inputState" class="form-control">
+                                                <option disabled selected value="">Choisir 2ème team</option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->getName() != null)
                                                         <option value="{{ $contender->id }}">
@@ -56,9 +53,9 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select name="location" id="inputState" class="form-control">
+                                            <select required name="location" id="inputState" class="form-control">
 
-                                                <option selected>Choisir lieu</option>
+                                                <option selected disabled value="">Choisir lieu</option>
 
                                                 @foreach ($courts as $value)
                                                     @if ($value->sport_id == $tournament->sport_id)
@@ -82,8 +79,12 @@
                         <table class="table">
                             @foreach ($games as $game)
                                 <tbody class="text">
-                                    <tr data-game="{{ $game->id }}">
+                                    <tr id="tr{{$game->id}}" data-game="{{ $game->id }}">
+
                                         <input type="hidden" name="game[{{$game->id}}][game_id]" value="{{$game->id}}">
+                                        <input type="hidden" id="game{{$game->id}}isDeleted" name="game[{{$game->id}}][isDeleted]" value="0">
+
+
                                         <td><input type="time" id="appt" name="game[{{$game->id}}][editedTime]" value="{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}"></td>
                                         <td>
                                             <select class="form-control" name="game[{{$game->id}}][editedContender1]" required>
@@ -137,7 +138,10 @@
                                             </select>
                                         </td>
                                         <td>
-                                       
+                                            <button type="button" class="btn btn-danger" onclick="del_row({{$game->id}})">
+                                                <i id="trashButton{{$game->id}}" class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                            </button>
+                                        
                                         </td>
                                     </tr>
                                 <tbody class="text">
@@ -187,8 +191,7 @@
                                         method="POST">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#deleteModal">
+                                        <button type="submit" class="btn btn-danger">
                                             <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                         </button>
                                     </form>
@@ -198,8 +201,9 @@
                             </tr>
                         @endfor
                     </table>
-
+                
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/poolShow.js') }}"></script>
     @stop

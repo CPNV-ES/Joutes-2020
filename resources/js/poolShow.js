@@ -1,3 +1,6 @@
+if (document.readyState === 'complete') {
+   console.log("AHAHAH");
+ }
 function edit_row(no) {
    var editButtons = document.getElementsByClassName("edit_button");
    for (var i = 0; i < editButtons.length; i++) {
@@ -25,6 +28,23 @@ function edit_row(no) {
   
    
 
+
+}
+function del_row(no) {
+   if(document.getElementById("game"+no+"isDeleted").value == 0){
+      row = document.getElementById("tr"+no);
+      row.style.backgroundColor="red";
+      document.getElementById("game"+no+"isDeleted").value = 1;
+      document.getElementById("trashButton"+no).className="fas fa-trash-restore fa-lg";
+   } else {
+      row = document.getElementById("tr"+no);
+      row.style.backgroundColor="white";
+      document.getElementById("game"+no+"isDeleted").value = 0;
+      
+      document.getElementById("trashButton"+no).className="fa fa-trash fa-lg";
+   }
+   
+  
 
 }
 
