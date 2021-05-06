@@ -12,6 +12,5 @@ class DatabaseSeeder extends Seeder{
     {
         $this->call(Joutes2020Seeder::class);
         $this->call(FakeResultPoolState::class);
-        $this->call(UserSeeder::class);
     }
 }
