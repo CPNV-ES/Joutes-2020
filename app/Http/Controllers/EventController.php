@@ -57,13 +57,21 @@ class EventController extends Controller
 
     public function store(CreateEventRequest $request)
     {
+        $image = $request->file('picture');
+
+        $imageName = time()."_".$image->getClientOriginalName();
+
+        $image->move(public_path('images/joutes'), $imageName);
 
         $newEvent = new Event();
-        $newEvent->name = $request->input("name");
-        $newEvent->img = $request->input("img");
-        $newEvent->save();
 
+        $newEvent->name = $request->input("name");
+
+        $newEvent->img = $imageName;
+
+        $newEvent->save();
         return redirect()->route('events.index');
+
 
     }
 }

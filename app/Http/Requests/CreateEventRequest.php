@@ -20,7 +20,7 @@ class CreateEventRequest extends FormRequest
     {
         return [
             'name' => 'required|min:10|max:255|unique:events,name',
-            'img' => 'required|min:5|max:45',
+            'picture' => 'required|mimes:jpeg,png,jpg',
         ];
 
     }
@@ -32,8 +32,8 @@ class CreateEventRequest extends FormRequest
             'name.min' => 'Le nom est trop petit, 10 caractères min',
             'name.max' => 'Le nom est trop grand, 255 caractères max',
             'name.unique' => 'Ce nom existe déjà',
-            'img.required' => 'Veuillez entrer une image',
-            'img.max' => 'L\'image n\'est pas conforme ',
+            'picture.required' => 'Veuillez choisir une image avant de passez à la suite',
+            'picture.mimes' => 'Vous n\'avez sélectionné une image. Merci de sélectionner une image avec l\'extension jpg/jpeg/png',
         ];
     }
 }
