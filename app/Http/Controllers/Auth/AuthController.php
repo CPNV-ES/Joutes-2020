@@ -8,8 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 use App\Http\Controllers\Controller;
 use App\User;
-
-
+use PhpParser\Builder;
 
 
 class AuthController extends Controller
@@ -28,7 +27,7 @@ class AuthController extends Controller
         }
         else
         {
-            return Socialite::driver('azure')->redirect();
+            return Socialite::with('azure')->with(["prompt" => "select_account"])->redirect();
         }
     }
 
@@ -44,10 +43,10 @@ class AuthController extends Controller
         } catch (Exception $e) {
             return Redirect::to('/auth/azure');
         }
-
         $authUser = $this->findOrCreateUser($user);
         if(!empty($authUser)){
             Auth::login($authUser);
+            
         }else{
             return Redirect::to('/')->withErrors(['Votre utilisateur ne fait pas parti de l\'application']);;
         }
@@ -57,22 +56,21 @@ class AuthController extends Controller
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $githubUser
+     * @param $azureUser
      * @return User
      */
     private function findOrCreateUser($azureUser)
     {
-        $email = $azureUser->email;
-        $authUser = User::whereHas('users',function($q) use ($email) {$q->where('value', $email);})->first();
+        $authUser = User::where('email', '=', $azureUser->email)->first();
         if (!$authUser) {
             $newComer = new User();
-            $newComer->username = "default"; //TODO Change default with intranet abreviation like WHN
-            $newComer->email = $email;
-            $newComer->password = "0000"; //TODO Delete password filed in the DB
-            $newComer->role_id = "0"; //TODO Function getting status of the user in Intranet to set permissions
+            $newComer->username = $azureUser->user['displayName'];
+            $newComer->email = $azureUser->email;
+            $newComer->password = "0000"; //TODO Delete password field in DB (if no usage)
+            $newComer->role_id = 1;
             $newComer->first_name = $azureUser->user['givenName'];
             $newComer->last_name = $azureUser->user['surname'];
-            $newComer->save();;
+            $newComer->save();
             $authUser = $newComer;
         }
         return $authUser;
