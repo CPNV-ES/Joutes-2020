@@ -77,17 +77,17 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $game_id)
+    public function update(Request $request,$game_id)
     {
-        // $game = Game::findOrFail($game_id);
-        // $game->contender1_id = $request->input('firstContenderEdited');
-        // $game->contender2_id = $request->input('secondContenderEdited');
-        // $game->court_id = $request->input('location');
-        @dd($request);
-      
-        
-
-        
+        foreach ($request->input("game") as $value) {
+            $game = Game::findOrFail($value["game_id"]);
+            $game->start_time = $value["editedTime"];
+            $game->contender1_id = $value["editedContender1"];
+            $game->contender2_id = $value["editedContender2"];
+            $game->court_id = $value["editedCourt"];
+            $game->save();
+        }
+        return redirect()->back();
     }
 
     /**

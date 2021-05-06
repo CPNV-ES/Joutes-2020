@@ -24,8 +24,7 @@
                         @csrf
                         <table class="table" id="data_table">
                             <tbody class="text">
-                                <!-- Formulaire d'ajout de match si le match est en préparation -->
-                                @if ($pool->poolState == 0)
+                              
                                     <tr>
 
 
@@ -34,7 +33,7 @@
                                         <td><input type="time" id="appt" name="start_time"></td>
                                         <td>
                                             <select name="firstContender" id="inputState" class="form-control">
-                                                <option selected>Choisir 1ère team </option>
+                                                <option disabled selected>Choisir 1ère team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->getName() != null)
                                                         <option value="{{ $contender->id }}">{{ $contender->getName() }}
@@ -46,7 +45,7 @@
                                         <td class="separator"> - </td>
                                         <td>
                                             <select name="secondContender" id="inputState" class="form-control">
-                                                <option selected>Choisir 2ème team</option>
+                                                <option disabled selected>Choisir 2ème team</option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->getName() != null)
                                                         <option value="{{ $contender->id }}">
@@ -72,24 +71,31 @@
                                         <td><button type="submit" class="btn btn-main">Ajouter</button></td>
 
                                     </tr>
-                                @endif
+                               
                             </tbody>
                         </table>
                         
                     </form>
-                    <form>
+                    <form action="{{ route('games.update',2) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="PUT">
                         <table class="table">
                             @foreach ($games as $game)
                                 <tbody class="text">
                                     <tr data-game="{{ $game->id }}">
-                                        <td><input type="time" id="appt" name="start_time" value="{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}"></td>
+                                        <input type="hidden" name="game[{{$game->id}}][game_id]" value="{{$game->id}}">
+                                        <td><input type="time" id="appt" name="game[{{$game->id}}][editedTime]" value="{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}"></td>
                                         <td>
-                                            <select class="form-control" name="firstContenderEdited[{{ $game->id }}]">
-                                                <option selected>Choisir 1ère team </option>
+                                            <select class="form-control" name="game[{{$game->id}}][editedContender1]" required>
+                                                <option disabled selected value="">Choisir 1ère team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->team_id && $game->contender1->team)
                                                         <option value="{{ $contender->id }}" @if ($contender->team->name == $game->contender1->team->name) selected @endif>
                                                             {{ $contender->team->name }}
+                                                        </option>
+                                                    @elseif($contender->getName())
+                                                        <option value="{{ $contender->id }}">
+                                                            {{ $contender->getName() }}
                                                         </option>
                                                     @endif
                                                 @endforeach
@@ -98,21 +104,25 @@
                                         <td class="separator"> - </td>
 
                                         <td>
-                                            <select class="form-control" name="secondContenderEdited[{{ $game->id }}]">
-                                                <option selected>Choisir 2ère team </option>
+                                            <select class="form-control" name="game[{{$game->id}}][editedContender2]" required>
+                                                <option disabled selected value="">Choisir 2ère team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->team_id && $game->contender2->team)
                                                         <option value="{{ $contender->id }}" @if ($contender->team->name == $game->contender2->team->name) selected @endif>
                                                             {{ $contender->team->name }}
                                                         </option>
+                                                    @else
+                                                        <option value="{{ $contender->id }}">
+                                                            {{ $contender->getName() }}
+                                                        </option>
                                                     @endif
                                                 @endforeach
                                             </select>
                                         </td>
-                                        <td id="courtEdit{{ $game->id }}">
+                                        <td>
 
-                                            <select name="location" class="form-control"
-                                                name="courtEdited[{{ $game->id }}]">
+                                            <select class="form-control"
+                                                name="game[{{$game->id}}][editedCourt]">
 
 
 
@@ -120,17 +130,14 @@
 
                                                     @if ($value->sport_id == $tournament->sport_id)
 
-                                                        <option value="{{ $value->name }}" @if ($value->name == $game->court->name) selected @endif>{{ $value->name }}
+                                                        <option value="{{ $value->id }}" @if ($value->name == $game->court->name) selected @endif>{{ $value->name }}
                                                         </option>
                                                     @endif
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td>
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#deleteModal">
-                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                        </button>
+                                       
                                         </td>
                                     </tr>
                                 <tbody class="text">
