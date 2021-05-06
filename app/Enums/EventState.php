@@ -6,16 +6,21 @@ namespace App\Enums;
 
 abstract class EventState
 {
-    const Close = 0;
-    const Activate = 1;
-
-    public static function poolStateName($poolState)
+    const Prep = 0;
+    const Register = 1;
+    const Ready = 2;
+    const Finished = 3;
+    public static function poolStateName($eventState)
     {
-        switch ($poolState) {
-            case self::Close:
-                return "Fermée";
-            case self::Activate:
-                return "Activée";
+        switch ($eventState) {
+            case self::Prep:
+                return "En Préparation";
+            case self::Register:
+                return "Inscription";
+            case self::Ready:
+                return "En cours";
+            case self::Finished:
+                return "Terminée";
             default:
                 return "inconnu";
         }
