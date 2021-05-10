@@ -185,7 +185,12 @@ class Pool extends Model
      */
     public function isReady()
     {
-        return ($this->poolSize == $this->contenders()->count()) && ($this->poolState == PoolState::Prep);
+        foreach($this->contenders as $contender)
+        {
+            if(!$contender->team_id) return false;
+        }
+        if($this->poolState == PoolState::Prep) return true;
+        
     }
 
 }

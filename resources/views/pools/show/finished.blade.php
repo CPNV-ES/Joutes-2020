@@ -88,4 +88,56 @@
                 </table>
         </div>
     </div>
+    <!-- Modal Deletion -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <form action="{{ route('tournaments.pools.destroy', [$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Update -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="updateModalLabel">Modifier le nom</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input type="text" name="poolName">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <button type="submit" class="btn btn-success">Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 @stop

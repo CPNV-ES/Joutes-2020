@@ -80,17 +80,26 @@ class GameController extends Controller
     public function update(Request $request,$game_id)
     {
         foreach ($request->input("game") as $value) {
-            $game = Game::findOrFail($value["game_id"]);
-            if($value["isDeleted"] == 1){
-                $game->delete();
-            } else{
-                $game->start_time = $value["editedTime"];
-                $game->contender1_id = $value["editedContender1"];
-                $game->contender2_id = $value["editedContender2"];
-                $game->court_id = $value["editedCourt"];
-                $game->save();
-            }
-            
+          
+            try {
+                if($value["editedContender2"] && $value["editedContender1"])
+                {
+                    $game = Game::findOrFail($value["game_id"]);
+                    if($value["isDeleted"] == 1){
+                        $game->delete();
+                    }else if(!$value["editedContender2"] || !$value["editedContender1"])
+                    {
+                        dd($value);
+                    } else {
+                        $game->start_time = $value["editedTime"];
+                        $game->contender1_id = $value["editedContender1"];
+                        $game->contender2_id = $value["editedContender2"];
+                        $game->court_id = $value["editedCourt"];
+                        $game->save();
+                    }
+                }
+            } 
+            catch (\Throwable $th) {}
         }
         return redirect()->back();
     }

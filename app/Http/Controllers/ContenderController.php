@@ -49,6 +49,7 @@ class ContenderController extends Controller
         // $game_contender2->delete();
         // $pool->teams()->detach($team_id);
         $pool->teams()->updateExistingPivot($team_id,['team_id'=> null]);
+        
         // $contender->delete();
       
         return redirect()->back();

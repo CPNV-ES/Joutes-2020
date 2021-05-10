@@ -48,6 +48,7 @@ class PoolController extends Controller
         }
 
         $pool->fill($request->all());
+        
         $pool->save();
 
         return redirect()->route('tournaments.pools.show', [$tournament, $pool]);
