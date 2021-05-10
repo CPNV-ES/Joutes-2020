@@ -17,7 +17,11 @@ mix.js('resources/js/app.js', 'public/js')
     .copy('node_modules/jquery/dist/jquery.min.js', 'public/lib/jquery')
     .copy('resources/js/tournamentView.js', 'public/js')
     .copy('resources/js/tournamentDuplication.js', 'public/js')
+<<<<<<< HEAD
     .copy('resources/js/poolShow.js', 'public/js')
+=======
+    .copy('resources/js/DropZone.js', 'public/js')
+>>>>>>> e8664798b78e72066236ac3830dca290b6651430
 
     //Bootstrap
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/lib/bootstrap')
