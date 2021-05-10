@@ -40,5 +40,5 @@ Route::resource('courts', 'Admin\CourtController');
 //Azure
 //Azure
 Route::get('/auth/azure', 'Auth\AuthController@redirectToProvider')->name('login');
-Route::get('/callback', 'Auth\AuthController@handleProviderCallback')->name('logout');
-Route::post('/auth/logout', 'Auth\AuthController@logoutUser');
+Route::get('/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('/auth/logout', 'Auth\AuthController@logoutUser')->name('logout');

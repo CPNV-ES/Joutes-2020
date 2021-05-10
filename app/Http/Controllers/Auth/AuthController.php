@@ -46,7 +46,7 @@ class AuthController extends Controller
         $authUser = $this->findOrCreateUser($user);
         if(!empty($authUser)){
             Auth::login($authUser);
-            
+
         }else{
             return Redirect::to('/')->withErrors(['Votre utilisateur ne fait pas parti de l\'application']);;
         }
@@ -67,7 +67,7 @@ class AuthController extends Controller
             $newComer->username = $azureUser->user['displayName'];
             $newComer->email = $azureUser->email;
             $newComer->password = "0000"; //TODO Delete password field in DB (if no usage)
-            $newComer->role_id = 1;
+            $newComer->role_id = 3;
             $newComer->first_name = $azureUser->user['givenName'];
             $newComer->last_name = $azureUser->user['surname'];
             $newComer->save();
