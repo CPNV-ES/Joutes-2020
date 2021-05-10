@@ -38,7 +38,14 @@ class GameController extends Controller
     public function store(Request $request)
     {
         
-
+        $game = new Game();
+        $game->date = $request->input('date');
+        $game->start_time = $request->input('start_time');
+        $game->contender1_id = $request->input('firstContender');
+        $game->contender2_id = $request->input('secondContender');
+        $game->court_id = $request->input('location');
+        $game->save();
+        return redirect()->back();
     }
 
     /**
@@ -70,10 +77,22 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $game)
+    public function update(Request $request,$game_id)
     {
-
-        
+        foreach ($request->input("game") as $value) {
+            $game = Game::findOrFail($value["game_id"]);
+            if($value["isDeleted"] == 1){
+                $game->delete();
+            } else{
+                $game->start_time = $value["editedTime"];
+                $game->contender1_id = $value["editedContender1"];
+                $game->contender2_id = $value["editedContender2"];
+                $game->court_id = $value["editedCourt"];
+                $game->save();
+            }
+            
+        }
+        return redirect()->back();
     }
 
     /**

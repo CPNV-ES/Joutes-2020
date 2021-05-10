@@ -9,6 +9,7 @@ use App\Pool;
 use App\Team;
 use App\PoolMode;
 use App\Tournament;
+use App\Court;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
@@ -54,35 +55,40 @@ class PoolController extends Controller
 
     public function show(Request $request, Tournament $tournament, Pool $pool)
     {
-        $pools = $tournament->pools;
-        $maxStage = $pools->max('stage');
-
-        $contenders = $pool->contenders;
-        $games = $pool->games->sortBy("start_time");
-
-        $rankings = $pool->rankings();
-
-        $ranking_completed = true;
-        foreach ($rankings as $ranking) {
-            if ($ranking["team_id"] == -1) {
-                $ranking_completed = false;
-                break;
-            }
-        }
-
-        $games_completed = true;
-        foreach ($games as $game) {
-            if ($game->score_contender1 === null || $game->score_contender2 === null) {
-                $games_completed = false;
-                break;
-            }
-        }
-
-        $teamsNotInAPool = $tournament->getTeamsNotInAPool();
-        $poolsInPreviousStage = $pool->poolsInPreviousStage();
-
-
-        return view('pools.show')->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage'));
+      $state = array('inprep','ready','inprogress','finished');
+  
+      $pools = $tournament->pools;
+      $maxStage = $pools->max('stage');
+  
+      $contenders = $pool->contenders;
+      $games = $pool->games->sortBy("start_time");
+      
+      $courts = Court::all();
+      $rankings = $pool->rankings();
+  
+     
+  
+      $ranking_completed = true;
+      foreach ($rankings as $ranking) {
+          if ($ranking["team_id"] == -1) {
+              $ranking_completed = false;
+              break;
+          }
+      }
+  
+      $games_completed = true;
+      foreach ($games as $game) {
+          if ($game->score_contender1 === null || $game->score_contender2 === null) {
+              $games_completed = false;
+              break;
+          }
+      }
+  
+      $teamsNotInAPool = $tournament->getTeamsNotInAPool();
+      $poolsInPreviousStage = $pool->poolsInPreviousStage();
+  
+  
+      return view('pools.show.'.$state[$pool->poolState])->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage','courts'));
     }
 
     public function close(Pool $pool)
