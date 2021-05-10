@@ -22,7 +22,11 @@
                         @endif
                     @endif
                 </h1>
+                @if(Auth::check())
+                    @if(Auth::user()->role->slug =='ADMIN')
                 <h3>État : {{\App\Enums\EventState::eventStateName($event->eventState)}}</h3>
+                    @endif
+                @endif
 
                 <hr>
             </div>
