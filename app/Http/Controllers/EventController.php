@@ -74,4 +74,27 @@ class EventController extends Controller
 
 
     }
+
+    public function next_state(Request $request, Event $event){
+
+        if($event->eventState < 3) {
+            $event->eventState = $event->eventState + 1;
+        }
+
+        $tournaments = $event->tournaments;
+
+        $sports = Sport::all();
+
+        foreach ($tournaments as $tournament) {
+            if (empty($tournament->img)) {
+                $tournament->img = 'default.jpg';
+            }
+        }
+        $event->save();
+
+        return view('events.show', compact('tournaments', 'event', 'sports'));
+
+
+
+    }
 }

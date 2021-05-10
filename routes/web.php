@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::post('pools/contenders/unlink','ContenderController@detachContender');
 
+
+Route::get('/events/{event}/next_state',  'EventController@next_state')->name('events.next_state');
+
 Route::resource('events', 'EventController');
 Route::resource('tournaments', 'TournamentController');
 //Route::post('/events/tournaments/copy',  'TournamentController@copy')->name('events.tournaments.copy');
