@@ -69,6 +69,8 @@ class EventController extends Controller
 
         $newEvent->img = $imageName;
 
+        $newEvent->eventState = 0;
+
         $newEvent->save();
         return redirect()->route('events.index');
 
