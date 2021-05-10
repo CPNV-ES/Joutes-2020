@@ -24,7 +24,7 @@ class Joutes2020Seeder extends Seeder
         $this->event = \App\Event::where('name', 'like', '%2019%')->first();
         if ($this->event) die ("L'événement existe déjà\n");
 
-        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'sports.jpg']);
+        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'joutes.jpg', 'eventState' => 0]);
         $this->event->save();
 
         // make room
@@ -40,6 +40,7 @@ class Joutes2020Seeder extends Seeder
         $this->UniHockey();
         $this->Badminton();
         $this->roles();
+        $this->users();
     }
 
     // Common stuff
@@ -706,5 +707,19 @@ class Joutes2020Seeder extends Seeder
         $role->save();
 
         echo "OK\n";
+    }
+
+    private function users()
+    {
+        echo "Création d'un utilisateur ...";
+        $this->user = new \App\User([
+            'username' => 'AdminTest',
+            'email' => 'Admin@cpnv.ch',
+            'first_name' => 'Admin',
+            'last_name' => 'Test',
+            'role_id' => '1',
+        ]);
+        $this->user->save();
+        echo "OK";
     }
 }
