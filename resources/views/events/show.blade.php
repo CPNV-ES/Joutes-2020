@@ -11,16 +11,18 @@
             <div class="col-11 ml-n2">
                 <h1>
                     Tournois de l'évenement {{ $event->name }}
+
                     @if(Auth::check())
                         @if(Auth::user()->role->slug =='ADMIN')
 
                             <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">Créer un tournoi</button>
                             @if($event->eventState < 3)
-                            <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.next_state', $event->id) }}'">état suivant : {{\App\Enums\EventState::eventStateName($event->eventState + 1)}}</button>
+                            <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.next_state', $event->id) }}'">État suivant </button>
                             @endif
                         @endif
                     @endif
                 </h1>
+                <h3>État : {{\App\Enums\EventState::eventStateName($event->eventState)}}</h3>
 
                 <hr>
             </div>
