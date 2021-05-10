@@ -10,6 +10,13 @@ class User extends Authenticatable
     public $timestamps = false;
     protected $hidden = ['password', 'remember_token'];
 
+    public static function getSurname()
+    {
+        $matches = [];
+        preg_match('/(foo)(bar)(baz)/', 'foobarbaz', $matches, PREG_OFFSET_CAPTURE);
+
+    }
+
 
     public function role(){
         return $this->belongsTo('App\Role');

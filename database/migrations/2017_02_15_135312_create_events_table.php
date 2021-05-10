@@ -13,11 +13,12 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-         Schema::create('events', function (Blueprint $table) { 
-            $table->increments('id'); 
+         Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
-            $table->string('img',45)->nullable(); 
-        }); 
+            $table->string('img',45)->nullable();
+            $table->integer('eventState');
+        });
     }
 
     /**

@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::post('pools/contenders/unlink','ContenderController@detachContender');
 
+
+Route::get('/events/{event}/next_state',  'EventController@next_state')->name('events.next_state');
+
 Route::resource('events', 'EventController');
 Route::resource('tournaments', 'TournamentController');
 //Route::post('/events/tournaments/copy',  'TournamentController@copy')->name('events.tournaments.copy');
@@ -36,3 +39,9 @@ Route::resource('games', 'GameController');
 Route::resource('administrations', 'Admin\AdministrationController');
 Route::resource('roles', 'Admin\RoleController');
 Route::resource('courts', 'Admin\CourtController');
+
+//Azure
+//Azure
+Route::get('/auth/azure', 'Auth\AuthController@redirectToProvider')->name('login');
+Route::get('/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('/auth/logout', 'Auth\AuthController@logoutUser')->name('logout');

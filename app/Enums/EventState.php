@@ -21,7 +21,7 @@ abstract class EventState
             case self::Ready:
                 return "En cours";
             case self::Finished:
-                return "Terminée";
+                return "Terminé";
             default:
                 return "inconnu";
         }
