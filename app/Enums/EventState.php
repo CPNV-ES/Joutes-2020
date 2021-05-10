@@ -10,7 +10,8 @@ abstract class EventState
     const Register = 1;
     const Ready = 2;
     const Finished = 3;
-    public static function poolStateName($eventState)
+
+    public static function eventStateName($eventState)
     {
         switch ($eventState) {
             case self::Prep:

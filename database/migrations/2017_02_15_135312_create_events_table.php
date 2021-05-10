@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('img',45)->nullable();
-            $table->integer('state');
+            $table->integer('eventState');
         });
     }
 

@@ -24,7 +24,7 @@ class Joutes2020Seeder extends Seeder
         $this->event = \App\Event::where('name', 'like', '%2019%')->first();
         if ($this->event) die ("L'événement existe déjà\n");
 
-        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'joutes.jpg', 'state' => 0]);
+        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'joutes.jpg', 'eventState' => 0]);
         $this->event->save();
 
         // make room

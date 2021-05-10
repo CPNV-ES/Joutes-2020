@@ -13,7 +13,9 @@
                     Tournois de l'évenement {{ $event->name }}
                     @if(Auth::check())
                         @if(Auth::user()->role->slug =='ADMIN')
-                    <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">Créer un tournoi</button>
+
+                            <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">Créer un tournoi</button>
+                            <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">état suivant : {{\App\Enums\EventState::eventStateName($event->eventState + 1)}}</button>
 
                         @endif
                     @endif
