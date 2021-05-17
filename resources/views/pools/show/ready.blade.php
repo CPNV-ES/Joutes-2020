@@ -21,6 +21,8 @@
             <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
             @if($pool->isEditable() && \App\Enums\EventState::eventStateName($pool->tournament->event->eventState) == "En cours")
                 <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante</button>
+            @else
+                <h5>En attente de l'activation</h5>
             @endif
             <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
 
