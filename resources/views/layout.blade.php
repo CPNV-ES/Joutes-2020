@@ -7,6 +7,7 @@
 
         <title>Joutes</title>
 
+        <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
         <link href="{{ asset('/lib/font-awesome/css/all.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('/css/main.css') }}" rel="stylesheet" type="text/css" />
@@ -38,7 +39,7 @@
                             @if(Auth::user()->role->slug =='ADMIN')
                                 <li class="@if(Route::is('sports.index')) active @endif"><a href="{{ route('sports.index') }}"> <i class="fa fa-futbol" aria-hidden="true"></i> Sports</a></li>
                                 <li class="@if(Route::is('courts.index')) active @endif"><a href="{{ route('courts.index') }}"> <i class="fa fa-map-marker" aria-hidden="true"></i> Terrains</a></li>
-                                <li class="@if(Route::is('participants.index')) active @endif"><a href="{{ route('participants.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Participants</a></li>
+                                <li class="@if(Route::is('users.index')) active @endif"><a href="{{ route('users.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Personnes</a></li>
 
                                 <!-- Administation Button -->
                                 <li class="@if(Route::is('administrations.index')) active @endif"><a href="{{ route('administrations.index') }}" class="btn-administration"> <input type="button" class="btn btn-main grow" value="Administration"></a></li>
@@ -73,6 +74,12 @@
                                 <a href="#" class="dev">Jérémy Gfeller</a>
                                 <a href="#" class="dev">Senistan Jegarajasingam</a>
                                 <a href="#" class="dev">Quentin Rossier</a>
+                                <a href="#" class="dev">Yvann Butticaz</a>
+                                <a href="#" class="dev">Gabriel Pereira</a>
+                                <a href="#" class="dev">Dylan Migewant</a>
+                                <a href="#" class="dev">Zaïd François Schouwey El-Hoiydi </a>
+                                <a href="#" class="dev">William Hausmann</a>
+                                <a href="#" class="dev">Cyril Goldenschue</a>
                             </div>
 
                         </div>-->
@@ -87,8 +94,6 @@
                 @yield('content')
             </div>
 		</div>
-
-        <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
         <script src="{{ asset('/js/app.js') }}"></script>
 
