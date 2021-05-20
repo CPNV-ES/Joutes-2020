@@ -24,6 +24,11 @@ class UserTableSeeder extends Seeder
                 'last_name' => $faker->lastName,
                 'role_id' => 3
             ]);
+            DB::table('team_user')->insert([
+                'user_id' => $index,
+                'team_id' => rand(1,68),
+                'isCaptain' => $faker->boolean
+            ]);
         }
     }
 }

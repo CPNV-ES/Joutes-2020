@@ -22,7 +22,12 @@
                 <tr>
                     <td>{{$user->username}}</td>
                     <td>{{$user->Role->name}}</td>
-                    <td>Aucunes</td>
+                    <td>
+                        Joutes :
+                        @foreach($user->playedIn() as $event)
+                            {{explode(' ',$event)[1]}}
+                        @endforeach
+                    </td>
                 </tr>
             @endforeach
             </tbody>
