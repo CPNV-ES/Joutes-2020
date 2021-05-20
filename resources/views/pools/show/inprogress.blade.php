@@ -27,11 +27,8 @@
                     <table class="table" id="data_table">
                         <tbody class="text">
                             @foreach ($games as $game)
-
-
-
                                 <!-- teams - no score -->
-                                @if (!isset($game->score_contender1) || !isset($game->score_contender2))
+                                @if (!isset($game->score_contender1->team) || !isset($game->score_contender2))
                                     <tr>
                                         <td class="separator sepTime ">
                                             {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>

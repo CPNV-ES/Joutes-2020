@@ -15,7 +15,12 @@ class Contender extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        try {
+            return $this->belongsTo(Team::class);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+        
     }
 
     public function getName()
