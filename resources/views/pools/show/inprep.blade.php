@@ -19,7 +19,7 @@
                 <h2>Matches et Résultats</h2>
                 <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
                 @if($pool->isReady() && $pool->isEditable())
-                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante</button>
+                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState+1) }}</button>
             @endif
                 <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
                 <div class="row justify-content-center">
@@ -71,10 +71,10 @@
                                         <td><button type="submit" class="btn btn-main">Ajouter</button></td>
 
                                     </tr>
-                               
+
                             </tbody>
                         </table>
-                        
+
                     </form>
                     <form action="{{ route('games.update',2) }}" method="post">
                         @csrf
@@ -144,7 +144,7 @@
                                             <button type="button" class="btn btn-danger" onclick="del_row({{$game->id}})">
                                                 <i id="trashButton{{$game->id}}" class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                             </button>
-                                        
+
                                         </td>
                                     </tr>
                                 <tbody class="text">
@@ -204,7 +204,7 @@
                             </tr>
                         @endfor
                     </table>
-                
+
                 </div>
             </div>
         </div>
