@@ -52,10 +52,23 @@ class User extends Authenticatable
 
     public function playedIn()
     {
-        $events = [];
+        $dates = [];
         foreach ($this->teams as $team){
-            array_push($events, $team->tournament->event->name);
+            array_push($dates, $team->tournament->end_date->format('Y'));
         }
-        return $events;
+        return array_unique($dates); //Distinct on the array to prevent from dates in duplicata
+    }
+
+    public function isDeletable()
+    {
+        $events = [];
+        $isDeletable = False;
+        foreach ($this->teams as $team){
+            $team->tournament->event->eventState > 1 ? $isDeletable = False : $isDeletable = True;
+            if (!$isDeletable) return False;
+        }
+        return True;
+
+
     }
 }
