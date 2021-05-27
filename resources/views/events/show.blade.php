@@ -17,7 +17,9 @@
 
                             <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">Créer un tournoi</button>
                             @if($event->eventState < 3)
-                            <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.next_state', $event->id) }}'">État suivant </button>
+                                <button type="button" class="btn btn-main" data-toggle="modal"
+                                        data-target="#stageEventModal">État suivant
+                                    : {{\App\Enums\EventState::eventStateName($event->eventState+1)}} </button>
                             @endif
                         @endif
                     @endif
