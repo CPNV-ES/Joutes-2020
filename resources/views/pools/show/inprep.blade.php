@@ -1,26 +1,25 @@
 @extends('layout')
 @section('content')
     <div class="container">
-
-        <div class="col-3">
-            <a href="{{ route('tournaments.show', $tournament) }}"><i
-                    class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
-            <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
-                <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
-            </button>
-            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
-            </button>
-        </div>
-        <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
-            {{ $pool->poolName }}
-        </h1>
-        <div class="text-center">
-            <h2>Matches et Résultats</h2>
-            <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
-            @if ($pool->isReady() && $pool->isEditable())
-                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à
-                    l'étape suivante</button>
+        <div class="row">
+            <div class="col-3">
+                <a href="{{ route('tournaments.show', $tournament) }}"><i
+                        class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+                <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
+                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                </button>
+                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                    <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
+                {{ $pool->poolName }}
+            </h1>
+            <div class="text-center">
+                <h2>Matches et Résultats</h2>
+                <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
+                @if($pool->isReady() && $pool->isEditable())
+                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState+1) }}</button>
             @endif
             <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
             <div>
