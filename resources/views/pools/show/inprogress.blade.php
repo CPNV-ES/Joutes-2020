@@ -35,11 +35,11 @@
                                                 {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
                                             <td class="contender1 ">{{ $game->contender1->team->name }}</td>
 
-                                            <td><input type="number" class="form-control" min="0" max="100" /></td>
+                                            <td><input type="number" class="form-control" min="0" max="100" @if(!$pool->isEditable()) disabled @endif /></td>
 
                                             <td class="separator"> - </td>
 
-                                            <td><input type="number" class="form-control" min="0" max="100" /></td>
+                                            <td><input type="number" class="form-control" min="0" max="100" @if(!$pool->isEditable()) disabled @endif/></td>
 
                                             <td class="contender2">{{ $game->contender2->team->name }}</td>
 
@@ -53,10 +53,10 @@
                                             <td class="contender1">{{ $game->contender1->team->name }}</td>
 
                                             <td><input type="number" class="form-control" min="0" max="100"
-                                                    value="{{ $game->score_contender1 }}" /></td>
+                                                    value="{{ $game->score_contender1 }}" @if(!$pool->isEditable()) disabled @endif/></td>
                                             <td class="separator"> - </td>
                                             <td><input type="number" class="form-control" min="0" max="100"
-                                                    value="{{ $game->score_contender2 }}" /></td>
+                                                    value="{{ $game->score_contender2 }}" @if(!$pool->isEditable()) disabled @endif/></td>
 
                                             <td class="contender2">{{ $game->contender2->team->name }}</td>
                                         </tr>
