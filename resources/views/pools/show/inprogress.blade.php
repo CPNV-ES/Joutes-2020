@@ -28,7 +28,7 @@
                         <tbody class="text">
                             @foreach ($games as $game)
                                 <!-- teams - no score -->
-                                @if (!isset($game->score_contender1->team) || !isset($game->score_contender2))
+                                @if (!isset($game->score_contender1) || !isset($game->score_contender2))
                                     <tr>
                                         <td class="separator sepTime ">
                                             {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
@@ -36,26 +36,21 @@
                                         <td class="separator"> - </td>
                                         <td class="contender2">{{ $game->contender2->team->name }}</td>
                                         <td class="score2 ">{{ $game->court->name }}</td>
-                                        @if ($pool->isEditable())
-                                            <td class="action"><i class="fa fa-lg fa-clock-o editTime"
-                                                    aria-hidden="true"></i> <i class="editScore fa fa-trophy fa-lg"
-                                                    aria-hidden="true"></i></td>
-                                        @endif
+                                        
                                     </tr>
 
                                 @else
                                     <!--teams and score -->
                                     <tr style="background-color: #DCDCDC;">
+                                        <td class="separator sepTime ">
+                                            {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
                                         <td class="contender1">{{ $game->contender1->team->name }}</td>
                                         <td class="score1">{{ $game->score_contender1 }}</td>
                                         <td class="separator"> - </td>
                                         <td class="score2">{{ $game->score_contender2 }}</td>
                                         <td class="contender2">{{ $game->contender2->team->name }}</td>
                                     </tr>
-                                    @if ($pool->isEditable())
-                                        <td class="action"><i class="fa fa-lg fa-trophy editScore" aria-hidden="true"></i>
-                                        </td>
-                                    @endif
+                                   
                                 @endif
 
                                 </tr>
@@ -64,7 +59,37 @@
                     </table>
 
             @endif
-        </div>
+           
+                @if($pool->poolState >= \App\Enums\PoolState::Inprog)
+                    <h2>Classement actuel</h2>
+                    <table class="table">
+                        <thead class="black white-text">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Équipes</th>
+                            <th scope="col">Pts</th>
+                            <th scope="col">G</th>
+                            <th scope="col">P</th>
+                            <th scope="col">N</th>
+                            <th scope="col">+/-</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for ($i = 0; $i < sizeof($rankings); $i++)
+                            <tr data-id="{{ $rankings[$i]["team_id"] }}" data-rank="{{$i+1}}">
+                                <td>{{$i+1}}</td>
+                                <td>{{$rankings[$i]["team"]}}</td>
+                                <td>{{$rankings[$i]["score"]}}</td>
+                                <td>{{$rankings[$i]["W"]}}</td>
+                                <td>{{$rankings[$i]["L"]}}</td>
+                                <td>{{$rankings[$i]["D"]}}</td>
+                                <td>{{$rankings[$i]["+-"]}}</td>
+                            </tr>
+                        @endfor
+                        </tbody>
+                    </table>
+                @endif
+   
     </div>
     </div>
     <!-- Modal Deletion -->

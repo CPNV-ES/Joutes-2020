@@ -45,7 +45,7 @@ class GameController extends Controller
         $game->contender2_id = $request->input('secondContender');
         $game->court_id = $request->input('location');
         $game->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','Le match à été ajouté.');
     }
 
     /**
@@ -101,7 +101,7 @@ class GameController extends Controller
             } 
             catch (\Throwable $th) {}
         }
-        return redirect()->back();
+        return redirect()->back()->with('success','Les modifications ont été sauvegardé.');
     }
 
     /**
