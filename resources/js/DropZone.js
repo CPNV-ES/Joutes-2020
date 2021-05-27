@@ -9,11 +9,11 @@ let dropArea = document.getElementById('drop-area')
 })
 
 function highlight(e) {
-    dropArea.classList.add('highlight')
+    dropArea.classList.add('highlighter')
 }
 
 function unhighlight(e) {
-    dropArea.classList.remove('highlight')
+    dropArea.classList.remove('highlighter')
 }
 
 const chooseFile = document.getElementById("drop-area");
