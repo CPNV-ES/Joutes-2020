@@ -9,25 +9,16 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel='stylesheet' href='lib/datatables/css/dataTables.bootstrap4.min.css'/>
     <link rel="stylesheet" href="lib/datatables/css/dataTables.responsive.bootstrap4.min.css">
-    <style>
-        table.dataTable tbody tr.selected   {
-            background-color: #d33333 !important;
-            color: white !important;
-        }
-
-        table.dataTable  tr.selected .sorting_1 {
-            background-color: #d33333 !important;
-            color: white !important;
-        }
-    </style>
     <div class="container">
-        <form method="POST">
+        <form method="POST" action="{{ route('users.destroy.all')}}">
             @csrf
-            <input type="hidden" name="_method" value="PUT">
+            @method('DELETE')
         <table id="persons"  class="display nowrap" style="width:100%" >
             <thead>
             <tr>
-                <th></th>
+                <th id="deleteInput">
+                    <input type="submit" class="btn btn-danger invisible" value="Supprimer"/>
+                </th>
                 <th>Nom d'utilisateur</th>
                 <th>Rôle</th>
                 <th>Participations</th>
@@ -39,7 +30,7 @@
                 <tr class="user">
                     <td>
                         @if($user->isDeletable())
-                            <input id="{{$user->id}}" type="checkbox"> Suppression
+                            <input id="{{$user->id}}" type="checkbox">
                         @endif
                     </td>
                     <td>
@@ -62,32 +53,7 @@
         </table>
         </form>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('#persons').DataTable({
-                responsive: true,
-                "pageLength": 15
-            });
-
-            $('#persons tbody').on( 'click','input', function () {
-                let userId = $(this).attr('id')
-                let input = $('input[name="deletedUserId"]')
-                $(this).closest("tr").toggleClass('selected')
-
-                if (input.length) {
-                    input.remove()
-                }
-                else{
-                    let inputDeleted = $(document.createElement('input'))
-                        .attr("type", "hidden")
-                        .attr("name", "deletedUserId")
-                        .attr("value", userId)
-                    $(this).closest("tr").append(inputDeleted)
-                }
-
-            } );
-        } );
-    </script>
+    <script src="{{ asset('js/dataTableUserPerms.js') }}"></script>
 @stop
 
 

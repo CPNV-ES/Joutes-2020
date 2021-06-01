@@ -27,6 +27,7 @@ Route::resource('events.tournaments', 'TournamentController');
 Route::resource('courts', 'CourtController');
 Route::resource('sports', 'SportController');
 Route::resource('teams', 'TeamController');
+Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
 Route::resource('users', 'UserController');
 Route::resource('tournaments.teams', 'TeamController');
 Route::resource('tournaments.pools', 'PoolController');

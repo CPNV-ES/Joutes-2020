@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
     .copy('resources/js/tournamentDuplication.js', 'public/js')
     .copy('resources/js/poolShow.js', 'public/js')
     .copy('resources/js/DropZone.js', 'public/js')
+    .copy('resources/js/dataTableUserPerms.js', 'public/js')
 
     //Bootstrap
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/lib/bootstrap')
