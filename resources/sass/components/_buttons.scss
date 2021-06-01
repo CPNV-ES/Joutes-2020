@@ -18,6 +18,24 @@
 }
 
 
+.page-item.active .page-link {
+    background-color: $main-green !important;
+    border-color: $main-green !important;
+}
+
+.page-link {
+    color: black !important;
+}
+
+.page-item.disabled .page-link{
+    background: #ccc !important;
+}
+
+.paginate_button:hover{
+    background: transparent !important;
+    border: 1px solid transparent !important;
+}
+
 .btn-administration{
     text-align: center;
     font-size: large;
