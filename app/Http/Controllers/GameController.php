@@ -102,6 +102,10 @@ class GameController extends Controller
                     }
                 }else if ($state=="inprogress"){
                     $game = Game::findOrFail($value["game_id"]);
+                    if(isset($value["scorecontender1"]) && empty($value["scorecontender2"]))
+                        $value["scorecontender2"]=0;
+                    if(isset($value["scorecontender2"]) && empty($value["scorecontender1"]))
+                        $value["scorecontender1"]=0;
                     $game->score_contender1 = $value["scorecontender1"];
                     $game->score_contender2 = $value["scorecontender2"];
                     $game->save();
