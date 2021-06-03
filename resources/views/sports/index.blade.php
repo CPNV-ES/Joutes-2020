@@ -44,7 +44,7 @@
                                     <a href="{{ route('sports.edit', $sport) }}" class="btn-edit btn btn-main">
                                         <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                                     </a>
-                                    <button id="deleteBtn" class="btn btn-main" type="button" data-toggle="modal"
+                                    <button id="deleteBtn" class="btn btn-danger" type="button" data-toggle="modal"
                                             data-target="#stageSportModal">
 
                                         <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
