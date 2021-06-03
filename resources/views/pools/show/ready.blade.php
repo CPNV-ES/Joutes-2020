@@ -6,17 +6,17 @@
             <div class="col-3">
                 <a href="{{ route('tournaments.show', $tournament) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
                 <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
-                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                 </button>
                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                    <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
                 </button>
             </div>
-        
+
         <div class="text-center">
             <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
                 {{ $pool->poolName }}</h1>
-                
+
             <h2>Matches et Résultats</h2>
             <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
             @if($pool->isEditable() && \App\Enums\EventState::eventStateName($pool->tournament->event->eventState) == "En cours")
@@ -64,7 +64,7 @@
 
 
             </div>
-            
+
             @if(\App\Contender::isAllEmpty($contenders))
                 <h2>Liste des participants</h2>
                 <table class="table">

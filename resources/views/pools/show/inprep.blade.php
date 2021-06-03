@@ -6,10 +6,10 @@
                 <a href="{{ route('tournaments.show', $tournament) }}"><i
                         class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
                 <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
-                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                 </button>
                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                    <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
                 </button>
             </div>
             <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
@@ -228,7 +228,7 @@
                                     </td>
                                 @endif
                             </form>
-                            
+
                             @if ($pool->isEditable())
                                 @if (isset($pool->id) && isset($pool->contenders[$i]->team_id))
                                 <td>
@@ -244,7 +244,7 @@
                                 </td>
                                 @endif
                             @endif
-                            
+
 
                         </tr>
                     @endfor
