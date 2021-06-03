@@ -23,50 +23,79 @@
                 <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
                 @if (count($games) > 0)
                     <div class="row justify-content-center">
-                        @csrf
-                        <input type="hidden" name="_method" value="PUT">
-                        <table class="table" id="data_table">
-                            <tbody class="text">
-                                @foreach ($games as $game)
-                                    <!-- teams - no score -->
-                                    @if (!isset($game->score_contender1) || !isset($game->score_contender2))
-                                        <tr>
-                                            <td class="separator sepTime ">
-                                                {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
-                                            <td class="contender1 ">{{ $game->contender1->team->name }}</td>
+                        <form action="{{ route('games.update', 'inprogress') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+                            <table class="table" id="data_table">
+                                <tbody class="text">
+                                    @foreach ($games as $game)
+                                        <input type="hidden" name="game[{{ $game->id }}][game_id]"
+                                            value="{{ $game->id }}">
+                                        <!-- teams - no score -->
+                                        @if (!isset($game->score_contender1) && !isset($game->score_contender2))
+                                            <tr>
+                                                <td class="separator sepTime ">
+                                                    {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
+                                                <td class="contender1 ">
+                                                    @if (empty($game->contender1->team))
+                                                        {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
+                                                    @else
+                                                        {{ $game->contender1->team->name }}
+                                                    @endif
+                                                </td>
+                                                <td><input type="number" name="game[{{ $game->id }}][scorecontender1]"
+                                                        class="form-control" min="0" max="100" @if (!$pool->isEditable()) disabled @endif /></td>
+                                                <td class="separator"> - </td>
+                                                <td><input type="number" name="game[{{ $game->id }}][scorecontender2]"
+                                                        class="form-control" min="0" max="100" @if (!$pool->isEditable()) disabled @endif /></td>
+                                                <td class="contender2">
+                                                    @if (empty($game->contender2->team))
+                                                        {{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender2->fromPool->poolName }}
+                                                    @else
+                                                        {{ $game->contender2->team->name }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <!--teams and score -->
+                                            <tr style="background-color: #DCDCDC;">
+                                                <td class="separator sepTime ">
+                                                    {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
+                                                <td class="contender1 ">
+                                                    @if (empty($game->contender1->team))
+                                                        {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
+                                                    @else
+                                                        {{ $game->contender1->team->name }}
+                                                    @endif
+                                                </td>
 
-                                            <td><input type="number" class="form-control" min="0" max="100" /></td>
+                                                <td><input type="number" name="game[{{ $game->id }}][scorecontender1]"
+                                                        class="form-control" min="0" max="100"
+                                                        value="{{ $game->score_contender1 }}" @if (!$pool->isEditable()) disabled @endif /></td>
+                                                <td class="separator"> - </td>
+                                                <td><input type="number" name="game[{{ $game->id }}][scorecontender2]"
+                                                        class="form-control" min="0" max="100"
+                                                        value="{{ $game->score_contender2 }}" @if (!$pool->isEditable()) disabled @endif /></td>
 
-                                            <td class="separator"> - </td>
+                                                <td class="contender2">
+                                                    @if (empty($game->contender2->team))
+                                                        {{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender2->fromPool->poolName }}
+                                                    @else
+                                                        {{ $game->contender2->team->name }}
+                                                    @endif
+                                                </td>
+                                            </tr>
 
-                                            <td><input type="number" class="form-control" min="0" max="100" /></td>
-
-                                            <td class="contender2">{{ $game->contender2->team->name }}</td>
+                                        @endif
 
                                         </tr>
-
-                                    @else
-                                        <!--teams and score -->
-                                        <tr style="background-color: #DCDCDC;">
-                                            <td class="separator sepTime ">
-                                                {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
-                                            <td class="contender1">{{ $game->contender1->team->name }}</td>
-
-                                            <td><input type="number" class="form-control" min="0" max="100"
-                                                    value="{{ $game->score_contender1 }}" /></td>
-                                            <td class="separator"> - </td>
-                                            <td><input type="number" class="form-control" min="0" max="100"
-                                                    value="{{ $game->score_contender2 }}" /></td>
-
-                                            <td class="contender2">{{ $game->contender2->team->name }}</td>
-                                        </tr>
-
-                                    @endif
-
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @if ($pool->isEditable())
+                                <h2><input value="Sauvegarder" type="submit" class="btn btn-main" /></h2>
+                            @endif
+                        </form>
                     </div>
                 @endif
 

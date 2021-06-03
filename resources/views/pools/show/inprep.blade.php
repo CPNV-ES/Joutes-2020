@@ -78,7 +78,7 @@
 
                     </form>
                 @endif
-                <form action="{{ route('games.update', 2) }}" method="post">
+                <form action="{{ route('games.update', 'inprep') }}" method="post">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <table class="table">

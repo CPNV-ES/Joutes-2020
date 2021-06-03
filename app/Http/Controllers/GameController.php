@@ -77,27 +77,37 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$game_id)
+    public function update(Request $request,$state)
     {
+        
         foreach ($request->input("game") as $value) {
           
             try {
-                if($value["editedContender2"] && $value["editedContender1"])
-                {
-                    $game = Game::findOrFail($value["game_id"]);
-                    if($value["isDeleted"] == 1){
-                        $game->delete();
-                    }else if(!$value["editedContender2"] || !$value["editedContender1"])
+                if($state=="inprep"){
+                    if($value["editedContender2"] && $value["editedContender1"])
                     {
-                        dd($value);
-                    } else {
-                        $game->start_time = $value["editedTime"];
-                        $game->contender1_id = $value["editedContender1"];
-                        $game->contender2_id = $value["editedContender2"];
-                        $game->court_id = $value["editedCourt"];
-                        $game->save();
+                        $game = Game::findOrFail($value["game_id"]);
+                        if($value["isDeleted"] == 1){
+                            $game->delete();
+                        }else if(!$value["editedContender2"] || !$value["editedContender1"])
+                        {
+                            
+                        } else {
+                            $game->start_time = $value["editedTime"];
+                            $game->contender1_id = $value["editedContender1"];
+                            $game->contender2_id = $value["editedContender2"];
+                            $game->court_id = $value["editedCourt"];
+                            $game->save();
+                        }
                     }
+                }else if ($state=="inprogress"){
+                    $game = Game::findOrFail($value["game_id"]);
+                    $game->score_contender1 = $value["scorecontender1"];
+                    $game->score_contender2 = $value["scorecontender2"];
+                    $game->save();
                 }
+
+                
             } 
             catch (\Throwable $th) {}
         }
