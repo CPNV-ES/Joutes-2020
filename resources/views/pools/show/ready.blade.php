@@ -3,8 +3,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-3">
-                <a href="{{ route('tournaments.show', $tournament) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+            <div class="col-md-2">
+                <a href="{{ route('tournaments.show', $tournament) }}"><i
+                        class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
                 <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
                     <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                 </button>
@@ -12,21 +13,23 @@
                     <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
                 </button>
             </div>
+            <div class="col-md-10 text-center">
+                <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
+                    {{ $pool->poolName }}</h1>
 
-        <div class="text-center">
-            <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
-                {{ $pool->poolName }}</h1>
-
-            <h2>Matches et Résultats</h2>
-            <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
-            @if($pool->isEditable() && \App\Enums\EventState::eventStateName($pool->tournament->event->eventState) == "En cours")
-                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState+1) }}</button>
-            @else
-                <h5>En attente de l'activation de l'évènement</h5>
-            @endif
-            <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
-
-            <div class="row justify-content-center">
+                <h2>Matches et Résultats</h2>
+                <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
+                @if ($pool->isEditable() && \App\Enums\EventState::eventStateName($pool->tournament->event->eventState) == 'En cours')
+                    <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à
+                        l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState + 1) }}</button>
+                @else
+                    <h5>En attente de l'activation de l'évènement</h5>
+                @endif
+                <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <table class="table" id="data_table">
@@ -63,30 +66,34 @@
 
 
 
-            </div>
 
-            @if(\App\Contender::isAllEmpty($contenders))
-                <h2>Liste des participants</h2>
-                <table class="table">
-                    @foreach($contenders as $contender)
-                        <tr><td>
-                        @if ($contender->getName() != null)
-                            {{ $contender->getName() }}
-                        @endif
-                        <td></tr>
+
+                @if (\App\Contender::isAllEmpty($contenders))
+                    <h2>Liste des participants</h2>
+                    <table class="table">
+                        @foreach ($contenders as $contender)
+                            <h6>
+                                @if ($contender->getName() != null)
+                                    {{ $contender->getName() }}
+                                @endif
+                            </h6>
+                        @endforeach
+                    </table>
+                @else
+                    <h2>Liste des participants</h2>
+                    @foreach ($contenders as $contender)
+                        <h6 style="color: black" value="{{ $contender[' pool_from_id'] }}">
+                            {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                        </h6>
                     @endforeach
-                </table>
-            @else
-                <h2>Liste des participants</h2>
-                @foreach($contenders as $contender)
-                    <h6 style="color: black" value="{{$contender[' pool_from_id']}}">{{$contender->rank_in_pool .($contender->rank_in_pool == 1 ? "er " : 'ème ') . "de "  . $contender->fromPool->poolName}}</h6>
-                @endforeach
-            @endif
-
+                @endif
+            </div>
         </div>
     </div>
+
     <!-- Modal Deletion -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -111,7 +118,8 @@
         </div>
     </div>
     <!-- Modal Update -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -125,7 +133,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
+                    <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
                         @csrf
                         <input type="text" name="poolName">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -137,7 +145,8 @@
         </div>
     </div>
     <!-- Modal StagePool -->
-    <div class="modal fade" id="stagePoolModal" tabindex="-1" role="dialog" aria-labelledby="stagePoolModalLabel" aria-hidden="true">
+    <div class="modal fade" id="stagePoolModal" tabindex="-1" role="dialog" aria-labelledby="stagePoolModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -151,7 +160,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
+                    <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
                         @csrf
                         <input hidden type="number" value="2" name="poolState">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>

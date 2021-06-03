@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-2">
                 <a href="{{ route('tournaments.show', $tournament) }}"><i
                         class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
                 <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
@@ -12,17 +12,22 @@
                     <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
                 </button>
             </div>
-            <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
-                {{ $pool->poolName }}
-            </h1>
-            <div class="text-center">
+
+            <div class="col-md-10 text-center">
+                <h1 class="text-center">Tournoi de {{ $tournament->name }} - Phase {{ $pool->stage }} -
+                    {{ $pool->poolName }}
+                </h1>
                 <h2>Matches et Résultats</h2>
                 <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
-                @if($pool->isReady() && $pool->isEditable())
-                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState+1) }}</button>
-            @endif
-            <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
-            <div>
+                @if ($pool->isReady() && $pool->isEditable())
+                    <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à
+                        l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState + 1) }}</button>
+                @endif
+                <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
                 @if ($pool->isEditable())
                     <form action="{{ route('games.store') }}" method="post">
                         @csrf
@@ -37,7 +42,8 @@
                                             <option disabled selected value="">Choisir 1ère team </option>
                                             @foreach ($pool->contenders as $contender)
                                                 @if ($contender->getName() != null)
-                                                    <option value="{{ $contender->id }}">{{ $contender->getName() }}
+                                                    <option value="{{ $contender->id }}">
+                                                        {{ $contender->getName() }}
                                                     </option>
                                                 @endif
                                             @endforeach
@@ -231,17 +237,17 @@
 
                             @if ($pool->isEditable())
                                 @if (isset($pool->id) && isset($pool->contenders[$i]->team_id))
-                                <td>
-                                    <form
-                                        action="{{ route('pools.contenders.destroy', [$pool->contenders[$i]->team_id, $pool->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                    <td>
+                                        <form
+                                            action="{{ route('pools.contenders.destroy', [$pool->contenders[$i]->team_id, $pool->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 @endif
                             @endif
 
@@ -252,86 +258,89 @@
 
             </div>
         </div>
+    </div>
 
-        <!-- Modal Deletion -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+    <!-- Modal Deletion -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
 
-                    <div class="modal-header">
-                        <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
-                        <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?
+                    </h5>
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-                    <div class="modal-footer">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <form action="{{ route('tournaments.pools.destroy', [$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Update -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="updateModalLabel">Modifier le nom</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input type="text" name="poolName">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <form action="{{ route('tournaments.pools.destroy', [$tournament, $pool]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
-                    </div>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <button type="submit" class="btn btn-success">Modifier</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- Modal Update -->
-        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+    </div>
+    <!-- Modal StagePool -->
+    <div class="modal fade" id="stagePoolModal" tabindex="-1" role="dialog" aria-labelledby="stagePoolModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
 
-                    <div class="modal-header">
-                        <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
-                        <h5 class="modal-title pl-3 pt-3" id="updateModalLabel">Modifier le nom</h5>
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="stagePoolModalLabel">Êtes-vous sûr de vouloir faire ça?
+                    </h5>
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-                    <div class="modal-footer">
-                        <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
-                            @csrf
-                            <input type="text" name="poolName">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <input type="hidden" name="_method" value="PATCH">
-                            <button type="submit" class="btn btn-success">Modifier</button>
-                        </form>
-                    </div>
+                <div class="modal-footer">
+                    <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input hidden type="number" value="1" name="poolState">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <button type="submit" name="changeStatePool" class="btn btn-success">Ok !</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- Modal StagePool -->
-        <div class="modal fade" id="stagePoolModal" tabindex="-1" role="dialog" aria-labelledby="stagePoolModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
-                        <h5 class="modal-title pl-3 pt-3" id="stagePoolModalLabel">Êtes-vous sûr de vouloir faire ça?</h5>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-footer">
-                        <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
-                            @csrf
-                            <input hidden type="number" value="1" name="poolState">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <input type="hidden" name="_method" value="PATCH">
-                            <button type="submit" name="changeStatePool" class="btn btn-success">Ok !</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="{{ asset('js/poolShow.js') }}"></script>
-    @stop
+    </div>
+    <script src="{{ asset('js/poolShow.js') }}"></script>
+@stop
