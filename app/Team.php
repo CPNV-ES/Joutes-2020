@@ -10,7 +10,7 @@ class Team extends Model
     public $timestamps = false;
     protected $fillable = ['name','isCaptain','owner_id','validation'];
 
-    public function users()
+    public function participants()
     {
         return $this->belongsToMany('App\User', 'team_user')->withPivot('isCaptain');
     }
