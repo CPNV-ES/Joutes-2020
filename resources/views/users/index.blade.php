@@ -35,7 +35,17 @@
                     </td>
                     <td>
                         {{$user->username}}</td>
-                    <td>{{$user->Role->name}}</td>
+                    <td>
+                        @if($user->username == Auth::user()->username)
+                            {{$user->role->name}}
+                        @else
+                            <select class="form-control-sm">
+                                @foreach($roles as $role)
+                                    <option @if($user->role->slug == $role->slug) selected @endif id={{$role->id}}>{{$role->name}}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    </td>
                     <td>
                         Joutes :
                         @foreach($dates = $user->playedIn() as $index=>$date)
