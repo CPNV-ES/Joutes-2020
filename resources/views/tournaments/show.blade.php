@@ -14,7 +14,7 @@
                     {{ $tournament->name }}
                     @if (Auth::check() && (Auth::user()->role == 'administrator' || Auth::user()->role == 'writer'))
                         <a href="{{ route('tournaments.schedule.index', $tournament->id) }}" class="greenBtn big-screen"
-                           title="Affichage écran géant">Affichage écran geant</i></a>
+                           title="Affichage écran géant">Affichage écran geant</a>
                     @endif
                     @if ( Auth::check() && (Auth::user()->role == "administrator"))
                         <a href="{{route('tournaments.export', $tournament->id)}}" class="greenBtn">Exporter en CSV les
@@ -22,7 +22,7 @@
                     @endif
                     <button type="button" class="btn btn-main"
                             onclick="location.href='{{ route('tournaments.edit', $tournament) }}'">
-                        Éditer le tournoi
+                        <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                     </button>
                 </h1>
 
@@ -80,8 +80,8 @@
                     </tbody>
                 </table>
                 @if(count($tournament->teams) < $tournament->max_teams)
-                    <a href="{{ route('tournaments.teams.create', $tournament) }}" class="greenBtn"
-                       title="Ajouter une équipe au tournoi">Ajouter</i></a>
+                    <a href="{{ route('tournaments.teams.create', $tournament) }}" class="btn btn-main"
+                       title="Ajouter une équipe au tournoi"><i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i></a>
                 @endif
             </div>
 
@@ -106,8 +106,8 @@
                     @endif
                     </tbody>
                 </table>
-                <a href="{{ route('courts.create', ['id_sport' => $tournament->sport->id]) }}" class="greenBtn"
-                   title="Créer un tournoi">Ajouter</a>
+                <a href="{{ route('courts.create', ['id_sport' => $tournament->sport->id]) }}" class="btn btn-main"
+                   title="Créer un tournoi"><i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i></a>
             </div>
         </div>
 
@@ -117,7 +117,7 @@
                 <h2>Visualisation du tournoi
                     <button type="button" class="btn btn-main"
                             onclick="location.href='{{ route('tournaments.pools.create', $tournament) }}'">
-                        Ajouter une poule
+                        <i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i>
                     </button>
                 </h2>
                 <hr>

@@ -7,10 +7,10 @@
             <div class="col-3">
                 <a href="{{ route('tournaments.show', $tournament) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
                 <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
-                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                 </button>
                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                    <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
                 </button>
             </div>
         <div class="text-center">
@@ -139,5 +139,5 @@
             </div>
         </div>
     </div>
-    
+
 @stop
