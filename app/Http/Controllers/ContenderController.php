@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contender;
 use App\Pool;
+use App\Team;
+use App\Game;
 use Illuminate\Support\Facades\Redirect;
 
 class ContenderController extends Controller
@@ -26,4 +28,32 @@ class ContenderController extends Controller
 
         return redirect()->route('tournaments.pools.show', [$pool->tournament, $pool]);
     }
+
+    public function update(Request $request,$pool_id, $contender)
+    {
+        $contender = Contender::find($contender);
+        $contender->team_id = $request->input('team_id');
+        $contender->save();
+
+        return redirect()->back();
+    }
+
+    public function destroy($team_id,$pool_id)
+    {
+        $pool = Pool::findOrFail($pool_id);
+       
+        // $contender = Contender::where('team_id','=',$team_id)->firstOrFail();
+        // $game_contender1 = Game::where('contender1_id','=',$contender->id);
+        // $game_contender2 = Game::where('contender2_id','=',$contender->id);
+        // $game_contender1->delete();
+        // $game_contender2->delete();
+        // $pool->teams()->detach($team_id);
+        $pool->teams()->updateExistingPivot($team_id,['team_id'=> null]);
+        
+        // $contender->delete();
+      
+        return redirect()->back();
+
+    }
+   
 }

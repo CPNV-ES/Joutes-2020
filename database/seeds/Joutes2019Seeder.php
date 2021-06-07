@@ -6,7 +6,7 @@ use App\Tournament;
 use App\Role;
 use Illuminate\Database\Seeder;
 
-class Joutes2019Seeder extends Seeder
+class Joutes2020Seeder extends Seeder
 {
     private $eventid;
 
@@ -24,7 +24,7 @@ class Joutes2019Seeder extends Seeder
         $this->event = \App\Event::where('name', 'like', '%2019%')->first();
         if ($this->event) die ("L'événement existe déjà\n");
 
-        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'sports.jpg']);
+        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'joutes.jpg', 'eventState' => 0]);
         $this->event->save();
 
         // make room
@@ -40,6 +40,7 @@ class Joutes2019Seeder extends Seeder
         $this->UniHockey();
         $this->Badminton();
         $this->roles();
+        $this->users();
     }
 
     // Common stuff
@@ -287,7 +288,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 13,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -384,7 +385,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -457,7 +458,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -543,7 +544,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => $gameTypeId,
             'poolSize' => 6,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -557,7 +558,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]))->save();
 
         $nbTeams = 0;
@@ -618,7 +619,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 1
+            'poolState' => 1
         ]);
         $pool->save();
         $firstpoolStage2 = $pool->id; // we'll need that to put teams into pools
@@ -632,7 +633,7 @@ class Joutes2019Seeder extends Seeder
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 1
+            'poolState' => 1
         ]))->save();
 
         (new \App\Contender(['pool_id' => $firstpoolStage2,'pool_from_id' => $firstpoolStage1, 'rank_in_pool' => 1]))->save();
@@ -706,5 +707,19 @@ class Joutes2019Seeder extends Seeder
         $role->save();
 
         echo "OK\n";
+    }
+
+    private function users()
+    {
+        echo "Création d'un utilisateur ...";
+        $this->user = new \App\User([
+            'username' => 'AdminTest',
+            'email' => 'Admin@cpnv.ch',
+            'first_name' => 'Admin',
+            'last_name' => 'Test',
+            'role_id' => '1',
+        ]);
+        $this->user->save();
+        echo "OK";
     }
 }

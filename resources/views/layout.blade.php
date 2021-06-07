@@ -48,8 +48,10 @@
                             @if(Auth::user()->role == 'participant')
                                 <li class="@if(Route::is('profile.index')) active @endif"><a href="{{ route('profile.index') }}"> <i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                             @endif
-                            @endif
-
+                                <li><a href="{{ route('logout') }}"> <i class="fa fa-user" aria-hidden="true"></i> Logout - {{Auth::user()->username}}</a></li>
+                        @elseif(!Auth::check())
+                            <li><a href="{{ route('login') }}"> <i class="fa fa-user" aria-hidden="true"></i> Login</a></li>
+                        @endif
                     </ul>
 
                     <div class="navbar-bottom">
@@ -80,9 +82,9 @@
 
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5 ml-l-5 ml-md-5 ml-sm-5">
+                @include('flash-message')
 
                 @yield('content')
-
             </div>
 		</div>
 
@@ -93,7 +95,7 @@
     </body>
 
     <script>
-        $(window).load(function() {
+        $(window).on('load', function() {
             $("body").removeClass("preload");
         });
     </script>

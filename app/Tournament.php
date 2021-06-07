@@ -27,7 +27,7 @@ class Tournament extends Model
 
     public function getPoolsOfStage($tournamentId, $stageNumber)
     {
-      return Pool::where('stage', '=', $stageNumber)->where('tournament_id', '=', $tournamentId)->get();
+        return Pool::where('stage', '=', $stageNumber)->where('tournament_id', '=', $tournamentId)->get();
     }
 
     /**

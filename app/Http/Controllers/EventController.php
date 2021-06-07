@@ -30,7 +30,6 @@ class EventController extends Controller
                 $event->img = 'default.jpg';
             }
         }
-
         return view('events.index')->with('events', $events);
 
     }
@@ -58,13 +57,40 @@ class EventController extends Controller
 
     public function store(CreateEventRequest $request)
     {
+        $image = $request->file('picture');
+
+        $imageName = time()."_".$image->getClientOriginalName();
+
+        $image->move(public_path('images/joutes'), $imageName);
 
         $newEvent = new Event();
-        $newEvent->name = $request->input("name");
-        $newEvent->img = $request->input("img");
-        $newEvent->save();
 
+        $newEvent->name = $request->input("name");
+
+        $newEvent->img = $imageName;
+
+        $newEvent->eventState = 0;
+
+        $newEvent->save();
         return redirect()->route('events.index');
 
+
     }
+
+    public function update(Request $request, Event $event){
+        if ($event->eventState < 3) {
+            $event->eventState = $event->eventState + 1;
+        }
+
+        $tournaments = $event->tournaments;
+
+        foreach ($tournaments as $tournament) {
+            if (empty($tournament->img)) {
+                $tournament->img = 'default.jpg';
+            }
+        }
+        $event->save();
+        return redirect()->refresh();
+    }
+
 }

@@ -2,11 +2,34 @@
 
 @section('content')
 
+    <?php
+        $mainArray = array ();
+        foreach ($pool->teams as $team){
+            array_push($mainArray,[$team->id,$team->name]);
+        }
+
+    ?>
     <div class="container">
-        <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
+        <div class="row">
+            <div class="col-3">
+                <a href="{{ route('tournaments.show', $tournament) }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+                <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#updateModal">
+                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                </button>
+                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                    <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="col-9 ml-n2">
+                <h1 class="text-center">Tournoi de {{$tournament->name}} - Phase {{$pool->stage}} - {{$pool->poolName}}</h1>
+            </div>
+        </div>
         <div class="text-center">
             <h2>Matches et Résultats</h2>
-            <h4>État: {{\App\HelperClasses\PoolHelper::poolState($pool)}}</h4>
+            <h4>État: {{\App\Enums\PoolState::poolStateName($pool->poolState)}}</h4>
+            @if($pool->isReady() && $pool->isEditable())
+                <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante</button>
+            @endif
             @if ($pool->stage > 1 && count($pool->contenders) < $pool->poolSize)
             <h2>Définition des équipes</h2>
             <table>
@@ -45,18 +68,37 @@
                                 <!-- No teams - no score -->
                                 @if (empty($game->contender1->team) || empty($game->contender2->team))
 
-                                    @if (empty($game->contender1->team))
+                                    @if ((empty($game->contender1->team))&&(isset($game->contender1->fromPool->poolName)))
                                         <td class="contender1">{{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender1->fromPool->poolName }}</td>
-                                    @else
+                                    @elseif(isset($game->contender1->team->name))
                                         <td class="contender1">{{ $game->contender1->team->name }}</td>
+                                    @else
+                                    <td>
+                                    <select id="inputState" class="form-control">
+                                        <option selected>Choisir team</option>
+                                        @foreach($mainArray as $value)
+                                            <option>{{ $value[1] }}</option>
+                                        @endforeach
+                                    </select>
+                                    </td>
                                     @endif
                                     <td class="separator sepTime">{{Carbon\Carbon::parse($game->start_time)->format('H:i')}}</td>
                                     <td class="score2">{{ $game->court->name }}</td>
 
-                                    @if (empty($game->contender2->team))
+                                    @if ((empty($game->contender2->team))&&(isset($game->contender2->fromPool->poolName)))
                                         <td class="contender2">{{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? "er " : 'ème ') . "de " . $game->contender2->fromPool->poolName }}</td>
-                                    @else
+                                    @elseif(isset($game->contender2->team->name))
                                         <td class="contender2">{{ $game->contender2->team->name }}</td>
+
+                                    @else
+                                    <td>
+                                    <select id="inputState" class="form-control">
+                                        <option selected>Choisir team</option>
+                                        @foreach($mainArray as $value)
+                                            <option>{{ $value[1] }}</option>
+                                        @endforeach
+                                    </select>
+                                    </td>
                                     @endif
 
                                     @if($pool->isEditable())
@@ -74,6 +116,7 @@
                                         @if($pool->isEditable())
                                             <td class="action"><i class="fa fa-lg fa-clock-o editTime" aria-hidden="true"></i> <i class="editScore fa fa-trophy fa-lg" aria-hidden="true"></i></td>
                                         @endif
+
                                     @else
                                         <!--teams and score -->
                                         <tr style="background-color: #DCDCDC;">
@@ -100,7 +143,7 @@
             </div>
         </div>
         <div class="text-center">
-            @if($pool->poolState >= 2)
+            @if($pool->poolState >= \App\Enums\PoolState::Inprog)
                 <h2>Classement actuel</h2>
                 <table class="table">
                     <thead class="black white-text">
@@ -130,28 +173,144 @@
                 </table>
             @elseif(\App\Contender::isAllEmpty($contenders))
                 <h2>Liste des participants</h2>
-                @foreach ($rankings as $ranking)
-                    <h6 style="color: black" value="{{ $ranking["team_id"] }}">{{ $ranking["team"] }}</h6>
-                @endforeach
+                <table class="table">
+
+
+
+
+
+                @for($i = 0;$i < $pool->poolSize; $i++ )
+                    <tr>
+                        <td>
+                            <h6 style="color: black">
+                                @if(isset($mainArray[$i][1]))
+                                    {{ $mainArray[$i][1] }}
+                                @else
+                                    !Vide!
+                                @endif
+                            </h6>
+                            </td>
+                        <td>
+                        <td>
+                        @if((isset($pool->id)) && (isset($mainArray[$i][0])))
+                            <form action="{{ route('pools.contenders.destroy', [$mainArray[$i][0], $pool->id]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        @endif
+                        </td>
+                        </td>
+                    </tr>
+                @endfor
+                </table>
             @else
                 <h2>Liste des participants</h2>
                 @foreach($contenders as $contender)
-                    <h6 style="color: black" value="{{$contender[" pool_from_id"]}}">{{$contender->rank_in_pool .($contender->rank_in_pool == 1 ? "er " : 'ème ') . "de "  . $contender->fromPool->poolName}}</h6>
+                    <h6 style="color: black" value="{{$contender[' pool_from_id']}}">{{$contender->rank_in_pool .($contender->rank_in_pool == 1 ? "er " : 'ème ') . "de "  . $contender->fromPool->poolName}}</h6>
                 @endforeach
             @endif
             @if($pool->stage == 1 && count($teamsNotInAPool) > 0)
             <form action="{{ route('pools.contenders.store', $pool->id) }}" method="post">
                 @csrf
-                <div class="form-group">
-                    <select id="teams" name="team_id">
-                        @foreach ($teamsNotInAPool as $team)
-                            <option value="{{ $team->id }}">{{ $team->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-main">+</button>
+                <table class="table">
+
+                    <tr>
+                        <td>
+                            <select id="teams" name="team_id" class="form-control">
+                                @foreach ($teamsNotInAPool as $team)
+                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                @endforeach
+                            </select>
+                            </td>
+                            <td>
+                            <button type="submit" class="btn btn-main">Ajouter</button>
+                    </td>
+                    </tr>
+                </table>
+
             </form>
             @endif
+        </div>
+    </div>
+
+    <!-- Modal Deletion -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <form action="{{ route('tournaments.pools.destroy', [$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Update -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="updateModalLabel">Modifier le nom</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input type="text" name="poolName">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <button type="submit" class="btn btn-success">Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal StagePool -->
+    <div class="modal fade" id="stagePoolModal" tabindex="-1" role="dialog" aria-labelledby="stagePoolModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                    <h5 class="modal-title pl-3 pt-3" id="stagePoolModalLabel">Êtes-vous sûr de vouloir faire ça?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <form action="{{ route('tournaments.pools.update',[$tournament, $pool]) }}" method="POST">
+                        @csrf
+                        <input hidden type="number" value="1" name="poolState">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <input type="hidden" name="_method" value="PATCH">
+                        <button type="submit" name="changeStatePool" class="btn btn-success">Ok !</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @stop

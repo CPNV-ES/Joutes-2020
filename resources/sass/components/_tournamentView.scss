@@ -18,8 +18,6 @@
 .pool {
     padding: 2px;
     margin: 2px;
-    display: flex;
-    flex-direction: row;
 }
 
 .teamlist {
@@ -65,4 +63,8 @@
 
 .highlight {
     background-color: pink;
+}
+
+.closeButton {
+    width: 50%;
 }

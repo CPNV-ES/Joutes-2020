@@ -20,7 +20,7 @@ class CreatePoolsTable extends Migration
             $table->string('poolName', 45);
             $table->integer('stage');
             $table->integer('poolSize');
-            $table->integer('isFinished');
+            $table->integer('poolState');
 
             $table->integer('tournament_id')->unsigned();
             $table->integer('mode_id')->unsigned();

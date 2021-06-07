@@ -1,0 +1,25 @@
+
+
+#img-preview {
+    display: none;
+    width: 155px;
+    border: 2px dashed #333;
+    margin-bottom: 20px;
+}
+#img-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    font-family: sans-serif;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+#drop-area.highlighter {
+    background-color: #c2f0c2;
+    border-color: green;
+}

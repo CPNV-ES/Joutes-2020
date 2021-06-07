@@ -15,7 +15,18 @@ class Contender extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        try {
+            return $this->belongsTo(Team::class);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+        
+    }
+
+    public function getName()
+    {
+        if($this->team) return $this->team->name;
+        return null;
     }
 
     public function fromPool(){
@@ -49,5 +60,6 @@ class Contender extends Model
         }
         return true;
     }
+
 
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\PoolState;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,9 +12,9 @@ class Pool extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'start_time', 'end_time', 'poolName', 'stage', 'poolSize', 'tournament_id', 'mode_id', 'game_type_id'
+      'start_time', 'end_time', 'poolName', 'stage', 'poolState' ,'poolSize', 'tournament_id', 'mode_id', 'game_type_id'
     ];
-
+    //TODO manage poolState with database slugs
     public function tournament()
     {
         return $this->belongsTo(Tournament::class);
@@ -21,6 +22,14 @@ class Pool extends Model
     public function contenders()
     {
         return $this->hasMany(Contender::class);
+    }
+
+    public function mode(){
+        return $this->belongsTo(PoolMode::class);
+    }
+
+    public function game_type(){
+        return $this->belongsTo(GameType::class);
     }
 
     public function games(){
@@ -133,14 +142,11 @@ class Pool extends Model
     }
 
     public function teams(){
-        $teams = DB::table('contenders')
-            ->where('pool_id', '=', $this->id)
-            ->get();
-        return $teams;
+        return $this->belongsToMany('App\Team','Contenders');
     }
 
     public function listTeams() {
-      $teams = array();
+        $teams = array();
         foreach ($this->games as $game) {
             if(!empty($game->contender1->team)){
                 $teams[$game->contender1->team->id] = $game->contender1->team->name;
@@ -163,12 +169,28 @@ class Pool extends Model
         return $rankings_row;
     }
 
+    //TODO: Move this method into a laravel policy
     public function isEditable(){
         if(Auth::check()){
-            $role = Auth::user()->role;
-            if($role == "writer" || $role == "administrator") return ($this->isFinished == 0);
+            $role = Auth::user()->role->getSlug();
+            if($role == "GEST" || $role == "ADMIN") return ($this->isFinished == 0);
         }
         return false;
+    }
+    //TODO Create a function to see if the pool is
+
+    /**
+     * Return true if it's ready to begin
+     * @return bool
+     */
+    public function isReady()
+    {
+        foreach($this->contenders as $contender)
+        {
+            if(!$contender->team_id) return false;
+        }
+        if($this->poolState == PoolState::Prep) return true;
+        
     }
 
 }

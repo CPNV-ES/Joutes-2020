@@ -80,5 +80,8 @@ class Team extends Model
         //$this->participants()->where('isCaptain', 1)->get();
         $this->users()->when('isCaptain', 1)->get();
     }
+    public function pools(){
+        return $this->belongsToMany('App\Pool','Contenders');
+    }
 
 }

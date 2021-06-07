@@ -28,27 +28,23 @@
 	            @endforeach
 	        </div>
         @endif
-
-
 		<div class="row ml-4">
 			<div class="col-10">
-
-                <form action="{{ route('events.store') }}" method="post">
+                <form action="{{ route('events.store')  }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="slug">Slug</label>
-                        <input type="text" class="form-control" name="name" placeholder="Ajouter un nom">
+                        <label for="name">Nom</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Ajouter un nom">
                     </div>
-                    <div class="form-group">
-                        <label for="Nom">Nom</label>
-                        <input type="text" class="form-control" name="img" placeholder="Ajouter une image">
-                    </div>
-
+                    <input name="picture" id="drop-area" type="file"  accept="image/png, image/jpeg" >
+                    <div id="img-preview"></div>
+                    <br>
                     <button type="submit" class="btn btn-main">Ajouter</button>
                 </form>
+
 			</div>
 		</div>
 
     </div>
-
+    <script src="{{ asset('js/DropZone.js') }}"></script>
 @stop
