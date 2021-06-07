@@ -27,7 +27,7 @@ class UserController extends Controller
                 return redirect()->back()->with('error','Vous ne pouvez pas vous supprimer');
             }
             //Check if the user is really deletable
-            elseif ($user->isDeletable()){
+            elseif (!$user->isDeletable()){
                 return redirect()->back()->with('error',$user->username." n'est pas supprimable");
             }
         }
@@ -36,5 +36,16 @@ class UserController extends Controller
 
         count($user_ids) < 2 ? $flashmessage = "L'utilisateur a bien été supprimé" : $flashmessage = "Les utilisateurs ont bien été supprimés" ;
         return redirect()->back()->with('success',$flashmessage);
+    }
+
+    public function update(Request $request, User $user){
+        if($user == Auth::user()) {
+            return redirect()->back()->with('error', "Vous ne pouvez pas changer vos permissions");
+        }else{
+            $user->role_id = $request->input('role_id');
+            $user->save();
+            return redirect()->back()->with('success', "Les permissions de ".$user->username." ont été changées");
+        }
+
     }
 }

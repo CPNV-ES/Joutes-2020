@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='lib/datatables/css/dataTables.bootstrap4.min.css'/>
     <link rel="stylesheet" href="lib/datatables/css/dataTables.responsive.bootstrap4.min.css">
     <div class="container">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <form method="POST" action="{{ route('users.destroy.all')}}">
             @csrf
             @method('DELETE')
@@ -36,15 +37,11 @@
                     <td>
                         {{$user->username}}</td>
                     <td>
-                        @if($user->username == Auth::user()->username)
-                            {{$user->role->name}}
-                        @else
-                            <select class="form-control-sm">
-                                @foreach($roles as $role)
-                                    <option @if($user->role->slug == $role->slug) selected @endif id={{$role->id}}>{{$role->name}}</option>
-                                @endforeach
-                            </select>
-                        @endif
+                        <select id='{{$user->id}}' class="form-control-sm rolesSelect">
+                            @foreach($roles as $role)
+                                <option @if($user->role->slug == $role->slug) selected @endif id={{$role->id}}>{{$role->name}}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         Joutes :
