@@ -19,24 +19,24 @@ Route::post('pools/contenders/unlink','ContenderController@detachContender');
 
 
 
-Route::resource('events', 'EventController');
-Route::resource('tournaments', 'TournamentController');
+Route::resource('events', 'EventController')->register();
+Route::resource('tournaments', 'TournamentController')->register();
 //Route::post('/events/tournaments/copy',  'TournamentController@copy')->name('events.tournaments.copy');
-Route::resource('events.tournaments', 'TournamentController');
-Route::resource('courts', 'CourtController');
-Route::resource('sports', 'SportController');
-Route::resource('teams', 'TeamController');
-Route::resource('tournaments.teams', 'TeamController');
-Route::resource('participants', 'ParticipantController');
-Route::resource('tournaments.pools', 'PoolController');
+Route::resource('events.tournaments', 'TournamentController')->register();
+Route::resource('courts', 'CourtController')->register();
+Route::resource('sports', 'SportController')->register();
+Route::resource('teams', 'TeamController')->register();
+Route::resource('tournaments.teams', 'TeamController')->register();
+Route::resource('participants', 'ParticipantController')->register();
+Route::resource('tournaments.pools', 'PoolController')->register();
 Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
-Route::resource('pools.contenders', 'ContenderController');
-Route::resource('games', 'GameController');
+Route::resource('pools.contenders', 'ContenderController')->register();
+Route::resource('games', 'GameController')->register();
 
 //Administration resources
-Route::resource('administrations', 'Admin\AdministrationController');
-Route::resource('roles', 'Admin\RoleController');
-Route::resource('courts', 'Admin\CourtController');
+Route::resource('administrations', 'Admin\AdministrationController')->register();
+Route::resource('roles', 'Admin\RoleController')->register();
+Route::resource('courts', 'Admin\CourtController')->register();
 
 //Azure
 //Azure
