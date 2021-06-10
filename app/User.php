@@ -65,8 +65,6 @@ class User extends Authenticatable
 
     public function isDeletable()
     {
-        $events = [];
-        $isDeletable = False;
         foreach ($this->teams as $team){
             $team->tournament->event->eventState > 1 ? $isDeletable = False : $isDeletable = True;
             if (!$isDeletable) return False;
