@@ -3,12 +3,19 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\False_;
 
 class User extends Authenticatable
 {
+    use SoftDeletes;
+
     protected $fillable = ['username', 'first_name', 'last_name', 'password', 'role'];
     public $timestamps = false;
     protected $hidden = ['password', 'remember_token'];
+    /**
+     * @var mixed
+     */
 
     public static function getSurname()
     {
@@ -22,14 +29,6 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
-
-
-
-    public function participant()
-    {
-        return $this->hasOne('App\Participant');
-    }
-
     public function teams()
     {
         /*
@@ -37,23 +36,10 @@ class User extends Authenticatable
         $teams = $participant->teams;
         return $teams;
         */
-        return $this->belongsToMany('App\Team')->withPivot('isCaptain');
+        return $this->belongsToMany('App\Team', 'team_user')->withPivot('isCaptain');
 
 
         //return $this->hasManyThrough('App\Team', 'App\Participant', 'team_id','user_id' );
-    }
-
-    public function tournaments() {
-        // get event teams
-        $teams = $this->teams;
-        // create empty array for participants
-        $tournaments = [];
-
-        foreach ($teams as $team) {
-            $tournaments[] = $team->tournament;
-        }
-
-        return collect($tournaments)->unique("id");
     }
 
     // Returns whether the user is locally authenticated or remotely (SAML)
@@ -66,5 +52,25 @@ class User extends Authenticatable
     {
         $participant = user::where('id',$id)->first();
         return (count ($participant->teams) < 2);
+    }
+
+    public function playedIn()
+    {
+        $dates = [];
+        foreach ($this->teams as $team){
+            array_push($dates, $team->tournament->end_date->format('Y'));
+        }
+        return array_unique($dates); //Distinct on the array to prevent from dates in duplicata
+    }
+
+    public function isDeletable()
+    {
+        foreach ($this->teams as $team){
+            $team->tournament->event->eventState > 1 ? $isDeletable = False : $isDeletable = True;
+            if (!$isDeletable) return False;
+        }
+        return True;
+
+
     }
 }

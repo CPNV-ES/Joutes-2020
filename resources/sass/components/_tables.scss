@@ -6,3 +6,13 @@
     font-size: 18px;
     font-weight: bolder;
 }
+
+table.dataTable tbody tr.selected   {
+    background-color: #d33333 !important;
+    color: white !important;
+}
+
+table.dataTable  tr.selected .sorting_1 {
+    background-color: #d33333 !important;
+    color: white !important;
+}

@@ -154,7 +154,7 @@ INSERT INTO teams (NAME, tournament_id) VALUES ('Minions', 2);
 INSERT INTO teams (NAME, tournament_id) VALUES ('Big fat boys', 2);
 INSERT INTO teams (NAME, tournament_id) VALUES ('La loooose', 2);
 
--- Build 12 teams of 4 with first 48 persons for beachvolley
+-- Build 12 teams of 4 with first 48 users for beachvolley
 INSERT INTO team_user (user_id, team_id, isCaptain) SELECT
                                                                     id,
                                                                     FLOOR((id + 3) / 4),
