@@ -61,7 +61,7 @@ class Tournament extends Model
     /**
      * Create a new belongs to many relationship instance between Tournament and Team
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      *
      */
     public function teams()
