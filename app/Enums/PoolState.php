@@ -26,4 +26,20 @@ abstract class PoolState
                 return "inconnu";
         }
     }
+
+    public static function poolStateClassColor($poolState)
+    {
+        switch ($poolState) {
+            case self::Prep:
+                return "prep";
+            case self::Ready:
+                return "ready";
+            case self::Inprog:
+                return "inprog";
+            case self::Finished:
+                return "finished";
+            default:
+                return "";
+        }
+    }
 }
