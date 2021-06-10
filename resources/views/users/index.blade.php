@@ -18,9 +18,32 @@
             <thead>
             <tr>
                 <th id="deleteInput">
-                    <input type="submit" class="btn btn-danger invisible" value="Supprimer"/>
+                    <input type="button" class="btn btn-danger invisible" value="Supprimer" data-toggle="modal" data-target="#deleteModal"/>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
+                                    <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Suppression</h5>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="deleteModalText"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </th>
-                <th>Nom d'utilisateur</th>
+                <th>Nom d'utilisateur / Nom + Prénom</th>
                 <th>Rôle</th>
                 <th>Participations</th>
                 <th>Équipes</th>
@@ -31,13 +54,13 @@
                 <tr class="user">
                     <td>
                         @if($user->isDeletable())
-                            <input id="{{$user->id}}" type="checkbox">
+                            <input value="{{$user->id}}" type="checkbox">
                         @endif
                     </td>
                     <td>
-                        {{$user->username}}</td>
+                        {{$user->username}} / {{$user->last_name}} {{$user->first_name}}</td>
                     <td>
-                        <select id='{{$user->id}}' class="form-control-sm rolesSelect">
+                        <select name='{{$user->id}}' class="form-control-sm rolesSelect">
                             @foreach($roles as $role)
                                 <option @if($user->role->slug == $role->slug) selected @endif id={{$role->id}}>{{$role->name}}</option>
                             @endforeach

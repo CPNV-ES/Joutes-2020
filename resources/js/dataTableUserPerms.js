@@ -42,7 +42,7 @@ $(document).ready(function() {
         return getRepresentativeStringForTDContent(el);
     };
 
-    // Define datable
+    // Define datatable
     $('#persons').DataTable({
         columnDefs: [
             { "type": "html-input", "targets": [2] },  // Search Logic for the special types
@@ -56,12 +56,11 @@ $(document).ready(function() {
 
     //On click listener on the checkboxes for deletion
     $('#persons tbody').on( 'click','input', function () {
-        let userId = $(this).attr('id')
+        let userId = $(this).attr('value')
 
         //Check if the user selected is already selected
-        let input = $(this).parents('tr').find('input[name="deletedUserId[]"]')
+        let input = $('#' + userId)
         $(this).closest("tr").toggleClass('selected')
-
 
         //Check the input length (0 if there is no input)
         if (input.length) {
@@ -73,7 +72,8 @@ $(document).ready(function() {
                 .attr("type", "hidden")
                 .attr("name", "deletedUserId[]") //[] for concatenation of ids when sending post request
                 .attr("value", userId)
-            $(this).closest("tr").append(inputDeleted)
+                .attr("id", userId)
+            $(this).closest('table').append(inputDeleted)
             count++
         }
 
@@ -89,13 +89,13 @@ $(document).ready(function() {
             $('#deleteInput').children('input').toggleClass('invisible', 1)
             isDeletable = false
         }
+        $('#deleteModalText').text('Voulez vous vraiment supprimer ' + count + ' utilisateurs ?')
     } );
 
 
     //On change listener for the select to change roles
     $('#persons tbody').on('change', 'select', function (){
-        console.log("salit")
-       let userId = this.id;
+       let userId = this.name;
        let roleId = $(this).children(":selected").attr("id");
        //Create an object to parse in JSON
        let data = {"role_id": roleId}

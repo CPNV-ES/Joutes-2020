@@ -44,7 +44,7 @@ class UserController extends Controller
         }else{
             $user->role_id = $request->input('role_id');
             $user->save();
-            return redirect()->back()->with('success', "Les permissions de ".$user->username." ont été changées");
+            return redirect()->back()->with('success', "Les permissions de ".$user->username." / ".$user->last_name." ".$user->first_name." ont été changées");
         }
 
     }
