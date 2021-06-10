@@ -134,12 +134,12 @@
             @if($key === 0)
                 <div class="phase">
                     @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
-                        <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
+                        <div title="poule {{ $stage }}" class="pool">
                             <table id="" class="tableTeamList table table-bordered ">
                                 <thead>
                                 <tr>
                                     <th title="Teams In" class="teamlist">
-                                        <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                        <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a><br> {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}
                                     </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
@@ -208,7 +208,7 @@
                                 <thead>
                                 <tr>
                                     <th title="Teams In" class="teamlist"><a
-                                            href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                            href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a><br> {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}
                                     </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
