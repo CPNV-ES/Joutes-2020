@@ -2,9 +2,7 @@
 /config/*_rsa*
 /public/hot
 /public/storage
-/public/lib
-/public/css
-/public/js
+
 /public/mix-manifest.json
 
 /storage/*.key
