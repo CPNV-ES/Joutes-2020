@@ -22,6 +22,13 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.0",
         "bootstrap": "^4.4.1",
-        "jquery": "^3.4.1"
+        "datatables.net-bs4": "^1.10.24",
+        "datatables.net-buttons-bs4": "^1.7.0",
+        "datatables.net-fixedheader-bs4": "^3.1.8",
+        "datatables.net-responsive-bs4": "^2.2.7",
+        "datatables.net-scroller-bs4": "^2.0.3",
+        "datatables.net-searchbuilder-bs4": "^1.0.1",
+        "datatables.net-searchpanes-bs4": "^1.2.2",
+        "jquery": "^3.6.0"
     }
 }

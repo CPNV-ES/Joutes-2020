@@ -7,20 +7,20 @@
 
         <div class="row mb-4">
             <div class="col-1 ml-n5">
-                <a href="{{ route('administrations.index') }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
+                <a href="{{ route('events.index') }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon" aria-hidden="true"></i></a>
             </div>
 
             <div class="col-11 ml-n2">
                 <div class="row">
                     <div class="col-8">
                         <h1>Rôles</h1>
-                    </div>    
+                    </div>
                     <div class="col-4 pt-2">
                         <button type="button" class="btn btn-main" onclick="location.href='{{ route('roles.create') }}'">
                             Ajouter un rôle
                         </button>
                     </div>
-                </div>  
+                </div>
                 <hr>
             </div>
         </div>
@@ -52,7 +52,7 @@
                                                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                             </button>
                                         @endIf
-                                     
+
                                     </div>
                                 </td>
                             </tr>
@@ -64,14 +64,14 @@
         </div>
     </div>
 
-    
+
   <!-- Modal -->
   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <i class="fas fa-times-circle fa-4x" style="color: red;"></i>       
+                <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
                 <h5 class="modal-title pl-3 pt-3" id="deleteModalLabel">Souhaitez-vous vraiment le supprimer ?</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -84,7 +84,7 @@
                 <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-danger">Supprimer</button> 
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </div>
         </div>

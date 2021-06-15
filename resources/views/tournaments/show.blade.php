@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <div class="container">
 
         <div class="row">
@@ -81,7 +82,8 @@
                 </table>
                 @if(count($tournament->teams) < $tournament->max_teams)
                     <a href="{{ route('tournaments.teams.create', $tournament) }}" class="btn btn-main"
-                       title="Ajouter une équipe au tournoi"><i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i></a>
+                       title="Ajouter une équipe au tournoi"><i class="fa fa-solid fa-plus fa-1x"
+                                                                aria-hidden="true"></i></a>
                 @endif
             </div>
 
@@ -134,12 +136,38 @@
             @if($key === 0)
                 <div class="phase">
                     @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
-                        <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
+                        <div title="poule {{ $stage }}" class="pool">
                             <table id="" class="tableTeamList table table-bordered ">
-                                <thead>
+                                <thead class="{{\App\Enums\PoolState::poolStateClassColor($pool->poolState)}}">
                                 <tr>
                                     <th title="Teams In" class="teamlist">
                                         <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                        <br><a
+                                            class="poolHeader"> {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</a>
+                                        @php
+                                            $countPlayed = 0;
+                                            $countPlanned = 0;
+                                        @endphp
+                                        @foreach($pool->games as $keyGame =>  $game)
+                                            @if ($keyGame === 0)
+                                                <br><a class="poolHeader">commence
+                                                    à {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</a>
+                                            @endif
+                                            @if($game->score_contender1 !== null && $game->score_contender2 !== null)
+                                                @php
+                                                    $countPlayed++;
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $countPlanned++;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+
+                                        @if( $pool->poolState == 2)
+                                            <br><a class="poolHeader">jouée : {{ $countPlayed }}</a>
+                                            <br><a class="poolHeader"> plannifiée : {{ $countPlanned }}</a>
+                                        @endif
                                     </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
@@ -147,7 +175,24 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <table title="Teams In" class="table table-bordered teamlist tableStyle">
+                                        @php
+                                            $allGamePlayed = false;
+                                        @endphp
+                                        @foreach($pool->games as $game)
+                                            @if($game->score_contender1 === null && $game->score_contender2 === null)
+                                                @php
+                                                    $allGamePlayed = false;
+                                                @endphp
+                                            @else
+                                                @if($pool->poolState == 2)
+                                                    @php
+                                                        $allGamePlayed = true;
+                                                    @endphp
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                        <table title="Teams In"
+                                               class="table table-bordered teamlist tableStyle {{!$allGamePlayed ? $pool->poolState <= 1 ? "sortable" : "" : ""}}">
                                             @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
 
 
@@ -156,7 +201,9 @@
                                                     @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
                                                         <tr>
                                                             <td title="Team" class="team colorBackground"
-                                                                id="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                                id="{{ $contender->previousId() }}">
+                                                                <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>
+                                                            </td>
                                                         </tr>
                                                     @endif
                                                 @endforeach
@@ -179,20 +226,18 @@
                                 </tbody>
                             </table>
                         </div>
-                        @foreach($pool->games as $keyGame =>  $game)
-                            @if ($keyGame === 0)
-                                @if($game->score_contender1 === null && $game->score_contender2 === null)
+
+                        @if(Auth::check())
+                            @if(Auth::user()->role->slug == 'ADMIN')
+                                @if(!$allGamePlayed)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                       class="btn btn-main disabled closeButton">Terminer la pool</a>
-                                @elseif($pool->poolState == 2)
-                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                       class="btn btn-main closeButton">Terminer la pool</a>
+                                       class="disabled btn btn-main closeButton">Terminer la pool</a>
                                 @else
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                       class="btn btn-main disabled closeButton">Terminer la pool</a>
+                                       class="btn btn-main closeButton">Terminer la pool</a>
                                 @endif
                             @endif
-                        @endforeach
+                        @endif
                     @endforeach
 
 
@@ -205,18 +250,60 @@
 
                         <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
                             <table id="" class="tableTeamList table table-bordered ">
-                                <thead>
+                                <thead class="{{\App\Enums\PoolState::poolStateClassColor($pool->poolState)}}">
                                 <tr>
-                                    <th title="Teams In" class="teamlist"><a
-                                            href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                    <th title="Teams In" class="teamlist">
+                                        <a href="{{ route('tournaments.pools.show', [$tournament->id, $pool]) }}"> {{ $pool->poolName }} </a>
+                                        <br><a
+                                            class="poolHeader"> {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</a>
+                                        @php
+                                            $countPlayed = 0;
+                                            $countPlanned = 0;
+                                        @endphp
+                                        @foreach($pool->games as $keyGame =>  $game)
+                                            @if ($keyGame === 0)
+                                                <br><a class="poolHeader">commence
+                                                    à {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</a>
+                                            @endif
+                                            @if($game->score_contender1 !== null && $game->score_contender2 !== null)
+                                                @php
+                                                    $countPlayed++;
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $countPlanned++;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+
+                                        @if( $pool->poolState == 2)
+                                            <br><a class="poolHeader">jouée : {{ $countPlayed }}</a>
+                                            <br><a class="poolHeader"> plannifiée : {{ $countPlanned }}</a>
+                                        @endif
                                     </th>
                                     <th title="Teams Out" class="teamlist">Classement</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>
-                                        <table id="" class="table table-bordered teamlist tableStyle">
+                                    <td>@php
+                                            $allGamePlayed = false;
+                                        @endphp
+                                        @foreach($pool->games as $game)
+                                            @if($game->score_contender1 === null && $game->score_contender2 === null)
+                                                @php
+                                                    $allGamePlayed = false;
+                                                @endphp
+                                            @else
+                                                @if($pool->poolState == 2)
+                                                    @php
+                                                        $allGamePlayed = true;
+                                                    @endphp
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                        <table id=""
+                                               class="table table-bordered teamlist tableStyle {{!$allGamePlayed ? $pool->poolState <= 1 ? "sortable" : "" : ""}}">
 
                                             @php
                                                 $teamName = "";
@@ -230,7 +317,8 @@
                                                 @if($contender->team_id == null)
                                                     <tr>
                                                         <td title="Team" class="team">
-                                                            {{ $contender->rank_in_pool }} de {{ $contender->fromPool->poolName }}
+                                                            <a>{{ $contender->rank_in_pool }}
+                                                                de {{ $contender->fromPool->poolName }}</a>
                                                         </td>
                                                     </tr>
                                                     @php $i++; @endphp
@@ -242,7 +330,9 @@
 
                                                             <tr>
                                                                 <td title="Team" class="team colorBackground"
-                                                                    data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
+                                                                    data-previous="{{ $contender->previousId() }}">
+                                                                    <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -278,20 +368,17 @@
                                 </tbody>
                             </table>
                         </div>
-                        @foreach($pool->games as $keyGame =>  $game)
-                            @if ($keyGame === 0)
-                                @if($game->score_contender1 === null && $game->score_contender2 === null)
+                        @if(Auth::check())
+                            @if(Auth::user()->role->slug == 'ADMIN')
+                                @if(!$allGamePlayed)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
                                        class="disabled btn btn-main closeButton">Terminer la pool</a>
-                                @elseif($pool->poolState == 2)
-                                    <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                       class="btn btn-main closeButton">Terminer la pool</a>
                                 @else
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
-                                       class="disabled btn btn-main closeButton">Terminer la pool</a>
+                                       class="btn btn-main closeButton">Terminer la pool</a>
                                 @endif
                             @endif
-                        @endforeach
+                        @endif
                     @endforeach
                 </div>
 
