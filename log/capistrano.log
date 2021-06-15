@@ -3687,3 +3687,1262 @@ Use the `composer fund` command to find out more!
  DEBUG [ca477ac1] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210610071416 && /usr/bin/env php artisan migrate --force --env=production
  DEBUG [ca477ac1] 	Nothing to migrate.
   INFO [ca477ac1] Finished in 0.316 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:09:44 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [cc1293f7] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [cc1293f7] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:10:43 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [f76d26f3] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [f76d26f3] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:10:57 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [85acc142] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [85acc142] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:11:45 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [3cfc0eb5] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [3cfc0eb5] Command: /usr/bin/env mkdir -p /tmp
+  INFO [3cfc0eb5] Finished in 0.440 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-3ad52225b109b0d5221e.sh 0.0%
+  INFO Uploading /tmp/git-ssh-3ad52225b109b0d5221e.sh 100.0%
+  INFO [d34fcec7] Running /usr/bin/env chmod 700 /tmp/git-ssh-3ad52225b109b0d5221e.sh as joutes@joutes.mycpnv.ch
+ DEBUG [d34fcec7] Command: /usr/bin/env chmod 700 /tmp/git-ssh-3ad52225b109b0d5221e.sh
+  INFO [d34fcec7] Finished in 0.142 seconds with exit status 0 (successful).
+  INFO [2979b55e] Running /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD as joutes@joutes.mycpnv.ch
+ DEBUG [2979b55e] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-3ad52225b109b0d5221e.sh" ; /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD )
+ DEBUG [2979b55e] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac	HEAD
+  INFO [2979b55e] Finished in 1.319 seconds with exit status 0 (successful).
+  INFO [d1d46aa5] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [d1d46aa5] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases
+  INFO [d1d46aa5] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [599224e1] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [599224e1] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs
+  INFO [599224e1] Finished in 0.129 seconds with exit status 0 (successful).
+ DEBUG [1ac41ee9] Running [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ] as joutes@joutes.mycpnv.ch
+ DEBUG [1ac41ee9] Command: [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ]
+ DEBUG [1ac41ee9] Finished in 0.139 seconds with exit status 0 (successful).
+ DEBUG [1b7f0a26] Running /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null as joutes@joutes.mycpnv.ch
+ DEBUG [1b7f0a26] Command: /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null
+ DEBUG [1b7f0a26] 	13aca5dc6630c86b2214d7cee438ccc51bf482fa
+ DEBUG [1b7f0a26] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [af10a24b] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [af10a24b] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [af10a24b] Finished in 0.141 seconds with exit status 0 (successful).
+  INFO [c7e73656] Running /usr/bin/env mkdir -p storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [c7e73656] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/app
+  INFO [c7e73656] Finished in 0.121 seconds with exit status 0 (successful).
+ DEBUG [cbc0a121] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [cbc0a121] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [cbc0a121] Finished in 0.125 seconds with exit status 0 (successful).
+  INFO [133754d4] Running /usr/bin/env mkdir -p storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [133754d4] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/cache
+  INFO [133754d4] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [30a535bd] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [30a535bd] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [30a535bd] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [19927a80] Running /usr/bin/env mkdir -p storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [19927a80] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/sessions
+  INFO [19927a80] Finished in 0.120 seconds with exit status 0 (successful).
+ DEBUG [0756550f] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [0756550f] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [0756550f] Finished in 0.114 seconds with exit status 0 (successful).
+  INFO [5e49e31f] Running /usr/bin/env mkdir -p storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [5e49e31f] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/views
+  INFO [5e49e31f] Finished in 0.142 seconds with exit status 0 (successful).
+ DEBUG [291c0ac2] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [291c0ac2] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [291c0ac2] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [c59603ee] Running /usr/bin/env mkdir -p storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [c59603ee] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/logs
+  INFO [c59603ee] Finished in 0.122 seconds with exit status 0 (successful).
+ DEBUG [61cf57d6] Running [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ] as joutes@joutes.mycpnv.ch
+ DEBUG [61cf57d6] Command: [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ]
+ DEBUG [61cf57d6] Finished in 0.139 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/joutes/joutes.mycpnv.ch/repo
+ DEBUG [bfe41259] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [bfe41259] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [bfe41259] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [d113e41b] Running /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git as joutes@joutes.mycpnv.ch
+ DEBUG [d113e41b] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-3ad52225b109b0d5221e.sh" ; /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git )
+  INFO [d113e41b] Finished in 0.166 seconds with exit status 0 (successful).
+  INFO [33d2b186] Running /usr/bin/env git remote update --prune as joutes@joutes.mycpnv.ch
+ DEBUG [33d2b186] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-3ad52225b109b0d5221e.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [33d2b186] 	Fetching origin
+ DEBUG [33d2b186] 	From github.com:CPNV-ES/Joutes-2020
+ - [deleted]         (none)     -> feature/userPerms
+ DEBUG [33d2b186] 	   68115d5..ba28437  develop                 -> develop
+ DEBUG [33d2b186] 	 * [new branch]      feature/PerfectViewPool -> feature/PerfectViewPool
+ DEBUG [33d2b186] 	   13aca5d..9b738a0  master                  -> master
+ DEBUG [33d2b186] 	 + 498c531...ca05b32 refs/pull/30/merge      -> refs/pull/30/merge  (forced update)
+ DEBUG [33d2b186] 	 + 57593e0...ab8fd53 refs/pull/35/merge      -> refs/pull/35/merge  (forced update)
+ DEBUG [33d2b186] 	 + 37982c9...986ea03 refs/pull/37/merge      -> refs/pull/37/merge  (forced update)
+ DEBUG [33d2b186] 	 + ed1d91d...e6f58fa refs/pull/43/merge      -> refs/pull/43/merge  (forced update)
+ DEBUG [33d2b186] 	 + ca169f5...35c729a refs/pull/44/merge      -> refs/pull/44/merge  (forced update)
+ DEBUG [33d2b186] 	 + 4e496af...acf1b55 refs/pull/46/merge      -> refs/pull/46/merge  (forced update)
+ DEBUG [33d2b186] 	 + b5c4dca...7318219 refs/pull/47/merge      -> refs/pull/47/merge  (forced update)
+ DEBUG [33d2b186] 	 + d8928c8...ce1e5ec refs/pull/48/merge      -> refs/pull/48/merge  (forced update)
+ DEBUG [33d2b186] 	 + 3838fcf...87acb48 refs/pull/49/merge      -> refs/pull/49/merge  (forced update)
+ DEBUG [33d2b186] 	 + 43fc426...ebe3e66 refs/pull/53/merge      -> refs/pull/53/merge  (forced update)
+ DEBUG [33d2b186] 	 + 4eef4c2...f25a2fc refs/pull/55/merge      -> refs/pull/55/merge  (forced update)
+ DEBUG [33d2b186] 	 + 3a6512a...5b20de3 refs/pull/57/merge      -> refs/pull/57/merge  (forced update)
+ DEBUG [33d2b186] 	 * [new tag]         v0.5                    -> v0.5
+  INFO [33d2b186] Finished in 2.098 seconds with exit status 0 (successful).
+ DEBUG [e4856f18] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [e4856f18] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [e4856f18] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [e05544f9] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141149 as joutes@joutes.mycpnv.ch
+ DEBUG [e05544f9] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-3ad52225b109b0d5221e.sh" ; /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141149 )
+  INFO [e05544f9] Finished in 0.125 seconds with exit status 0 (successful).
+  INFO [2ce323c8] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615141149 as joutes@joutes.mycpnv.ch
+ DEBUG [2ce323c8] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-3ad52225b109b0d5221e.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615141149 )
+  INFO [2ce323c8] Finished in 0.329 seconds with exit status 0 (successful).
+ DEBUG [f445fcb7] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [f445fcb7] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [f445fcb7] Finished in 0.120 seconds with exit status 0 (successful).
+ DEBUG [ddcc6f36] Running /usr/bin/env git rev-list --max-count=1 master as joutes@joutes.mycpnv.ch
+ DEBUG [ddcc6f36] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-3ad52225b109b0d5221e.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [ddcc6f36] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [ddcc6f36] Finished in 0.125 seconds with exit status 0 (successful).
+ DEBUG [e0a6c1c1] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [e0a6c1c1] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi
+ DEBUG [e0a6c1c1] Finished in 0.135 seconds with exit status 0 (successful).
+  INFO [ecc4d477] Running /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION as joutes@joutes.mycpnv.ch
+ DEBUG [ecc4d477] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141149 && /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION
+  INFO [ecc4d477] Finished in 0.135 seconds with exit status 0 (successful).
+  INFO [c30c8ce1] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework as joutes@joutes.mycpnv.ch
+ DEBUG [c30c8ce1] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework
+  INFO [c30c8ce1] Finished in 0.145 seconds with exit status 0 (successful).
+ DEBUG [bdd514cf] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [bdd514cf] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app ]
+ DEBUG [bdd514cf] Finished in 0.118 seconds with exit status 1 (failed).
+ DEBUG [c8e01823] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [c8e01823] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app ]
+ DEBUG [c8e01823] Finished in 0.126 seconds with exit status 0 (successful).
+  INFO [736becba] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [736becba] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app
+  INFO [736becba] Finished in 0.151 seconds with exit status 0 (successful).
+  INFO [e11cbc02] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [e11cbc02] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/app
+  INFO [e11cbc02] Finished in 0.119 seconds with exit status 0 (successful).
+ DEBUG [96520d4b] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [96520d4b] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache ]
+ DEBUG [96520d4b] Finished in 0.127 seconds with exit status 1 (failed).
+ DEBUG [3b8cde8f] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [3b8cde8f] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache ]
+ DEBUG [3b8cde8f] Finished in 0.137 seconds with exit status 0 (successful).
+  INFO [9cb91582] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [9cb91582] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache
+  INFO [9cb91582] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [d11e782d] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [d11e782d] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/cache
+  INFO [d11e782d] Finished in 0.118 seconds with exit status 0 (successful).
+ DEBUG [d6172794] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [d6172794] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions ]
+ DEBUG [d6172794] Finished in 0.129 seconds with exit status 1 (failed).
+ DEBUG [1f457bf4] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [1f457bf4] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions ]
+ DEBUG [1f457bf4] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [c62c921c] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [c62c921c] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions
+  INFO [c62c921c] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [e2d470c8] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [e2d470c8] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/sessions
+  INFO [e2d470c8] Finished in 0.145 seconds with exit status 0 (successful).
+ DEBUG [864082eb] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [864082eb] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views ]
+ DEBUG [864082eb] Finished in 0.130 seconds with exit status 1 (failed).
+ DEBUG [0ed2b99c] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [0ed2b99c] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views ]
+ DEBUG [0ed2b99c] Finished in 0.132 seconds with exit status 0 (successful).
+  INFO [27f9060c] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [27f9060c] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views
+  INFO [27f9060c] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [2d9db8a2] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [2d9db8a2] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/framework/views
+  INFO [2d9db8a2] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [3983feb0] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [3983feb0] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs ]
+ DEBUG [3983feb0] Finished in 0.129 seconds with exit status 1 (failed).
+ DEBUG [0fa5da6b] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [0fa5da6b] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs ]
+ DEBUG [0fa5da6b] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [aade53f3] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [aade53f3] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs
+  INFO [aade53f3] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO [1620eccc] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [1620eccc] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615141149/storage/logs
+  INFO [1620eccc] Finished in 0.115 seconds with exit status 0 (successful).
+  INFO [b4de6fe6] Running ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version as joutes@joutes.mycpnv.ch
+ DEBUG [b4de6fe6] Command: ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version
+  INFO [b4de6fe6] Finished in 0.122 seconds with exit status 0 (successful).
+ DEBUG [21b9616d] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [21b9616d] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi
+ DEBUG [21b9616d] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [a3339f56] Running php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader as joutes@joutes.mycpnv.ch
+ DEBUG [a3339f56] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141149 && php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+ DEBUG [a3339f56] 	Installing dependencies from lock file
+ DEBUG [a3339f56] 	Verifying lock file contents can be installed on current platform.
+ DEBUG [a3339f56] 	Package operations: 64 installs, 0 updates, 0 removals
+ DEBUG [a3339f56] 	    0 [>---------------------------]    0 [>---------------------------]
+ DEBUG [a3339f56] 	  - Installing doctrine/event-manager (1.1.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing doctrine/deprecations (v0.5.3): Extracting archive
+ DEBUG [a3339f56] 	  - Installing doctrine/cache (1.11.3): Extracting archive
+ DEBUG [a3339f56] 	  - Installing doctrine/dbal (2.13.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing doctrine/inflector (2.0.3): Extracting archive
+ DEBUG [a3339f56] 	  - Installing doctrine/lexer (1.2.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing dragonmantank/cron-expression (v2.3.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing symfony/polyfill-ctype (v1.22.1): Extracting archive
+  - Installing phpoption/phpoption (1.7.5): Extracting archive
+  - Installing vlucas/phpdotenv (v3.6.8): Extracting archive
+  - Installing symfony/css-selector (v5.2.9): Extracting archive
+  - Installing tijsverkoyen/css-to-inline-styles (2.2.3): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-php72 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.22.1): Extracting archive
+  - Installing symfony/var-dumper (v4.4.22): Extracting archive
+  - Installing symfony/routing (v4.4.24): Extracting archive
+  - Installing symfony/process (v4.4.22): Extracting archive
+ DEBUG [a3339f56] 	  - Installing symfony/polyfill-php73 (v1.22.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing symfony/polyfill-intl-normalizer (v1.22.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing symfony/polyfill-intl-idn (v1.22.1): Extracting archive
+  - Installing symfony/deprecation-contracts (v2.4.0): Extracting archive
+  - Installing symfony/mime (v5.2.9): Extracting archive
+  - Installing symfony/http-foundation (v4.4.23): Extracting archive
+  - Installing symfony/http-client-contracts (v2.4.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v1.1.9): Extracting archive
+  - Installing symfony/event-dispatcher (v4.4.20): Extracting archive
+  - Installing psr/log (1.1.4): Extracting archive
+  - Installing symfony/debug (v4.4.22): Extracting archive
+  - Installing symfony/error-handler (v4.4.23): Extracting archive
+  - Installing symfony/http-kernel (v4.4.24): Extracting archive
+  - Installing symfony/finder (v4.4.24): Extracting archive
+  - Installing psr/container (1.1.1): Extracting archive
+  - Installing symfony/service-contracts (v2.4.0): Extracting archive
+  - Installing symfony/console (v4.4.24): Extracting archive
+  - Installing symfony/polyfill-iconv (v1.22.1): Extracting archive
+  - Installing egulias/email-validator (2.1.25): Extracting archive
+  - Installing swiftmailer/swiftmailer (v6.2.7): Extracting archive
+  - Installing paragonie/random_compat (v9.99.99): Extracting archive
+  - Installing ramsey/uuid (3.9.3): Extracting archive
+  - Installing psr/simple-cache (1.0.1): Extracting archive
+  - Installing opis/closure (3.6.2): Extracting archive
+  - Installing symfony/translation-contracts (v2.4.0): Extracting archive
+  - Installing symfony/translation (v4.4.24): Extracting archive
+  - Installing nesbot/carbon (2.48.1): Extracting archive
+  - Installing monolog/monolog (2.2.0): Extracting archive
+  - Installing league/flysystem (1.0.46): Extracting archive
+  - Installing league/commonmark (1.6.2): Extracting archive
+  - Installing laravel/framework (v6.18.43): Extracting archive
+  - Installing fideloper/proxy (4.4.1): Extracting archive
+  - Installing guzzlehttp/promises (1.4.1): Extracting archive
+  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+  - Installing psr/http-message (1.0.1): Extracting archive
+  - Installing guzzlehttp/psr7 (1.8.2): Extracting archive
+  - Installing psr/http-client (1.0.1): Extracting archive
+  - Installing guzzlehttp/guzzle (7.3.0): Extracting archive
+ DEBUG [a3339f56] 	  - Installing league/oauth1-client (v1.9.0): Extracting archive
+ DEBUG [a3339f56] 	  - Installing laravel/socialite (v5.2.3): Extracting archive
+  - Installing nikic/php-parser (v4.10.5): Extracting archive
+  - Installing psy/psysh (v0.10.8): Extracting archive
+ DEBUG [a3339f56] 	  - Installing laravel/tinker (v2.6.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing socialiteproviders/manager (4.0.1): Extracting archive
+ DEBUG [a3339f56] 	  - Installing socialiteproviders/microsoft-azure (4.2.0): Extracting archive
+ DEBUG [a3339f56] 	  - Installing socialiteproviders/vkontakte (4.2.1): Extracting archive
+ DEBUG [a3339f56] 	  0/64 [>---------------------------]   0%
+ DEBUG [a3339f56] 	
+  9/64 [===>------------------------]  14%
+ DEBUG [a3339f56] 	
+ 24/64 [==========>-----------------]  37%
+ DEBUG [a3339f56] 	
+ 43/64 [==================>---------]  67%
+ DEBUG [a3339f56] 	
+ 60/64 [==========================>-]  93%
+ DEBUG [a3339f56] 	
+ 64/64 [============================] 100%
+ DEBUG [a3339f56] 	Package fzaninotto/faker is abandoned, you should avoid using it. No replacement was suggested.
+Package jakub-onderka/php-console-color is abandoned, you should avoid using it. Use php-parallel-lint/php-console-color instead.
+Package jakub-onderka/php-console-highlighter is abandoned, you should avoid using it. Use php-parallel-lint/php-console-highlighter instead.
+Package phpunit/php-token-stream is abandoned, you should avoid using it. No replacement was suggested.
+Generating optimized autoload files
+ DEBUG [a3339f56] 	Warning: Ambiguous class resolution, "Joutes2018Seeder" was found in both "/home/joutes/joutes.mycpnv.ch/releases/20210615141149/database/seeds/Joutes2018Seeder.php" and "/home/joutes/joutes.mycpnv.ch/releases/20210615141149/database/seeds/Joutes2018Seeder2.php", the first will be used.
+ DEBUG [a3339f56] 	> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+ DEBUG [a3339f56] 	> @php artisan package:discover --ansi
+ DEBUG [a3339f56] 	Discovered Package: [32mfideloper/proxy[39m
+Discovered Package: [32mlaravel/socialite[39m
+Discovered Package: [32mlaravel/tinker[39m
+Discovered Package: [32mnesbot/carbon[39m
+Discovered Package: [32msocialiteproviders/manager[39m
+[32mPackage manifest generated successfully.[39m
+ DEBUG [a3339f56] 	40 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+  INFO [a3339f56] Finished in 2.648 seconds with exit status 0 (successful).
+ DEBUG [fcb32128] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [fcb32128] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi
+ DEBUG [fcb32128] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [60c87cd9] Running /usr/bin/env php artisan storage:link --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [60c87cd9] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141149 && /usr/bin/env php artisan storage:link --env=production
+ DEBUG [60c87cd9] 	The [public/storage] directory has been linked.
+  INFO [60c87cd9] Finished in 0.300 seconds with exit status 0 (successful).
+  INFO [bfd96a84] Running /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615141149/.env as joutes@joutes.mycpnv.ch
+ DEBUG [bfd96a84] Command: /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615141149/.env
+  INFO [bfd96a84] Finished in 0.143 seconds with exit status 0 (successful).
+ DEBUG [c357687c] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [c357687c] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141149; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141149'" 1>&2; false; fi
+ DEBUG [c357687c] Finished in 0.113 seconds with exit status 0 (successful).
+  INFO [48f605be] Running /usr/bin/env php artisan migrate --force --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [48f605be] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141149 && /usr/bin/env php artisan migrate --force --env=production
+ DEBUG [48f605be] 	Migrating: 2021_06_03_062621_add_deleted_at_to_users
+ DEBUG [48f605be] 	Migrated:  2021_06_03_062621_add_deleted_at_to_users (0.11 seconds)
+  INFO [48f605be] Finished in 0.442 seconds with exit status 0 (successful).
+  INFO [3dc3a728] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615141149 /home/joutes/joutes.mycpnv.ch/releases/current as joutes@joutes.mycpnv.ch
+ DEBUG [3dc3a728] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615141149 /home/joutes/joutes.mycpnv.ch/releases/current
+  INFO [3dc3a728] Finished in 0.133 seconds with exit status 0 (successful).
+  INFO [62bc08b7] Running /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch as joutes@joutes.mycpnv.ch
+ DEBUG [62bc08b7] Command: /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch
+  INFO [62bc08b7] Finished in 0.134 seconds with exit status 0 (successful).
+ DEBUG [7a692d3c] Running /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [7a692d3c] Command: /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases
+ DEBUG [7a692d3c] 	20210610062702	20210610062806	20210610062929	20210610063440	20210610064815
+20210610064950	20210610071416	20210615141149
+ DEBUG [7a692d3c] Finished in 0.113 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 8 deployed releases on joutes.mycpnv.ch
+ DEBUG [b01ec588] Running [ -d /home/joutes/joutes.mycpnv.ch/current ] as joutes@joutes.mycpnv.ch
+ DEBUG [b01ec588] Command: [ -d /home/joutes/joutes.mycpnv.ch/current ]
+ DEBUG [b01ec588] Finished in 0.107 seconds with exit status 0 (successful).
+ DEBUG [4beeccdd] Running /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current as joutes@joutes.mycpnv.ch
+ DEBUG [4beeccdd] Command: /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current
+ DEBUG [4beeccdd] 	/home/joutes/joutes.mycpnv.ch/releases/20210615141149
+ DEBUG [4beeccdd] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [219711b6] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610062702 /home/joutes/joutes.mycpnv.ch/releases/20210610062806 /home/joutes/joutes.mycpnv.ch/releases/20210610062929 as joutes@joutes.mycpnv.ch
+ DEBUG [219711b6] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610062702 /home/joutes/joutes.mycpnv.ch/releases/20210610062806 /home/joutes/joutes.mycpnv.ch/releases/20210610062929
+  INFO [219711b6] Finished in 4.287 seconds with exit status 0 (successful).
+ DEBUG [39e20e7a] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [39e20e7a] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi
+ DEBUG [39e20e7a] Finished in 0.121 seconds with exit status 0 (successful).
+  INFO [b3f1b947] Running /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615141149 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log as joutes@joutes.mycpnv.ch
+ DEBUG [b3f1b947] Command: cd /home/joutes/joutes.mycpnv.ch/releases && /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615141149 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log
+  INFO [b3f1b947] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:19:00 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [0fbfe09c] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [0fbfe09c] Command: /usr/bin/env mkdir -p /tmp
+  INFO [0fbfe09c] Finished in 0.371 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-0d35b73425483121d9c3.sh 0.0%
+  INFO Uploading /tmp/git-ssh-0d35b73425483121d9c3.sh 100.0%
+  INFO [f1c7d1eb] Running /usr/bin/env chmod 700 /tmp/git-ssh-0d35b73425483121d9c3.sh as joutes@joutes.mycpnv.ch
+ DEBUG [f1c7d1eb] Command: /usr/bin/env chmod 700 /tmp/git-ssh-0d35b73425483121d9c3.sh
+  INFO [f1c7d1eb] Finished in 0.121 seconds with exit status 0 (successful).
+  INFO [62747983] Running /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD as joutes@joutes.mycpnv.ch
+ DEBUG [62747983] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0d35b73425483121d9c3.sh" ; /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD )
+ DEBUG [62747983] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac	HEAD
+  INFO [62747983] Finished in 2.465 seconds with exit status 0 (successful).
+  INFO [e87add92] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [e87add92] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases
+  INFO [e87add92] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [87d4f02e] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [87d4f02e] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs
+  INFO [87d4f02e] Finished in 0.126 seconds with exit status 0 (successful).
+ DEBUG [f2c6cd1b] Running [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ] as joutes@joutes.mycpnv.ch
+ DEBUG [f2c6cd1b] Command: [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ]
+ DEBUG [f2c6cd1b] Finished in 0.133 seconds with exit status 0 (successful).
+ DEBUG [b90e7bb6] Running /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null as joutes@joutes.mycpnv.ch
+ DEBUG [b90e7bb6] Command: /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null
+ DEBUG [b90e7bb6] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [b90e7bb6] Finished in 0.128 seconds with exit status 0 (successful).
+ DEBUG [d07f4222] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [d07f4222] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [d07f4222] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [bfb2101f] Running /usr/bin/env mkdir -p storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [bfb2101f] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/app
+  INFO [bfb2101f] Finished in 0.134 seconds with exit status 0 (successful).
+ DEBUG [78638a18] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [78638a18] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [78638a18] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [bfb3d04d] Running /usr/bin/env mkdir -p storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [bfb3d04d] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/cache
+  INFO [bfb3d04d] Finished in 0.115 seconds with exit status 0 (successful).
+ DEBUG [41f0336f] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [41f0336f] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [41f0336f] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [b3a0066e] Running /usr/bin/env mkdir -p storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [b3a0066e] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/sessions
+  INFO [b3a0066e] Finished in 0.116 seconds with exit status 0 (successful).
+ DEBUG [bcca6ad2] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [bcca6ad2] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [bcca6ad2] Finished in 0.124 seconds with exit status 0 (successful).
+  INFO [2d4fbf60] Running /usr/bin/env mkdir -p storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [2d4fbf60] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/views
+  INFO [2d4fbf60] Finished in 0.119 seconds with exit status 0 (successful).
+ DEBUG [8c31c4b7] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [8c31c4b7] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [8c31c4b7] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [2892a26e] Running /usr/bin/env mkdir -p storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [2892a26e] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/logs
+  INFO [2892a26e] Finished in 0.118 seconds with exit status 0 (successful).
+ DEBUG [5b75e329] Running [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ] as joutes@joutes.mycpnv.ch
+ DEBUG [5b75e329] Command: [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ]
+ DEBUG [5b75e329] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/joutes/joutes.mycpnv.ch/repo
+ DEBUG [925b7528] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [925b7528] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [925b7528] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO [33180a4f] Running /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git as joutes@joutes.mycpnv.ch
+ DEBUG [33180a4f] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0d35b73425483121d9c3.sh" ; /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git )
+  INFO [33180a4f] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [aa118f16] Running /usr/bin/env git remote update --prune as joutes@joutes.mycpnv.ch
+ DEBUG [aa118f16] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0d35b73425483121d9c3.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [aa118f16] 	Fetching origin
+  INFO [aa118f16] Finished in 2.431 seconds with exit status 0 (successful).
+ DEBUG [7cf8e973] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [7cf8e973] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [7cf8e973] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [0e3bc02e] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141905 as joutes@joutes.mycpnv.ch
+ DEBUG [0e3bc02e] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0d35b73425483121d9c3.sh" ; /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141905 )
+  INFO [0e3bc02e] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [2d8a44ab] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615141905 as joutes@joutes.mycpnv.ch
+ DEBUG [2d8a44ab] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0d35b73425483121d9c3.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615141905 )
+  INFO [2d8a44ab] Finished in 0.258 seconds with exit status 0 (successful).
+ DEBUG [f2af53e4] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [f2af53e4] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [f2af53e4] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [7aa87f28] Running /usr/bin/env git rev-list --max-count=1 master as joutes@joutes.mycpnv.ch
+ DEBUG [7aa87f28] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0d35b73425483121d9c3.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [7aa87f28] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [7aa87f28] Finished in 0.120 seconds with exit status 0 (successful).
+ DEBUG [87c6d8da] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [87c6d8da] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi
+ DEBUG [87c6d8da] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [a17d8119] Running /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION as joutes@joutes.mycpnv.ch
+ DEBUG [a17d8119] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141905 && /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION
+  INFO [a17d8119] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [b8981df3] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework as joutes@joutes.mycpnv.ch
+ DEBUG [b8981df3] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework
+  INFO [b8981df3] Finished in 0.119 seconds with exit status 0 (successful).
+ DEBUG [71e0ac16] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [71e0ac16] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app ]
+ DEBUG [71e0ac16] Finished in 0.115 seconds with exit status 1 (failed).
+ DEBUG [591cb677] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [591cb677] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app ]
+ DEBUG [591cb677] Finished in 0.135 seconds with exit status 0 (successful).
+  INFO [4602984b] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [4602984b] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app
+  INFO [4602984b] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO [0145dd92] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [0145dd92] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/app
+  INFO [0145dd92] Finished in 0.147 seconds with exit status 0 (successful).
+ DEBUG [7585fda7] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [7585fda7] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache ]
+ DEBUG [7585fda7] Finished in 0.130 seconds with exit status 1 (failed).
+ DEBUG [55ece307] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [55ece307] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache ]
+ DEBUG [55ece307] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [2eebfd35] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [2eebfd35] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache
+  INFO [2eebfd35] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO [e3b7f7b7] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [e3b7f7b7] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/cache
+  INFO [e3b7f7b7] Finished in 0.132 seconds with exit status 0 (successful).
+ DEBUG [e119969e] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [e119969e] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions ]
+ DEBUG [e119969e] Finished in 0.108 seconds with exit status 1 (failed).
+ DEBUG [5820de11] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [5820de11] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions ]
+ DEBUG [5820de11] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO [34f2d65f] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [34f2d65f] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions
+  INFO [34f2d65f] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [ad3f00b4] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [ad3f00b4] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/sessions
+  INFO [ad3f00b4] Finished in 0.118 seconds with exit status 0 (successful).
+ DEBUG [22565c20] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [22565c20] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views ]
+ DEBUG [22565c20] Finished in 0.126 seconds with exit status 1 (failed).
+ DEBUG [00491de8] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [00491de8] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views ]
+ DEBUG [00491de8] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO [10862cc1] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [10862cc1] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views
+  INFO [10862cc1] Finished in 0.107 seconds with exit status 0 (successful).
+  INFO [e5b1a893] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [e5b1a893] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/framework/views
+  INFO [e5b1a893] Finished in 0.106 seconds with exit status 0 (successful).
+ DEBUG [dcd348b3] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [dcd348b3] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs ]
+ DEBUG [dcd348b3] Finished in 0.117 seconds with exit status 1 (failed).
+ DEBUG [3f67b093] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [3f67b093] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs ]
+ DEBUG [3f67b093] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [a1a753c8] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [a1a753c8] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs
+  INFO [a1a753c8] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [34f4973c] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [34f4973c] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615141905/storage/logs
+  INFO [34f4973c] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [68ce65d9] Running ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version as joutes@joutes.mycpnv.ch
+ DEBUG [68ce65d9] Command: ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version
+  INFO [68ce65d9] Finished in 0.126 seconds with exit status 0 (successful).
+ DEBUG [061ad0af] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [061ad0af] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi
+ DEBUG [061ad0af] Finished in 0.107 seconds with exit status 0 (successful).
+  INFO [849c72b9] Running php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader as joutes@joutes.mycpnv.ch
+ DEBUG [849c72b9] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141905 && php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+ DEBUG [849c72b9] 	Installing dependencies from lock file
+ DEBUG [849c72b9] 	Verifying lock file contents can be installed on current platform.
+ DEBUG [849c72b9] 	Package operations: 64 installs, 0 updates, 0 removals
+ DEBUG [849c72b9] 	    0 [>---------------------------]    0 [>---------------------------]
+  - Installing doctrine/event-manager (1.1.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing doctrine/deprecations (v0.5.3): Extracting archive
+ DEBUG [849c72b9] 	  - Installing doctrine/cache (1.11.3): Extracting archive
+  - Installing doctrine/dbal (2.13.1): Extracting archive
+  - Installing doctrine/inflector (2.0.3): Extracting archive
+ DEBUG [849c72b9] 	  - Installing doctrine/lexer (1.2.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing dragonmantank/cron-expression (v2.3.1): Extracting archive
+  - Installing symfony/polyfill-ctype (v1.22.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing phpoption/phpoption (1.7.5): Extracting archive
+ DEBUG [849c72b9] 	  - Installing vlucas/phpdotenv (v3.6.8): Extracting archive
+  - Installing symfony/css-selector (v5.2.9): Extracting archive
+ DEBUG [849c72b9] 	  - Installing tijsverkoyen/css-to-inline-styles (2.2.3): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/polyfill-php80 (v1.22.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/polyfill-php72 (v1.22.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/polyfill-mbstring (v1.22.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/var-dumper (v4.4.22): Extracting archive
+  - Installing symfony/routing (v4.4.24): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/process (v4.4.22): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/polyfill-php73 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-intl-normalizer (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-intl-idn (v1.22.1): Extracting archive
+  - Installing symfony/deprecation-contracts (v2.4.0): Extracting archive
+  - Installing symfony/mime (v5.2.9): Extracting archive
+  - Installing symfony/http-foundation (v4.4.23): Extracting archive
+  - Installing symfony/http-client-contracts (v2.4.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v1.1.9): Extracting archive
+  - Installing symfony/event-dispatcher (v4.4.20): Extracting archive
+  - Installing psr/log (1.1.4): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/debug (v4.4.22): Extracting archive
+  - Installing symfony/error-handler (v4.4.23): Extracting archive
+  - Installing symfony/http-kernel (v4.4.24): Extracting archive
+  - Installing symfony/finder (v4.4.24): Extracting archive
+ DEBUG [849c72b9] 	  - Installing psr/container (1.1.1): Extracting archive
+  - Installing symfony/service-contracts (v2.4.0): Extracting archive
+  - Installing symfony/console (v4.4.24): Extracting archive
+  - Installing symfony/polyfill-iconv (v1.22.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing egulias/email-validator (2.1.25): Extracting archive
+ DEBUG [849c72b9] 	  - Installing swiftmailer/swiftmailer (v6.2.7): Extracting archive
+ DEBUG [849c72b9] 	  - Installing paragonie/random_compat (v9.99.99): Extracting archive
+ DEBUG [849c72b9] 	  - Installing ramsey/uuid (3.9.3): Extracting archive
+ DEBUG [849c72b9] 	  - Installing psr/simple-cache (1.0.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing opis/closure (3.6.2): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/translation-contracts (v2.4.0): Extracting archive
+ DEBUG [849c72b9] 	  - Installing symfony/translation (v4.4.24): Extracting archive
+ DEBUG [849c72b9] 	  - Installing nesbot/carbon (2.48.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing monolog/monolog (2.2.0): Extracting archive
+ DEBUG [849c72b9] 	  - Installing league/flysystem (1.0.46): Extracting archive
+ DEBUG [849c72b9] 	  - Installing league/commonmark (1.6.2): Extracting archive
+ DEBUG [849c72b9] 	  - Installing laravel/framework (v6.18.43): Extracting archive
+ DEBUG [849c72b9] 	  - Installing fideloper/proxy (4.4.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing guzzlehttp/promises (1.4.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+ DEBUG [849c72b9] 	  - Installing psr/http-message (1.0.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing guzzlehttp/psr7 (1.8.2): Extracting archive
+ DEBUG [849c72b9] 	  - Installing psr/http-client (1.0.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing guzzlehttp/guzzle (7.3.0): Extracting archive
+ DEBUG [849c72b9] 	  - Installing league/oauth1-client (v1.9.0): Extracting archive
+ DEBUG [849c72b9] 	  - Installing laravel/socialite (v5.2.3): Extracting archive
+  - Installing nikic/php-parser (v4.10.5): Extracting archive
+  - Installing psy/psysh (v0.10.8): Extracting archive
+ DEBUG [849c72b9] 	  - Installing laravel/tinker (v2.6.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing socialiteproviders/manager (4.0.1): Extracting archive
+ DEBUG [849c72b9] 	  - Installing socialiteproviders/microsoft-azure (4.2.0): Extracting archive
+ DEBUG [849c72b9] 	  - Installing socialiteproviders/vkontakte (4.2.1): Extracting archive
+ DEBUG [849c72b9] 	  0/64 [>---------------------------]   0%
+ DEBUG [849c72b9] 	
+  9/64 [===>------------------------]  14%
+ DEBUG [849c72b9] 	
+ 23/64 [==========>-----------------]  35%
+ DEBUG [849c72b9] 	
+ 42/64 [==================>---------]  65%
+ DEBUG [849c72b9] 	
+ 59/64 [=========================>--]  92%
+ DEBUG [849c72b9] 	
+ 64/64 [============================] 100%
+ DEBUG [849c72b9] 	Package fzaninotto/faker is abandoned, you should avoid using it. No replacement was suggested.
+Package jakub-onderka/php-console-color is abandoned, you should avoid using it. Use php-parallel-lint/php-console-color instead.
+ DEBUG [849c72b9] 	Package jakub-onderka/php-console-highlighter is abandoned, you should avoid using it. Use php-parallel-lint/php-console-highlighter instead.
+Package phpunit/php-token-stream is abandoned, you should avoid using it. No replacement was suggested.
+ DEBUG [849c72b9] 	Generating optimized autoload files
+ DEBUG [849c72b9] 	Warning: Ambiguous class resolution, "Joutes2018Seeder" was found in both "/home/joutes/joutes.mycpnv.ch/releases/20210615141905/database/seeds/Joutes2018Seeder2.php" and "/home/joutes/joutes.mycpnv.ch/releases/20210615141905/database/seeds/Joutes2018Seeder.php", the first will be used.
+ DEBUG [849c72b9] 	> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+ DEBUG [849c72b9] 	> @php artisan package:discover --ansi
+ DEBUG [849c72b9] 	Discovered Package: [32mfideloper/proxy[39m
+Discovered Package: [32mlaravel/socialite[39m
+Discovered Package: [32mlaravel/tinker[39m
+Discovered Package: [32mnesbot/carbon[39m
+Discovered Package: [32msocialiteproviders/manager[39m
+[32mPackage manifest generated successfully.[39m
+ DEBUG [849c72b9] 	40 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+  INFO [849c72b9] Finished in 3.381 seconds with exit status 0 (successful).
+ DEBUG [875126e7] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [875126e7] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi
+ DEBUG [875126e7] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [cddd34d1] Running /usr/bin/env php artisan storage:link --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [cddd34d1] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141905 && /usr/bin/env php artisan storage:link --env=production
+ DEBUG [cddd34d1] 	The [public/storage] directory has been linked.
+  INFO [cddd34d1] Finished in 0.346 seconds with exit status 0 (successful).
+  INFO [38aaa4bb] Running /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615141905/.env as joutes@joutes.mycpnv.ch
+ DEBUG [38aaa4bb] Command: /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615141905/.env
+  INFO [38aaa4bb] Finished in 0.119 seconds with exit status 0 (successful).
+ DEBUG [de9d5b0a] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [de9d5b0a] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615141905; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615141905'" 1>&2; false; fi
+ DEBUG [de9d5b0a] Finished in 0.125 seconds with exit status 0 (successful).
+  INFO [a70f1e02] Running /usr/bin/env php artisan migrate --force --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [a70f1e02] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615141905 && /usr/bin/env php artisan migrate --force --env=production
+ DEBUG [a70f1e02] 	Nothing to migrate.
+  INFO [a70f1e02] Finished in 0.301 seconds with exit status 0 (successful).
+  INFO [e4c9d196] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615141905 /home/joutes/joutes.mycpnv.ch/releases/current as joutes@joutes.mycpnv.ch
+ DEBUG [e4c9d196] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615141905 /home/joutes/joutes.mycpnv.ch/releases/current
+  INFO [e4c9d196] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO [b1d0da4f] Running /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch as joutes@joutes.mycpnv.ch
+ DEBUG [b1d0da4f] Command: /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch
+  INFO [b1d0da4f] Finished in 0.134 seconds with exit status 0 (successful).
+ DEBUG [99d621ec] Running /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [99d621ec] Command: /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases
+ DEBUG [99d621ec] 	20210610063440	20210610064815	20210610064950	20210610071416	20210615141149
+20210615141905
+ DEBUG [99d621ec] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on joutes.mycpnv.ch
+ DEBUG [45cc4a8b] Running [ -d /home/joutes/joutes.mycpnv.ch/current ] as joutes@joutes.mycpnv.ch
+ DEBUG [45cc4a8b] Command: [ -d /home/joutes/joutes.mycpnv.ch/current ]
+ DEBUG [45cc4a8b] Finished in 0.113 seconds with exit status 0 (successful).
+ DEBUG [7d664d77] Running /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current as joutes@joutes.mycpnv.ch
+ DEBUG [7d664d77] Command: /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current
+ DEBUG [7d664d77] 	/home/joutes/joutes.mycpnv.ch/releases/20210615141905
+ DEBUG [7d664d77] Finished in 0.120 seconds with exit status 0 (successful).
+  INFO [21baf110] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610063440 as joutes@joutes.mycpnv.ch
+ DEBUG [21baf110] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610063440
+  INFO [21baf110] Finished in 1.094 seconds with exit status 0 (successful).
+ DEBUG [409de578] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [409de578] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi
+ DEBUG [409de578] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO [14d56eeb] Running /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615141905 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log as joutes@joutes.mycpnv.ch
+ DEBUG [14d56eeb] Command: cd /home/joutes/joutes.mycpnv.ch/releases && /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615141905 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log
+  INFO [14d56eeb] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:26:13 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [e04a2ff4] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [e04a2ff4] Command: /usr/bin/env mkdir -p /tmp
+  INFO [e04a2ff4] Finished in 0.323 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-2fda614ec6a4307c9894.sh 0.0%
+  INFO Uploading /tmp/git-ssh-2fda614ec6a4307c9894.sh 100.0%
+  INFO [0e078b80] Running /usr/bin/env chmod 700 /tmp/git-ssh-2fda614ec6a4307c9894.sh as joutes@joutes.mycpnv.ch
+ DEBUG [0e078b80] Command: /usr/bin/env chmod 700 /tmp/git-ssh-2fda614ec6a4307c9894.sh
+  INFO [0e078b80] Finished in 0.387 seconds with exit status 0 (successful).
+  INFO [7bef695c] Running /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD as joutes@joutes.mycpnv.ch
+ DEBUG [7bef695c] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2fda614ec6a4307c9894.sh" ; /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD )
+ DEBUG [7bef695c] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac	HEAD
+  INFO [7bef695c] Finished in 1.286 seconds with exit status 0 (successful).
+  INFO [2bd1f63a] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [2bd1f63a] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases
+  INFO [2bd1f63a] Finished in 0.132 seconds with exit status 0 (successful).
+  INFO [c5970f0b] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [c5970f0b] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs
+  INFO [c5970f0b] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [4c2f0599] Running [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ] as joutes@joutes.mycpnv.ch
+ DEBUG [4c2f0599] Command: [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ]
+ DEBUG [4c2f0599] Finished in 0.116 seconds with exit status 0 (successful).
+ DEBUG [7c2ce7b8] Running /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null as joutes@joutes.mycpnv.ch
+ DEBUG [7c2ce7b8] Command: /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null
+ DEBUG [7c2ce7b8] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [7c2ce7b8] Finished in 0.123 seconds with exit status 0 (successful).
+ DEBUG [1adc5c55] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [1adc5c55] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [1adc5c55] Finished in 0.137 seconds with exit status 0 (successful).
+  INFO [10a85ec6] Running /usr/bin/env mkdir -p storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [10a85ec6] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/app
+  INFO [10a85ec6] Finished in 0.115 seconds with exit status 0 (successful).
+ DEBUG [3e19a64c] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [3e19a64c] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [3e19a64c] Finished in 0.115 seconds with exit status 0 (successful).
+  INFO [4ede07d3] Running /usr/bin/env mkdir -p storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [4ede07d3] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/cache
+  INFO [4ede07d3] Finished in 0.145 seconds with exit status 0 (successful).
+ DEBUG [2cb026f8] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [2cb026f8] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [2cb026f8] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO [ab12d4d1] Running /usr/bin/env mkdir -p storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [ab12d4d1] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/sessions
+  INFO [ab12d4d1] Finished in 0.118 seconds with exit status 0 (successful).
+ DEBUG [f8968ef6] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [f8968ef6] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [f8968ef6] Finished in 0.144 seconds with exit status 0 (successful).
+  INFO [c11da5a2] Running /usr/bin/env mkdir -p storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [c11da5a2] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/views
+  INFO [c11da5a2] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [0cc8a6c0] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [0cc8a6c0] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [0cc8a6c0] Finished in 0.114 seconds with exit status 0 (successful).
+  INFO [216c5885] Running /usr/bin/env mkdir -p storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [216c5885] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/logs
+  INFO [216c5885] Finished in 0.132 seconds with exit status 0 (successful).
+ DEBUG [98bd5aaf] Running [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ] as joutes@joutes.mycpnv.ch
+ DEBUG [98bd5aaf] Command: [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ]
+ DEBUG [98bd5aaf] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/joutes/joutes.mycpnv.ch/repo
+ DEBUG [6e635b95] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [6e635b95] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [6e635b95] Finished in 0.132 seconds with exit status 0 (successful).
+  INFO [3db50a84] Running /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git as joutes@joutes.mycpnv.ch
+ DEBUG [3db50a84] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2fda614ec6a4307c9894.sh" ; /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git )
+  INFO [3db50a84] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [f95a887d] Running /usr/bin/env git remote update --prune as joutes@joutes.mycpnv.ch
+ DEBUG [f95a887d] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2fda614ec6a4307c9894.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [f95a887d] 	Fetching origin
+  INFO [f95a887d] Finished in 1.290 seconds with exit status 0 (successful).
+ DEBUG [3e23bfd4] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [3e23bfd4] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [3e23bfd4] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [aa5d991f] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142617 as joutes@joutes.mycpnv.ch
+ DEBUG [aa5d991f] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2fda614ec6a4307c9894.sh" ; /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142617 )
+  INFO [aa5d991f] Finished in 0.132 seconds with exit status 0 (successful).
+  INFO [1d012617] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615142617 as joutes@joutes.mycpnv.ch
+ DEBUG [1d012617] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2fda614ec6a4307c9894.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615142617 )
+  INFO [1d012617] Finished in 0.197 seconds with exit status 0 (successful).
+ DEBUG [bc928b84] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [bc928b84] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [bc928b84] Finished in 0.115 seconds with exit status 0 (successful).
+ DEBUG [8b4bfc85] Running /usr/bin/env git rev-list --max-count=1 master as joutes@joutes.mycpnv.ch
+ DEBUG [8b4bfc85] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2fda614ec6a4307c9894.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [8b4bfc85] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [8b4bfc85] Finished in 0.145 seconds with exit status 0 (successful).
+ DEBUG [e61b8df8] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [e61b8df8] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi
+ DEBUG [e61b8df8] Finished in 0.135 seconds with exit status 0 (successful).
+  INFO [2d9df384] Running /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION as joutes@joutes.mycpnv.ch
+ DEBUG [2d9df384] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142617 && /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION
+  INFO [2d9df384] Finished in 0.143 seconds with exit status 0 (successful).
+  INFO [5a594ae0] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework as joutes@joutes.mycpnv.ch
+ DEBUG [5a594ae0] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework
+  INFO [5a594ae0] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [84421096] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [84421096] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app ]
+ DEBUG [84421096] Finished in 0.131 seconds with exit status 1 (failed).
+ DEBUG [0c2b680f] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [0c2b680f] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app ]
+ DEBUG [0c2b680f] Finished in 0.126 seconds with exit status 0 (successful).
+  INFO [0bf88c9e] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [0bf88c9e] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app
+  INFO [0bf88c9e] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [90f19e77] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [90f19e77] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/app
+  INFO [90f19e77] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [299fcb8c] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [299fcb8c] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache ]
+ DEBUG [299fcb8c] Finished in 0.130 seconds with exit status 1 (failed).
+ DEBUG [eaf9d4e7] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [eaf9d4e7] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache ]
+ DEBUG [eaf9d4e7] Finished in 0.133 seconds with exit status 0 (successful).
+  INFO [de587632] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [de587632] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache
+  INFO [de587632] Finished in 0.125 seconds with exit status 0 (successful).
+  INFO [216086c5] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [216086c5] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/cache
+  INFO [216086c5] Finished in 0.134 seconds with exit status 0 (successful).
+ DEBUG [b37eb7ce] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [b37eb7ce] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions ]
+ DEBUG [b37eb7ce] Finished in 0.130 seconds with exit status 1 (failed).
+ DEBUG [0e2655b4] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [0e2655b4] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions ]
+ DEBUG [0e2655b4] Finished in 0.139 seconds with exit status 0 (successful).
+  INFO [251fd354] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [251fd354] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions
+  INFO [251fd354] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO [10abf879] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [10abf879] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/sessions
+  INFO [10abf879] Finished in 0.127 seconds with exit status 0 (successful).
+ DEBUG [99630f47] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [99630f47] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views ]
+ DEBUG [99630f47] Finished in 0.137 seconds with exit status 1 (failed).
+ DEBUG [9cfe7c91] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [9cfe7c91] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views ]
+ DEBUG [9cfe7c91] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [9a3a0ea0] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [9a3a0ea0] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views
+  INFO [9a3a0ea0] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [60b04359] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [60b04359] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/framework/views
+  INFO [60b04359] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [e42af02d] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [e42af02d] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs ]
+ DEBUG [e42af02d] Finished in 0.129 seconds with exit status 1 (failed).
+ DEBUG [049297f7] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [049297f7] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs ]
+ DEBUG [049297f7] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [7afd88c8] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [7afd88c8] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs
+  INFO [7afd88c8] Finished in 0.136 seconds with exit status 0 (successful).
+  INFO [12d43087] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [12d43087] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615142617/storage/logs
+  INFO [12d43087] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO [e09cd0cf] Running ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version as joutes@joutes.mycpnv.ch
+ DEBUG [e09cd0cf] Command: ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version
+  INFO [e09cd0cf] Finished in 0.138 seconds with exit status 0 (successful).
+ DEBUG [011f7851] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [011f7851] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi
+ DEBUG [011f7851] Finished in 0.136 seconds with exit status 0 (successful).
+  INFO [b4f58260] Running php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader as joutes@joutes.mycpnv.ch
+ DEBUG [b4f58260] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142617 && php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+ DEBUG [b4f58260] 	Installing dependencies from lock file
+ DEBUG [b4f58260] 	Verifying lock file contents can be installed on current platform.
+ DEBUG [b4f58260] 	Package operations: 64 installs, 0 updates, 0 removals
+ DEBUG [b4f58260] 	    0 [>---------------------------]    0 [>---------------------------]
+ DEBUG [b4f58260] 	
+ DEBUG [b4f58260] 	  - Installing doctrine/event-manager (1.1.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing doctrine/deprecations (v0.5.3): Extracting archive
+ DEBUG [b4f58260] 	  - Installing doctrine/cache (1.11.3): Extracting archive
+ DEBUG [b4f58260] 	  - Installing doctrine/dbal (2.13.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing doctrine/inflector (2.0.3): Extracting archive
+  - Installing doctrine/lexer (1.2.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing dragonmantank/cron-expression (v2.3.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/polyfill-ctype (v1.22.1): Extracting archive
+  - Installing phpoption/phpoption (1.7.5): Extracting archive
+ DEBUG [b4f58260] 	  - Installing vlucas/phpdotenv (v3.6.8): Extracting archive
+  - Installing symfony/css-selector (v5.2.9): Extracting archive
+  - Installing tijsverkoyen/css-to-inline-styles (2.2.3): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-php72 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.22.1): Extracting archive
+  - Installing symfony/var-dumper (v4.4.22): Extracting archive
+  - Installing symfony/routing (v4.4.24): Extracting archive
+  - Installing symfony/process (v4.4.22): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/polyfill-php73 (v1.22.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/polyfill-intl-normalizer (v1.22.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/polyfill-intl-idn (v1.22.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/deprecation-contracts (v2.4.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/mime (v5.2.9): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/http-foundation (v4.4.23): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/http-client-contracts (v2.4.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/event-dispatcher-contracts (v1.1.9): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/event-dispatcher (v4.4.20): Extracting archive
+ DEBUG [b4f58260] 	  - Installing psr/log (1.1.4): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/debug (v4.4.22): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/error-handler (v4.4.23): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/http-kernel (v4.4.24): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/finder (v4.4.24): Extracting archive
+ DEBUG [b4f58260] 	  - Installing psr/container (1.1.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/service-contracts (v2.4.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/console (v4.4.24): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/polyfill-iconv (v1.22.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing egulias/email-validator (2.1.25): Extracting archive
+ DEBUG [b4f58260] 	  - Installing swiftmailer/swiftmailer (v6.2.7): Extracting archive
+ DEBUG [b4f58260] 	  - Installing paragonie/random_compat (v9.99.99): Extracting archive
+ DEBUG [b4f58260] 	  - Installing ramsey/uuid (3.9.3): Extracting archive
+ DEBUG [b4f58260] 	  - Installing psr/simple-cache (1.0.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing opis/closure (3.6.2): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/translation-contracts (v2.4.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing symfony/translation (v4.4.24): Extracting archive
+ DEBUG [b4f58260] 	  - Installing nesbot/carbon (2.48.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing monolog/monolog (2.2.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing league/flysystem (1.0.46): Extracting archive
+ DEBUG [b4f58260] 	  - Installing league/commonmark (1.6.2): Extracting archive
+ DEBUG [b4f58260] 	  - Installing laravel/framework (v6.18.43): Extracting archive
+ DEBUG [b4f58260] 	  - Installing fideloper/proxy (4.4.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing guzzlehttp/promises (1.4.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+ DEBUG [b4f58260] 	  - Installing psr/http-message (1.0.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing guzzlehttp/psr7 (1.8.2): Extracting archive
+ DEBUG [b4f58260] 	  - Installing psr/http-client (1.0.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing guzzlehttp/guzzle (7.3.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing league/oauth1-client (v1.9.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing laravel/socialite (v5.2.3): Extracting archive
+ DEBUG [b4f58260] 	  - Installing nikic/php-parser (v4.10.5): Extracting archive
+ DEBUG [b4f58260] 	  - Installing psy/psysh (v0.10.8): Extracting archive
+ DEBUG [b4f58260] 	  - Installing laravel/tinker (v2.6.1): Extracting archive
+  - Installing socialiteproviders/manager (4.0.1): Extracting archive
+ DEBUG [b4f58260] 	  - Installing socialiteproviders/microsoft-azure (4.2.0): Extracting archive
+ DEBUG [b4f58260] 	  - Installing socialiteproviders/vkontakte (4.2.1): Extracting archive
+ DEBUG [b4f58260] 	  0/64 [>---------------------------]   0%
+ DEBUG [b4f58260] 	
+  9/64 [===>------------------------]  14%
+ DEBUG [b4f58260] 	
+ 24/64 [==========>-----------------]  37%
+ DEBUG [b4f58260] 	
+ 39/64 [=================>----------]  60%
+ DEBUG [b4f58260] 	
+ 55/64 [========================>---]  85%
+ DEBUG [b4f58260] 	
+ 64/64 [============================] 100%
+ DEBUG [b4f58260] 	Package fzaninotto/faker is abandoned, you should avoid using it. No replacement was suggested.
+ DEBUG [b4f58260] 	Package jakub-onderka/php-console-color is abandoned, you should avoid using it. Use php-parallel-lint/php-console-color instead.
+Package jakub-onderka/php-console-highlighter is abandoned, you should avoid using it. Use php-parallel-lint/php-console-highlighter instead.
+ DEBUG [b4f58260] 	Package phpunit/php-token-stream is abandoned, you should avoid using it. No replacement was suggested.
+ DEBUG [b4f58260] 	Generating optimized autoload files
+ DEBUG [b4f58260] 	Warning: Ambiguous class resolution, "Joutes2018Seeder" was found in both "/home/joutes/joutes.mycpnv.ch/releases/20210615142617/database/seeds/Joutes2018Seeder2.php" and "/home/joutes/joutes.mycpnv.ch/releases/20210615142617/database/seeds/Joutes2018Seeder.php", the first will be used.
+ DEBUG [b4f58260] 	> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+ DEBUG [b4f58260] 	> @php artisan package:discover --ansi
+ DEBUG [b4f58260] 	Discovered Package: [32mfideloper/proxy[39m
+Discovered Package: [32mlaravel/socialite[39m
+Discovered Package: [32mlaravel/tinker[39m
+Discovered Package: [32mnesbot/carbon[39m
+Discovered Package: [32msocialiteproviders/manager[39m
+[32mPackage manifest generated successfully.[39m
+ DEBUG [b4f58260] 	40 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+  INFO [b4f58260] Finished in 1.969 seconds with exit status 0 (successful).
+ DEBUG [5936cfbd] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [5936cfbd] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi
+ DEBUG [5936cfbd] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [bda98483] Running /usr/bin/env php artisan storage:link --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [bda98483] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142617 && /usr/bin/env php artisan storage:link --env=production
+ DEBUG [bda98483] 	The [public/storage] directory has been linked.
+  INFO [bda98483] Finished in 0.321 seconds with exit status 0 (successful).
+  INFO [3d2ca931] Running /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615142617/.env as joutes@joutes.mycpnv.ch
+ DEBUG [3d2ca931] Command: /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615142617/.env
+  INFO [3d2ca931] Finished in 0.128 seconds with exit status 0 (successful).
+ DEBUG [93d06fe0] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [93d06fe0] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142617; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142617'" 1>&2; false; fi
+ DEBUG [93d06fe0] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [f04433fa] Running /usr/bin/env php artisan migrate --force --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [f04433fa] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142617 && /usr/bin/env php artisan migrate --force --env=production
+ DEBUG [f04433fa] 	Nothing to migrate.
+  INFO [f04433fa] Finished in 0.316 seconds with exit status 0 (successful).
+  INFO [63f337f1] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615142617 /home/joutes/joutes.mycpnv.ch/releases/current as joutes@joutes.mycpnv.ch
+ DEBUG [63f337f1] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615142617 /home/joutes/joutes.mycpnv.ch/releases/current
+  INFO [63f337f1] Finished in 0.109 seconds with exit status 0 (successful).
+  INFO [a444f5f0] Running /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch as joutes@joutes.mycpnv.ch
+ DEBUG [a444f5f0] Command: /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch
+  INFO [a444f5f0] Finished in 0.123 seconds with exit status 0 (successful).
+ DEBUG [64df4990] Running /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [64df4990] Command: /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases
+ DEBUG [64df4990] 	20210610064815	20210610064950	20210610071416	20210615141149	20210615141905
+20210615142617
+ DEBUG [64df4990] Finished in 0.153 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on joutes.mycpnv.ch
+ DEBUG [5fe9c6b2] Running [ -d /home/joutes/joutes.mycpnv.ch/current ] as joutes@joutes.mycpnv.ch
+ DEBUG [5fe9c6b2] Command: [ -d /home/joutes/joutes.mycpnv.ch/current ]
+ DEBUG [5fe9c6b2] Finished in 0.129 seconds with exit status 0 (successful).
+ DEBUG [c7cb1bf1] Running /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current as joutes@joutes.mycpnv.ch
+ DEBUG [c7cb1bf1] Command: /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current
+ DEBUG [c7cb1bf1] 	/home/joutes/joutes.mycpnv.ch/releases/20210615142617
+ DEBUG [c7cb1bf1] Finished in 0.148 seconds with exit status 0 (successful).
+  INFO [0146a145] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610064815 as joutes@joutes.mycpnv.ch
+ DEBUG [0146a145] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610064815
+  INFO [0146a145] Finished in 1.367 seconds with exit status 0 (successful).
+ DEBUG [369b212c] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [369b212c] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi
+ DEBUG [369b212c] Finished in 0.138 seconds with exit status 0 (successful).
+  INFO [c6581b3a] Running /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615142617 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log as joutes@joutes.mycpnv.ch
+ DEBUG [c6581b3a] Command: cd /home/joutes/joutes.mycpnv.ch/releases && /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615142617 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log
+  INFO [c6581b3a] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-06-15 16:27:22 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [4a2215a6] Running /usr/bin/env mkdir -p /tmp as joutes@joutes.mycpnv.ch
+ DEBUG [4a2215a6] Command: /usr/bin/env mkdir -p /tmp
+  INFO [4a2215a6] Finished in 0.341 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-6161183d9bd2e3b49a35.sh 0.0%
+  INFO Uploading /tmp/git-ssh-6161183d9bd2e3b49a35.sh 100.0%
+  INFO [80806cd6] Running /usr/bin/env chmod 700 /tmp/git-ssh-6161183d9bd2e3b49a35.sh as joutes@joutes.mycpnv.ch
+ DEBUG [80806cd6] Command: /usr/bin/env chmod 700 /tmp/git-ssh-6161183d9bd2e3b49a35.sh
+  INFO [80806cd6] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [66cc5497] Running /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD as joutes@joutes.mycpnv.ch
+ DEBUG [66cc5497] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6161183d9bd2e3b49a35.sh" ; /usr/bin/env git ls-remote git@github.com:CPNV-ES/Joutes-2020.git HEAD )
+ DEBUG [66cc5497] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac	HEAD
+  INFO [66cc5497] Finished in 1.265 seconds with exit status 0 (successful).
+  INFO [fc4ecb5b] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [fc4ecb5b] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared /home/joutes/joutes.mycpnv.ch/releases
+  INFO [fc4ecb5b] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [06fb367d] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [06fb367d] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/shared/storage/logs
+  INFO [06fb367d] Finished in 0.126 seconds with exit status 0 (successful).
+ DEBUG [0cc19f90] Running [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ] as joutes@joutes.mycpnv.ch
+ DEBUG [0cc19f90] Command: [ -f /home/joutes/joutes.mycpnv.ch/current/REVISION ]
+ DEBUG [0cc19f90] Finished in 0.122 seconds with exit status 0 (successful).
+ DEBUG [39a1933c] Running /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null as joutes@joutes.mycpnv.ch
+ DEBUG [39a1933c] Command: /usr/bin/env cat /home/joutes/joutes.mycpnv.ch/current/REVISION 2>/dev/null
+ DEBUG [39a1933c] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [39a1933c] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [a7ad090f] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [a7ad090f] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [a7ad090f] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [2eab3741] Running /usr/bin/env mkdir -p storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [2eab3741] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/app
+  INFO [2eab3741] Finished in 0.134 seconds with exit status 0 (successful).
+ DEBUG [c49bf19c] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [c49bf19c] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [c49bf19c] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [dd35ed69] Running /usr/bin/env mkdir -p storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [dd35ed69] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/cache
+  INFO [dd35ed69] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [37953412] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [37953412] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [37953412] Finished in 0.142 seconds with exit status 0 (successful).
+  INFO [b0986a5f] Running /usr/bin/env mkdir -p storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [b0986a5f] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/sessions
+  INFO [b0986a5f] Finished in 0.129 seconds with exit status 0 (successful).
+ DEBUG [4e23de67] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [4e23de67] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [4e23de67] Finished in 0.121 seconds with exit status 0 (successful).
+  INFO [703f49a7] Running /usr/bin/env mkdir -p storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [703f49a7] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/framework/views
+  INFO [703f49a7] Finished in 0.140 seconds with exit status 0 (successful).
+ DEBUG [64426e1f] Running if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [64426e1f] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/shared; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/shared'" 1>&2; false; fi
+ DEBUG [64426e1f] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [d4f06870] Running /usr/bin/env mkdir -p storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [d4f06870] Command: cd /home/joutes/joutes.mycpnv.ch/shared && /usr/bin/env mkdir -p storage/logs
+  INFO [d4f06870] Finished in 0.127 seconds with exit status 0 (successful).
+ DEBUG [9ee0f90d] Running [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ] as joutes@joutes.mycpnv.ch
+ DEBUG [9ee0f90d] Command: [ -f /home/joutes/joutes.mycpnv.ch/repo/HEAD ]
+ DEBUG [9ee0f90d] Finished in 0.142 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/joutes/joutes.mycpnv.ch/repo
+ DEBUG [a93cc057] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [a93cc057] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [a93cc057] Finished in 0.136 seconds with exit status 0 (successful).
+  INFO [21e8bd06] Running /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git as joutes@joutes.mycpnv.ch
+ DEBUG [21e8bd06] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6161183d9bd2e3b49a35.sh" ; /usr/bin/env git remote set-url origin git@github.com:CPNV-ES/Joutes-2020.git )
+  INFO [21e8bd06] Finished in 0.156 seconds with exit status 0 (successful).
+  INFO [0aaf2f3d] Running /usr/bin/env git remote update --prune as joutes@joutes.mycpnv.ch
+ DEBUG [0aaf2f3d] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6161183d9bd2e3b49a35.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [0aaf2f3d] 	Fetching origin
+  INFO [0aaf2f3d] Finished in 1.295 seconds with exit status 0 (successful).
+ DEBUG [4ef01124] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [4ef01124] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [4ef01124] Finished in 0.144 seconds with exit status 0 (successful).
+  INFO [53a99f59] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142725 as joutes@joutes.mycpnv.ch
+ DEBUG [53a99f59] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6161183d9bd2e3b49a35.sh" ; /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142725 )
+  INFO [53a99f59] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [2cc8d464] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615142725 as joutes@joutes.mycpnv.ch
+ DEBUG [2cc8d464] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6161183d9bd2e3b49a35.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/joutes/joutes.mycpnv.ch/releases/20210615142725 )
+  INFO [2cc8d464] Finished in 0.184 seconds with exit status 0 (successful).
+ DEBUG [a35a60a3] Running if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [a35a60a3] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/repo; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/repo'" 1>&2; false; fi
+ DEBUG [a35a60a3] Finished in 0.113 seconds with exit status 0 (successful).
+ DEBUG [77ac0858] Running /usr/bin/env git rev-list --max-count=1 master as joutes@joutes.mycpnv.ch
+ DEBUG [77ac0858] Command: cd /home/joutes/joutes.mycpnv.ch/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6161183d9bd2e3b49a35.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [77ac0858] 	9b738a01000ed7bea8ffa768b72eda0e9b3effac
+ DEBUG [77ac0858] Finished in 0.131 seconds with exit status 0 (successful).
+ DEBUG [4fc313f2] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [4fc313f2] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi
+ DEBUG [4fc313f2] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO [a4f95ad8] Running /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION as joutes@joutes.mycpnv.ch
+ DEBUG [a4f95ad8] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142725 && /usr/bin/env echo "9b738a01000ed7bea8ffa768b72eda0e9b3effac" > REVISION
+  INFO [a4f95ad8] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [dc5bcad6] Running /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework as joutes@joutes.mycpnv.ch
+ DEBUG [dc5bcad6] Command: /usr/bin/env mkdir -p /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework
+  INFO [dc5bcad6] Finished in 0.137 seconds with exit status 0 (successful).
+ DEBUG [51070485] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [51070485] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app ]
+ DEBUG [51070485] Finished in 0.138 seconds with exit status 1 (failed).
+ DEBUG [0021b445] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app ] as joutes@joutes.mycpnv.ch
+ DEBUG [0021b445] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app ]
+ DEBUG [0021b445] Finished in 0.137 seconds with exit status 0 (successful).
+  INFO [6c37e4f3] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [6c37e4f3] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app
+  INFO [6c37e4f3] Finished in 0.122 seconds with exit status 0 (successful).
+  INFO [e8c364f0] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app as joutes@joutes.mycpnv.ch
+ DEBUG [e8c364f0] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/app /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/app
+  INFO [e8c364f0] Finished in 0.128 seconds with exit status 0 (successful).
+ DEBUG [1c1c6ed6] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [1c1c6ed6] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache ]
+ DEBUG [1c1c6ed6] Finished in 0.138 seconds with exit status 1 (failed).
+ DEBUG [f95ad9ef] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache ] as joutes@joutes.mycpnv.ch
+ DEBUG [f95ad9ef] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache ]
+ DEBUG [f95ad9ef] Finished in 0.137 seconds with exit status 0 (successful).
+  INFO [3522926c] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [3522926c] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache
+  INFO [3522926c] Finished in 0.126 seconds with exit status 0 (successful).
+  INFO [cfdbd32a] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache as joutes@joutes.mycpnv.ch
+ DEBUG [cfdbd32a] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/cache /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/cache
+  INFO [cfdbd32a] Finished in 0.126 seconds with exit status 0 (successful).
+ DEBUG [9dfd253c] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [9dfd253c] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions ]
+ DEBUG [9dfd253c] Finished in 0.129 seconds with exit status 1 (failed).
+ DEBUG [83f27096] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions ] as joutes@joutes.mycpnv.ch
+ DEBUG [83f27096] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions ]
+ DEBUG [83f27096] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO [b707a921] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [b707a921] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions
+  INFO [b707a921] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [74eac2dd] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions as joutes@joutes.mycpnv.ch
+ DEBUG [74eac2dd] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/sessions /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/sessions
+  INFO [74eac2dd] Finished in 0.128 seconds with exit status 0 (successful).
+ DEBUG [48074675] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [48074675] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views ]
+ DEBUG [48074675] Finished in 0.151 seconds with exit status 1 (failed).
+ DEBUG [2e4a88ae] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views ] as joutes@joutes.mycpnv.ch
+ DEBUG [2e4a88ae] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views ]
+ DEBUG [2e4a88ae] Finished in 0.131 seconds with exit status 0 (successful).
+  INFO [d496edf8] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [d496edf8] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views
+  INFO [d496edf8] Finished in 0.125 seconds with exit status 0 (successful).
+  INFO [c048a88d] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views as joutes@joutes.mycpnv.ch
+ DEBUG [c048a88d] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/framework/views /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/framework/views
+  INFO [c048a88d] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [f1cab175] Running [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [f1cab175] Command: [ -L /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs ]
+ DEBUG [f1cab175] Finished in 0.121 seconds with exit status 1 (failed).
+ DEBUG [25394583] Running [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs ] as joutes@joutes.mycpnv.ch
+ DEBUG [25394583] Command: [ -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs ]
+ DEBUG [25394583] Finished in 0.115 seconds with exit status 0 (successful).
+  INFO [b81e9dbd] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [b81e9dbd] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs
+  INFO [b81e9dbd] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO [b2dd283e] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs as joutes@joutes.mycpnv.ch
+ DEBUG [b2dd283e] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/shared/storage/logs /home/joutes/joutes.mycpnv.ch/releases/20210615142725/storage/logs
+  INFO [b2dd283e] Finished in 0.128 seconds with exit status 0 (successful).
+  INFO [27ac35c5] Running ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version as joutes@joutes.mycpnv.ch
+ DEBUG [27ac35c5] Command: ls /home/joutes/.data/joutes.mycpnv.ch_php* 2>/dev/null | sed -E 's/.+(php[[:digit:]]+)$/\1/' > ~/.php-cli-version
+  INFO [27ac35c5] Finished in 0.119 seconds with exit status 0 (successful).
+ DEBUG [a282959c] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [a282959c] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi
+ DEBUG [a282959c] Finished in 0.130 seconds with exit status 0 (successful).
+  INFO [8f0e4d47] Running php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader as joutes@joutes.mycpnv.ch
+ DEBUG [8f0e4d47] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142725 && php -d allow_url_fopen=true /home/joutes/joutes.mycpnv.ch/shared/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+ DEBUG [8f0e4d47] 	Installing dependencies from lock file
+ DEBUG [8f0e4d47] 	Verifying lock file contents can be installed on current platform.
+ DEBUG [8f0e4d47] 	Package operations: 64 installs, 0 updates, 0 removals
+ DEBUG [8f0e4d47] 	    0 [>---------------------------]    0 [>---------------------------]
+ DEBUG [8f0e4d47] 	  - Installing doctrine/event-manager (1.1.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing doctrine/deprecations (v0.5.3): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing doctrine/cache (1.11.3): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing doctrine/dbal (2.13.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing doctrine/inflector (2.0.3): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing doctrine/lexer (1.2.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing dragonmantank/cron-expression (v2.3.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/polyfill-ctype (v1.22.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing phpoption/phpoption (1.7.5): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing vlucas/phpdotenv (v3.6.8): Extracting archive
+  - Installing symfony/css-selector (v5.2.9): Extracting archive
+  - Installing tijsverkoyen/css-to-inline-styles (2.2.3): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-php72 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.22.1): Extracting archive
+  - Installing symfony/var-dumper (v4.4.22): Extracting archive
+  - Installing symfony/routing (v4.4.24): Extracting archive
+  - Installing symfony/process (v4.4.22): Extracting archive
+  - Installing symfony/polyfill-php73 (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-intl-normalizer (v1.22.1): Extracting archive
+  - Installing symfony/polyfill-intl-idn (v1.22.1): Extracting archive
+  - Installing symfony/deprecation-contracts (v2.4.0): Extracting archive
+  - Installing symfony/mime (v5.2.9): Extracting archive
+  - Installing symfony/http-foundation (v4.4.23): Extracting archive
+  - Installing symfony/http-client-contracts (v2.4.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v1.1.9): Extracting archive
+  - Installing symfony/event-dispatcher (v4.4.20): Extracting archive
+  - Installing psr/log (1.1.4): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/debug (v4.4.22): Extracting archive
+  - Installing symfony/error-handler (v4.4.23): Extracting archive
+  - Installing symfony/http-kernel (v4.4.24): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/finder (v4.4.24): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing psr/container (1.1.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/service-contracts (v2.4.0): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/console (v4.4.24): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/polyfill-iconv (v1.22.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing egulias/email-validator (2.1.25): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing swiftmailer/swiftmailer (v6.2.7): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing paragonie/random_compat (v9.99.99): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing ramsey/uuid (3.9.3): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing psr/simple-cache (1.0.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing opis/closure (3.6.2): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/translation-contracts (v2.4.0): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing symfony/translation (v4.4.24): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing nesbot/carbon (2.48.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing monolog/monolog (2.2.0): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing league/flysystem (1.0.46): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing league/commonmark (1.6.2): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing laravel/framework (v6.18.43): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing fideloper/proxy (4.4.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing guzzlehttp/promises (1.4.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing psr/http-message (1.0.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing guzzlehttp/psr7 (1.8.2): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing psr/http-client (1.0.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing guzzlehttp/guzzle (7.3.0): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing league/oauth1-client (v1.9.0): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing laravel/socialite (v5.2.3): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing nikic/php-parser (v4.10.5): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing psy/psysh (v0.10.8): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing laravel/tinker (v2.6.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing socialiteproviders/manager (4.0.1): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing socialiteproviders/microsoft-azure (4.2.0): Extracting archive
+ DEBUG [8f0e4d47] 	  - Installing socialiteproviders/vkontakte (4.2.1): Extracting archive
+ DEBUG [8f0e4d47] 	  0/64 [>---------------------------]   0%
+ DEBUG [8f0e4d47] 	
+  9/64 [===>------------------------]  14%
+ DEBUG [8f0e4d47] 	
+ 26/64 [===========>----------------]  40%
+ DEBUG [8f0e4d47] 	
+ 44/64 [===================>--------]  68%
+ DEBUG [8f0e4d47] 	
+ 59/64 [=========================>--]  92%
+ DEBUG [8f0e4d47] 	
+ 64/64 [============================] 100%
+ DEBUG [8f0e4d47] 	Package fzaninotto/faker is abandoned, you should avoid using it. No replacement was suggested.
+Package jakub-onderka/php-console-color is abandoned, you should avoid using it. Use php-parallel-lint/php-console-color instead.
+Package jakub-onderka/php-console-highlighter is abandoned, you should avoid using it. Use php-parallel-lint/php-console-highlighter instead.
+Package phpunit/php-token-stream is abandoned, you should avoid using it. No replacement was suggested.
+Generating optimized autoload files
+ DEBUG [8f0e4d47] 	Warning: Ambiguous class resolution, "Joutes2018Seeder" was found in both "/home/joutes/joutes.mycpnv.ch/releases/20210615142725/database/seeds/Joutes2018Seeder2.php" and "/home/joutes/joutes.mycpnv.ch/releases/20210615142725/database/seeds/Joutes2018Seeder.php", the first will be used.
+ DEBUG [8f0e4d47] 	> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+ DEBUG [8f0e4d47] 	> @php artisan package:discover --ansi
+ DEBUG [8f0e4d47] 	Discovered Package: [32mfideloper/proxy[39m
+Discovered Package: [32mlaravel/socialite[39m
+Discovered Package: [32mlaravel/tinker[39m
+Discovered Package: [32mnesbot/carbon[39m
+Discovered Package: [32msocialiteproviders/manager[39m
+ DEBUG [8f0e4d47] 	[32mPackage manifest generated successfully.[39m
+ DEBUG [8f0e4d47] 	40 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+  INFO [8f0e4d47] Finished in 1.796 seconds with exit status 0 (successful).
+ DEBUG [0f82f514] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [0f82f514] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi
+ DEBUG [0f82f514] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [16fa0577] Running /usr/bin/env php artisan storage:link --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [16fa0577] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142725 && /usr/bin/env php artisan storage:link --env=production
+ DEBUG [16fa0577] 	The [public/storage] directory has been linked.
+  INFO [16fa0577] Finished in 0.304 seconds with exit status 0 (successful).
+  INFO [72f3aedc] Running /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615142725/.env as joutes@joutes.mycpnv.ch
+ DEBUG [72f3aedc] Command: /usr/bin/env cp /home/joutes/joutes.mycpnv.ch/shared/.env /home/joutes/joutes.mycpnv.ch/releases/20210615142725/.env
+  INFO [72f3aedc] Finished in 0.122 seconds with exit status 0 (successful).
+ DEBUG [28b7cc64] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [28b7cc64] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases/20210615142725; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases/20210615142725'" 1>&2; false; fi
+ DEBUG [28b7cc64] Finished in 0.125 seconds with exit status 0 (successful).
+  INFO [4d99cc93] Running /usr/bin/env php artisan migrate --force --env=production as joutes@joutes.mycpnv.ch
+ DEBUG [4d99cc93] Command: cd /home/joutes/joutes.mycpnv.ch/releases/20210615142725 && /usr/bin/env php artisan migrate --force --env=production
+ DEBUG [4d99cc93] 	Nothing to migrate.
+  INFO [4d99cc93] Finished in 0.318 seconds with exit status 0 (successful).
+  INFO [50923c26] Running /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615142725 /home/joutes/joutes.mycpnv.ch/releases/current as joutes@joutes.mycpnv.ch
+ DEBUG [50923c26] Command: /usr/bin/env ln -s /home/joutes/joutes.mycpnv.ch/releases/20210615142725 /home/joutes/joutes.mycpnv.ch/releases/current
+  INFO [50923c26] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [551942d8] Running /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch as joutes@joutes.mycpnv.ch
+ DEBUG [551942d8] Command: /usr/bin/env mv /home/joutes/joutes.mycpnv.ch/releases/current /home/joutes/joutes.mycpnv.ch
+  INFO [551942d8] Finished in 0.126 seconds with exit status 0 (successful).
+ DEBUG [7b56c233] Running /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases as joutes@joutes.mycpnv.ch
+ DEBUG [7b56c233] Command: /usr/bin/env ls -x /home/joutes/joutes.mycpnv.ch/releases
+ DEBUG [7b56c233] 	20210610064950	20210610071416	20210615141149	20210615141905	20210615142617
+20210615142725
+ DEBUG [7b56c233] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on joutes.mycpnv.ch
+ DEBUG [855883ff] Running [ -d /home/joutes/joutes.mycpnv.ch/current ] as joutes@joutes.mycpnv.ch
+ DEBUG [855883ff] Command: [ -d /home/joutes/joutes.mycpnv.ch/current ]
+ DEBUG [855883ff] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [5d8a3e7f] Running /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current as joutes@joutes.mycpnv.ch
+ DEBUG [5d8a3e7f] Command: /usr/bin/env readlink /home/joutes/joutes.mycpnv.ch/current
+ DEBUG [5d8a3e7f] 	/home/joutes/joutes.mycpnv.ch/releases/20210615142725
+ DEBUG [5d8a3e7f] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [412b7a89] Running /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610064950 as joutes@joutes.mycpnv.ch
+ DEBUG [412b7a89] Command: /usr/bin/env rm -rf /home/joutes/joutes.mycpnv.ch/releases/20210610064950
+  INFO [412b7a89] Finished in 1.092 seconds with exit status 0 (successful).
+ DEBUG [0399e2a5] Running if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi as joutes@joutes.mycpnv.ch
+ DEBUG [0399e2a5] Command: if test ! -d /home/joutes/joutes.mycpnv.ch/releases; then echo "Directory does not exist '/home/joutes/joutes.mycpnv.ch/releases'" 1>&2; false; fi
+ DEBUG [0399e2a5] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO [8558f3e7] Running /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615142725 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log as joutes@joutes.mycpnv.ch
+ DEBUG [8558f3e7] Command: cd /home/joutes/joutes.mycpnv.ch/releases && /usr/bin/env echo "Branch master (at 9b738a01000ed7bea8ffa768b72eda0e9b3effac) deployed as release 20210615142725 by Zaid-Francois.SCHOUW" >> /home/joutes/joutes.mycpnv.ch/revisions.log
+  INFO [8558f3e7] Finished in 0.138 seconds with exit status 0 (successful).
