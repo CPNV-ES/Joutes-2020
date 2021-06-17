@@ -99,17 +99,17 @@ $(document).ready(function() {
        let roleId = $(this).children(":selected").attr("id");
        //Create an object to parse in JSON
        let data = {"role_id": roleId}
+       let url = location.href + "/" + userId
 
        //Create the patch request
        $.ajax({
-           url: "http://localhost:8080/users/" + userId, //Todo: Change hardcoded url
+           url: url,
            contentType: "application/json",
            data: JSON.stringify(data),
-           type: "PUT"
-       })
-
-        location.reload();
-
+           type: "PUT",
+       }).always(function () {
+           location.reload();
+       });
     });
 
 } );
