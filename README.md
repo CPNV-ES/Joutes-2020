@@ -5,6 +5,6 @@ This project was carried out in the CPNV. Its main purpose is to help the sports
 
 
 ## Start developping
-You can fin an installation procedure [here](https://github.com/CPNV-ES/Joutes-2020/wiki/Proc%C3%A9dure-d'installation)
+You can find an installation procedure [here](https://github.com/CPNV-ES/Joutes-2020/wiki/Proc%C3%A9dure-d'installation)
 ## Documentation
 You can find the documentation [here](https://github.com/CPNV-ES/Joutes-2020/wiki)
