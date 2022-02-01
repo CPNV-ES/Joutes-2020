@@ -1,15 +1,19 @@
-FROM php:7.4.7-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 RUN apk add --no-cache libmcrypt-dev openssl
 
-RUN apk add --no-cache composer npm
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+
+RUN apk add --no-cache npm
 
 RUN docker-php-ext-install pdo_mysql pdo
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /joutes
 
 VOLUME [ "/joutes" ]
-
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD /bin/sh -c "composer install --no-autoloader --no-scripts --no-plugins && composer dump-autoload --optimize && php artisan serve --host 0.0.0.0 --port 8000"
 
 EXPOSE 8000
