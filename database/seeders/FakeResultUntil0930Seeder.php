@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class FootTournamentSeeder extends Seeder
+class FakeResultUntil0930Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,6 +19,6 @@ class FootTournamentSeeder extends Seeder
 
         // Using mysql instance to pass a sqlfile and execute it 
         // Because on our sql file we have multiple procedure delimited by DELIMITER and those DELIMITER work ~only on MYSQL...  
-        exec("mysql -u " . $user . " -p" . $pass . " -h ".\Config::get("database.connections.mysql.host")." " . $db . " < ".database_path("sqlFiles/footTournament.sql"));
+        exec("mysql -u " . $user . " -p" . $pass . " -h " . \Config::get("database.connections.mysql.host") . " " . $db . " < " . database_path("sqlFiles/fakeResultUntil0930.sql"));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +17,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,200) as $index) {
+        foreach (range(1, 200) as $index) {
             DB::table('users')->insert([
                 'username' => $faker->userName,
                 'password' => bcrypt('secret'),
@@ -26,7 +28,7 @@ class UserTableSeeder extends Seeder
             ]);
             DB::table('team_user')->insert([
                 'user_id' => $index,
-                'team_id' => rand(1,68),
+                'team_id' => rand(1, 68),
                 'isCaptain' => $faker->boolean
             ]);
         }
