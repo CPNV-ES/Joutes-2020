@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\GameType;
-use App\Team;
-use App\Tournament;
 use App\Role;
+use App\Team;
+use App\GameType;
+use Carbon\Carbon;
+use App\Tournament;
 use Illuminate\Database\Seeder;
 
 class Joutes2020Seeder extends Seeder
@@ -77,7 +78,7 @@ class Joutes2020Seeder extends Seeder
         $court = new \App\Court(['name' => 'Montagne', 'acronym' => 'MTN']);
         $court->sport()->associate($sport);
         $court->save();
-        $tournament = new \App\Tournament(['name' => 'Beach Volley', 'start_date' => Carbon\Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 12, 'img' => 'beachvolley.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Beach Volley', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 12, 'img' => 'beachvolley.jpg']);
         echo ("-");
         $tournament->sport()->associate($sport);
         echo ("-");
@@ -95,7 +96,7 @@ class Joutes2020Seeder extends Seeder
             $court->sport()->associate($sport);
             $court->save();
         }
-        $tournament = new \App\Tournament(['name' => 'Badminton', 'start_date' => Carbon\Carbon::Parse('2019-07-02 13:30'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 16, 'img' => 'badminton.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Badminton', 'start_date' => Carbon::Parse('2019-07-02 13:30'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 16, 'img' => 'badminton.jpg']);
         $tournament->sport()->associate($sport);
         $tournament->event()->associate($this->event);
         $tournament->save();
@@ -110,7 +111,7 @@ class Joutes2020Seeder extends Seeder
             $court->sport()->associate($sport);
             $court->save();
         }
-        $tournament = new \App\Tournament(['name' => 'Basket', 'start_date' => Carbon\Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 12:00'), 'max_teams' => 10, 'img' => 'basket.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Basket', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 12:00'), 'max_teams' => 10, 'img' => 'basket.jpg']);
         $tournament->sport()->associate($sport);
         $tournament->event()->associate($this->event);
         $tournament->save();
@@ -125,7 +126,7 @@ class Joutes2020Seeder extends Seeder
             $court->sport()->associate($sport);
             $court->save();
         }
-        $tournament = new \App\Tournament(['name' => 'Unihockey', 'start_date' => Carbon\Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 12:00'), 'max_teams' => 10, 'img' => 'unihockey.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Unihockey', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 12:00'), 'max_teams' => 10, 'img' => 'unihockey.jpg']);
         $tournament->sport()->associate($sport);
         $tournament->event()->associate($this->event);
         $tournament->save();
@@ -140,7 +141,7 @@ class Joutes2020Seeder extends Seeder
             $court->sport()->associate($sport);
             $court->save();
         }
-        $tournament = new \App\Tournament(['name' => 'Pétanque', 'start_date' => Carbon\Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 16, 'img' => 'petanque.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Pétanque', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 16, 'img' => 'petanque.jpg']);
         $tournament->sport()->associate($sport);
         $tournament->event()->associate($this->event);
         $tournament->save();
@@ -155,7 +156,7 @@ class Joutes2020Seeder extends Seeder
             $court->sport()->associate($sport);
             $court->save();
         }
-        $tournament = new \App\Tournament(['name' => 'Foot', 'start_date' => Carbon\Carbon::Parse('2019-07-02 13:30'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 8, 'img' => 'football.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Foot', 'start_date' => Carbon::Parse('2019-07-02 13:30'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 8, 'img' => 'football.jpg']);
         $tournament->sport()->associate($sport);
         $tournament->event()->associate($this->event);
         $tournament->save();
@@ -168,7 +169,7 @@ class Joutes2020Seeder extends Seeder
         $court = new \App\Court(['name' => 'Sainte-Croix et alentours', 'acronym' => 'Stex']);
         $court->sport()->associate($sport);
         $court->save();
-        $tournament = new \App\Tournament(['name' => 'Marche', 'start_date' => Carbon\Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon\Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 100, 'img' => 'rando.jpg']);
+        $tournament = new \App\Tournament(['name' => 'Marche', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 100, 'img' => 'rando.jpg']);
         $tournament->sport()->associate($sport);
         $tournament->event()->associate($this->event);
         $tournament->save();
