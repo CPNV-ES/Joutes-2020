@@ -5,6 +5,7 @@
 /public/lib
 /public/css
 /public/js
+
 /public/mix-manifest.json
 
 /storage/*.key
@@ -20,5 +21,6 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .idea
+*_icescrum_api.js*
 
 docs/timesheets/_icescrum_api.js

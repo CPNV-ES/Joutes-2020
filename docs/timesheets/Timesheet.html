@@ -126,6 +126,11 @@
                     {
                         tasks.push(...prepareTaskForPivot(task, stories)) // must spread before pushing, otherwise we build an array of array of objects (try it if you don't believe it)
                     }
+                    // If the task is started, it goes to the pivot
+                    if (task.spent > 0)
+                    {
+                        tasks.push(...prepareTaskForPivot(task, stories)) // must spread before pushing, otherwise we build an array of array of objects (try it if you don't believe it)
+                    }
                 })
             }).then(function () {
                 // compute additional fields
