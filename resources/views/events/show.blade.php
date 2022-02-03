@@ -16,7 +16,8 @@
                     @if(Auth::check())
                         @if(Auth::user()->role->slug =='ADMIN')
 
-                            <button type="button" class="btn btn-main" onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">
+                            <button type="button" class="btn btn-main"
+                                    onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">
                                 <i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i>
                             </button>
                             @if($event->eventState < 3)
@@ -27,18 +28,25 @@
                         @endif
                     @endif
                 </h1>
-                @if(Auth::check())
-                    @if(Auth::user()->role->slug =='ADMIN')
-                        <h3>État : {{\App\Enums\EventState::eventStateName($event->eventState)}}</h3>
-                    @endif
-                @endif
-
-                <hr>
             </div>
+            <div class="col-11 ml-n2 inline mb-3 flex flex-row inline">
+                    @if(Auth::check())
+                        @if(Auth::user()->role->slug =='ADMIN')
+                            <h3>État : {{\App\Enums\EventState::eventStateName($event->eventState)}}</h3>
+
+                           <form
+                               action="#" method="get">
+                               <button type="button" class="btn btn-main">Créer une équipe
+                               </button>
+                           </form>
+                        @endif
+                    @endif
+            </div>
+            <hr>
 
         </div>
 
-        <div class="row ml-4">
+        <div class="flex flex-row justify-center">
             @include('tournaments.list')
         </div>
     </div>
