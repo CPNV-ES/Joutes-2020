@@ -25,6 +25,17 @@ You can find the documentation [here](https://laravel.com/docs/8.x/sail#configur
 
 ### Quick tips
 
+Installing Composer Dependencies For Existing Applications
+
+```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
 Instead of repeatedly typing vendor/bin/sail to execute Sail commands, you may wish to configure a Bash alias that allows you to execute Sail's commands more easily
 
 ```bash
@@ -52,15 +63,4 @@ php artisan queue:work
 
 # Running Artisan commands within Laravel Sail...
 sail artisan queue:work
-```
-
-Installing Composer Dependencies For Existing Applications
-
-```bash
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v $(pwd):/var/www/html \
-    -w /var/www/html \
-    laravelsail/php81-composer:latest \
-    composer install --ignore-platform-reqs
 ```
