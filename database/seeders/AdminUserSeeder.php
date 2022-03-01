@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AdminUserSeeder extends Seeder
 {
@@ -11,12 +14,12 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        \App\User::create([
-            'username' => 'admin',
-            'first_name' => 'admin',
-            'last_name' => 'admin',
-            'password' => password_hash('Pa$$w0rd',PASSWORD_DEFAULT),
-            'role_id' => \App\Role::where('slug','ADMIN')->first()->id
+        DB::table('users')->insert([
+            'username' => 'AdminTest',
+            'email' => 'Admin@cpnv.ch',
+            'first_name' => 'Admin',
+            'last_name' => 'Test',
+            'role_id' => '1',
         ]);
     }
 }
