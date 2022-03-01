@@ -33,20 +33,13 @@
                     @if(Auth::check())
                         @if(Auth::user()->role->slug =='ADMIN')
                             <h3>État : {{\App\Enums\EventState::eventStateName($event->eventState)}}</h3>
-
-                           <form
-                               action="#" method="get">
-                               <button type="button" class="btn btn-main">Créer une équipe
-                               </button>
-                           </form>
                         @endif
                     @endif
             </div>
-            <hr>
 
         </div>
 
-        <div class="flex flex-row justify-center">
+        <div class="row ml-4">
             @include('tournaments.list')
         </div>
     </div>
