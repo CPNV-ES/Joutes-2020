@@ -16,12 +16,15 @@ class TeamController extends Controller
 
     public function store(CreateTeamRequest $request, Tournament $tournament)
     {
+        $nom =$request->validate([
+            'name'=> ['required','min:5']
+        ]);
         $team = new Team();
-        $team->fill($request->all());
+        $team->fill($nom);
         $team->tournament()->associate($tournament);
-
         $team->save();
 
-        return redirect()->route('tournaments.show', ['tournament' => $tournament]);
+        return redirect()->route('tournaments.show', ['tournament' => $tournament])
+            ->with('success',' votre équipe a été créée.');
     }
 }
