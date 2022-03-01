@@ -7,9 +7,9 @@
             <div class="col-12">
                 <h1>
                     Evénements
-                    @if(Auth::check())
-                        @if(Auth::user()->role->slug == 'ADMIN')
-                            <a href="{{route('events.create')}}" class="btn btn-main" title="Créer un événement">
+                    @if (Auth::check())
+                        @if (Auth::user()->role->slug == 'ADMIN')
+                            <a href="{{ route('events.create') }}" class="btn btn-main" title="Créer un événement">
                                 <i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i>
                             </a>
                         @endif
@@ -23,22 +23,22 @@
         <div class="row ml-4">
 
             @foreach ($events as $event)
-                <a href="{{route('events.show', $event->id)}}" title="Voir l'événement">
+                <a href="{{ route('events.show', $event->id) }}" title="Voir l'événement">
                     <div class="card">
-                        @if($event->img != null)
+                        @if ($event->img != null)
                             <img class="card-img" src="images/joutes/{{ $event->img }}" alt="Image de l'événement">
                         @else
-                        <!-- Get uploaded image -->
+                            <!-- Get uploaded image -->
                         @endif
 
                         <div class="card-body">
-                            <h5 class="card-title">{{$event->name}} </h5>
-
-                            @if(Auth::check())
-                                @if(Auth::user()->role == 'administrator')
+                            <h5 class="card-title">{{ $event->name }}</h5>
+                            @if (Auth::check())
+                                @if (Auth::user()->role == 'administrator')
                                     <div class="infos">
-                                        <a href="{{route('events.edit', $event->id)}}" title="Éditer le événement"
-                                           class="edit"><i class="fa fa-pencil fa-lg action" aria-hidden="true"></i></a>
+                                        <a href="{{ route('events.edit', $event->id) }}" title="Éditer le événement"
+                                            class="edit"><i class="fa fa-pencil fa-lg action"
+                                                aria-hidden="true"></i></a>
 
                                         {{-- {{ Form::open(array('url' => route('events.destroy', $event->id), 'method' => 'delete')) }}
                                             <button type="button" class="button-delete" data-name="{{ $event->name }}" data-type="tournament">
@@ -48,13 +48,14 @@
                                     </div>
                                 @endif
                             @endif
-
+                            <span class="badge badge-light">
+                                {{ \App\Enums\EventState::eventStateName($event->eventState) }}
+                            </span>
                         </div>
                     </div>
                 </a>
-
             @endforeach
-            @if(count($events) == 0)
+            @if (count($events) == 0)
                 <div class="col-md-12">Aucun événement pour l'instant...</div>
             @endif
 
