@@ -99,4 +99,12 @@ class Tournament extends Model
 
         return $teamsNotInAPool;
     }
+
+    public static function isNewTeam(string $name, Tournament $tournament)
+    {
+        return self::whereHas('teams',function ($q) use ($tournament, $name) {
+                $q->where('name',$name)->where('tournament_id',$tournament['id']);
+            })->count() === 0;
+
+    }
 }
