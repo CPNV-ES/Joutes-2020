@@ -15,7 +15,7 @@ class GameTypeSeeder extends Seeder
     public function run()
     {
         DB::table('game_types')->insert([
-            'game_types_description' => 'Modalités de jeu'
+            'game_type_description' => 'Modalités de jeu'
         ]);
     }
 }
