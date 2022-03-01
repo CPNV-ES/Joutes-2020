@@ -27,8 +27,9 @@
                         @endif
                         @if (Auth::user()->role->slug == 'STUD')
                             @if ($event->eventState == 1)
-                                <button type="button" class="btn btn-main" data-toggle="modal"
-                                    data-target="#engagementUserModal">S'insrire à l'évenement</button>
+                                <a href="{{ route('events.engagements.create', [$event]) }}"
+                                    class="btn btn-main btn-lg active" role="button" aria-pressed="true">S'insrire à
+                                    l'évenement</a>
                             @endif
                         @endif
                     @endif
