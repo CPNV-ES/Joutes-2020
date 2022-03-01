@@ -9,8 +9,6 @@
             <label for="name">Nom de l'équipe</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
-
-        
         <button type="submit" class="btn btn-main">Créer</button>
     </form>
 </div>
