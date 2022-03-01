@@ -21,11 +21,11 @@ class User extends Authenticatable
     {
         $matches = [];
         preg_match('/(foo)(bar)(baz)/', 'foobarbaz', $matches, PREG_OFFSET_CAPTURE);
-
     }
 
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo('App\Role');
     }
 
@@ -50,14 +50,14 @@ class User extends Authenticatable
 
     public function isUnsigned($id)
     {
-        $participant = user::where('id',$id)->first();
-        return (count ($participant->teams) < 2);
+        $participant = user::where('id', $id)->first();
+        return (count($participant->teams) < 2);
     }
 
     public function playedIn()
     {
         $dates = [];
-        foreach ($this->teams as $team){
+        foreach ($this->teams as $team) {
             array_push($dates, $team->tournament->end_date->format('Y'));
         }
         return array_unique($dates); //Distinct on the array to prevent from dates in duplicata
@@ -65,12 +65,15 @@ class User extends Authenticatable
 
     public function isDeletable()
     {
-        foreach ($this->teams as $team){
+        foreach ($this->teams as $team) {
             $team->tournament->event->eventState > 1 ? $isDeletable = False : $isDeletable = True;
             if (!$isDeletable) return False;
         }
         return True;
+    }
 
-
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_engagement_user')->withPivot('engagement_id');
     }
 }

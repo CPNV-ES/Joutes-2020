@@ -26,12 +26,20 @@
                             @endif
                         @endif
                         @if (Auth::user()->role->slug == 'STUD')
-                            @if ($event->eventState == 1)
+                            @if (count($event->user(Auth::user())->get()) > 0)
+                            <h4>
+                                <span class="badge badge-info">Déjà Inscript
+                                    ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                                </span>
+                            </h4>
+                        @else
+                            @if ($event->eventState == \App\Enums\EventState::Register)
                                 <a href="{{ route('events.engagements.create', [$event]) }}"
                                     class="btn btn-main btn-lg active" role="button" aria-pressed="true">S'insrire à
                                     l'évenement</a>
                             @endif
                         @endif
+                    @endif
                     @endif
                 </h1>
             </div>

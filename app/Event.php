@@ -33,6 +33,11 @@ class Event extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'event_engagement_user');
+        return $this->belongsToMany(User::class, 'event_engagement_user')->withPivot('engagement_id');
+    }
+
+    public function user(User $user)
+    {
+        return $this->users()->where('user_id', $user->id);
     }
 }

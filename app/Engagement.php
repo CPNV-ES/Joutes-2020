@@ -9,4 +9,9 @@ class Engagement extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public static function findBySlug(string $slug): self
+    {
+        return self::where('slug', $slug)->firstOrFail();
+    }
 }

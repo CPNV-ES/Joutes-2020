@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Engagement;
 use App\Event;
 use App\Enums\EventState;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreEventEngagementRequest;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class EventEngagementController extends Controller
 {
@@ -30,9 +32,12 @@ class EventEngagementController extends Controller
      */
     public function store(StoreEventEngagementRequest $request, Event $event)
     {
-        if ($event->eventState !== EventState::Register) {
+        if ($event->eventState !== EventState::Register || count($event->user(Auth::user())->get()) > 0) {
             abort(403);
         }
-        dd($event->users()->get());
+
+        $event->users()->attach(Auth::user(), ['engagement_id' =>  Engagement::findBySlug($request->engagement)->id]);
+
+        return redirect()->route('events.show', $event)->with('success', 'Inscription effectuée !');
     }
 }
