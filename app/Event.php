@@ -11,12 +11,14 @@ class Event extends Model
     public $timestamps = false;
 
     //Get event tournaments
-    public function tournaments() {
+    public function tournaments()
+    {
         return $this->hasMany('App\Tournament')->orderBy('sport_id'); // XCL: temporary fix on order, just to keep admin and injured fake tournaments at the end of the list
     }
 
     //Get specific tournament
-    public function tournament($id) {
+    public function tournament($id)
+    {
 
         // get event tournaments
         $tournaments = $this->tournaments()->get();
@@ -27,5 +29,10 @@ class Event extends Model
                 return $tournament;
             }
         }
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'event_engagement_user');
     }
 }
