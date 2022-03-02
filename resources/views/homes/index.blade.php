@@ -40,6 +40,16 @@
                                 <span class="badge badge-light">
                                     {{ \App\Enums\EventState::eventStateName($event->eventState) }}
                                 </span>
+                                @auth
+                                    @php
+                                        $userRegisterToEvent = $event->user(Auth::user())->first();
+                                    @endphp
+                                    @if ($userRegisterToEvent)
+                                        <span class="badge badge-success"> Inscrit
+                                            ({{ \App\Engagement::find($userRegisterToEvent->pivot->engagement_id)->name }})
+                                        </span>
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                     </a>

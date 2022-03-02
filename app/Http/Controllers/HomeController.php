@@ -12,9 +12,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-
-        $eventReady = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Ready)->get() : new Collection([]);;
-        $states = $eventReady->merge(Event::where('eventState', EventState::Register)->get())->groupBy('eventState');
+        $eventReady = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Ready)->get() : new Collection([]);
+        $eventFinished = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Finished)->get() : new Collection([]);
+        $states = Event::where('eventState', EventState::Register)->get()->merge($eventReady)->merge($eventFinished)->groupBy('eventState');
         return view('homes.index', compact('states'));
     }
 }
