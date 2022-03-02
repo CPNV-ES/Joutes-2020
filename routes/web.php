@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,12 +13,9 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('events.index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
 
 Route::post('pools/contenders/unlink', 'ContenderController@detachContender');
-
 
 
 Route::resource('events', 'EventController')->register();
@@ -33,7 +32,6 @@ Route::resource('tournaments.pools', 'PoolController')->register();
 Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
 Route::resource('pools.contenders', 'ContenderController')->register();
 Route::resource('games', 'GameController')->register();
-
 Route::resource('events.engagements', EventEngagementController::class)->only([
     'create', 'store'
 ]);
