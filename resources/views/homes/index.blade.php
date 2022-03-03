@@ -15,46 +15,17 @@
                     <hr>
                 </div>
             </div>
-            @foreach ($events as $event)
-                <div class="row ml-4">
-                    <a href="{{ route('events.show', $event->id) }}" title="Voir l'événement">
-                        <div class="card">
-                            @if ($event->img != null)
-                                <img class="card-img" src="images/joutes/{{ $event->img }}"
-                                    alt="Image de l'événement">
-                            @else
-                                <!-- Get uploaded image -->
-                            @endif
-
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $event->name }}</h5>
-                                @if (Auth::check())
-                                    @if (Auth::user()->role == 'administrator')
-                                        <div class="infos">
-                                            <a href="{{ route('events.edit', $event->id) }}" title="Éditer le événement"
-                                                class="edit"><i class="fa fa-pencil fa-lg action"
-                                                    aria-hidden="true"></i></a>
-                                        </div>
-                                    @endif
-                                @endif
-                                <span class="badge badge-light">
-                                    {{ \App\Enums\EventState::eventStateName($event->eventState) }}
-                                </span>
-                                @auth
-                                    @php
-                                        $userRegisterToEvent = $event->user(Auth::user())->first();
-                                    @endphp
-                                    @if ($userRegisterToEvent)
-                                        <span class="badge badge-success"> Inscrit
-                                            ({{ \App\Engagement::find($userRegisterToEvent->pivot->engagement_id)->name }})
-                                        </span>
-                                    @endif
-                                @endauth
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+            <div class="row">
+                @foreach ($events as $event)
+                    <x-event :event="$event">
+                        @if (Auth::check() && $event->user(Auth::user())->first())
+                            <span class="badge badge-success"> Inscrit
+                                ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                            </span>
+                        @endif
+                    </x-event>
+                @endforeach
+            </div>
 
         @empty
             <h1>Aucun événement prévu</h1>

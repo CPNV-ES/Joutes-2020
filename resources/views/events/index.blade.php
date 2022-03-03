@@ -20,46 +20,22 @@
             </div>
         </div>
 
-        <div class="row ml-4">
-
+        <div class="row">
             @foreach ($events as $event)
-                <a href="{{ route('events.show', $event->id) }}" title="Voir l'événement">
-                    <div class="card">
-                        @if ($event->img != null)
-                            <img class="card-img" src="images/joutes/{{ $event->img }}" alt="Image de l'événement">
-                        @else
-                            <!-- Get uploaded image -->
-                        @endif
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $event->name }}</h5>
-                            @if (Auth::check())
-                                @if (Auth::user()->role == 'administrator')
-                                    <div class="infos">
-                                        <a href="{{ route('events.edit', $event->id) }}" title="Éditer le événement"
-                                            class="edit"><i class="fa fa-pencil fa-lg action"
-                                                aria-hidden="true"></i></a>
-
-                                        {{-- {{ Form::open(array('url' => route('events.destroy', $event->id), 'method' => 'delete')) }}
-                                            <button type="button" class="button-delete" data-name="{{ $event->name }}" data-type="tournament">
-                                                <i class="fa fa-trash-o fa-lg action" aria-hidden="true"></i>
-                                            </button>
-                                        {{ Form::close() }} --}}
-                                    </div>
-                                @endif
-                            @endif
-                            <span class="badge badge-light">
-                                {{ \App\Enums\EventState::eventStateName($event->eventState) }}
-                            </span>
-                        </div>
-                    </div>
-                </a>
+                <x-event :event="$event">
+                    @if (Auth::check() && $event->user(Auth::user())->first())
+                        <span class="badge badge-success"> Inscrit
+                            ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                        </span>
+                    @endif
+                    <span class="badge badge-light">
+                        {{ \App\Enums\EventState::eventStateName($event->eventState) }}
+                    </span>
+                </x-event>
             @endforeach
             @if (count($events) == 0)
                 <div class="col-md-12">Aucun événement pour l'instant...</div>
             @endif
-
         </div>
-
     </div>
 @stop
