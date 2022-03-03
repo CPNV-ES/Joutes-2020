@@ -6,41 +6,54 @@
         <div class="row">
             <div class="col-1 ml-n5">
                 <a href="{{ route('events.index') }}"><i class="fa fa-4x fa-arrow-circle-left return fa-return growIcon"
-                                                         aria-hidden="true"></i></a>
+                        aria-hidden="true"></i></a>
             </div>
 
             <div class="col-11 ml-n2">
                 <h1>
                     Tournois de l'évenement {{ $event->name }}
 
-                    @if(Auth::check())
-                        @if(Auth::user()->role->slug =='ADMIN')
-
+                    @if (Auth::check())
+                        @if (Auth::user()->role->slug == 'ADMIN')
                             <button type="button" class="btn btn-main"
-                                    onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">
+                                onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">
                                 <i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i>
                             </button>
-                            @if($event->eventState < 3)
+                            @if ($event->eventState < 3)
                                 <button type="button" class="btn btn-main" data-toggle="modal"
-                                        data-target="#stageEventModal">État suivant
-                                    : {{\App\Enums\EventState::eventStateName($event->eventState+1)}} </button>
+                                    data-target="#stageEventModal">État suivant
+                                    : {{ \App\Enums\EventState::eventStateName($event->eventState + 1) }} </button>
                             @endif
                         @endif
+                        @if (Auth::user()->role->slug == 'STUD')
+                            @if (count($event->user(Auth::user())->get()) > 0)
+                            <h4>
+                                <span class="badge badge-info">Déjà Inscript
+                                    ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                                </span>
+                            </h4>
+                        @else
+                            @if ($event->eventState == \App\Enums\EventState::Register)
+                                <a href="{{ route('events.engagements.create', [$event]) }}"
+                                    class="btn btn-main btn-lg active" role="button" aria-pressed="true">S'insrire à
+                                    l'évenement</a>
+                            @endif
+                        @endif
+                    @endif
                     @endif
                 </h1>
             </div>
             <div class="col-11 ml-n2 inline mb-3 flex flex-row inline">
-                    @if(Auth::check())
-                        @if(Auth::user()->role->slug =='ADMIN')
-                            <h3>État : {{\App\Enums\EventState::eventStateName($event->eventState)}}</h3>
+                @if (Auth::check())
+                    @if (Auth::user()->role->slug == 'ADMIN')
+                        <h3>État : {{ \App\Enums\EventState::eventStateName($event->eventState) }}</h3>
 
-                           <form
-                               action="#" method="get">
-                               <button type="button" class="btn btn-main">Créer une équipe
-                               </button>
-                           </form>
-                        @endif
+                        <form action="#" method="get">
+                            <button type="button" class="btn btn-main">Créer une équipe
+                            </button>
+                        </form>
                     @endif
+                @endif
             </div>
             <hr>
 
@@ -51,29 +64,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="stageEventModal" tabindex="-1" role="dialog" aria-labelledby="stageEventModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+    <x-confirm trigger="stageEventModal" route="events.update" :parameters="[$event]">
+    </x-confirm>
 
-                <div class="modal-header">
-                    <i class="fas fa-times-circle fa-4x" style="color: red;"></i>
-                    <h5 class="modal-title pl-3 pt-3" id="stageEventModalLabel">Êtes-vous sûr de vouloir faire ça?</h5>
+    <x-confirm trigger="engagementUserModal" route="events.update" :parameters="[$event]">
+    </x-confirm>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-footer">
-                    <form action="{{ route('events.update', [$event]) }}" method="POST">
-                        @csrf
-                        {{ method_field('PUT') }}
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-success">Ok !</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @stop
