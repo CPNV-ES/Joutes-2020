@@ -2,19 +2,17 @@
 //// Cards edits
 //
 
-.card{
-    width: 22rem !important;
+.card {
     height: 95%;
-    margin-right: 50px;
 }
 
-.card-title{
+.card-title {
     color: white;
     font-weight: bolder;
     margin-top: -12px;
 }
 
-.card-text{
+.card-text {
     color: white !important;
     margin-top: -14px;
 }
@@ -25,7 +23,7 @@
     object-fit: cover;
 }
 
-.card-body{
+.card-body {
     background-color: #000000af;
     height: 20%;
 }
