@@ -1,10 +1,15 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Fakes;
 
+use App\Role;
+use App\Team;
+use App\GameType;
+use Carbon\Carbon;
+use App\Tournament;
 use Illuminate\Database\Seeder;
 
-class Joutes2018Seeder extends Seeder
+class Joutes2020Seeder extends Seeder
 {
     private $eventid;
 
@@ -19,9 +24,11 @@ class Joutes2018Seeder extends Seeder
         $user = \Config::get('database.connections.mysql.username');
         $pass = \Config::get('database.connections.mysql.password');
 
-        $event = \App\Event::where('name', 'like', '%2018%')->first();
-        if (!$event) die("L'événement n'existe pas\n");
-        $this->eventid = $event->id;
+        $this->event = \App\Event::where('name', 'like', '%2019%')->first();
+        if ($this->event) die("L'événement existe déjà\n");
+
+        $this->event = new \App\Event(['name' => 'Joutes 2019', 'img' => 'joutes.jpg', 'eventState' => 0]);
+        $this->event->save();
 
         // make room
         \Illuminate\Support\Facades\DB::statement('delete from games;');
@@ -29,10 +36,14 @@ class Joutes2018Seeder extends Seeder
         \Illuminate\Support\Facades\DB::statement('delete from pools;');
 
         $this->basics();
+        $this->tournamentsList();
+        $this->teams();
         $this->BeachVolley();
         $this->Basket();
         $this->UniHockey();
         $this->Badminton();
+        $this->roles();
+        $this->users();
     }
 
     // Common stuff
@@ -54,6 +65,197 @@ class Joutes2018Seeder extends Seeder
         ]))->save();
     }
 
+    // Create (empty) tournaments
+    private function tournamentsList()
+    {
+        echo "Création du tournoi de beach...";
+        // Beach Volley
+        $sport = new \App\Sport(['name' => 'Beach Volley', 'description' => 'Le 4-4 de la mort', 'min_participant' => 12, 'max_participant' => 12]);
+        $sport->save();
+        $court = new \App\Court(['name' => 'Lac', 'acronym' => 'LAC']);
+        $court->sport()->associate($sport);
+        $court->save();
+        $court = new \App\Court(['name' => 'Montagne', 'acronym' => 'MTN']);
+        $court->sport()->associate($sport);
+        $court->save();
+        $tournament = new \App\Tournament(['name' => 'Beach Volley', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 12, 'img' => 'beachvolley.jpg']);
+        echo ("-");
+        $tournament->sport()->associate($sport);
+        echo ("-");
+        $tournament->event()->associate($this->event);
+        echo ("-");
+        $tournament->save();
+        echo "OK\n";
+
+        echo "Création du tournoi de badminton...";
+        // Bad
+        $sport = new \App\Sport(['name' => 'Badminton', 'description' => 'En double mixte (ou pas)', 'min_participant' => 12, 'max_participant' => 16]);
+        $sport->save();
+        for ($i = 1; $i <= 6; $i++) {
+            $court = new \App\Court(['name' => 'Court ' . $i, 'acronym' => 'CT' . $i]);
+            $court->sport()->associate($sport);
+            $court->save();
+        }
+        $tournament = new \App\Tournament(['name' => 'Badminton', 'start_date' => Carbon::Parse('2019-07-02 13:30'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 16, 'img' => 'badminton.jpg']);
+        $tournament->sport()->associate($sport);
+        $tournament->event()->associate($this->event);
+        $tournament->save();
+        echo "OK\n";
+
+        echo "Création du tournoi de basket...";
+        // Basket
+        $sport = new \App\Sport(['name' => 'Basket', 'description' => 'Equipes de 5 (+1 remplaçant)', 'min_participant' => 10, 'max_participant' => 10]);
+        $sport->save();
+        for ($i = 1; $i <= 2; $i++) {
+            $court = new \App\Court(['name' => 'Court ' . $i, 'acronym' => 'CT' . $i]);
+            $court->sport()->associate($sport);
+            $court->save();
+        }
+        $tournament = new \App\Tournament(['name' => 'Basket', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 12:00'), 'max_teams' => 10, 'img' => 'basket.jpg']);
+        $tournament->sport()->associate($sport);
+        $tournament->event()->associate($this->event);
+        $tournament->save();
+        echo "OK\n";
+
+        echo "Création du tournoi de unihockey...";
+        // Unihockey
+        $sport = new \App\Sport(['name' => 'Unihockey', 'description' => 'Equipes de 4 (+1 remplaçant)', 'min_participant' => 10, 'max_participant' => 10]);
+        $sport->save();
+        for ($i = 1; $i <= 2; $i++) {
+            $court = new \App\Court(['name' => 'Court ' . $i, 'acronym' => 'CT' . $i]);
+            $court->sport()->associate($sport);
+            $court->save();
+        }
+        $tournament = new \App\Tournament(['name' => 'Unihockey', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 12:00'), 'max_teams' => 10, 'img' => 'unihockey.jpg']);
+        $tournament->sport()->associate($sport);
+        $tournament->event()->associate($this->event);
+        $tournament->save();
+        echo "OK\n";
+
+        echo "Création du tournoi de pétanque...";
+        // Pétanque
+        $sport = new \App\Sport(['name' => 'Pétanque', 'description' => 'Doublettes', 'min_participant' => 16, 'max_participant' => 16]);
+        $sport->save();
+        for ($i = 1; $i <= 4; $i++) {
+            $court = new \App\Court(['name' => 'Piste ' . $i, 'acronym' => 'PT' . $i]);
+            $court->sport()->associate($sport);
+            $court->save();
+        }
+        $tournament = new \App\Tournament(['name' => 'Pétanque', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 16, 'img' => 'petanque.jpg']);
+        $tournament->sport()->associate($sport);
+        $tournament->event()->associate($this->event);
+        $tournament->save();
+        echo "OK\n";
+
+        echo "Création du tournoi de foot...";
+        // Foot
+        $sport = new \App\Sport(['name' => 'Foot', 'description' => 'A huit', 'min_participant' => 8, 'max_participant' => 8]);
+        $sport->save();
+        for ($i = 'A'; $i <= 'B'; $i++) {
+            $court = new \App\Court(['name' => 'Terrain ' . $i, 'acronym' => 'T' . $i]);
+            $court->sport()->associate($sport);
+            $court->save();
+        }
+        $tournament = new \App\Tournament(['name' => 'Foot', 'start_date' => Carbon::Parse('2019-07-02 13:30'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 8, 'img' => 'football.jpg']);
+        $tournament->sport()->associate($sport);
+        $tournament->event()->associate($this->event);
+        $tournament->save();
+        echo "OK\n";
+
+        echo "Création de la marche...";
+        // Marche
+        $sport = new \App\Sport(['name' => 'Marche', 'description' => 'Par là autour', 'min_participant' => 1, 'max_participant' => 100]);
+        $sport->save();
+        $court = new \App\Court(['name' => 'Sainte-Croix et alentours', 'acronym' => 'Stex']);
+        $court->sport()->associate($sport);
+        $court->save();
+        $tournament = new \App\Tournament(['name' => 'Marche', 'start_date' => Carbon::Parse('2019-07-02 08:00'), 'end_date' => Carbon::Parse('2019-07-02 16:00'), 'max_teams' => 100, 'img' => 'rando.jpg']);
+        $tournament->sport()->associate($sport);
+        $tournament->event()->associate($this->event);
+        $tournament->save();
+        echo "OK\n";
+    }
+
+    private function teams()
+    {
+        echo "Création des équipes...";
+        echo "\nde badminton";
+        $badmintonTournament = Tournament::where('name', 'like', '%Badmin%')->first();
+
+        (new Team(['name' => 'Badboys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Super Nanas', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'CPVN Crew', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Magical Girls', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'OliverTwist', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Big fat boys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Minions', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Tchôoo', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Olakétal', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'MAlexandri', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Youpi', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Mouarf', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Soft Dog Meteors', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Volleywood ', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'art-Time Snakes', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Magaical Girls', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'OliverTwist', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Big fat boys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Minions boys', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Tchôoo men', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Olakétal teammmm', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Dylan gang', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Yakow', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'NotWorking', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Error404', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Super superman', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'CPVN gang', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Magical hood', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'OliverTwinnn', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Big fat girls', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Brrrrrooooo', 'tournament_id' => $badmintonTournament->id]))->save();
+        (new Team(['name' => 'Yomen', 'tournament_id' => $badmintonTournament->id]))->save();
+
+        echo "\nde beach volley";
+        $beachVolleyTournament = Tournament::where('name', 'like', '%Beach%')->first();
+
+        (new Team(['name' => 'Siomer', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Salsadi', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Monoster', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Picalo', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Dellit', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Btooom', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Stalgia', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Clattonia', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Danrell', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'RunAGround', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Believer', 'tournament_id' => $beachVolleyTournament->id]))->save();
+        (new Team(['name' => 'Plouf', 'tournament_id' => $beachVolleyTournament->id]))->save();
+
+        echo "\nde basket";
+        $basketTournament = Tournament::where('name', 'like', '%Basket%')->first();
+
+        (new Team(['name' => 'SuperStar', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Masting', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Clafier', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Robert2Poche', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Alexandri', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'FanGirls', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Les Otakus', 'tournament_id' => $basketTournament->id]))->save();
+        (new Team(['name' => 'Les Hotoman', 'tournament_id' => $basketTournament->id]))->save();
+
+        echo "\nde UniHockey";
+        $uniHockeyTournament = Tournament::where('name', 'like', '%hockey%')->first();
+
+        (new Team(['name' => 'Gamers', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Over2000', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Shinigami', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Rocketteurs', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Maya Labeille', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'Lonvoyant', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'RoyalGang', 'tournament_id' => $uniHockeyTournament->id]))->save();
+        (new Team(['name' => 'The Dwarf', 'tournament_id' => $uniHockeyTournament->id]))->save();
+    }
+
     private function Badminton()
     {
         echo "Badminton\n";
@@ -67,6 +269,10 @@ class Joutes2018Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Championnat\n";
@@ -76,11 +282,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '16:00',
             'poolName' => 'The Battle',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 13,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -101,6 +307,7 @@ class Joutes2018Seeder extends Seeder
         $nbTeams = count($teams);
         $evenNumberOfTeams = ($nbTeams % 2 == 0); // it matters....
 
+        // Building the rounds follows the algorithm described here:  https://nrich.maths.org/1443. Thank you Arunachalam Y
         // There will be N-1 rounds (each team will play N-1 games) if the number of teams is even,
         // N rounds if it is odd: each team will play N-1 games and rest during one round
         // Build an array so that it's easy to later define rounds in a richer way than just a number
@@ -155,6 +362,10 @@ class Joutes2018Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Championnat\n";
@@ -164,11 +375,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '16:00',
             'poolName' => 'The Championship',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -222,6 +433,10 @@ class Joutes2018Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Championnat\n";
@@ -231,11 +446,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '16:00',
             'poolName' => 'NBA',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 8,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -302,6 +517,10 @@ class Joutes2018Seeder extends Seeder
 
         $teams = \App\Team::where('tournament_id', '=', $tournamentid)->get();
 
+        $poolModeId = \App\PoolMode::where('mode_description', '=', 'Matches simples')->get()->first()->id;
+
+        $gameTypeId = GameType::where('game_type_description', '=', 'Modalités de jeu')->get()->first()->id;
+
         echo "Tournoi #$tournamentid, " . $teams->count() . " équipes inscrites\n";
         //================================================================================================================
         echo "Stage 1 = 2 poules de 6 équipes\n";
@@ -311,11 +530,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'A',
-            'mode_id' => 1,
-            'game_type_id' => 1,
+            'mode_id' => $poolModeId,
+            'game_type_id' => $gameTypeId,
             'poolSize' => 6,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]);
         $pool->save();
         $firstpoolStage1 = $pool->id; // we'll need that to put teams into pools
@@ -325,11 +544,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'B',
-            'mode_id' => 1,
+            'mode_id' => $poolModeId,
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 1,
-            'isFinished' => 0
+            'poolState' => 0
         ]))->save();
 
         $nbTeams = 0;
@@ -385,11 +604,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'Winners',
-            'mode_id' => 1,
+            'mode_id' => $poolModeId,
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 0
+            'poolState' => 1
         ]);
         $pool->save();
         $firstpoolStage2 = $pool->id; // we'll need that to put teams into pools
@@ -399,11 +618,11 @@ class Joutes2018Seeder extends Seeder
             'start_time' => '09:30',
             'end_time' => '11:45',
             'poolName' => 'Cool',
-            'mode_id' => 1,
+            'mode_id' => $poolModeId,
             'game_type_id' => 1,
             'poolSize' => 6,
             'stage' => 2,
-            'isFinished' => 0
+            'poolState' => 1
         ]))->save();
 
         (new \App\Contender(['pool_id' => $firstpoolStage2, 'pool_from_id' => $firstpoolStage1, 'rank_in_pool' => 1]))->save();
@@ -456,5 +675,38 @@ class Joutes2018Seeder extends Seeder
         (new \App\Game(['date' => '2017-06-27', 'start_time' => '15:00', 'contender1_id' => $firstcontender + 6, 'contender2_id' => $firstcontender + 11, 'court_id' => $firstcourt + 1]))->save();
         (new \App\Game(['date' => '2017-06-27', 'start_time' => '15:10', 'contender1_id' => $firstcontender + 7, 'contender2_id' => $firstcontender + 9, 'court_id' => $firstcourt + 1]))->save();
         (new \App\Game(['date' => '2017-06-27', 'start_time' => '15:20', 'contender1_id' => $firstcontender + 8, 'contender2_id' => $firstcontender + 10, 'court_id' => $firstcourt + 1]))->save();
+    }
+
+
+    private function roles()
+    {
+        echo "Création des roles utilisateurs\n";
+        // Admin
+        $role = new \App\Role(['name' => 'Administrateur', 'slug' => 'ADMIN',]);
+        $role->save();
+
+        // Gestionnaire
+        $role = new \App\Role(['name' => 'Gestionnaire', 'slug' => 'GEST',]);
+        $role->save();
+
+        // Élève
+        $role = new \App\Role(['name' => 'Student', 'slug' => 'STUD',]);
+        $role->save();
+
+        echo "OK\n";
+    }
+
+    private function users()
+    {
+        echo "Création d'un utilisateur ...";
+        $this->user = new \App\User([
+            'username' => 'AdminTest',
+            'email' => 'Admin@cpnv.ch',
+            'first_name' => 'Admin',
+            'last_name' => 'Test',
+            'role_id' => '1',
+        ]);
+        $this->user->save();
+        echo "OK";
     }
 }
