@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Engagement;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEventEngagementRequest extends FormRequest
 {
@@ -16,7 +17,7 @@ class StoreEventEngagementRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user();
+        return Gate::allows('isStudent') || Gate::allows('isGest');
     }
 
     /**

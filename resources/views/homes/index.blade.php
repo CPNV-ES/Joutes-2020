@@ -3,9 +3,6 @@
 
 @section('content')
     <div class="container">
-
-
-
         @forelse ($states as $state => $events)
             <div class="row mb-4">
                 <div class="col-12">
@@ -15,10 +12,10 @@
                     <hr>
                 </div>
             </div>
-            <div class="row">
+            <div class="row ">
                 @foreach ($events as $event)
                     <x-event :event="$event">
-                        @if (Auth::check() && $event->user(Auth::user())->first())
+                        @if ((Gate::allows('isStudent') || Gate::allows('isGest')) && $event->user(Auth::user())->first())
                             <span class="badge badge-success"> Inscrit
                                 ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
                             </span>
@@ -26,12 +23,8 @@
                     </x-event>
                 @endforeach
             </div>
-
         @empty
             <h1>Aucun événement prévu</h1>
         @endforelse
-
-
-
     </div>
 @stop

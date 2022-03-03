@@ -32,7 +32,8 @@ class EventEngagementController extends Controller
      */
     public function store(StoreEventEngagementRequest $request, Event $event)
     {
-        if ($event->eventState !== EventState::Register || count($event->user(Auth::user())->get()) > 0) {
+
+        if ($event->eventState != EventState::Register || count($event->user(Auth::user())->get()) > 0) {
             abort(403);
         }
 
