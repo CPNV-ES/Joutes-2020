@@ -69,11 +69,21 @@
                                 <td>{{$team->participants()->count()}}</td>
                                 <td><i class="{{ $team->isComplete() ? 'fa fa-check' : 'fa fa-close' }}"
                                        aria-hidden="true"></i></td>
-                                    @if($team->isComplete())
-                                        <td><i class="fa fa-check-square"
-                                               aria-hidden="true"></i>
-                                            <i class="fa fa-times-circle"
-                                               aria-hidden="true"></i>
+                                    @if($team->isComplete() && !$team->isValid())
+                                        <td>
+                                            <form action="{{ route('teams.update', $team) }}" method="post"
+                                               title="Valider cette équipe ">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="btn btn-main">
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                            <a href="#" class="btn btn-danger"
+                                               title="Refuser cette équipe ">
+                                                <i class="fa fa-ban"
+                                                   aria-hidden="true"></i>
+                                            </a>
                                         </td>
                                     @else
                                         <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"

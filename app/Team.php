@@ -48,8 +48,7 @@ class Team extends Model
     // Verify if the teams have all participants required to be full
     public function isValid()
     {
-        if ($this->participants()->count() >= $this->sport->min_participant) return true;
-        else return false;
+        return ($this->validation == 1);
     }
 
     public function isComplete()

@@ -33,4 +33,11 @@ class TeamController extends Controller
         }
 
     }
+    public function update(Request $request, Team $team)
+    {
+        $team->validation = 1;
+        $team->save();
+        return redirect()->route('tournaments.show', ['tournament' => $team->tournament])
+            ->with('success',"Équipe $team->name est validée");
+    }
 }
