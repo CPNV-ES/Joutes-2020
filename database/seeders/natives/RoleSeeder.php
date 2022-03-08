@@ -24,8 +24,12 @@ class RoleSeeder extends Seeder
                 'slug' => 'GEST',
             ],
             2 => [
-                'name' => 'Student',
-                'slug' => 'STUD',
+                'name' => 'Participant',
+                'slug' => 'PART',
+            ],
+            3 => [
+                'name' => 'Organisateur',
+                'slug' => 'ORG',
             ]
         ]);
     }
