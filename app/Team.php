@@ -8,7 +8,7 @@ use App\User;
 class Team extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name','isCaptain','owner_id','validation'];
+    protected $fillable = ['name','isCaptain','owner_id','validation', 'completion'];
 
     public function participants()
     {
@@ -46,15 +46,14 @@ class Team extends Model
 
 
     // Verify if the teams have all participants required to be full
-    public function isComplete()
-    {
-        if ($this->participants()->count() >= $this->sport->max_participant) return true;
-        else return false;
-    }
-
     public function isValid()
     {
-        if ($this->participants()->count() >= $this->sport->min_participant) return true;
+        return ($this->validation == 1);
+    }
+
+    public function isComplete()
+    {
+        if ($this->participants()->count() >= $this->sport->max_participant || $this->completion) return true;
         else return false;
     }
 

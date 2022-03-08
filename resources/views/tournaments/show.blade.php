@@ -69,8 +69,36 @@
                                 <td>{{$team->participants()->count()}}</td>
                                 <td><i class="{{ $team->isComplete() ? 'fa fa-check' : 'fa fa-close' }}"
                                        aria-hidden="true"></i></td>
-                                <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
-                                       aria-hidden="true"></i></td>
+                                    @if($team->isComplete() && !$team->isValid())
+                                        <td class="container pl-5">
+                                            <div class="row align-content-center">
+                                                <form action="{{ route('teams.update', $team) }}" method="post"
+                                                      title="Valider cette équipe ">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="validate" value="1">
+                                                    <button class="btn btn-main">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('teams.update', $team) }}" method="post"
+                                                      title="Refuser cette équipe">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="validate" value="0">
+                                                    <button class="btn btn-danger">
+                                                        <i class="fa fa-ban"
+                                                           aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
+                                               aria-hidden="true"></i></td>
+                                    @endif
+
+
                             </tr>
                         @endforeach
                     @else
