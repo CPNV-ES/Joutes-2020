@@ -69,8 +69,18 @@
                                 <td>{{$team->participants()->count()}}</td>
                                 <td><i class="{{ $team->isComplete() ? 'fa fa-check' : 'fa fa-close' }}"
                                        aria-hidden="true"></i></td>
-                                <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
-                                       aria-hidden="true"></i></td>
+                                    @if($team->isComplete())
+                                        <td><i class="fa fa-check-square"
+                                               aria-hidden="true"></i>
+                                            <i class="fa fa-times-circle"
+                                               aria-hidden="true"></i>
+                                        </td>
+                                    @else
+                                        <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
+                                               aria-hidden="true"></i></td>
+                                    @endif
+
+
                             </tr>
                         @endforeach
                     @else
