@@ -50,9 +50,6 @@
                             <li class="@if (Route::is('users.index')) active @endif"><a
                                     href="{{ route('users.index') }}"> <i class="fa fa-user-edit"
                                         aria-hidden="true"></i> Personnes</a></li>
-                            <li class="@if (Route::is('roles.index')) active @endif"><a
-                                    href="{{ route('roles.index') }}"> <i class="fa fa-edit"
-                                        aria-hidden="true"></i> Roles</a></li>
                         @endif
 
                         @if (Auth::user()->role == 'participant')

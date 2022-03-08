@@ -39,7 +39,6 @@ Route::resource('events.engagements', EventEngagementController::class)->only([
 
 //Administration resources
 Route::resource('administrations', 'Admin\AdministrationController')->register();
-Route::resource('roles', 'Admin\RoleController')->register();
 Route::resource('courts', 'Admin\CourtController')->register();
 
 //Azure
