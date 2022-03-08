@@ -22,11 +22,8 @@ Route::resource('events', 'EventController')->register();
 Route::resource('tournaments', 'TournamentController')->register();
 //Route::post('/events/tournaments/copy',  'TournamentController@copy')->name('events.tournaments.copy');
 Route::resource('events.tournaments', 'TournamentController')->register();
-Route::resource('courts', 'CourtController')->register();
-Route::resource('sports', 'SportController')->register();
+
 Route::resource('teams', 'TeamController')->register();
-Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
-Route::resource('users', 'UserController')->register();
 Route::resource('tournaments.teams', 'TeamController')->register();
 Route::resource('tournaments.pools', 'PoolController')->register();
 Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
@@ -38,8 +35,14 @@ Route::resource('events.engagements', EventEngagementController::class)->only([
 
 
 //Administration resources
-Route::resource('administrations', 'Admin\AdministrationController')->register();
-Route::resource('courts', 'Admin\CourtController')->register();
+Route::group(['middleware' => ['admin']], function () {
+    Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
+    Route::resource('users', 'UserController')->middleware('admin')->register();
+    Route::resource('administrations', 'Admin\AdministrationController')->register();
+    Route::resource('courts', 'Admin\CourtController')->register();
+    Route::resource('sports', 'SportController')->register();
+});
+
 
 //Azure
 //Azure
