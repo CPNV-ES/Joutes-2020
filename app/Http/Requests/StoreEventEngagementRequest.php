@@ -17,7 +17,7 @@ class StoreEventEngagementRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('isStudent') || Gate::allows('isGest');
+        return Gate::allows('isPart');
     }
 
     /**

@@ -25,7 +25,7 @@
                                     : {{ \App\Enums\EventState::eventStateName($event->eventState + 1) }} </button>
                             @endif
                         @endif
-                        @if (Auth::user()->role->slug == 'STUD')
+                        @if (Gate::allows('isPart'))
                             @if (count($event->user(Auth::user())->get()) > 0)
                                 <h4>
                                     <span class="badge badge-info">Déjà Inscript
