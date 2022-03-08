@@ -14,7 +14,7 @@ class AddCompletionToTeams extends Migration
     public function up()
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->integer('completion')->unsigned()->default(0)->after('validation');
+            $table->integer('completion')->unsigned()->default(0)->after('tournament_id');
         });
     }
 

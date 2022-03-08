@@ -35,9 +35,17 @@ class TeamController extends Controller
     }
     public function update(Request $request, Team $team)
     {
-        $team->validation = 1;
-        $team->save();
-        return redirect()->route('tournaments.show', ['tournament' => $team->tournament])
-            ->with('success',"Équipe $team->name est validée");
+        if($request['validate']){
+            $team->validation = $request['validate'];
+            $team->save();
+            return redirect()->route('tournaments.show', ['tournament' => $team->tournament])
+                ->with('success',"Équipe $team->name est validée");
+        }else{
+            $team->completion = $request['validate'];
+            $team->save();
+            return redirect()->route('tournaments.show', ['tournament' => $team->tournament])
+                ->with('success',"Équipe $team->name n'est pas validée et son status 'Complète' est annulé* ");
+        }
+
     }
 }

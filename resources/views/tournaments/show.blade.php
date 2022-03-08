@@ -75,15 +75,21 @@
                                                title="Valider cette équipe ">
                                                 @csrf
                                                 @method('PUT')
+                                                <input type="hidden" name="validate" value="1">
                                                 <button class="btn btn-main">
                                                     <i class="fa fa-check" aria-hidden="true"></i>
                                                 </button>
                                             </form>
-                                            <a href="#" class="btn btn-danger"
-                                               title="Refuser cette équipe ">
-                                                <i class="fa fa-ban"
-                                                   aria-hidden="true"></i>
-                                            </a>
+                                            <form action="{{ route('teams.update', $team) }}" method="post"
+                                                  title="Refuser cette équipe">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="validate" value="0">
+                                                <button class="btn btn-danger">
+                                                    <i class="fa fa-ban"
+                                                       aria-hidden="true"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     @else
                                         <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
