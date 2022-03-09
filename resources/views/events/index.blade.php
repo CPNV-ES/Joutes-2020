@@ -23,9 +23,9 @@
         <div class="row">
             @foreach ($events as $event)
                 <x-event :event="$event">
-                    @if (Gate::allows('isPart') && $event->user(Auth::user())->first())
+                    @if (Gate::allows('isPart') && $event->user(Auth::user()))
                         <span class="badge badge-success"> Inscrit
-                            ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                            ({{ \App\Helpers\EventHelper::displayUserRoleByEvent($event, Auth::user()) }})
                         </span>
                     @endif
                     <span class="badge badge-light">

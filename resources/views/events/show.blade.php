@@ -29,7 +29,7 @@
                             @if (count($event->user(Auth::user())->get()) > 0)
                                 <h4>
                                     <span class="badge badge-info">Déjà Inscript
-                                        ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                                        ({{ \App\Helpers\EventHelper::displayUserRoleByEvent($event, Auth::user()) }})
                                     </span>
                                 </h4>
                             @else
