@@ -2,8 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\User;
+use App\Event;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Engagement extends Model
 {
@@ -13,5 +15,10 @@ class Engagement extends Model
     public static function findBySlug(string $slug): self
     {
         return self::where('slug', $slug)->firstOrFail();
+    }
+
+    public static function findByEventAndUser(Event $event, User $user)
+    {
+        return self::find($event->user($user)->pivot->engagement_id);
     }
 }
