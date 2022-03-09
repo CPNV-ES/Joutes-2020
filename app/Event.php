@@ -31,13 +31,24 @@ class Event extends Model
         }
     }
 
+    /**
+     * Get all users related to this event
+     *
+     * @return void
+     */
     public function users()
     {
         return $this->belongsToMany(User::class, 'event_engagement_user')->withPivot('engagement_id');
     }
 
+    /**
+     * Check if a specific user is related to this event
+     *
+     * @param User $user
+     * @return void
+     */
     public function user(User $user)
     {
-        return $this->users()->where('user_id', $user->id);
+        return $this->users()->firstWhere('user_id', $user->id);
     }
 }
