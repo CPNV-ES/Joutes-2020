@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class Team extends Model
 {
@@ -68,8 +69,8 @@ class Team extends Model
 
     public function captain()
     {
-        //$this->participants()->where('isCaptain', 1)->get();
-        $this->users()->when('isCaptain', 1)->get();
+        $captain = $this->participants()->where('isCaptain', 1)->first();
+        return $captain ? $captain->getOriginal()['id'] == Auth::user()['id'] :false;
     }
     public function pools(){
         return $this->belongsToMany('App\Pool','Contenders');
