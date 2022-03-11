@@ -70,7 +70,7 @@ class Team extends Model
     public function captain()
     {
         $captain = $this->participants()->where('isCaptain', 1)->first();
-        return $captain ? $captain->getOriginal()['id'] == Auth::user()['id'] :false;
+        return  $captain !== null && Auth::check()  ? $captain->getOriginal()['id'] == Auth::user()['id'] :false;
     }
     public function pools(){
         return $this->belongsToMany('App\Pool','Contenders');

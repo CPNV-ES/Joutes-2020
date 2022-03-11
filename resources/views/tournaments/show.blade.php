@@ -89,8 +89,6 @@
                                     </td>
                                 @endif
 
-
-
                                 @if($team->isComplete() && !$team->isValid())
                                     <td class="container pl-5">
                                         <div class="row align-content-center">
