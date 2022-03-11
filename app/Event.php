@@ -13,7 +13,7 @@ class Event extends Model
     //Get event tournaments
     public function tournaments()
     {
-        return $this->hasMany('App\Tournament')->orderBy('sport_id'); // XCL: temporary fix on order, just to keep admin and injured fake tournaments at the end of the list
+        return $this->hasMany(Tournament::class)->orderBy('sport_id'); // XCL: temporary fix on order, just to keep admin and injured fake tournaments at the end of the list
     }
 
     //Get specific tournament

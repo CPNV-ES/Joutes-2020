@@ -21,7 +21,7 @@ class Role extends Model
     }
 
     public function getUsers(){
-        return $this->hasMany('App\User', 'roles_id');
+        return $this->hasMany(User::class, 'roles_id');
     }
 
     public function isUsed(){

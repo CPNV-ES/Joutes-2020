@@ -142,7 +142,7 @@ class Pool extends Model
     }
 
     public function teams(){
-        return $this->belongsToMany('App\Team','Contenders');
+        return $this->belongsToMany(Team::class,'Contenders');
     }
 
     public function listTeams() {
@@ -190,7 +190,7 @@ class Pool extends Model
             if(!$contender->team_id) return false;
         }
         if($this->poolState == PoolState::Prep) return true;
-        
+
     }
 
 }

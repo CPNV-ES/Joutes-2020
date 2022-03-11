@@ -13,14 +13,14 @@ class Team extends Model
 
     public function participants()
     {
-        return $this->belongsToMany('App\User', 'team_user')->withPivot('isCaptain');
+        return $this->belongsToMany(User::class, 'team_user')->withPivot('isCaptain');
     }
 
 
     //Get team tournament
     public function tournament()
     {
-        return $this->belongsTo('App\Tournament');
+        return $this->belongsTo(Tournament::class);
     }
 
     //
@@ -31,12 +31,12 @@ class Team extends Model
 
     public function games_contender_1()
     {
-        return $this->hasManyThrough('App\Game', 'App\Contender', 'team_id', 'contender1_id');
+        return $this->hasManyThrough(Game::class, Contender::class, 'team_id', 'contender1_id');
     }
 
     public function games_contender_2()
     {
-        return $this->hasManyThrough('App\Game', 'App\Contender', 'team_id', 'contender2_id');
+        return $this->hasManyThrough(Game::class, Contender::class, 'team_id', 'contender2_id');
     }
 
     public function games()
@@ -73,7 +73,7 @@ class Team extends Model
         return  $captain !== null && Auth::check()  ? $captain->getOriginal()['id'] == Auth::user()['id'] :false;
     }
     public function pools(){
-        return $this->belongsToMany('App\Pool','Contenders');
+        return $this->belongsToMany(Pool::class,'Contenders');
     }
 
     public function setFlag($flagName, $value)

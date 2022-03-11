@@ -20,7 +20,7 @@ class Contender extends Model
         } catch (\Throwable $th) {
             dd($th);
         }
-        
+
     }
 
     public function getName()
@@ -30,7 +30,7 @@ class Contender extends Model
     }
 
     public function fromPool(){
-        return $this->belongsTo('App\Pool', 'pool_from_id');
+        return $this->belongsTo(Pool::class, 'pool_from_id');
     }
 
     public function pool() {
