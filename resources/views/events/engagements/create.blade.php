@@ -24,7 +24,7 @@
                     <label for="tournamentName">Veuillez sélectionner le rôle pour cet événement (notez qu'un seul rôle
                         pourra être choisi).</label>
                     <select class="form-control" name="engagement">
-                        @foreach (\App\Engagement::All() as $engagement)
+                        @foreach (\App\role::availableForEngagement()->get() as $engagement)
                             <option value="{{ $engagement->slug }}">{{ $engagement->name }}</option>
                         @endforeach
                     </select>

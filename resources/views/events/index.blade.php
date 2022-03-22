@@ -23,13 +23,13 @@
         <div class="row">
             @foreach ($events as $event)
                 <x-event :event="$event">
-                    @if (Gate::allows('isPart') && $event->user(Auth::user()))
+                    @if (Gate::allows('isPart') && Helper::EventRoleUser(Auth::user(), $event))
                         <span class="badge badge-success"> Inscrit
-                            ({{ \App\Helpers\EventHelper::displayUserRoleByEvent($event, Auth::user()) }})
+                            ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})
                         </span>
                     @endif
                     <span class="badge badge-light">
-                        {{ \App\Enums\EventState::eventStateName($event->eventState) }}
+                        {{ Helper::eventStateName($event->eventState) }}
                     </span>
                 </x-event>
             @endforeach

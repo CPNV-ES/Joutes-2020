@@ -18,7 +18,7 @@
                 <thead>
                     <tr>
                         <th id="deleteInput">
-                            <input type="button" class="btn btn-danger invisible" value="Supprimer" data-toggle="modal"
+                            <input type="button" class="btn btn-danger d-none" value="Supprimer" data-toggle="modal"
                                 data-target="#deleteModal" />
                             <!-- Modal -->
                             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
@@ -73,10 +73,17 @@
                             </td>
                             <td>
                                 @foreach ($user->events as $event)
-                                    <div>{{ $event->name }}
-                                        <span class="badge badge-info">
-                                            ({{ \App\Helpers\EventHelper::displayUserRoleByEvent($event, $user) }})
-                                        </span>
+                                    <div class="p-2">
+                                        {{ $event->name }}
+                                        <select name='engagements' data-user="{{ $user->id }}"
+                                            data-event="{{ $event->id }}" class="form-control-sm engagementsSelect">
+                                            @foreach (\App\Engagement::all() as $engagement)
+                                                <option @if (Helper::EventRoleUser($event, $user, false)->slug == $engagement->slug) selected @endif
+                                                    id={{ $engagement->id }}>
+                                                    {{ $engagement->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 @endforeach
                             </td>

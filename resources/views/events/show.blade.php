@@ -22,14 +22,14 @@
                             @if ($event->eventState < 3)
                                 <button type="button" class="btn btn-main" data-toggle="modal"
                                     data-target="#stageEventModal">État suivant
-                                    : {{ \App\Enums\EventState::eventStateName($event->eventState + 1) }} </button>
+                                    : {{ Helper::eventStateName($event->eventState + 1) }} </button>
                             @endif
                         @endif
                         @if (Gate::allows('isPart'))
-                            @if (count($event->user(Auth::user())->get()) > 0)
+                            @if (Helper::EventRoleUser(Auth::user(), $event))
                                 <h4>
                                     <span class="badge badge-info">Déjà Inscript
-                                        ({{ \App\Helpers\EventHelper::displayUserRoleByEvent($event, Auth::user()) }})
+                                        ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})
                                     </span>
                                 </h4>
                             @else
@@ -46,7 +46,7 @@
             <div class="col-11 ml-n2 inline mb-3 flex flex-row inline">
                 @if (Auth::check())
                     @if (Auth::user()->role->slug == 'ADMIN')
-                        <h3>État : {{ \App\Enums\EventState::eventStateName($event->eventState) }}</h3>
+                        <h3>État : {{ Helper::eventStateName($event->eventState) }}</h3>
 
                         <form action="#" method="get">
                             <button type="button" class="btn btn-main">Créer une équipe
