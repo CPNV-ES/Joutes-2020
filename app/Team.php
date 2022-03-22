@@ -86,4 +86,19 @@ class Team extends Model
         }
     }
 
+    public static function newTeam($tournament,$data)
+    {
+
+        $team = new Team();
+        $team->fill($data);
+        $team->tournament()->associate($tournament);
+        $team->save();
+
+        $teamUser = new TeamUser;
+        $teamUser->user_id = Auth::id();
+        $teamUser->team_id = $team->id;
+        $teamUser->isCaptain = 1;
+        $teamUser->save();
+    }
+
 }

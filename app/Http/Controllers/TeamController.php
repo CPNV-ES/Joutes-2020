@@ -18,23 +18,11 @@ class TeamController extends Controller
 
     public function store(CreateTeamRequest $request, Tournament $tournament)
     {
-        $newTeam = $request->validate([
+        $team = $request->validate([
             'name' => ['required', 'min:5']
         ]);
-        if (Tournament::isNewTeam($newTeam['name'], $tournament)) {
-            $team = new Team();
-            $team->fill($newTeam);
-            $team->tournament()->associate($tournament);
-            $team->save();
-
-
-
-            $teamUser = TeamUser::created([
-                'user_id' => Auth::id(),
-                'team_id' => $team->id,
-                'isCaptain' => 1,
-            ]);
-
+        if (Tournament::isNewTeam($team['name'], $tournament)) {
+            Team::newTeam($tournament,$team);
             return redirect()->route('tournaments.show', ['tournament' => $tournament])
                 ->with('success', ' votre équipe a été créée.');
         } else {
