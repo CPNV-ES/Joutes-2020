@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\TeamUser;
 use Illuminate\Http\Request;
 use App\Tournament;
 use App\Team;
 use App\Http\Requests\CreateTeamRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -25,6 +27,14 @@ class TeamController extends Controller
             $team->tournament()->associate($tournament);
             $team->save();
 
+
+
+            $teamUser = TeamUser::created([
+                'user_id' => Auth::id(),
+                'team_id' => $team->id,
+                'isCaptain' => 1,
+            ]);
+
             return redirect()->route('tournaments.show', ['tournament' => $tournament])
                 ->with('success', ' votre équipe a été créée.');
         } else {
@@ -39,7 +49,7 @@ class TeamController extends Controller
         $team->setFlag($request['flag_name'], $request['flag_value']);
         $team->save();
         return redirect()->route('tournaments.show', ['tournament' => $team->tournament])
-            ->with('success', "Équipe $team->name ".$request['flag_message']);
+            ->with('success', "Équipe $team->name " . $request['flag_message']);
 
     }
 }
