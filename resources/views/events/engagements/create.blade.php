@@ -18,7 +18,7 @@
     <div class="container">
 
         <div class="col-8">
-            <form action="{{ route('events.engagements.store', $event) }}" method="POST">
+            <form action="{{ route('events.eventRoleUsers.store', $event) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="tournamentName">Veuillez sélectionner le rôle pour cet événement (notez qu'un seul rôle
