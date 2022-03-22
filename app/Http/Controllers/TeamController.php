@@ -16,9 +16,12 @@ class TeamController extends Controller
         return view('teams.create')->with(compact('tournament'));
     }
 
-    public function show($id)
+    public function show(Team $team)
     {
-        //
+
+        $members = TeamUser::where('team_id',$team->id)->get();
+        $tournament = Tournament::find($team->tournament_id);
+        return view('teams.show',compact('members', 'team','tournament'));
     }
 
     public function store(CreateTeamRequest $request, Tournament $tournament)

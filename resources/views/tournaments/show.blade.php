@@ -69,7 +69,7 @@
                                         </td>
                                     @else
                                         <td data-id="{{$team->id}}">
-                                            <a href="#" title="accéder à la page de l'équipe {{$team->name}}">
+                                            <a href="{{ route('teams.show', $team) }}" title="accéder à la page de l'équipe {{$team->name}}">
                                                 {{$team->name}}
                                             </a>
                                         </td>
