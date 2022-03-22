@@ -13,9 +13,12 @@ class Team extends Model
 
     public function participants()
     {
-        return $this->belongsToMany(User::class, 'team_user')->withPivot('isCaptain');
+        return $this->belongsToMany(User::class, 'team_users')->withPivot('isCaptain');
     }
 
+    public function teamUser(){
+        return $this->hasMany(TeamUser::class);
+    }
 
     //Get team tournament
     public function tournament()
@@ -70,7 +73,7 @@ class Team extends Model
     public function captain()
     {
         $captain = $this->participants()->firstwhere('isCaptain', 1);
-        return  $captain !== null && Auth::check()  ? $captain->getOriginal()['id'] == Auth::user()['id'] :false;
+        return  $captain !== null && Auth::check()  ? $captain->getOriginal()['id'] == Auth::id() :false;
     }
     public function pools(){
         return $this->belongsToMany(Pool::class,'Contenders');

@@ -29,6 +29,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function teamUser(){
+        return $this->hasMany(TeamUser::class);
+    }
+
     public function teams()
     {
         /*
@@ -36,7 +40,7 @@ class User extends Authenticatable
         $teams = $participant->teams;
         return $teams;
         */
-        return $this->belongsToMany(Team::class, 'team_user')->withPivot('isCaptain');
+        return $this->belongsToMany(Team::class, 'team_users')->withPivot('isCaptain');
 
 
         //return $this->hasManyThrough('App\Team', 'App\Participant', 'team_id','user_id' );
