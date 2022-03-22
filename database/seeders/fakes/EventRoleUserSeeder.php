@@ -18,7 +18,7 @@ class EventRoleUserSeeder extends Seeder
             DB::table('event_role_user')->insert([
                 'user_id' => rand(1, 201),
                 'event_id' => rand(1, 12),
-                'role_id' => rand(1, 2),
+                'role_id' => rand(2, 3),
             ]);
         }
     }
