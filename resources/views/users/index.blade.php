@@ -75,15 +75,20 @@
                                 @foreach ($user->events as $event)
                                     <div class="p-2">
                                         {{ $event->name }}
-                                        <select name='engagements' data-user="{{ $user->id }}"
-                                            data-event="{{ $event->id }}" class="form-control-sm engagementsSelect">
-                                            @foreach (\App\Engagement::all() as $engagement)
-                                                <option @if (Helper::EventRoleUser($event, $user, false)->slug == $engagement->slug) selected @endif
-                                                    id={{ $engagement->id }}>
-                                                    {{ $engagement->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        @if ($event->isRegisterOrReady())
+                                            <select name='{{ Helper::EventRoleUser($user, $event)->id }}'
+                                                data-event="{{ $event->id }}" class="form-control-sm engagementsSelect">
+                                                @foreach (\App\role::availableForEngagement()->get() as $role)
+                                                    <option @if (Helper::EventRoleUser($user, $event)->role->slug == $role->slug) selected @endif
+                                                        id={{ $role->slug }}>
+                                                        {{ $role->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <span class="form-control-sm select">{{ $role->name }}</span>
+                                        @endif
+
                                     </div>
                                 @endforeach
                             </td>

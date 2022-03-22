@@ -6,11 +6,14 @@ use App\Role;
 use App\Event;
 use App\EventRoleUser;
 use App\Enums\EventState;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreEventRoleUserRequest;
+use App\Http\Requests\UpdateEventRoleUserRequest;
 
 class EventRoleUserController extends Controller
 {
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,5 +47,28 @@ class EventRoleUserController extends Controller
         ]);
 
         return redirect()->route('events.show', $event)->with('success', 'Inscription effectuée !');
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\EventRoleUser  $eventRoleUser
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateEventRoleUserRequest $request, Event $event, EventRoleUser $eventRoleUser)
+    {
+        // TODO Refactor with Policy
+        if (!$event->isRegisterOrReady()) {
+            abort(403);
+        }
+
+        $eventRoleUser->role_id =  Role::findBySlug($request->engagement)->id;
+        $eventRoleUser->save();
+
+        // dd("Les rôles de " . $eventRoleUser->user->username . " / " . $eventRoleUser->user->last_name . " " . $eventRoleUser->user->first_name . " ont été changées pour l'évènement " . $event->name);
+        // session(['success' => "Les permissions de " . $eventRoleUser->user()->username . " / " . $eventRoleUser->user()->last_name . " " . $eventRoleUser->user()->first_name . " ont été changées"]);
+        return redirect()->back()->with('success', "Les rôles de " . $eventRoleUser->user->username . " / " . $eventRoleUser->user->last_name . " " . $eventRoleUser->user->first_name . " ont été changées pour l'évènement " . $event->name);
     }
 }

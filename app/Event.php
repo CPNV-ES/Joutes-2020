@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\EventState;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -37,5 +38,10 @@ class Event extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'event_role_user');
+    }
+
+    public function isRegisterOrReady()
+    {
+        return ($this->eventState == EventState::Register || $this->eventState == EventState::Ready);
     }
 }
