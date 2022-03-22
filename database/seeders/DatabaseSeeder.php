@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $this->call(Natives\EngagementSeeder::class);
         $this->call(Natives\RoleSeeder::class);
         $this->call(Natives\AdminUserSeeder::class);
         $this->call(Natives\GameTypeSeeder::class);
@@ -31,7 +29,7 @@ class DatabaseSeeder extends Seeder
             $this->call(Fakes\FakeResultPoolState::class);
             $this->call(Fakes\UserTableSeeder::class);
             $this->call(Fakes\EventsSeeder::class);
-            $this->call(Fakes\EventEngagementUserSeeder::class);
+            $this->call(Fakes\EventRoleUserSeeder::class);
         }
     }
 }

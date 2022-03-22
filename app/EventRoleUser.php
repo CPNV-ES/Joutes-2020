@@ -16,7 +16,7 @@ class EventEngagementUser extends Model
      *
      * @var string
      */
-    protected $table = 'event_engagement_user';
+    protected $table = 'event_role_user';
 
     public function user()
     {
@@ -28,7 +28,7 @@ class EventEngagementUser extends Model
         return $this->belongsTo(Event::class);
     }
 
-    public function engagement()
+    public function role()
     {
         return $this->belongsTo(Engagement::class);
     }
