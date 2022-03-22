@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventEngagementUser extends Model
+class EventRoleUser extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
+
+    protected $fillable = ['role_id', 'user_id', 'event_id'];
 
     /**
      * The table associated with the model.
@@ -30,6 +32,14 @@ class EventEngagementUser extends Model
 
     public function role()
     {
-        return $this->belongsTo(Engagement::class);
+        return $this->belongsTo(Role::class);
+    }
+
+    public static function findByEventAndEvent(User $user, Event $event)
+    {
+        return self::firstWhere([
+            ['user_id', $user->id],
+            ['event_id', $event->id]
+        ]);
     }
 }

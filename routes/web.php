@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,8 +30,8 @@ Route::resource('tournaments.pools', 'PoolController')->register();
 Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
 Route::resource('pools.contenders', 'ContenderController')->register();
 Route::resource('games', 'GameController')->register();
-Route::resource('events.engagements', EventEngagementController::class)->only([
-    'create', 'store'
+Route::resource('events.engagements', EventRoleUserController::class)->only([
+    'create', 'store', 'update'
 ]);
 
 

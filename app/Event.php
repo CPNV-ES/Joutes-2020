@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -38,17 +36,6 @@ class Event extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'event_engagement_user')->withPivot('engagement_id');
-    }
-
-    /**
-     * Check if a specific user is related to this event
-     *
-     * @param User $user
-     * @return void
-     */
-    public function user(User $user)
-    {
-        return $this->users()->firstWhere('user_id', $user->id);
+        return $this->belongsToMany(User::class, 'event_role_user');
     }
 }
