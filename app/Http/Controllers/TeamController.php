@@ -16,6 +16,11 @@ class TeamController extends Controller
         return view('teams.create')->with(compact('tournament'));
     }
 
+    public function show($id)
+    {
+        //
+    }
+
     public function store(CreateTeamRequest $request, Tournament $tournament)
     {
         $team = $request->validate([
