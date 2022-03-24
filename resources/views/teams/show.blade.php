@@ -29,6 +29,13 @@
                             <th>Nom</th>
                             <th>email</th>
                             <th>Capitain</th>
+                            @if($team->captain())
+                                <th>
+                                    <button id="capitain" class="btn btn-main growIcon" title="élu un successeur">
+                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                    </button>
+                                </th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +46,11 @@
                             <td>{{$member->user->last_name}}</td>
                             <td>{{$member->user->email}}</td>
                             <td>{{$member->isCaptain}}</td>
+                            <td>
+                                <button class="chooseCapitain btn btn-main invisible">
+                                <i class="fa fa-check growIcon" aria-hidden="true"></i>
+                                </button>
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -52,6 +64,21 @@
         </div>
 
     </div>
+ //TODO move it to proble js file
+    <script>
+        document.getElementById('capitain').addEventListener("click", function (e) {
+            const chooseCapitain = document.querySelectorAll('.chooseCapitain')
+            chooseCapitain.forEach(x => {
+                if (x.classList.contains('invisible')) {
+                    x.classList.remove('invisible')
+
+                } else {
+                    x.classList.add('invisible');
+                }
+            })
+        })
+    </script>
 
     <script src="{{ asset('js/tournamentView.js') }}"></script>
+
 @stop
