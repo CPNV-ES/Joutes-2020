@@ -19,7 +19,7 @@
 
                 <h2>Matches et Résultats</h2>
                 <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
-                @if ($pool->isEditable() && \App\Enums\EventState::eventStateName($pool->tournament->event->eventState) == 'En cours')
+                @if ($pool->isEditable() && Helper::eventStateName($pool->tournament->event->eventState) == 'En cours')
                     <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à
                         l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState + 1) }}</button>
                 @else
@@ -40,12 +40,12 @@
                                     <td class="separator sepTime " id="time{{ $game->id }}">
                                         {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
                                     <td class="contender1">
-                                        {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
+                                        {{ $game->contender1->rank_in_pool .($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') .'de ' .$game->contender1->fromPool->poolName }}
                                     </td>
                                     <td class="separator"> - </td>
 
                                     <td class="contender2">
-                                        {{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender2->fromPool->poolName }}
+                                        {{ $game->contender2->rank_in_pool .($game->contender2->rank_in_pool == 1 ? 'er ' : 'ème ') .'de ' .$game->contender2->fromPool->poolName }}
                                     </td>
                                     <td class="score2" id="court{{ $game->id }}">{{ $game->court->name }}
                                     </td>
@@ -83,7 +83,7 @@
                     <h2>Liste des participants</h2>
                     @foreach ($contenders as $contender)
                         <h6 style="color: black" value="{{ $contender[' pool_from_id'] }}">
-                            {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                            {{ $contender->rank_in_pool .($contender->rank_in_pool == 1 ? 'er ' : 'ème ') .'de ' .$contender->fromPool->poolName }}
                         </h6>
                     @endforeach
                 @endif

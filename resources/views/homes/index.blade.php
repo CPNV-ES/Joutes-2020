@@ -7,7 +7,7 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <h1>
-                        Evénements {{ \App\Enums\EventState::eventStateName($state) }}
+                        Evénements {{ Helper::eventStateName($state) }}
                     </h1>
                     <hr>
                 </div>
@@ -15,9 +15,9 @@
             <div class="row ">
                 @foreach ($events as $event)
                     <x-event :event="$event">
-                        @if ((Gate::allows('isStudent') || Gate::allows('isGest')) && $event->user(Auth::user())->first())
+                        @if (Gate::allows('isPart') && Helper::eventRoleUser(Auth::user(), $event))
                             <span class="badge badge-success"> Inscrit
-                                ({{ \App\Engagement::find($event->user(Auth::user())->first()->pivot->engagement_id)->name }})
+                                ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})
                             </span>
                         @endif
                     </x-event>

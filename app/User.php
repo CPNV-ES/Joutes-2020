@@ -78,6 +78,6 @@ class User extends Authenticatable
 
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'event_engagement_user')->withPivot('engagement_id');
+        return $this->belongsToMany(Event::class, 'event_role_user');
     }
 }

@@ -4,9 +4,8 @@ namespace Database\Seeders\Fakes;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
-class EventEngagementUserSeeder extends Seeder
+class EventRoleUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +14,11 @@ class EventEngagementUserSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
         foreach (range(1, 200) as $index) {
-            DB::table('event_engagement_user')->insert([
+            DB::table('event_role_user')->insert([
                 'user_id' => rand(1, 201),
                 'event_id' => rand(1, 12),
-                'engagement_id' => rand(1, 2),
+                'role_id' => rand(2, 3),
             ]);
         }
     }

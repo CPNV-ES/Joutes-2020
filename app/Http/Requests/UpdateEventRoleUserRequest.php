@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Role;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditRoleRequest extends FormRequest
+class UpdateEventRoleUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +16,7 @@ class EditRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Gate::allows('isAdmin');
     }
 
     /**
@@ -24,17 +27,7 @@ class EditRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:45|unique:roles,name,ignore($role->name)'
-        ];
-    
-    }
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'Veuillez entrer un nom',
-            'name.max' => 'Le nom est trop long, 45 caractères max',
-            'name.unique' => 'Ce nom existe déjà'
+            'engagement' => Rule::in(Role::availableForEngagement()->pluck('slug')),
         ];
     }
 }

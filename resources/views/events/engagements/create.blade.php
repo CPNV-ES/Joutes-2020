@@ -18,13 +18,13 @@
     <div class="container">
 
         <div class="col-8">
-            <form action="{{ route('events.engagements.store', $event) }}" method="POST">
+            <form action="{{ route('events.eventRoleUsers.store', $event) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="tournamentName">Veuillez sélectionner le rôle pour cet événement (notez qu'un seul rôle
                         pourra être choisi).</label>
                     <select class="form-control" name="engagement">
-                        @foreach (\App\Engagement::All() as $engagement)
+                        @foreach (\App\role::availableForEngagement()->get() as $engagement)
                             <option value="{{ $engagement->slug }}">{{ $engagement->name }}</option>
                         @endforeach
                     </select>

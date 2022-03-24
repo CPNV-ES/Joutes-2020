@@ -2,9 +2,8 @@
 
 namespace App;
 
+use App\Enums\EventState;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -31,13 +30,18 @@ class Event extends Model
         }
     }
 
+    /**
+     * Get all users related to this event
+     *
+     * @return void
+     */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'event_engagement_user')->withPivot('engagement_id');
+        return $this->belongsToMany(User::class, 'event_role_user');
     }
 
-    public function user(User $user)
+    public function isRegisterOrReady()
     {
-        return $this->users()->where('user_id', $user->id);
+        return ($this->eventState == EventState::Register || $this->eventState == EventState::Ready);
     }
 }

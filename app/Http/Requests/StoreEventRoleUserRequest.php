@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Engagement;
+use App\Role;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEventEngagementRequest extends FormRequest
+class StoreEventRoleUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,7 +17,7 @@ class StoreEventEngagementRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('isStudent') || Gate::allows('isGest');
+        return Gate::allows('isPart');
     }
 
     /**
@@ -28,7 +28,7 @@ class StoreEventEngagementRequest extends FormRequest
     public function rules()
     {
         return [
-            'engagement' => 'exists:engagements,slug'
+            'engagement' => Rule::in(Role::availableForEngagement()->pluck('slug')),
         ];
     }
 }
