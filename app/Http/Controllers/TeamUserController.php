@@ -70,7 +70,7 @@ class TeamUser extends Controller
      */
     public function update(Request $request, Team $team, User $user)
     {
-        dd($team);
+        dd(Teamu::all());
     }
 
     /**

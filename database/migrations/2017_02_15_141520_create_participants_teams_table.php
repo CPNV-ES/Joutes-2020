@@ -14,13 +14,13 @@ class CreateParticipantsTeamsTable extends Migration
     public function up()
     {
         Schema::create('team_users', function (Blueprint $table) {
-
+            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('team_id')->unsigned();
             $table->boolean('isCaptain');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
