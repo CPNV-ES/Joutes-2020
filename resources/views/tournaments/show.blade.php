@@ -61,12 +61,20 @@
                     @if(count($tournament->teams) > 0)
                         @foreach ($tournament->teams as $team)
                             <tr>
-                                @if(Auth::check() && Auth::user()->role == 'administrator')
-                                    <td class="clickable" data-id="{{$team->id}}">{{$team->name}}</td>
-                                @else
-                                    <td data-id="{{$team->id}}">{{$team->name}}</td>
-                                @endif
-                                <td>{{$team->participants()->count()}}</td>
+                                    @if(Auth::check() && Auth::user()->role == 'administrator')
+                                        <td class="clickable" data-id="{{$team->id}}">
+                                            <a href="https://www.google.com" title="Complete cette équipe ">
+                                            {{$team->name}}
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td data-id="{{$team->id}}">
+                                            <a href="{{ route('teams.show', $team) }}" title="accéder à la page de l'équipe {{$team->name}}">
+                                                {{$team->name}}
+                                            </a>
+                                        </td>
+                                    @endif
+                                    <td>{{$team->participants()->count()}}</td>
 
                                 @if(!$team->isComplete() && $team->captain() )
                                     <td class="container pl-5">

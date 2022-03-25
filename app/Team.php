@@ -88,7 +88,6 @@ class Team extends Model
 
     public static function newTeam($tournament,$data)
     {
-
         $team = new Team();
         $team->fill($data);
         $team->tournament()->associate($tournament);

@@ -25,6 +25,9 @@ Route::resource('tournaments', 'TournamentController')->register();
 Route::resource('events.tournaments', 'TournamentController')->register();
 
 Route::resource('teams', 'TeamController')->register();
+Route::resource('team.user', 'TeamUserController')->register();
+Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
+Route::resource('users', 'UserController')->register();
 Route::resource('tournaments.teams', 'TeamController')->register();
 Route::resource('tournaments.pools', 'PoolController')->register();
 Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
