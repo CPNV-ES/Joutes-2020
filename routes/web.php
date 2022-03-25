@@ -25,7 +25,7 @@ Route::resource('events.tournaments', 'TournamentController')->register();
 Route::resource('courts', 'CourtController')->register();
 Route::resource('sports', 'SportController')->register();
 Route::resource('teams', 'TeamController')->register();
-Route::resource('team.user', 'TeamUser')->register();
+Route::resource('team.user', 'TeamUserController')->register();
 Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
 Route::resource('users', 'UserController')->register();
 Route::resource('tournaments.teams', 'TeamController')->register();

@@ -45,17 +45,19 @@
                             <td>{{$member->user->last_name}}</td>
                             <td>{{$member->user->email}}</td>
                             <td>{{$member->isCaptain}}</td>
-                            <td>
-                                <form action="{{ route('team.user.update', [$team,$member->user]) }}" method="post"
-                                      title="choisi un nouveau capitain"
-                                      onsubmit="return confirm('Vous êtes sûr?');">
-                                    @csrf
-                                    @method('PUT')
-                                    <button class=" chooseCapitain btn btn-main invisible">
-                                        <i class="fa fa-check growIcon" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            @if($team->captain())
+                                <td>
+                                    <form action="{{ route('team.user.update', [$team,$member->user]) }}" method="post"
+                                          title="choisi un nouveau capitain"
+                                          onsubmit="return confirm('Vous êtes sûr de ne pas vouloir être le capitain ?');">
+                                        @csrf
+                                        @method('PUT')
+                                        <button class=" chooseCapitain btn btn-main invisible">
+                                            <i class="fa fa-check growIcon" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            @endif
                         </tr>
                     @empty
                         <tr>

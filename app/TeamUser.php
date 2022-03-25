@@ -20,5 +20,16 @@ class TeamUser extends Model
         return $this->belongsTo(Team::class, 'team_id');
     }
 
+    public static function newCapitain($members,$user)
+    {
+        foreach ($members as $member){
+            $member->isCaptain = 0;
+            $member->save();
+        }
+        $chosen = TeamUser::firstWhere('user_id', $user->id);
+        $chosen->isCaptain = 1;
+        return $chosen->save();
+    }
+
 
 }

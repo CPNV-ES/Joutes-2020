@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Team;
+use App\Tournament;
 use App\User;
+use App\TeamUser;
 use Illuminate\Http\Request;
 
-class TeamUser extends Controller
+class TeamUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -70,7 +72,12 @@ class TeamUser extends Controller
      */
     public function update(Request $request, Team $team, User $user)
     {
-        dd(Teamu::all());
+        $members = TeamUser::where('team_id',$team->id)->get();
+        $tournament = Tournament::find($team->tournament_id);
+        TeamUser::newCapitain($members,$user);
+
+        return redirect()->route('teams.show',compact('members', 'team','tournament'))
+            ->with('success', "$user->username est le nouveau capitain." . $request['flag_message']);
     }
 
     /**
