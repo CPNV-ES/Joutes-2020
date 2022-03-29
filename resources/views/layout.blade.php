@@ -54,7 +54,7 @@
                                     href="{{ route('roles.index') }}"> <i class="fa fa-edit"
                                         aria-hidden="true"></i> Roles</a></li>
                             <li class="@if (Route::is('classes.index')) active @endif"><a
-                                    href="#"> <i class="fa fa-home"
+                                    href="{{ route('classes.index') }}"> <i class="fa fa-home"
                                           aria-hidden="true"></i> Classes</a></li>
                         @endif
 
