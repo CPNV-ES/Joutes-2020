@@ -20,14 +20,18 @@
                     <thead>
                     <tr>
                         <th>classes</th>
-                        <th>status</th>
+                        <th>year</th>
+                        <th>titulaire</th>
+                        <th>délégué</th>
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($classes as $class)
                         <tr>
                             <td>{{$class->name}}</td>
-                            <td>{{$class->status}}</td>
+                            <td>{{$class->year}}</td>
+                            <td>{{$class->holder}}</td>
+                            <td>{{$class->delegate}}</td>
                         </tr>
                     @empty
                         <tr>

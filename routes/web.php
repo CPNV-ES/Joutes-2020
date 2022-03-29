@@ -35,7 +35,7 @@ Route::resource('games', 'GameController')->register();
 Route::resource('events.engagements', EventEngagementController::class)->only([
     'create', 'store'
 ]);
-
+Route::resource('classes', 'SchoolClassController')->register();
 
 //Administration resources
 Route::resource('administrations', 'Admin\AdministrationController')->register();
