@@ -16,7 +16,9 @@ class CreateSchoolClassesTable extends Migration
         Schema::create('school_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('status');
+            $table->string('year');
+            $table->string('holder');
+            $table->string('delegate');
             $table->timestamps();
         });
     }
