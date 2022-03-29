@@ -15,7 +15,7 @@ class CreateSchoolClassesTable extends Migration
     {
         Schema::create('school_classes', function (Blueprint $table) {
             $table->id();
-            $table->string('class');
+            $table->string('name');
             $table->string('status');
             $table->timestamps();
         });
