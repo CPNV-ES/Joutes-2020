@@ -44,7 +44,9 @@
                             <td>{{$member->user->first_name}}</td>
                             <td>{{$member->user->last_name}}</td>
                             <td>{{$member->user->email}}</td>
-                            <td>{{$member->isCaptain}}</td>
+                            <td><i class="{{ $member->isCaptain ? 'fa fa-check' : 'fa fa-close' }}"
+                                   aria-hidden="true"></i>
+                            </td>
                             @if($team->captain())
                                 <td>
                                     <form action="{{ route('team.user.update', [$team,$member->user]) }}" method="post"
