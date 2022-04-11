@@ -38,7 +38,8 @@ class SchoolClass extends Model
         }
         return $classesIntranet;
     }
-    public static function identifyClass($classes,$classesIntranet){
+    public static function identifyClass($classesIntranet){
+        $classes = SchoolClass::all();
         $classes_array = [];
         foreach ($classes as $class) {
             $classes_array[$class->name] = [

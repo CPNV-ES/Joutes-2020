@@ -14,10 +14,10 @@ class SchoolClassController extends Controller
      */
     public function index()
     {
-        $classes = SchoolClass::all();
         $classesIntranet = SchoolClass::fetchClassFromIntranet();
-        $class = SchoolClass::identifyClass($classes,$classesIntranet);
+        $classes = SchoolClass::identifyClass($classesIntranet);
         return view('classes.index', compact('classes', 'classesIntranet'));
+
     }
 
     /**
