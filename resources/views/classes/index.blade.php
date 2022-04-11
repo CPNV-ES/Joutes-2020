@@ -38,6 +38,18 @@
                             <td>Aucune classes pour l'instant ...</td>
                         </tr>
                     @endforelse
+                    @forelse($classesIntranet as $class)
+                        <tr>
+                            <td>{{$class["name"]}}</td>
+                            <td>{{$class["year"]}}</td>
+                            <td>{{$class["holder"]}}</td>
+                            <td>{{$class["delegate"]}}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td>Aucune classes pour l'instant ...</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>

@@ -9,4 +9,6 @@ class SchoolClass extends Model
 {
     use HasFactory;
     protected $fillable = ['class', 'status'];
+
+
 }
