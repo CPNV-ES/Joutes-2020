@@ -38,4 +38,31 @@ class SchoolClass extends Model
         }
         return $classesIntranet;
     }
+    public static function identifyClass($classes,$classesIntranet){
+        $classes_array = [];
+        foreach ($classes as $class) {
+            $classes_array[$class->name] = [
+                "name" => $class->name,
+                "year" => $class->year,
+                "holder" => $class->holder,
+                "delegate" => $class->delegate,
+                "status" => $class->status,
+            ];
+        }
+        foreach ($classesIntranet as $classIntranet) {
+            if (array_key_exists($classIntranet['name'], $classes_array)) {
+                $classes_array[$classIntranet['name']]['status'] = 'synchronized';
+            } else {
+                $classes_array[$classIntranet['name']] = [
+                    "name" => $classIntranet['name'],
+                    "year" => $classIntranet['year'],
+                    "holder" => $classIntranet['holder'],
+                    "delegate" => $classIntranet['delegate'],
+                    "status" => 'not_synchronized',
+                ];
+            }
+        }
+        return $classes_array;
+    }
+
 }

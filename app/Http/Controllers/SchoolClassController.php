@@ -15,9 +15,8 @@ class SchoolClassController extends Controller
     public function index()
     {
         $classes = SchoolClass::all();
-
         $classesIntranet = SchoolClass::fetchClassFromIntranet();
-
+        $class = SchoolClass::identifyClass($classes,$classesIntranet);
         return view('classes.index', compact('classes', 'classesIntranet'));
     }
 
