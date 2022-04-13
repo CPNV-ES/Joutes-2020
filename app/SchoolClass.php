@@ -9,7 +9,7 @@ class SchoolClass extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['class', 'status'];
+    protected $fillable = ['name','year','holder','delegate'];
 
     public static function fetchClassesFromIntranet()
     {

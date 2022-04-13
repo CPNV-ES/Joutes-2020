@@ -36,9 +36,23 @@ class SchoolClassController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        //
+        foreach($request->query() as $class){
+            if(array_key_exists($class['name'], $_POST))
+            {
+                SchoolClass::updateOrCreate(
+                    ['name' => $class['name']],
+                    ['year' => $class['year']],
+                    ['holder' => $class['holder']],
+                    ['delegate' => $class['delegate']]
+                );
+            }
+        }
+        $classesIntranet = SchoolClass::fetchClassesFromIntranet();
+        $classes = SchoolClass::identifyClass($classesIntranet);
+        return view('classes.index', compact('classes', 'classesIntranet'));
+
     }
 
     /**
@@ -70,7 +84,7 @@ class SchoolClassController extends Controller
      * @param \App\SchoolClass $schoolClass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SchoolClass $schoolClass)
+    public function update(Request $request, $schoolClasses)
     {
         //
     }
