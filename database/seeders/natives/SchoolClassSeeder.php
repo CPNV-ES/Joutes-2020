@@ -39,6 +39,12 @@ class SchoolClassSeeder extends Seeder
                 'holder' => 'WULLIAMOZ Didier',
                 'delegate' => 'SOLLIARD	Yann',
             ],
+            3 => [
+                'name' => 'SRI-T2b',
+                'year' => '2020-2021',
+                'holder' => 'WULLIAMOZ Didier',
+                'delegate' => 'SOLLIARD	Yann',
+            ],
         ]);
     }
 }

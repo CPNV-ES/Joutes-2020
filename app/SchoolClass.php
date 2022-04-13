@@ -11,7 +11,7 @@ class SchoolClass extends Model
 
     protected $fillable = ['class', 'status'];
 
-    public static function fetchClassFromIntranet()
+    public static function fetchClassesFromIntranet()
     {
         $url = "https://intranet.cpnv.ch/sainte-croix/classes.json?api_key=demo&signature=deb6ccd76335e4c3e6a450d6c8db159d";
 
@@ -31,7 +31,7 @@ class SchoolClass extends Model
         foreach ($classes_array as $class) {
             $classesIntranet[$class->name] = [
                 "name" => $class->name,
-                "year" => $class->moment->link->name,
+                "year" => explode(' ',$class->moment->link->name)[1],
                 "holder" => isset($class->master->link->name) ? $class->master->link->name : '',
                 "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
             ];
@@ -52,14 +52,14 @@ class SchoolClass extends Model
         }
         foreach ($classesIntranet as $classIntranet) {
             if (array_key_exists($classIntranet['name'], $classes_array)) {
-                $classes_array[$classIntranet['name']]['status'] = 'synchronized';
+                $classes_array[$classIntranet['name']]['status'] = 'synchronisé';
             } else {
                 $classes_array[$classIntranet['name']] = [
                     "name" => $classIntranet['name'],
                     "year" => $classIntranet['year'],
                     "holder" => $classIntranet['holder'],
                     "delegate" => $classIntranet['delegate'],
-                    "status" => 'not_synchronized',
+                    "status" => 'pas synchronisé',
                 ];
             }
         }
