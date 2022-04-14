@@ -40,9 +40,11 @@ class SchoolClassController extends Controller
     {
         $classesIntranet = SchoolClass::fetchClassesFromIntranet();
         $classes = SchoolClass::identifyClass($classesIntranet);
+        $selected = $_POST;
         foreach ($classesIntranet as $class) {
-            if (array_key_exists($class['name'], $_POST)) {
-               SchoolClass::synchronise($class);
+            if (array_key_exists($class['name'], $selected)) {
+                SchoolClass::removeOldClasses($classes,$selected);//get class with status null form $classes array
+                SchoolClass::synchronise($class);
             }
         }
         /*$old = SchoolClass::where('name',$class['name']);
