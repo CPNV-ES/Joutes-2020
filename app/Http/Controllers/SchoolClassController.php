@@ -40,21 +40,13 @@ class SchoolClassController extends Controller
     {
         $classesIntranet = SchoolClass::fetchClassesFromIntranet();
         $classes = SchoolClass::identifyClass($classesIntranet);
-
         foreach ($classesIntranet as $class) {
             if (array_key_exists($class['name'], $_POST)) {
-
-                SchoolClass::updateOrCreate([
-                    'name' => $class['name']],
-                    [
-                        'name' => $class['name'],
-                        'year' => $class['year'],
-                        'holder' => $class['holder'],
-                        'delegate' => $class['delegate']
-                    ]);
+               SchoolClass::synchronise($class);
             }
         }
-
+        /*$old = SchoolClass::where('name',$class['name']);
+        $old->delete();*/
         return view('classes.index', compact('classes', 'classesIntranet'));
 
     }

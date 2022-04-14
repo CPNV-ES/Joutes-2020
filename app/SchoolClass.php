@@ -67,4 +67,16 @@ class SchoolClass extends Model
         return $classes_array;
     }
 
+    public static function synchronise($class)
+    {
+        SchoolClass::updateOrCreate([
+            'name' => $class['name']],
+            [
+                'name' => $class['name'],
+                'year' => $class['year'],
+                'holder' => $class['holder'],
+                'delegate' => $class['delegate']
+            ]);
+}
+
 }
