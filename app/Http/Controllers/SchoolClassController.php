@@ -47,7 +47,7 @@ class SchoolClassController extends Controller
         }
         /*$old = SchoolClass::where('name',$class['name']);
         $old->delete();*/
-        return view('classes.index', compact('classes', 'classesIntranet'));
+        return redirect()->route('classes.index', compact('classes', 'classesIntranet'));
 
     }
 
