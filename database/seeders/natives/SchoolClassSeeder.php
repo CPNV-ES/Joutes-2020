@@ -16,14 +16,14 @@ class SchoolClassSeeder extends Seeder
     {
         DB::table('school_classes')->insert([
             0 => [
-                'name' => 'SI-T1a',
-                'year' => '2021-2022',
+                'name' => 'SI-M1a',
+                'year' => '2020-2021',
                 'holder' => 'GLASSEY Nicolas',
                 'delegate' => 'COSTA-DOS-SANTOS	Mauro-Alexandre',
             ],
             1 => [
                 'name' => 'SI-T1b',
-                'year' => '2021-2022',
+                'year' => '2020-2021',
                 'holder' => 'ROTEN Cédric',
                 'delegate' => 'FAILLOUBAZ	Jeremy',
             ],
@@ -35,15 +35,21 @@ class SchoolClassSeeder extends Seeder
             ],
             3 => [
                 'name' => 'SI-T2b',
-                'year' => '2021-2022',
+                'year' => '2019-2020',
                 'holder' => 'WULLIAMOZ Didier',
                 'delegate' => 'SOLLIARD	Yann',
             ],
             3 => [
                 'name' => 'SRI-T2b',
-                'year' => '2020-2021',
+                'year' => '2017-2018',
                 'holder' => 'WULLIAMOZ Didier',
                 'delegate' => 'SOLLIARD	Yann',
+            ],
+            4 => [
+                'name' => 'SI-T1a',
+                'year' => '2020-2021',
+                'holder' => 'GLASSEY Nicolas',
+                'delegate' => 'COSTA-DOS-SANTOS	Mauro-Alexandre',
             ],
         ]);
     }

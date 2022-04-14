@@ -10,6 +10,7 @@ class SchoolClass extends Model
     use HasFactory;
 
     protected $fillable = ['name','year','holder','delegate'];
+    //protected $guarded = [];
 
     public static function fetchClassesFromIntranet()
     {

@@ -36,21 +36,25 @@ class SchoolClassController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store(Request $request)
     {
-        foreach($request->query() as $class){
-            if(array_key_exists($class['name'], $_POST))
-            {
-                SchoolClass::updateOrCreate(
-                    ['name' => $class['name']],
-                    ['year' => $class['year']],
-                    ['holder' => $class['holder']],
-                    ['delegate' => $class['delegate']]
-                );
-            }
-        }
         $classesIntranet = SchoolClass::fetchClassesFromIntranet();
         $classes = SchoolClass::identifyClass($classesIntranet);
+
+        foreach ($classesIntranet as $class) {
+            if (array_key_exists($class['name'], $_POST)) {
+
+                SchoolClass::updateOrCreate([
+                    'name' => $class['name']],
+                    [
+                        'name' => $class['name'],
+                        'year' => $class['year'],
+                        'holder' => $class['holder'],
+                        'delegate' => $class['delegate']
+                    ]);
+            }
+        }
+
         return view('classes.index', compact('classes', 'classesIntranet'));
 
     }
