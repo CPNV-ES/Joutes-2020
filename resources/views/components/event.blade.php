@@ -11,7 +11,7 @@
             @endif
             <div class="card-body">
                 <h5 class="card-title">{{ $event->name }}</h5>
-                @if (Auth::check() && Auth::user()->role->slug == 'ADMIN')
+                @if (Auth::check() && Gate::allows('isAdmin'))
                     <a href="{{ route('events.show', $event) }}" title="Éditer l'événement"
                         class="btn btn-outline-primary">Éditer l'événement</a>
                 @endif
