@@ -28,7 +28,8 @@
                         @if (Gate::allows('isPart'))
                             @if (Helper::EventRoleUser(Auth::user(), $event))
                                 <h4>
-                                    <a href="#" class="badge badge-success">Mon programme</a>
+                                    <a href="{{ route('events.schedules.index', $event) }}" class="badge badge-success">Mon
+                                        programme</a>
                                     <span class="badge badge-info">Déjà Inscript
                                         ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})
                                     </span>

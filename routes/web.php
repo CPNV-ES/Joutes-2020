@@ -36,6 +36,9 @@ Route::resource('games', 'GameController')->register();
 Route::resource('events.eventRoleUsers', EventRoleUserController::class)->only([
     'create', 'store', 'update'
 ]);
+
+Route::resource('events.schedules', 'ScheduleController')->only(['index']);
+
 Route::resource('classes', 'SchoolClassController')->register();
 
 //Administration resources
