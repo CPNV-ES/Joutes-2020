@@ -28,6 +28,7 @@
                         @if (Gate::allows('isPart'))
                             @if (Helper::EventRoleUser(Auth::user(), $event))
                                 <h4>
+                                    <a href="#" class="badge badge-success">Mon programme</a>
                                     <span class="badge badge-info">Déjà Inscript
                                         ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})
                                     </span>
@@ -45,7 +46,7 @@
             </div>
             <div class="col-11 ml-n2 inline mb-3 flex flex-row inline">
                 @if (Auth::check())
-                    @if (Auth::user()->role->slug == 'ADMIN')
+                    @if (Gate::allows('isAdmin'))
                         <h3>État : {{ Helper::eventStateName($event->eventState) }}</h3>
 
                         <form action="#" method="get">
