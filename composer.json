@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.9",
+        "acaronlex/laravel-calendar": "^1.6",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.0.1",
