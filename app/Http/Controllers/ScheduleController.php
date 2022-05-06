@@ -37,7 +37,7 @@ class ScheduleController extends Controller
                 Carbon::parse($tournament->end_date)->toDateTimeLocalString(),
                 $tournament->id,
                 [
-                    'url' => route('tournaments.teams.show', [$tournament->id, $tournament->teams_id]),
+                    'url' => route('tournaments.show', $tournament->id),
                 ]
             );
         }
