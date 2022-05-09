@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Acaronlex\LaravelCalendar\Calendar;
-
-
 
 class ScheduleController extends Controller
 {
@@ -20,25 +17,18 @@ class ScheduleController extends Controller
      */
     public function index(Event $event)
     {
-        // dd(route('homepage'));
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
+        if (!Auth::check()) return redirect()->route('login');
 
         $events = [];
 
         foreach ($event->allTournamentsRelatedToAUser(Auth::user()) as $tournament) {
-            // dd($tournament);
-            // var_dump(route('tournaments.teams.show', [$tournament->teams_id, $tournament->id]));
             $events[] = Calendar::event(
                 "{$tournament->name} - {$tournament->teams_name}",
                 false,
                 Carbon::parse($tournament->start_date)->toDateTimeLocalString(),
                 Carbon::parse($tournament->end_date)->toDateTimeLocalString(),
                 $tournament->id,
-                [
-                    'url' => route('tournaments.show', $tournament->id),
-                ]
+                ['url' => route('tournaments.show', $tournament->id),]
             );
         }
 
