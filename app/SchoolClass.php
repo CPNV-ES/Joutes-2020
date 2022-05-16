@@ -64,7 +64,20 @@ class SchoolClass extends Model
                 ];
             }
         }
+        
+        self::sort_array_of_array($classes_array,'status');
         return $classes_array;
+    }
+
+    public static function sort_array_of_array(&$array, $subfield)
+    {
+        $sortarray = array();
+        foreach ($array as $key => $row)
+        {
+            $sortarray[$key] = $row[$subfield];
+        }
+
+        array_multisort($sortarray, SORT_ASC, $array);
     }
 
     public static function synchronise($class)
