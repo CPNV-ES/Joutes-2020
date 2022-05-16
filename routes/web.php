@@ -40,6 +40,8 @@ Route::resource('events.eventRoleUsers', EventRoleUserController::class)->only([
 Route::resource('events.schedules', 'ScheduleController')->only(['index']);
 
 Route::resource('classes', 'SchoolClassController')->register();
+Route::resource('students', 'StudentController')->register();
+
 
 //Administration resources
 Route::group(['middleware' => ['admin']], function () {
