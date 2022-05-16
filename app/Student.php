@@ -4,6 +4,16 @@ namespace App;
 
 class Student
 {
-    private $lastname;
-    private $firstname;
+    public $lastname;
+    public $firstname;
+    public $class;
+    public $state;
+
+    public function __construct($lastname, $firstname, $class, $state)
+    {
+        $this->lastname = $lastname;
+        $this->firstname = $firstname;
+        $this->class = $class;
+        $this->state = $state;
+    }
 }
