@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Sport;
+use App\Student;
+use App\User;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
 class StudentController extends Controller
 {
@@ -12,76 +16,24 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($eventId)
     {
-        $request = "https://intranet.cpnv.ch/sainte-croix/etudiants.json?alter[include]=current_class&alter[only]=firstname,lastname";
-        $students = json_decode(file_get_contents($request));
+        $event = Event::find($eventId);
+        $registedStudents = $event->users->pluck('first_name', 'last_name')->toArray();
+        $expectedStudents = $event->getExpectedParticipants();
+        $studentsList = [];
+        // get array of registered students firstname and lastname
+        foreach ($expectedStudents as $student) {
+            //$registedStudents->contains($student['lastname'] && $student['firstname'])
+            if (array_key_exists($student['lastname'], $registedStudents) && $registedStudents[$student['lastname']] == $student['firstname']) {
+                $studentsList[] = new Student($student['lastname'], $student['firstname'], $student['class'], "Inscrit");
+            } else {
+                $studentsList[] = new Student($student['lastname'], $student['firstname'], $student['class'], "Pas inscrit");;
+            }
+        }
+        //sort students list by lastname asc
+        array_multisort(array_column($studentsList, 'lastname'), SORT_ASC, $studentsList);
 
-        return view('students.index')->with(compact('students'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $sports = Sport::all();
-        return view('students.create')->with(compact('sports'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request = "https://intranet.cpnv.ch/sainte-croix/etudiants.json?alter[include]=current_class&alter[only]=firstname,lastname";
-
-        $response = Http::get($request);
-
-        $students = new Student();
-
-        $students->lastname = $request->input('lastname');
-        $students->firstname = $request->input('firstname');
-
-        $students->save();
-        //return view('sports.index')->with(compact('sports'));
-        return redirect()->route('students.index', ['students' => $students]);
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+        return view('students.show')->with(compact('studentsList'));
     }
 }
