@@ -78,7 +78,7 @@
                                         @if ($event->isRegisterOrReady())
                                             <select name='{{ Helper::EventRoleUser($user, $event)->id }}'
                                                 data-event="{{ $event->id }}" class="form-control-sm engagementsSelect">
-                                                @foreach (\App\role::availableForEngagement()->get() as $role)
+                                                @foreach (\App\Role::availableForEngagement()->get() as $role)
                                                     <option @if (Helper::EventRoleUser($user, $event)->role->slug == $role->slug) selected @endif
                                                         id={{ $role->slug }}>
                                                         {{ $role->name }}
