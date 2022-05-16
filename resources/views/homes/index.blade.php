@@ -19,12 +19,6 @@
                             <span class="badge badge-success"> Inscrit
                                 ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})
                             </span>
-                            @if (Gate::allows('isOrganizer'))
-                                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-main"
-                                    title="Modifier l'événement">
-                                    <i class="fa fa-solid fa-edit fa-1x" aria-hidden="true"></i>
-                                </a>
-                            @endif
                         @endif
                     </x-event>
                 @endforeach
