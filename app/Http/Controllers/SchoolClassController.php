@@ -43,13 +43,13 @@ class SchoolClassController extends Controller
         $selected = $_POST;
         foreach ($classesIntranet as $class) {
             if (array_key_exists($class['name'], $selected)) {
-                SchoolClass::removeOldClasses($classes,$selected);//get class with status null form $classes array
+                SchoolClass::removeOldClasses($classes,$selected);
                 SchoolClass::synchronise($class);
             }
         }
         /*$old = SchoolClass::where('name',$class['name']);
         $old->delete();*/
-        return redirect()->route('classes.index', compact('classes', 'classesIntranet'));
+        return redirect()->route('classes.index');
 
     }
 

@@ -16,7 +16,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <form action="{{ route('classes.store',$classes) }}" method="post"
+                <form action="{{ route('classes.store') }}" method="post"
                       title="Synchroniser le liste des classes"
                       onsubmit="return confirm('Vous êtes sûr de vouloir synchroniser la liste des classes. ?');">
                     @csrf
