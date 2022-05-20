@@ -21,10 +21,11 @@ class StudentController extends Controller
         $event = Event::find($eventId);
         $registedStudents = $event->users->pluck('first_name', 'last_name')->toArray();
         $expectedStudents = $event->getExpectedParticipants();
+
+        $registedStudents = array_change_key_case($registedStudents, CASE_LOWER);
         $studentsList = [];
         // get array of registered students firstname and lastname
         foreach ($expectedStudents as $student) {
-            //$registedStudents->contains($student['lastname'] && $student['firstname'])
             if (array_key_exists($student['lastname'], $registedStudents) && $registedStudents[$student['lastname']] == $student['firstname']) {
                 $studentsList[] = new Student($student['lastname'], $student['firstname'], $student['class'], "Inscrit");
             } else {

@@ -96,9 +96,7 @@ class Event extends Model
             if ($schoolClass->contains('name', $student->current_class->name)) {
                 $studentsIntranet[$student->id] = [
                     'firstname' => $student->firstname,
-                    //lowercase except first letter
-
-                    'lastname' =>  ucfirst(strtolower($student->lastname)),
+                    'lastname' =>  strtolower($student->lastname),
                     'class' => $student->current_class->name,
                 ];
             }
