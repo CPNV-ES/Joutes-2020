@@ -25,6 +25,12 @@
                                     : {{ Helper::eventStateName($event->eventState + 1) }} </button>
                             @endif
                         @endif
+                        @if (Gate::allows('isOrg'))
+                            <a href="{{ route('carousel.show', $event->id) }}" class="btn btn-main"
+                                title="Affichage Kiosque">
+                                Affichage Kiosque
+                            </a>
+                        @endif
                         @if (Gate::allows('isPart'))
                             @if (Helper::EventRoleUser(Auth::user(), $event))
                                 <h4>
