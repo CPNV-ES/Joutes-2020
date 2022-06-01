@@ -193,4 +193,20 @@ class Pool extends Model
 
     }
 
+    /**
+     * Return true if score contenders are set and the pool is in the prep state
+     *
+     * @return boolean
+     */
+    public function areAllGamesPlayed(): bool
+    {
+        $flag = false;
+        foreach ($this->games as $game) {
+            if ($game->score_contender1 === null && $game->score_contender2 === null)
+                $flag = false;
+            elseif ($this->poolState == PoolState::Inprog)
+                $flag = true;
+        }
+        return $flag;
+    }
 }
