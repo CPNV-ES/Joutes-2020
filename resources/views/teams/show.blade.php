@@ -47,6 +47,7 @@
                             <td><i class="{{ $member->isCaptain ? 'fa fa-check' : 'fa fa-close' }}"
                                    aria-hidden="true"></i>
                             </td>
+
                             @if($team->captain())
                                 <td>
                                     <form action="{{ route('team.user.update', [$team,$member->user]) }}" method="post"
