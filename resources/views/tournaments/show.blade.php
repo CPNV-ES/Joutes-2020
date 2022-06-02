@@ -61,20 +61,21 @@
                     @if(count($tournament->teams) > 0)
                         @foreach ($tournament->teams as $team)
                             <tr>
-                                    @if(Auth::check() && Auth::user()->role == 'administrator')
-                                        <td class="clickable" data-id="{{$team->id}}">
-                                            <a href="https://www.google.com" title="Complete cette équipe ">
+                                @if(Auth::check() && Auth::user()->role == 'administrator')
+                                    <td class="clickable" data-id="{{$team->id}}">
+                                        <a href="https://www.google.com" title="Complete cette équipe ">
                                             {{$team->name}}
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td data-id="{{$team->id}}">
-                                            <a href="{{ route('teams.show', $team) }}" title="accéder à la page de l'équipe {{$team->name}}">
-                                                {{$team->name}}
-                                            </a>
-                                        </td>
-                                    @endif
-                                    <td>{{$team->participants()->count()}}</td>
+                                        </a>
+                                    </td>
+                                @else
+                                    <td data-id="{{$team->id}}">
+                                        <a href="{{ route('teams.show', $team) }}"
+                                           title="accéder à la page de l'équipe {{$team->name}}">
+                                            {{$team->name}}
+                                        </a>
+                                    </td>
+                                @endif
+                                <td>{{$team->participants()->count()}}</td>
 
                                 @if(!$team->isComplete() && $team->captain() )
                                     <td class="container pl-5">
@@ -83,7 +84,8 @@
                                                   title="Complete cette équipe ">
                                                 <input type="hidden" name="flag_name" value="completion">
                                                 <input type="hidden" name="flag_value" value="1">
-                                                <input type="hidden" name="flag_message" value="est en attente de validation">
+                                                <input type="hidden" name="flag_message"
+                                                       value="est en attente de validation">
                                                 @csrf
                                                 @method('PUT')
                                                 <button class="btn btn-main">
@@ -119,7 +121,8 @@
                                                 @method('PUT')
                                                 <input type="hidden" name="flag_name" value="completion">
                                                 <input type="hidden" name="flag_value" value="0">
-                                                <input type="hidden" name="flag_message" value="n'est pas validée et son status 'Complète' est annulé*">
+                                                <input type="hidden" name="flag_message"
+                                                       value="n'est pas validée et son status 'Complète' est annulé*">
                                                 <button class="btn btn-danger">
                                                     <i class="fa fa-ban"
                                                        aria-hidden="true"></i>
@@ -192,7 +195,6 @@
 
     <body>
 
-
     <div id="tournament" title="tournament" class="tournament">
         @foreach ($tournament->getStages() as $key => $stage)
             @if($key === 0)
@@ -237,7 +239,7 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        @php
+                                        {{--@php
                                             $allGamePlayed = false;
                                         @endphp
                                         @foreach($pool->games as $game)
@@ -272,24 +274,75 @@
 
                                             @endforeach
 
-                                        </table>
-                                    </td>
+                                        </table>--}}
+
+                                <tr>
                                     <td>
-                                        <table title="Teams Out" class="table table-bordered teamlist tableStyle">
+                                        {{--@php
+                                            $allGamePlayed = false;
+                                        @endphp
+                                        @foreach($pool->games as $game)
+                                            @if($game->score_contender1 === null && $game->score_contender2 === null)
+                                                @php
+                                                    $allGamePlayed = false;
+                                                @endphp
+                                            @else
+                                                @if($pool->poolState == 2)
+                                                    @php
+                                                        $allGamePlayed = true;
+                                                    @endphp
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                        <table title="Teams In"
+                                               class="table table-bordered teamlist tableStyle {{!$allGamePlayed ? $pool->poolState <= 1 ? "sortable" : "" : ""}}">
+                                            @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
+
+
+                                                @foreach ($tournament->teams as $team)
+
+                                                    @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
+                                                        <tr>
+                                                            <td title="Team" class="team colorBackground"
+                                                                id="{{ $contender->previousId() }}">
+                                                                <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+
+                                            @endforeach
+
+                                        </table>--}}
+
+                                        <div class="list-group list-group-flush">
                                             @for ($i = 1; $i <= $pool->poolSize; $i++)
-                                                <tr>
-                                                    <td title="Team" class="team"
-                                                        id="{{ $pool->id.'-'.$i }}">{{ $i }}</td>
-                                                </tr>
+                                                <select class="list-group-item mt-2">
+                                                    <option> ---- </option>
+                                                    @foreach ($tournament->teams as $team)
+                                                        <option value="{{ $team->id }}">{{ $team->name  }}</option>
+                                                    @endforeach
+                                                </select>
                                             @endfor
-                                        </table>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="list-group list-group-flush">
+                                            @for ($i = 1; $i <= $pool->poolSize; $i++)
+                                                <p class="list-group-item mt-2 py-2" title="Team" id="{{ $pool->id.'-'.$i }}">
+                                                    {{ $i }}
+                                                </p>
+                                            @endfor
+                                        </div>
+
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        @if(Auth::check())
+                      {{--  @if(Auth::check())
                             @if(Auth::user()->role->slug == 'ADMIN')
                                 @if(!$allGamePlayed)
                                     <a href="{{ route('tournaments.pools.close', $pool) }}"
@@ -299,7 +352,7 @@
                                        class="btn btn-main closeButton">Terminer la pool</a>
                                 @endif
                             @endif
-                        @endif
+                        @endif--}}
                     @endforeach
 
 
