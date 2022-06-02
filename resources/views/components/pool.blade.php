@@ -103,8 +103,6 @@
                                         @endforeach
                                     @endif
                                 @endforeach
-
-
                             @endif
                         </table>
                     </td>
@@ -123,10 +121,23 @@
             </tbody>
         </table>
     </div>
-    @if (Gate::allows('isAdmin'))
-        @if ($pool->areAllGamesPlayed())
-            <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">Terminer la
-                pool</a>
-        @endif
+
+
+</div>
+<div class="row">
+
+    @if (Gate::allows('isOrg') && $pool->areAllGamesPlayed())
+        <div class="col">
+            <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">
+                Terminer la pool
+            </a>
+        </div>
+    @endif
+    @if (Gate::allows('isOrg') && $pool->poolState == \App\Enums\PoolState::Prep && $pool->tournament->event->isPrepOrRegistered())
+        <div class="col">
+            <a href="" class="btn btn-main startButton">
+                Générer les matches
+            </a>
+        </div>
     @endif
 </div>
