@@ -192,17 +192,12 @@
                 <hr>
             </div>
         </div>
-
-
-
     </div>
     <div id="tournament" class="container-fluid">
         <div class="row">
             @foreach ($tournament->getStages() as $key => $stage)
                 <div class="col">
-                    {{-- <div class="col-12"> --}}
                     <h3> stage {{ $stage }}</h3>
-                    {{-- </div> --}}
                     @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
                         <x-pool :tournament="$tournament" :stage="$stage" poolState="$key" :pool="$pool"></x-pool>
                     @endforeach
