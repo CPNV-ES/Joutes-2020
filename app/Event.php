@@ -46,6 +46,11 @@ class Event extends Model
         return ($this->eventState == EventState::Register || $this->eventState == EventState::Ready);
     }
 
+    public function isPrepOrRegistered()
+    {
+        return ($this->eventState == EventState::Prep || $this->eventState == EventState::Register);
+    }
+
     public function allTournamentsRelatedToAUser(User $user)
     {
         return DB::table('teams')
