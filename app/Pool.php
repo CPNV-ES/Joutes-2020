@@ -148,8 +148,10 @@ class Pool extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(Team::class, 'Contenders');
+        return $this->belongsToMany(Team::class, 'contenders', 'pool_id', 'team_id');
     }
+
+
 
     public function listTeams()
     {
@@ -214,5 +216,15 @@ class Pool extends Model
                 $flag = true;
         }
         return $flag;
+    }
+
+    public function allowMatchesGeneration()
+    {
+        $teams = $this->teams()->get();
+        if ($this->poolState === \App\Enums\PoolState::Prep && $this->tournament->event->isPrepOrRegistered() && count($teams) === 0) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -133,7 +133,7 @@
             </a>
         </div>
     @endif
-    @if (Gate::allows('isOrg') && $pool->poolState == \App\Enums\PoolState::Prep && $pool->tournament->event->isPrepOrRegistered())
+    @if (Gate::allows('isOrg') && $pool->allowMatchesGeneration())
         <div class="col">
             <form name="generate-matches" method="post" action="{{ route('pools.gameManagers.store', $pool) }}">
                 @csrf
