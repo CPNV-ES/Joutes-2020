@@ -135,9 +135,10 @@
     @endif
     @if (Gate::allows('isOrg') && $pool->poolState == \App\Enums\PoolState::Prep && $pool->tournament->event->isPrepOrRegistered())
         <div class="col">
-            <a href="" class="btn btn-main startButton">
-                Générer les matches
-            </a>
+            <form name="generate-matches" method="post" action="{{ route('pools.gameManagers.store', $pool) }}">
+                @csrf
+                <button type="submit" class="btn btn-main startButton">Générer les matches</button>
+            </form>
         </div>
     @endif
 </div>
