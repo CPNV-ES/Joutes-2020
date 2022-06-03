@@ -19,5 +19,8 @@ class CarouselController extends Controller
     public function show($eventId)
     {
         $event = Event::find($eventId);
+        $tournaments = $event->tournamentsReady();
+        
+        dd($tournaments);
     }
 }
