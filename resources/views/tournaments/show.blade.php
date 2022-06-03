@@ -315,26 +315,35 @@
 
                                         </table>--}}
 
-                                        <div class="list-group list-group-flush">
+
+
+                                        <table title="Teams Out" class="table table-bordered teamlist tableStyle">
                                             @for ($i = 1; $i <= $pool->poolSize; $i++)
-                                                <select class="list-group-item mt-2">
-                                                    <option> ---- </option>
-                                                    @foreach ($tournament->teams as $team)
-                                                        <option value="{{ $team->id }}">{{ $team->name  }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <tr>
+                                                    <td title="Team" id="{{ $pool->id.'-'.$i }}">
+                                                        <select>
+                                                            <option> ---- </option>
+                                                            @foreach ($tournament->teams as $team)
+                                                                <option value="{{ $team->id }}">{{ $team->name  }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                </tr>
                                             @endfor
-                                        </div>
+
+                                        </table>
+
                                     </td>
 
                                     <td>
-                                        <div class="list-group list-group-flush">
+                                        <table title="Teams Out" class="table table-bordered teamlist tableStyle">
                                             @for ($i = 1; $i <= $pool->poolSize; $i++)
-                                                <p class="list-group-item mt-2 py-2" title="Team" id="{{ $pool->id.'-'.$i }}">
-                                                    {{ $i }}
-                                                </p>
+                                                <tr>
+                                                    <td title="Team" class="team"
+                                                        id="{{ $pool->id.'-'.$i }}">{{ $i }}</td>
+                                                </tr>
                                             @endfor
-                                        </div>
+                                        </table>
 
                                     </td>
                                 </tr>
