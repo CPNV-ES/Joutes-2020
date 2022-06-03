@@ -20,7 +20,6 @@ class CarouselController extends Controller
     {
         $event = Event::find($eventId);
         $tournaments = $event->tournamentsReady();
-        
-        dd($tournaments);
+        return view('events.carousel.show')->with(compact('tournaments', 'event'));
     }
 }
