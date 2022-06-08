@@ -194,7 +194,6 @@
     </div>
 
     <body>
-
     <div id="tournament" title="tournament" class="tournament">
         @foreach ($tournament->getStages() as $key => $stage)
             @if($key === 0)
@@ -314,25 +313,36 @@
                                             @endforeach
 
                                         </table>--}}
-
-
-
                                         <table title="Teams Out" class="table table-bordered teamlist tableStyle">
                                             @for ($i = 1; $i <= $pool->poolSize; $i++)
-                                                @php
-                                                    $contender = $pool->contenders->sortBy('rank_in_pool')[$i-1];
-                                                @endphp
-                                                <tr>
-                                                    <td title="Team" id="{{ $pool->id.'-'.$i }}">
-                                                        <select>
-                                                            <option> ---- </option>
-                                                            @foreach ($tournament->teams as $team)
+                                               @if($pool->contenders->isEmpty())
+                                                    <tr>
+                                                        <td title="Team" id="{{ $pool->id.'-'.$i }}">
+                                                            <select>
+                                                                <option> ---- </option>
+                                                                @foreach ($tournament->teams as $team)
 
-                                                                <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                                                    <option value="{{ $team->id }}">{{ $team->name  }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                @else
+                                                    @php
+                                                        $contender = $pool->contenders->sortBy('rank_in_pool')[$i-1];
+                                                    @endphp
+                                                    <tr>
+                                                        <td title="Team" id="{{ $pool->id.'-'.$i }}">
+                                                            <select>
+                                                                <option> ---- </option>
+                                                                @foreach ($tournament->teams as $team)
+
+                                                                    <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                             @endfor
 
                                         </table>
