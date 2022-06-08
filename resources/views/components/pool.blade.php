@@ -66,7 +66,7 @@
                                 {{-- Part of display for Visualisation to display name of team --}}
 
                                 @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
-                                    @if ($contender->team_id == null)
+                                    @if ($contender->team_id == null && !is_null($contender->fromPool))
                                         <tr>
                                             <td title="Team" class="team">
                                                 <a>{{ $contender->rank_in_pool }}
