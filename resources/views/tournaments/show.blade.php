@@ -319,12 +319,16 @@
 
                                         <table title="Teams Out" class="table table-bordered teamlist tableStyle">
                                             @for ($i = 1; $i <= $pool->poolSize; $i++)
+                                                @php
+                                                    $contender = $pool->contenders->sortBy('rank_in_pool')[$i-1];
+                                                @endphp
                                                 <tr>
                                                     <td title="Team" id="{{ $pool->id.'-'.$i }}">
                                                         <select>
                                                             <option> ---- </option>
                                                             @foreach ($tournament->teams as $team)
-                                                                <option value="{{ $team->id }}">{{ $team->name  }}</option>
+
+                                                                <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
                                                             @endforeach
                                                         </select>
                                                     </td>
