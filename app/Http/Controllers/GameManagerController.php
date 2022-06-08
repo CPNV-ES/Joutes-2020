@@ -16,5 +16,6 @@ class GameManagerController extends Controller
      */
     public function store(Request $request, Pool $pool)
     {
+        return redirect()->route('tournaments.pools.show', [$pool->tournament, $pool]);
     }
 }
