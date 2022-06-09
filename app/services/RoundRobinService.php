@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @url https://github.com/tony98ms/laravel-round-robin
+ */
+
 namespace App\Services;
 
 use Exception;
@@ -7,6 +11,8 @@ use Illuminate\Support\Collection;
 
 class RoundRobinService
 {
+
+    const MIN_TEAMS  = 2;
 
     /**
      * Teams to get Schedule
@@ -39,14 +45,14 @@ class RoundRobinService
      *
      * @param array $teams
      */
-    public function __construct(array $teams)
+    private function __construct(Collection $teams)
     {
-        $this->teams = collect($teams);
+        $this->teams = $teams;
         $this->schedule = collect();
     }
-    public static function addTeams(array $teams): RoundRobinService
+    private static function addTeams(Collection $teams): RoundRobinService
     {
-        if (empty($teams) || count($teams) < 2) {
+        if (empty($teams) || count($teams) < self::MIN_TEAMS) {
             throw new Exception('You need at least 2 teams to generate the schedule.');
         }
         $instance = new static($teams);
@@ -57,9 +63,9 @@ class RoundRobinService
      *
      * @return Collection
      */
-    public function schedule(): Collection
+    private function schedule(): Collection
     {
-        if ($this->teams->isEmpty() || $this->teams->count() < 2) {
+        if ($this->teams->isEmpty() || $this->teams->count() < self::MIN_TEAMS) {
             throw new Exception('You need at least 2 teams to generate the schedule.');
         }
         $this->checkForOdd();
@@ -72,13 +78,13 @@ class RoundRobinService
     /**
      * Generate the schedule in a single function.
      *
-     * @param array $teams
+     * @param Collection $teams
      * @param integer|null $rounds
      * @param boolean $shuffle
      * @param boolean $doubleRound
      * @return Collection
      */
-    public static function makeSchedule(array $teams, int $rounds = null, bool $shuffle = true, int $seed = null, bool $doubleRound = false): Collection
+    public static function makeSchedule(Collection $teams, int $rounds = null, bool $shuffle = true, int $seed = null, bool $doubleRound = false): Collection
     {
         $instance = static::addTeams($teams);
         if (!is_null($rounds)) {
@@ -114,7 +120,8 @@ class RoundRobinService
             $this->teams = collect($this->teams->shuffle($this->seed));
         }
     }
-    public function doubleRound()
+
+    protected function doubleRound()
     {
         $this->rounds = (($count = $this->teams->count()) % 2 === 0 ? $count - 1 : $count) * 2;
 
@@ -132,7 +139,7 @@ class RoundRobinService
         $halfTeamCount = $teamsCount / 2;
         $rounds = $this->rounds ?? $teamsCount - 1;
         for ($round = 1; $round <= $rounds; $round += 1) {
-            $fase = $round > ($teamsCount - 1) ? config('round-robin.way_phase') :  config('round-robin.one_phase');
+            $fase = $round > ($teamsCount - 1) ? 'way' :  'one';
             $this->schedule[$round] = collect();
             $this->teams->each(function ($team, $index) use ($halfTeamCount, $round, $fase) {
                 if ($index >= $halfTeamCount) {
@@ -194,7 +201,7 @@ class RoundRobinService
      *
      * @return RoundRobinService
      */
-    public function shuffle($seed = null)
+    protected function shuffle($seed = null)
     {
         $this->shuffle = true;
         $this->seed = $seed;
@@ -206,7 +213,7 @@ class RoundRobinService
      *
      * @return RoundRobinService
      */
-    public function doNotShuffle()
+    protected function doNotShuffle()
     {
         $this->shuffle = false;
 

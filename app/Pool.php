@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Enums\PoolState;
+use App\Services\RoundRobinService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -226,5 +227,52 @@ class Pool extends Model
         }
 
         return false;
+    }
+
+    /**
+     * This function will generate the contenders for the poolSize
+     *
+     * @return void
+     */
+    public function generateContenders()
+    {
+        for ($i = 0; $i < $this->poolSize; $i++) {
+            $contender = new Contender();
+            $contender->pool_id = $this->id;
+            $contender->save();
+        }
+    }
+
+    public function generateSimpleMatches()
+    {
+        $teams = $this->contenders;
+
+        $schedule = RoundRobinService::makeSchedule($teams)->collapse()->all();
+        foreach ($schedule as $key => $round) {
+            Game::create([
+                'contender1_id' => $round['local']->id,
+                'contender2_id' => $round['visitor']->id,
+                'court_id' => 1,
+                'date' => $this->tournament->start_date,
+                'start_time' => '08:00',
+            ]);
+        }
+    }
+
+    public function generateDoubleMatches()
+    {
+        $teams = $this->contenders;
+
+        $schedule = RoundRobinService::makeSchedule($teams, doubleRound: true)->collapse()->all();
+
+        foreach ($schedule as $key => $round) {
+            Game::create([
+                'contender1_id' => $round['local']->id,
+                'contender2_id' => $round['visitor']->id,
+                'court_id' => 1,
+                'date' => $this->tournament->start_date,
+                'start_time' => '08:00',
+            ]);
+        }
     }
 }
