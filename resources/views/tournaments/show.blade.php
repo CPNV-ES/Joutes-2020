@@ -262,7 +262,7 @@
                                                         <td title="Team"  id="{{ $pool->id.'-'.$i }}">
                                                             <select>
                                                                 <option> ---- </option>
-                                                                @foreach ($tournament->teams as $team)
+                                                                @foreach ($tournament->getTeamsNotInAPool() as $team)
 
                                                                     <option value="{{ $team->id }}">{{ $team->name  }}</option>
                                                                 @endforeach
@@ -274,7 +274,7 @@
                                                         <td title="Team" id="{{ $pool->id.'-'.$i }}">
                                                             <select>
                                                                 <option> ---- </option>
-                                                                @foreach ($tournament->teams as $team)
+                                                                @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i-1])) as $team)
 
                                                                     <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i-1])?'selected':''}}>{{ $team->name  }}</option>
                                                                 @endforeach

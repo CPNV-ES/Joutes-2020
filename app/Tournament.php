@@ -99,6 +99,19 @@ class Tournament extends Model
 
         return $teamsNotInAPool;
     }
+    public function getTeamForPool(string $name)
+    {
+        $team = DB::table('contenders')
+            ->rightJoin('teams', 'teams.id', '=', 'contenders.team_id')
+            ->where('tournament_id', '=', $this->id)
+            ->where('teams.name', '=', $name)
+            ->get();
+        ;
+
+
+        return $team->concat($this->getTeamsNotInAPool());
+    }
+
 
     public static function isNewTeam(string $name, Tournament $tournament)
     {
