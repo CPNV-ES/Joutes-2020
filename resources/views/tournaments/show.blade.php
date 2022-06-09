@@ -256,7 +256,7 @@
                                             @endif
                                         @endforeach
                                         <table title="Teams In" class="table table-bordered teamlist tableStyle">
-                                            @for ($i = 1; $i <= $pool->poolSize; $i++)
+                                            @for ($i = 0; $i < $pool->poolSize; $i++)
                                                @if($pool->contenders->isEmpty())
                                                     <tr>
                                                         <td title="Team"  id="{{ $pool->id.'-'.$i }}">
@@ -274,9 +274,9 @@
                                                         <td title="Team" id="{{ $pool->id.'-'.$i }}">
                                                             <select>
                                                                 <option> ---- </option>
-                                                                @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i-1])) as $team)
+                                                                @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i])) as $team)
 
-                                                                    <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i-1])?'selected':''}}>{{ $team->name  }}</option>
+                                                                    <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i])?'selected':''}}>{{ $team->name  }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </td>
