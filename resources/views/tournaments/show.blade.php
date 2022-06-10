@@ -272,13 +272,17 @@
                                                 @else
                                                     <tr>
                                                         <td title="Team" id="{{ $pool->id.'-'.$i }}">
-                                                            <select>
-                                                                <option> ---- </option>
-                                                                @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i])) as $team)
+                                                           <form action="{{ route('pools.contenders.update', [$pool, $pool->contenders[$i]]) }}" method="post">
+                                                               @csrf
+                                                               @method('put')
+                                                               <select onchange="this.form.submit()" name="team_id">
+                                                                   <option> ---- </option>
+                                                                   @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i])) as $team)
 
-                                                                    <option value="{{ $team->id }}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i])?'selected':''}}>{{ $team->name  }}</option>
-                                                                @endforeach
-                                                            </select>
+                                                                       <option value="{{ $team->id }}"  {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($pool->contenders->sortBy('rank_in_pool')[$i])?'selected':''}}>{{ $team->name  }}</option>
+                                                                   @endforeach
+                                                               </select>
+                                                           </form>
                                                         </td>
                                                     </tr>
                                                 @endif

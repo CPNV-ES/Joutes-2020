@@ -29,19 +29,20 @@ class ContenderController extends Controller
         return redirect()->route('tournaments.pools.show', [$pool->tournament, $pool]);
     }
 
-    public function update(Request $request,$pool_id, $contender)
+    public function update(Request $request,Pool $pool, Contender $contender)
     {
-        $contender = Contender::find($contender);
+        dd($request);
+        $this->destroy($contender->team_id,$pool);
+
         $contender->team_id = $request->input('team_id');
         $contender->save();
 
         return redirect()->back();
     }
 
-    public function destroy($team_id,$pool_id)
+    public function destroy($team_id, Pool $pool)
     {
-        $pool = Pool::findOrFail($pool_id);
-       
+
         // $contender = Contender::where('team_id','=',$team_id)->firstOrFail();
         // $game_contender1 = Game::where('contender1_id','=',$contender->id);
         // $game_contender2 = Game::where('contender2_id','=',$contender->id);
@@ -49,11 +50,11 @@ class ContenderController extends Controller
         // $game_contender2->delete();
         // $pool->teams()->detach($team_id);
         $pool->teams()->updateExistingPivot($team_id,['team_id'=> null]);
-        
+
         // $contender->delete();
-      
+
         return redirect()->back();
 
     }
-   
+
 }
