@@ -219,10 +219,11 @@ class Pool extends Model
         return $flag;
     }
 
+    //TODO: Move this method into a laravel policy
     public function allowMatchesGeneration()
     {
-        $teams = $this->teams()->get();
-        if ($this->poolState === \App\Enums\PoolState::Prep && $this->tournament->event->isPrepOrRegistered() && count($teams) === 0) {
+        $contenders = $this->contenders()->get();
+        if (Gate::allows('isOrg') && $this->poolState === \App\Enums\PoolState::Prep && $this->tournament->event->isPrepOrRegistered() && count($contenders) === 0) {
             return true;
         }
 
@@ -243,29 +244,32 @@ class Pool extends Model
         }
     }
 
-    public function generateSimpleMatches()
+    public function generateGames()
     {
-        $teams = $this->contenders;
-
-        $schedule = RoundRobinService::makeSchedule($teams)->collapse()->all();
-        foreach ($schedule as $key => $round) {
-            Game::create([
-                'contender1_id' => $round['local']->id,
-                'contender2_id' => $round['visitor']->id,
-                'court_id' => 1,
-                'date' => $this->tournament->start_date,
-                'start_time' => '08:00',
-            ]);
+        $poolMode = $this->mode->planningAlgorithm;
+        switch ($poolMode) {
+            case PoolMode::SINGLE_ELIMINATION:
+                $this->generateSimpleOrDoubleGames(false);
+                break;
+            case PoolMode::DOUBLE_ELIMINATION:
+                $this->generateSimpleOrDoubleGames(true);
+                break;
+            case PoolMode::DIRECT_ELIMINATION:
+                throw new \Exception('Not implemented');
+                break;
+            default:
+                throw new \Exception("Pool mode not implemented");
+                break;
         }
     }
 
-    public function generateDoubleMatches()
+    public function generateSimpleOrDoubleGames(bool $isReturnMatche)
     {
-        $teams = $this->contenders;
+        $teams = $this->contenders()->get();
 
-        $schedule = RoundRobinService::makeSchedule($teams, doubleRound: true)->collapse()->all();
+        $schedule = RoundRobinService::makeSchedule($teams, doubleRound: $isReturnMatche)->collapse()->all();
 
-        foreach ($schedule as $key => $round) {
+        foreach ($schedule as $round) {
             Game::create([
                 'contender1_id' => $round['local']->id,
                 'contender2_id' => $round['visitor']->id,

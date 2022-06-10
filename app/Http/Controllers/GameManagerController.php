@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class GameManagerController extends Controller
 {
@@ -14,10 +15,13 @@ class GameManagerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Pool $pool)
+    public function store(Pool $pool)
     {
-        $pool->generateContenders();
-        $pool->generateSimpleMatches();
+        if ($pool->allowMatchesGeneration()) {
+            $pool->generateContenders();
+            $pool->generateGames();
+        }
+
         return redirect()->route('tournaments.pools.show', [$pool->tournament, $pool]);
     }
 }
