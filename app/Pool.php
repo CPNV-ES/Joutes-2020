@@ -269,13 +269,16 @@ class Pool extends Model
 
         $schedule = RoundRobinService::makeSchedule($teams, doubleRound: $isReturnMatche)->collapse()->all();
 
-        foreach ($schedule as $round) {
+        foreach ($schedule as $key => $round) {
+            $date = new \DateTime($this->start_time);
+            $date->modify('+' . $key . ' Minutes');
+
             Game::create([
                 'contender1_id' => $round['local']->id,
                 'contender2_id' => $round['visitor']->id,
                 'court_id' => 1,
                 'date' => $this->tournament->start_date,
-                'start_time' => '08:00',
+                'start_time' => $date->format('H:i:s'),
             ]);
         }
     }

@@ -41,11 +41,13 @@
                                         <select required name="firstContender" id="inputState" class="form-control">
                                             <option disabled selected value="">Choisir 1ère team </option>
                                             @foreach ($pool->contenders as $contender)
-                                                @if ($contender->getName() != null)
-                                                    <option value="{{ $contender->id }}">
+                                                <option value="{{ $contender->id }}">
+                                                    @if ($contender->getName() != null)
                                                         {{ $contender->getName() }}
-                                                    </option>
-                                                @endif
+                                                    @else
+                                                        équipe fictive N.{{ $contender->id }}
+                                                    @endif
+                                                </option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -54,11 +56,13 @@
                                         <select required name="secondContender" id="inputState" class="form-control">
                                             <option disabled selected value="">Choisir 2ème team</option>
                                             @foreach ($pool->contenders as $contender)
-                                                @if ($contender->getName() != null)
-                                                    <option value="{{ $contender->id }}">
+                                                <option value="{{ $contender->id }}">
+                                                    @if ($contender->getName() != null)
                                                         {{ $contender->getName() }}
-                                                    </option>
-                                                @endif
+                                                    @else
+                                                        équipe fictive N.{{ $contender->id }}
+                                                    @endif
+                                                </option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -118,6 +122,11 @@
                                                         <option value="{{ $contender->id }}">
                                                             {{ $contender->getName() }}
                                                         </option>
+                                                    @else
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender1->id) selected @endif>
+                                                            équipe fictive N.{{ $contender->id }}
+                                                        </option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -125,7 +134,7 @@
                                             @if ($game->contender1->team)
                                                 {{ $game->contender1->team->name }}
                                             @else
-                                                -VIDE-
+                                                équipe fictive n. {{ $game->contender1->id }}
                                             @endif
                                         @endif
 
@@ -136,7 +145,7 @@
                                         @if ($pool->isEditable())
                                             <select id="selectSecondContender{{ $game->id }}" class="form-control"
                                                 name="game[{{ $game->id }}][editedContender2]">
-                                                <option disabled selected value="">Choisir 2ère team </option>
+                                                <option disabled selected value="">Choisir 2ème team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->team_id && $game->contender2->team)
                                                         <option value="{{ $contender->id }}"
@@ -147,6 +156,11 @@
                                                         <option value="{{ $contender->id }}">
                                                             {{ $contender->getName() }}
                                                         </option>
+                                                    @else
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender2->id) selected @endif>
+                                                            équipe fictive N.{{ $contender->id }}
+                                                        </option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -154,7 +168,7 @@
                                             @if ($game->contender2->team)
                                                 {{ $game->contender2->team->name }}
                                             @else
-                                                -VIDE-
+                                                équipe fictive n. {{ $game->contender2->id }}
                                             @endif
                                         @endif
                                     </td>
