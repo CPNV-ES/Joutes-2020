@@ -44,7 +44,6 @@
                         <table title="Teams In"
                             class="table table-bordered teamlist tableStyle {{ !$pool->areAllGamesPlayed() ? ($pool->poolState <= 1 ? 'sortable' : '') : '' }}">
                             @if ($poolState == 1)
-
                                 @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
                                     @foreach ($tournament->teams as $team)
                                         @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
@@ -62,18 +61,50 @@
                                     $teamName = '';
                                     $i = 1;
                                 @endphp
-
                                 {{-- Part of display for Visualisation to display name of team --}}
-
-                                @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
-                                    @if ($contender->team_id == null && !is_null($contender->fromPool))
+                                @if ($pool->poolState === 0 && $pool->stage > 1 && (Gate::allows('isAdmin') || Gate::allows('isOrg')))
+                                    @for ($i = 0; $i < $pool->poolSize - $pool->contenders->count(); $i++)
                                         <tr>
-                                            <td title="Team" class="team">
-                                                <a>{{ $contender->rank_in_pool }}
-                                                    de {{ $contender->fromPool->poolName }}</a>
+                                            <td title="Team" class="team" id="{{ $pool->id . '-' . $i }}">
+                                                <form action="{{ route('pools.contenders.store', $pool) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <select onchange="this.form.submit()" name="contender">
+                                                        <option> ---- </option>
+                                                        @foreach ($tournament->getPoolsOfStage($tournament->id, $pool->stage - 1) as $poolOfStage)
+                                                            @for ($x = 0; $x < $poolOfStage->poolSize; $x++)
+                                                                <option
+                                                                    value='{"rank_in_pool":"{{ $x + 1 }}","pool_from_id":"{{ $poolOfStage->id }}"}'>
+                                                                    {{ $x + 1 }} de
+                                                                    {{ $poolOfStage->poolName }}
+                                                                </option>
+                                                            @endfor
+                                                        @endforeach
+                                                    </select>
+                                                </form>
                                             </td>
                                         </tr>
-                                        @php $i++; @endphp
+                                    @endfor
+                                @endif
+
+                                @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
+                                    @if ($contender->team_id == null)
+                                        @if (!is_null($contender->fromPool))
+                                            <tr>
+                                                <td title="Team" class="team">
+                                                    <a>{{ $contender->rank_in_pool }}
+                                                        de {{ $contender->fromPool->poolName }}</a>
+                                                </td>
+                                            </tr>
+                                            @php $i++; @endphp
+                                        @elseif($pool->stage == 1)
+                                            <tr>
+                                                <td title="Team" class="team">
+                                                    <a>équipe fictive No. {{ $contender->id }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @else
                                         @foreach ($tournament->teams as $keyTeam => $team)
                                             @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
@@ -133,7 +164,7 @@
             </a>
         </div>
     @endif
-    @if (Gate::allows('isOrg') && $pool->allowMatchesGeneration())
+    @if ($pool->allowMatchesGeneration())
         <div class="col">
             <form name="generate-matches" method="post" action="{{ route('pools.gameManagers.store', $pool) }}">
                 @csrf

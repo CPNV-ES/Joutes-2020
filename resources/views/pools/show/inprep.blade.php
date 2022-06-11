@@ -44,6 +44,8 @@
                                                 <option value="{{ $contender->id }}">
                                                     @if ($contender->getName() != null)
                                                         {{ $contender->getName() }}
+                                                    @elseif($pool->stage > 1)
+                                                        {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
                                                     @else
                                                         équipe fictive N.{{ $contender->id }}
                                                     @endif
@@ -59,6 +61,8 @@
                                                 <option value="{{ $contender->id }}">
                                                     @if ($contender->getName() != null)
                                                         {{ $contender->getName() }}
+                                                    @elseif($pool->stage > 1)
+                                                        {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
                                                     @else
                                                         équipe fictive N.{{ $contender->id }}
                                                     @endif
@@ -122,6 +126,11 @@
                                                         <option value="{{ $contender->id }}">
                                                             {{ $contender->getName() }}
                                                         </option>
+                                                    @elseif($pool->stage > 1)
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender1->id) selected @endif>
+                                                            {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                                                        </option>
                                                     @else
                                                         <option value="{{ $contender->id }}"
                                                             @if ($contender->id == $game->contender1->id) selected @endif>
@@ -133,6 +142,8 @@
                                         @else
                                             @if ($game->contender1->team)
                                                 {{ $game->contender1->team->name }}
+                                            @elseif($game->contender1->pool->stage > 1)
+                                                {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
                                             @else
                                                 équipe fictive n. {{ $game->contender1->id }}
                                             @endif
@@ -156,6 +167,11 @@
                                                         <option value="{{ $contender->id }}">
                                                             {{ $contender->getName() }}
                                                         </option>
+                                                    @elseif($pool->stage > 1)
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender2->id) selected @endif>
+                                                            {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                                                        </option>
                                                     @else
                                                         <option value="{{ $contender->id }}"
                                                             @if ($contender->id == $game->contender2->id) selected @endif>
@@ -167,6 +183,8 @@
                                         @else
                                             @if ($game->contender2->team)
                                                 {{ $game->contender2->team->name }}
+                                            @elseif($game->contender2->pool->stage > 1)
+                                                {{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender2->fromPool->poolName }}
                                             @else
                                                 équipe fictive n. {{ $game->contender2->id }}
                                             @endif
