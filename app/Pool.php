@@ -223,11 +223,18 @@ class Pool extends Model
     public function allowMatchesGeneration()
     {
         $contenders = $this->contenders()->get();
-        if (Gate::allows('isOrg') && $this->poolState === \App\Enums\PoolState::Prep && $this->tournament->event->isPrepOrRegistered() && count($contenders) === 0) {
-            return true;
-        }
 
-        return false;
+        // if (Gate::denies('isOrg') || Gate::denies('isAdmin')) return false;
+
+        if (!(Gate::allows('isOrg') || Gate::allows('isAdmin'))) return false;
+
+        if ($this->poolState !== 0) return false;
+
+        if ($this->games()->count() > 0) return false;
+
+        if ($this->stage > 1 && count($contenders) !== $this->poolSize) return false;
+
+        return true;
     }
 
     /**
@@ -237,15 +244,24 @@ class Pool extends Model
      */
     public function generateContenders()
     {
-        for ($i = 0; $i < $this->poolSize; $i++) {
-            $contender = new Contender();
-            $contender->pool_id = $this->id;
-            $contender->save();
+        $contendersExist = $this->contenders()->get();
+        if (count($contendersExist) < $this->poolSize) {
+            $numberOfContendersToGenerate = $this->poolSize - count($contendersExist);
+            for ($i = 0; $i < $numberOfContendersToGenerate; $i++) {
+                Contender::create([
+                    'pool_id' => $this->id,
+                ]);
+            }
         }
     }
 
     public function generateGames()
     {
+
+        if ($this->stage === 1) {
+            $this->generateContenders();
+        }
+
         $poolMode = $this->mode->planningAlgorithm;
         switch ($poolMode) {
             case PoolMode::SINGLE_ELIMINATION:
