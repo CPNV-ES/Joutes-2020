@@ -13,47 +13,50 @@ class ContenderController extends Controller
 {
     public function store(Request $request, Pool $pool)
     {
+
+        $data = $request->all();
+
+        if ($request->contender)
+            $data = json_decode($request->contender, true);
+
         $contender = new Contender();
-        $contender->fill($request->all());
+        $contender->fill($data);
         $contender->pool()->associate($pool);
 
-        // if the team ID is not sent, it means we are editing a pool that is not in phase 1
         // so it is required to check if the contender is already inserted
-        if (!isset($request->team_id) && $contender->alreadyInserted()) {
+        if ($contender->alreadyInserted()) {
             // TODO: redirect with an error message and show it to the user
             return redirect()->back();
         }
 
         $contender->save();
 
-        return redirect()->route('tournaments.pools.show', [$pool->tournament, $pool]);
+        return redirect()->back();
     }
 
-    public function update(Request $request,$pool_id, $contender)
+    public function update(Request $request, $pool_id, $contender)
     {
-        $contender = Contender::find($contender);
+        $contender = Contender::findOrFail($contender);
         $contender->team_id = $request->input('team_id');
         $contender->save();
 
         return redirect()->back();
     }
 
-    public function destroy($team_id,$pool_id)
+    public function destroy($team_id, $pool_id)
     {
         $pool = Pool::findOrFail($pool_id);
-       
+
         // $contender = Contender::where('team_id','=',$team_id)->firstOrFail();
         // $game_contender1 = Game::where('contender1_id','=',$contender->id);
         // $game_contender2 = Game::where('contender2_id','=',$contender->id);
         // $game_contender1->delete();
         // $game_contender2->delete();
         // $pool->teams()->detach($team_id);
-        $pool->teams()->updateExistingPivot($team_id,['team_id'=> null]);
-        
-        // $contender->delete();
-      
-        return redirect()->back();
+        $pool->teams()->updateExistingPivot($team_id, ['team_id' => null]);
 
+        // $contender->delete();
+
+        return redirect()->back();
     }
-   
 }
