@@ -18,7 +18,6 @@ class GameManagerController extends Controller
     public function store(Pool $pool)
     {
         if ($pool->allowMatchesGeneration()) {
-            $pool->generateContenders();
             $pool->generateGames();
         }
 
