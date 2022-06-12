@@ -224,9 +224,9 @@ class Pool extends Model
     {
         $contenders = $this->contenders()->get();
 
-        // if (Gate::denies('isOrg') || Gate::denies('isAdmin')) return false;
-
         if (!(Gate::allows('isOrg') || Gate::allows('isAdmin'))) return false;
+
+        if (!$this->tournament->event->isPrepOrRegistered()) return false;
 
         if ($this->poolState !== 0) return false;
 
