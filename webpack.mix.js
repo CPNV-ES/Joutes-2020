@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/carousel.js', 'public/js')
 
     // js
     .copy('node_modules/jquery/dist/jquery.min.js', 'public/lib/jquery')
