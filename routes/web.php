@@ -32,6 +32,9 @@ Route::resource('tournaments.teams', 'TeamController')->register();
 Route::resource('tournaments.pools', 'PoolController')->register();
 Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
 Route::resource('pools.contenders', 'ContenderController')->register();
+Route::resource('pools.gameManagers', 'GameManagerController')->only([
+    'store'
+])->register();
 Route::resource('games', 'GameController')->register();
 Route::resource('events.eventRoleUsers', EventRoleUserController::class)->only([
     'create', 'store', 'update'

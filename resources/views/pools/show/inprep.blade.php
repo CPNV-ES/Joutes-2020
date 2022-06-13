@@ -41,11 +41,15 @@
                                         <select required name="firstContender" id="inputState" class="form-control">
                                             <option disabled selected value="">Choisir 1ère team </option>
                                             @foreach ($pool->contenders as $contender)
-                                                @if ($contender->getName() != null)
-                                                    <option value="{{ $contender->id }}">
+                                                <option value="{{ $contender->id }}">
+                                                    @if ($contender->getName() != null)
                                                         {{ $contender->getName() }}
-                                                    </option>
-                                                @endif
+                                                    @elseif($pool->stage > 1)
+                                                        {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                                                    @else
+                                                        équipe fictive N.{{ $contender->id }}
+                                                    @endif
+                                                </option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -54,11 +58,15 @@
                                         <select required name="secondContender" id="inputState" class="form-control">
                                             <option disabled selected value="">Choisir 2ème team</option>
                                             @foreach ($pool->contenders as $contender)
-                                                @if ($contender->getName() != null)
-                                                    <option value="{{ $contender->id }}">
+                                                <option value="{{ $contender->id }}">
+                                                    @if ($contender->getName() != null)
                                                         {{ $contender->getName() }}
-                                                    </option>
-                                                @endif
+                                                    @elseif($pool->stage > 1)
+                                                        {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                                                    @else
+                                                        équipe fictive N.{{ $contender->id }}
+                                                    @endif
+                                                </option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -69,7 +77,6 @@
 
                                             @foreach ($courts as $value)
                                                 @if ($value->sport_id == $tournament->sport_id)
-
                                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                                                 @endif
                                             @endforeach
@@ -90,7 +97,6 @@
                     <table class="table">
                         <tbody class="text">
                             @foreach ($games as $game)
-
                                 <tr id="tr{{ $game->id }}" data-game="{{ $game->id }}">
 
                                     <input type="hidden" name="game[{{ $game->id }}][game_id]"
@@ -112,12 +118,23 @@
                                                 <option disabled selected value="">Choisir 1ère team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->team_id && $game->contender1->team)
-                                                        <option value="{{ $contender->id }}" @if ($contender->team->name == $game->contender1->team->name) selected @endif>
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->team->name == $game->contender1->team->name) selected @endif>
                                                             {{ $contender->team->name }}
                                                         </option>
                                                     @elseif($contender->getName())
                                                         <option value="{{ $contender->id }}">
                                                             {{ $contender->getName() }}
+                                                        </option>
+                                                    @elseif($pool->stage > 1)
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender1->id) selected @endif>
+                                                            {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender1->id) selected @endif>
+                                                            équipe fictive N.{{ $contender->id }}
                                                         </option>
                                                     @endif
                                                 @endforeach
@@ -125,8 +142,10 @@
                                         @else
                                             @if ($game->contender1->team)
                                                 {{ $game->contender1->team->name }}
+                                            @elseif($game->contender1->pool->stage > 1)
+                                                {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
                                             @else
-                                                -VIDE-
+                                                équipe fictive n. {{ $game->contender1->id }}
                                             @endif
                                         @endif
 
@@ -137,15 +156,26 @@
                                         @if ($pool->isEditable())
                                             <select id="selectSecondContender{{ $game->id }}" class="form-control"
                                                 name="game[{{ $game->id }}][editedContender2]">
-                                                <option disabled selected value="">Choisir 2ère team </option>
+                                                <option disabled selected value="">Choisir 2ème team </option>
                                                 @foreach ($pool->contenders as $contender)
                                                     @if ($contender->team_id && $game->contender2->team)
-                                                        <option value="{{ $contender->id }}" @if ($contender->team->name == $game->contender2->team->name) selected @endif>
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->team->name == $game->contender2->team->name) selected @endif>
                                                             {{ $contender->team->name }}
                                                         </option>
                                                     @elseif($contender->getName())
                                                         <option value="{{ $contender->id }}">
                                                             {{ $contender->getName() }}
+                                                        </option>
+                                                    @elseif($pool->stage > 1)
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender2->id) selected @endif>
+                                                            {{ $contender->rank_in_pool . ($contender->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $contender->fromPool->poolName }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $contender->id }}"
+                                                            @if ($contender->id == $game->contender2->id) selected @endif>
+                                                            équipe fictive N.{{ $contender->id }}
                                                         </option>
                                                     @endif
                                                 @endforeach
@@ -153,8 +183,10 @@
                                         @else
                                             @if ($game->contender2->team)
                                                 {{ $game->contender2->team->name }}
+                                            @elseif($game->contender2->pool->stage > 1)
+                                                {{ $game->contender2->rank_in_pool . ($game->contender2->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender2->fromPool->poolName }}
                                             @else
-                                                -VIDE-
+                                                équipe fictive n. {{ $game->contender2->id }}
                                             @endif
                                         @endif
                                     </td>
@@ -165,10 +197,10 @@
 
 
                                                 @foreach ($courts as $value)
-
                                                     @if ($value->sport_id == $tournament->sport_id)
-
-                                                        <option value="{{ $value->id }}" @if ($value->name == $game->court->name) selected @endif>{{ $value->name }}
+                                                        <option value="{{ $value->id }}"
+                                                            @if ($value->name == $game->court->name) selected @endif>
+                                                            {{ $value->name }}
                                                         </option>
                                                     @endif
                                                 @endforeach
@@ -188,9 +220,8 @@
                                         </td>
                                     @endif
                                 </tr>
-
                             @endforeach
-                        <tbody class="text">
+                        </tbody>
                     </table>
                     @if ($pool->isEditable())
                         <h2><input value="Sauvegarder" type="submit" class="btn btn-main" /></h2>
@@ -201,59 +232,62 @@
                     <caption style="caption-side:top; text-align:center">
                         <h2>Liste des participants</h2>
                     </caption>
-                    @for ($i = 0; $i < $pool->poolSize; $i++)
-                        <tr>
-                            <form action="{{ route('pools.contenders.update', [$pool->id, $pool->contenders[$i]->id]) }}"
-                                method="POST" enctype="multipart/form-data">
-                                <input name="_token" type="hidden" value="{{ csrf_token() }}" />
-                                <input type="hidden" name="_method" value="PUT">
+                    @if ($pool->contenders->count() > 0)
+                        @for ($i = 0; $i < $pool->poolSize; $i++)
+                            <tr>
+                                <form
+                                    action="{{ route('pools.contenders.update', [$pool->id, $pool->contenders[$i]->id]) }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+                                    <input type="hidden" name="_method" value="PUT">
 
-                                <td>
-                                    <h6 style="color: black">
-
-                                        @if ($pool->contenders[$i]->getName() != null)
-                                            {{ $pool->contenders[$i]->getName() }}
-                                        @elseif ($pool->isEditable())
-
-                                            <select id="teams" name="team_id" class="form-control">
-
-                                                @foreach ($teamsNotInAPool as $team)
-                                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        @else
-                                            -VIDE-
-                                        @endif
-                                    </h6>
-                                </td>
-
-
-                                @if ($pool->contenders[$i]->getName() == null && $pool->isEditable())
                                     <td>
-                                        <button type="submit" class="btn btn-main">Ajouter</button>
+                                        <h6 style="color: black">
+
+                                            @if ($pool->contenders[$i]->getName() != null)
+                                                {{ $pool->contenders[$i]->getName() }}
+                                            @elseif ($pool->isEditable())
+                                                <select id="teams" name="team_id" class="form-control">
+
+                                                    @foreach ($teamsNotInAPool as $team)
+                                                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            @else
+                                                -VIDE-
+                                            @endif
+                                        </h6>
                                     </td>
+
+
+                                    @if ($pool->contenders[$i]->getName() == null && $pool->isEditable())
+                                        <td>
+                                            <button type="submit" class="btn btn-main">Ajouter</button>
+                                        </td>
+                                    @endif
+                                </form>
+
+                                @if ($pool->isEditable())
+                                    @if (isset($pool->id) && isset($pool->contenders[$i]->team_id))
+                                        <td>
+                                            <form
+                                                action="{{ route('pools.contenders.destroy', [$pool->contenders[$i]->team_id, $pool->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 @endif
-                            </form>
-
-                            @if ($pool->isEditable())
-                                @if (isset($pool->id) && isset($pool->contenders[$i]->team_id))
-                                    <td>
-                                        <form
-                                            action="{{ route('pools.contenders.destroy', [$pool->contenders[$i]->team_id, $pool->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                @endif
-                            @endif
 
 
-                        </tr>
-                    @endfor
+                            </tr>
+                        @endfor
+                    @endif
+
                 </table>
 
             </div>
