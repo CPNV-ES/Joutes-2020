@@ -279,6 +279,7 @@ class Pool extends Model
         }
     }
 
+    // TODO: Handle scheduling of games in the future and Cout of games in the pool
     public function generateSimpleOrDoubleGames(bool $isReturnMatche)
     {
         $teams = $this->contenders()->get();
