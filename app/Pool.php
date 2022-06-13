@@ -12,7 +12,7 @@ class Pool extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'start_time', 'end_time', 'poolName', 'stage', 'poolState' ,'poolSize', 'tournament_id', 'mode_id', 'game_type_id'
+        'start_time', 'end_time', 'poolName', 'stage', 'poolState', 'poolSize', 'tournament_id', 'mode_id', 'game_type_id'
     ];
     //TODO manage poolState with database slugs
     public function tournament()
@@ -24,16 +24,28 @@ class Pool extends Model
         return $this->hasMany(Contender::class);
     }
 
-    public function mode(){
+    public function mode()
+    {
         return $this->belongsTo(PoolMode::class);
     }
 
-    public function game_type(){
+    public function game_type()
+    {
         return $this->belongsTo(GameType::class);
     }
 
-    public function games(){
+    public function games()
+    {
         return $this->hasManyThrough(Game::class, Contender::class, 'pool_id', 'contender1_id');
+    }
+    public function gamesWithoutScores()
+    {
+        return $this->games()->where('score_contender1', null)->where('score_contender2', null)->orderBy('date')->orderBy('start_time');
+    }
+    //get games if game as scores
+    public function gamesWithScores()
+    {
+        return $this->games()->where('score1', '!=', null)->where('score2', '!=', null);
     }
 
     public function poolsInPreviousStage()
@@ -45,22 +57,23 @@ class Pool extends Model
         return $pools;
     }
 
-    public function rankings() {
+    public function rankings()
+    {
         $teams = $this->listTeams();
         $games = $this->games;
         $rankings = array();
 
 
-        foreach ($games as $key=>$game) {
+        foreach ($games as $key => $game) {
 
 
             // for classement ----------------------------------------------------------
             if (!empty($teams)) {
                 foreach ($teams as $id => $team) {
-                    $score 		 = 0;
-                    $win 		 = 0;
+                    $score          = 0;
+                    $win          = 0;
                     $loose       = 0;
-                    $draw 	     = 0;
+                    $draw          = 0;
                     $goalBalance = 0;
 
 
@@ -74,24 +87,26 @@ class Pool extends Model
                     }
                     // if so get old ranking values
                     if ($position != -1) {
-                        $score 			= $rankings[$position]["score"];
-                        $win 			= $rankings[$position]["W"];
-                        $loose 			= $rankings[$position]["L"];
-                        $draw 			= $rankings[$position]["D"];
-                        $goalBalance 	= $rankings[$position]["+-"];
+                        $score             = $rankings[$position]["score"];
+                        $win             = $rankings[$position]["W"];
+                        $loose             = $rankings[$position]["L"];
+                        $draw             = $rankings[$position]["D"];
+                        $goalBalance     = $rankings[$position]["+-"];
                     }
 
 
                     if ((!empty($game->score_contender1) || !empty($game->score_contender2)) && !empty($game->contender1->team) && !empty($game->contender2->team)) {
-                        if($game->contender1->team->name == $team || $game->contender2->team->name == $team) {
+                        if ($game->contender1->team->name == $team || $game->contender2->team->name == $team) {
                             // $team had a draw
-                            if($game->score_contender1 == $game->score_contender2) {
+                            if ($game->score_contender1 == $game->score_contender2) {
                                 $score += 1;
                                 $draw++;
                             }
                             // $team won the game
-                            else if($game->score_contender1 > $game->score_contender2 && $game->contender1->team->name == $team ||
-                                $game->score_contender2 > $game->score_contender1 && $game->contender2->team->name == $team) {
+                            else if (
+                                $game->score_contender1 > $game->score_contender2 && $game->contender1->team->name == $team ||
+                                $game->score_contender2 > $game->score_contender1 && $game->contender2->team->name == $team
+                            ) {
                                 $score += 2;
                                 $win++;
                             }
@@ -101,11 +116,10 @@ class Pool extends Model
                             }
 
                             // calcul the balance between goal+ ($team) and goal- (contender)
-                            if($game->contender1->team->name == $team) {
+                            if ($game->contender1->team->name == $team) {
                                 $goalBalance += $game->score_contender1;
                                 $goalBalance -= $game->score_contender2;
-                            }
-                            else if($game->contender2->team->name == $team) {
+                            } else if ($game->contender2->team->name == $team) {
                                 $goalBalance += $game->score_contender2;
                                 $goalBalance -= $game->score_contender1;
                             }
@@ -114,24 +128,23 @@ class Pool extends Model
 
                     if ($position == -1) {
                         $rankings[] = array(
-                            "team_id" 	=> $id,
-                            "team" 		=> $team,
-                            "score" 	=> $score,
-                            "W" 		=> $win,
-                            "L" 		=> $loose,
-                            "D" 		=> $draw,
-                            "+-" 		=> $goalBalance
+                            "team_id"     => $id,
+                            "team"         => $team,
+                            "score"     => $score,
+                            "W"         => $win,
+                            "L"         => $loose,
+                            "D"         => $draw,
+                            "+-"         => $goalBalance
                         );
-                    }
-                    else {
+                    } else {
                         $rankings[$position] = array(
-                            "team_id" 	=> $id,
-                            "team" 		=> $team,
-                            "score" 	=> $score,
-                            "W" 		=> $win,
-                            "L" 		=> $loose,
-                            "D" 		=> $draw,
-                            "+-" 		=> $goalBalance
+                            "team_id"     => $id,
+                            "team"         => $team,
+                            "score"     => $score,
+                            "W"         => $win,
+                            "L"         => $loose,
+                            "D"         => $draw,
+                            "+-"         => $goalBalance
                         );
                     }
                 }
@@ -141,26 +154,29 @@ class Pool extends Model
         return $rankings;
     }
 
-    public function teams(){
-        return $this->belongsToMany(Team::class,'Contenders');
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'Contenders');
     }
 
-    public function listTeams() {
+    public function listTeams()
+    {
         $teams = array();
         foreach ($this->games as $game) {
-            if(!empty($game->contender1->team)){
+            if (!empty($game->contender1->team)) {
                 $teams[$game->contender1->team->id] = $game->contender1->team->name;
             }
-            if(!empty($game->contender2->team)){
+            if (!empty($game->contender2->team)) {
                 $teams[$game->contender2->team->id] = $game->contender2->team->name;
             }
         }
         return $teams;
     }
 
-    private function sort($rankings_row){
+    private function sort($rankings_row)
+    {
         $rankings_sort = array();
-        foreach($rankings_row as $key=>$value) {
+        foreach ($rankings_row as $key => $value) {
             $rankings_sort['score'][$key] = $value['score'];
             $rankings_sort['+-'][$key] = $value['+-'];
         }
@@ -170,10 +186,11 @@ class Pool extends Model
     }
 
     //TODO: Move this method into a laravel policy
-    public function isEditable(){
-        if(Auth::check()){
+    public function isEditable()
+    {
+        if (Auth::check()) {
             $role = Auth::user()->role->getSlug();
-            if($role == "GEST" || $role == "ADMIN") return ($this->isFinished == 0);
+            if ($role == "GEST" || $role == "ADMIN") return ($this->isFinished == 0);
         }
         return false;
     }
@@ -185,12 +202,9 @@ class Pool extends Model
      */
     public function isReady()
     {
-        foreach($this->contenders as $contender)
-        {
-            if(!$contender->team_id) return false;
+        foreach ($this->contenders as $contender) {
+            if (!$contender->team_id) return false;
         }
-        if($this->poolState == PoolState::Prep) return true;
-
+        if ($this->poolState == PoolState::Prep) return true;
     }
-
 }
