@@ -54,7 +54,7 @@
 
                             <li class="@if (Route::is('classes.index')) active @endif"><a
                                     href="{{ route('classes.index') }}"> <i class="fa fa-home"
-                                          aria-hidden="true"></i> Classes</a></li>
+                                        aria-hidden="true"></i> Classes</a></li>
                         @endif
 
                         @if (Auth::user()->role == 'participant')
@@ -90,6 +90,8 @@
     </div>
     <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
+    @stack('carousel')
+    <script src="{{ asset('/js/carousel.js') }}"></script>
 
 </body>
 

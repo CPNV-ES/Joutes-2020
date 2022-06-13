@@ -5,6 +5,7 @@ namespace App;
 use App\Enums\EventState;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\IsEmpty;
 
 class Event extends Model
 {
@@ -30,7 +31,19 @@ class Event extends Model
             }
         }
     }
-
+    //Get event tournaments if poolsReady return is not null
+    public function tournamentsReady()
+    {
+        $tournaments = $this->tournaments()->get();
+        $tournamentsReady = array();
+        foreach ($tournaments as $tournament) {
+            //if tournament  pools ins't empty
+            if ($tournament->poolsReady()->toArray()) {
+                $tournamentsReady[] = $tournament;
+            }
+        }
+        return $tournamentsReady;
+    }
     /**
      * Get all users related to this event
      *

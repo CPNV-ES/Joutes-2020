@@ -25,10 +25,24 @@
                                     : {{ Helper::eventStateName($event->eventState + 1) }} </button>
                             @endif
                         @endif
+
+                        @if (Gate::allows('isOrg') && $event->eventState == 2)
+                            @if ($event->tournaments->count() > 0)
+                                <a href="{{ route('carousel.show', $event->id) }}" class="btn btn-main"
+                                    title="Affichage Kiosque">
+                                    Affichage Kiosque
+                                </a>
+                            @else
+                                <button class="btn btn-main" title="Affichage Kiosque" disabled>
+                                    Affichage Kiosque
+                                </button>
+                            @endif
+                        @endif
                         @if (Gate::allows('isPart'))
                             @if (Helper::EventRoleUser(Auth::user(), $event))
                                 <h4>
-                                    <a href="{{ route('events.schedules.index', $event) }}" class="badge badge-success">Mon
+                                    <a href="{{ route('events.schedules.index', $event) }}"
+                                        class="badge badge-success">Mon
                                         programme</a>
                                     <span class="badge badge-info">Déjà Inscript
                                         ({{ Helper::EventRoleUser(Auth::user(), $event)->role->name }})

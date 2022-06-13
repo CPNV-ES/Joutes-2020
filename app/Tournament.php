@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Enums\PoolState;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
 class Tournament extends Model
 {
@@ -22,7 +23,7 @@ class Tournament extends Model
 
     public function getStages()
     {
-      return $this->pools()->distinct('stage')->orderBy('stage')->pluck('stage')->toArray();
+        return $this->pools()->distinct('stage')->orderBy('stage')->pluck('stage')->toArray();
     }
 
     public function getPoolsOfStage($tournamentId, $stageNumber)
@@ -57,7 +58,10 @@ class Tournament extends Model
         return $this->hasMany(Pool::class);
     }
 
-
+    public function poolsReady()
+    {
+        return $this->pools()->whereIn('poolState', [PoolState::Ready, PoolState::Inprog])->get();
+    }
     /**
      * Create a new belongs to many relationship instance between Tournament and Team
      *
@@ -75,14 +79,15 @@ class Tournament extends Model
     }
 
 
-    public function results() {
+    public function results()
+    {
         $pools = $this->pools;
         $filtered = null;
         if (!empty($pools->last())) {
             $final_stage = $pools->last()->stage;
-            $filtered = $pools->filter(function($value, $key) use (&$final_stage) {
+            $filtered = $pools->filter(function ($value, $key) use (&$final_stage) {
                 if ($value['stage'] == $final_stage && $value['isFinished'] == 1)
-                return $value;
+                    return $value;
             });
             $pools = null;
         }
@@ -102,9 +107,8 @@ class Tournament extends Model
 
     public static function isNewTeam(string $name, Tournament $tournament)
     {
-        return self::whereHas('teams',function ($q) use ($tournament, $name) {
-                $q->where('name',$name)->where('tournament_id',$tournament['id']);
-            })->count() === 0;
-
+        return self::whereHas('teams', function ($q) use ($tournament, $name) {
+            $q->where('name', $name)->where('tournament_id', $tournament['id']);
+        })->count() === 0;
     }
 }

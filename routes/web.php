@@ -44,7 +44,7 @@ Route::resource('events.schedules', 'ScheduleController')->only(['index']);
 
 Route::resource('classes', 'SchoolClassController')->register();
 Route::resource('students', 'StudentController')->register();
-
+Route::resource('carousel', 'CarouselController')->register();
 
 //Administration resources
 Route::group(['middleware' => ['admin']], function () {

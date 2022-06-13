@@ -40,6 +40,15 @@ class Pool extends Model
     {
         return $this->hasManyThrough(Game::class, Contender::class, 'pool_id', 'contender1_id');
     }
+    public function gamesWithoutScores()
+    {
+        return $this->games()->where('score_contender1', null)->where('score_contender2', null)->orderBy('date')->orderBy('start_time');
+    }
+    //get games if game as scores
+    public function gamesWithScores()
+    {
+        return $this->games()->where('score1', '!=', null)->where('score2', '!=', null);
+    }
 
     public function poolsInPreviousStage()
     {
