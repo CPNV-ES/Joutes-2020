@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./fullcalendar');
+require('./carousel');
 
 // side nav bar
 (function ($) {
