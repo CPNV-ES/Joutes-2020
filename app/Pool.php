@@ -298,4 +298,9 @@ class Pool extends Model
             ]);
         }
     }
+
+    public function doesContenderNotExistInThisPool(int $rankInPool, int $poolFromId)
+    {
+        return is_null($this->contenders->where('rank_in_pool', $rankInPool)->where('pool_from_id', $poolFromId)->first());
+    }
 }

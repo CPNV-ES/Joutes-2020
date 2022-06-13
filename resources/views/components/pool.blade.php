@@ -73,11 +73,13 @@
                                                         <option> ---- </option>
                                                         @foreach ($tournament->getPoolsOfStage($tournament->id, $pool->stage - 1) as $poolOfStage)
                                                             @for ($x = 0; $x < $poolOfStage->poolSize; $x++)
-                                                                <option
-                                                                    value='{"rank_in_pool":"{{ $x + 1 }}","pool_from_id":"{{ $poolOfStage->id }}"}'>
-                                                                    {{ $x + 1 }} de
-                                                                    {{ $poolOfStage->poolName }}
-                                                                </option>
+                                                                @if ($pool->doesContenderNotExistInThisPool($x + 1, $poolOfStage->id))
+                                                                    <option
+                                                                        value='{"rank_in_pool":"{{ $x + 1 }}","pool_from_id":"{{ $poolOfStage->id }}"}'>
+                                                                        {{ $x + 1 }} de
+                                                                        {{ $poolOfStage->poolName }}
+                                                                    </option>
+                                                                @endif
                                                             @endfor
                                                         @endforeach
                                                     </select>
@@ -111,7 +113,7 @@
                                                 @php $teamName = $team->name @endphp
 
                                                 <tr>
-                                                    <td title="Team" class="team colorBackground"
+                                                    <td title="Team" class="team colorBackground classList"
                                                         data-previous="{{ $contender->previousId() }}">
                                                         <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>
                                                     </td>
