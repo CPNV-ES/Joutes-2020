@@ -46,7 +46,7 @@ class ContenderController extends Controller
 
     public function update(Request $request,Pool $pool, Contender $contender)
     {
-        $contender->team_id = $request->team_id;
+        $contender->fill($request->all());
         $contender->save();
         return redirect()->back()->with('success', "Equipe ".ContenderHelper::contenderDisplayName($contender) ." inscrite dans ".$pool->poolName);
     }

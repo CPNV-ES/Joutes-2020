@@ -387,13 +387,26 @@
                                             {{-- Part of display for Visualisation to display name of team --}}
 
                                             @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
-
                                                 @if($contender->team_id == null)
                                                     <tr>
-                                                        <td title="Team" class="team">
-                                                            <a>{{ $contender->rank_in_pool }}
-                                                                de {{ $contender->fromPool->poolName }}</a>
+                                                         <td title="Team" class="team">
+                                                            <form action="{{ route('pools.contenders.update', [$pool, $contender]) }}" method="post">                                                     
+                                                                @csrf
+                                                                @method('put')
+                                                            <select onchange="this.form.submit()" name="team_id">
+                                                                <option selected="true" disabled="disabled"> ---- </option>
+                                                                @foreach ($tournament->getPoolsOfStage($tournament->id, $stage-1) as $pool)
+                                                                    @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
+                                                                        @if($contender->team_id != null)
+                                                                            <option value="{{ $contender->team_id }}">{{ $contender->rank_in_pool }} de {{ $pool->poolName }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endforeach
+                                                                                                                        
+                                                            </select>
+                                                            </form>
                                                         </td>
+                                                        
                                                     </tr>
                                                     @php $i++; @endphp
                                                 @else
