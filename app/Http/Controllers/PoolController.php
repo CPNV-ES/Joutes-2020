@@ -24,6 +24,7 @@ class PoolController extends Controller
 
     public function store(CreatePoolRequest $request, Tournament $tournament)
     {
+        
         $pool = new Pool();
         $pool->fill($request->all() + ['tournament_id' => $tournament->id]);
 
@@ -32,6 +33,14 @@ class PoolController extends Controller
         $pool->poolState = 0;
 
         $pool->save();
+
+        for ($i=1; $i <= $pool->poolSize ; $i++) { 
+            Contender::create([
+                'pool_id' => $pool->id,
+                'team_id' => null,
+                'rank_in_pool' => $i,
+                'pool_from_id' => null]);
+        }
 
         return redirect()->route('tournaments.show', ['tournament' => $tournament]);
     }

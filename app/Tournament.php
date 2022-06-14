@@ -91,26 +91,20 @@ class Tournament extends Model
 
     public function getTeamsNotInAPool()
     {
-        $teamsNotInAPool = DB::table('contenders')
-            ->rightJoin('teams', 'teams.id', '=', 'contenders.team_id')
-            ->whereNull('contenders.team_id')
-            ->where('tournament_id', '=', $this->id)
-            ->get();
-
-        return $teamsNotInAPool;
+        $teamsId = Contender::whereIn('pool_id', $this->pools->pluck('id'))->where('team_id','!=',null)->get()->pluck('team_id');
+        return Tournament::find($this->id)->teams()->whereNotIn('id', $teamsId)->get();
     }
-    public function getTeamForPool(string $name)
+    public function getTeamForPool($name)
     {
-        $team = DB::table('contenders')
-            ->rightJoin('teams', 'teams.id', '=', 'contenders.team_id')
-            ->where('tournament_id', '=', $this->id)
-            ->where('teams.name', '=', $name)
-            ->get();
-        ;
 
-
-        return $team->concat($this->getTeamsNotInAPool());
+        return $name == null ? $this->getTeamsNotInAPool(): $this->getTeamsNotInAPool()->push(Team::firstWhere('name', $name));
     }
+    public function getTeamsInAPool()
+    {   
+        return Contender::whereIn('pool_id', $this->pools->pluck('id')->toArray())->get();
+
+    }
+
 
 
     public static function isNewTeam(string $name, Tournament $tournament)
