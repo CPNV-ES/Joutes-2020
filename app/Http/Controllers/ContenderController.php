@@ -7,6 +7,7 @@ use App\Contender;
 use App\Pool;
 use App\Team;
 use App\Game;
+use App\Helpers\ContenderHelper;
 use App\Tournament;
 use Illuminate\Support\Facades\Redirect;
 
@@ -47,8 +48,7 @@ class ContenderController extends Controller
     {
         $contender->team_id = $request->team_id;
         $contender->save();
-
-        return redirect()->back();
+        return redirect()->back()->with('success', "Equipe ".ContenderHelper::contenderDisplayName($contender) ." inscrite dans ".$pool->poolName);
     }
 
     public function destroy( Contender $contender)
