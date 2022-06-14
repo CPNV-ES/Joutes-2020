@@ -264,15 +264,15 @@
                                                         @csrf
                                                         @method('put')
                                                         <select onchange="this.form.submit()" name="team_id">
-                                                            <option> ---- </option>
+                                                            <option selected="true" disabled="disabled"> ---- </option>
                                                             @if ($contender->team_id === null)
                                                                 @foreach ($tournament->getTeamsNotInAPool() as $team)
 
-                                                                    <option value="{{ $team->id .':'.$contender->rank_in_pool }}">{{ $team->name  }}</option>
+                                                                    <option value="{{ $team->id }}">{{ $team->name  }}</option>
                                                                 @endforeach
                                                             @else
                                                             @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($contender)) as $team)
-                                                                <option value="{{ $team->id .':'.$contender->id }}"  {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
+                                                                <option value="{{ $team->id}}"  {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
                                                             @endforeach
                                                             @endif
                                                            

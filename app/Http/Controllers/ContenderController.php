@@ -15,7 +15,6 @@ class ContenderController extends Controller
     public function store(Request $request, Pool $pool)
     {
         $tournament = Tournament::find($pool->tournament_id);
-        dd($tournament->getTeamsInAPool());
 
         if($pool->stage == 1 && $pool->id !== null){
             Contender::create([
@@ -46,27 +45,15 @@ class ContenderController extends Controller
 
     public function update(Request $request,Pool $pool, Contender $contender)
     {
-        dd($request);
-        $this->destroy($contender->team_id,$pool);
-
-        $contender->team_id = $request->input('team_id');
+        $contender->team_id = $request->team_id;
         $contender->save();
 
         return redirect()->back();
     }
 
-    public function destroy($team_id, Pool $pool)
+    public function destroy( Contender $contender)
     {
-
-        // $contender = Contender::where('team_id','=',$team_id)->firstOrFail();
-        // $game_contender1 = Game::where('contender1_id','=',$contender->id);
-        // $game_contender2 = Game::where('contender2_id','=',$contender->id);
-        // $game_contender1->delete();
-        // $game_contender2->delete();
-        // $pool->teams()->detach($team_id);
-        $pool->teams()->updateExistingPivot($team_id,['team_id'=> null]);
-
-        // $contender->delete();
+        $contender->delete();
 
         return redirect()->back();
 
