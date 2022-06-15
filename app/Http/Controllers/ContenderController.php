@@ -46,9 +46,12 @@ class ContenderController extends Controller
 
     public function update(Request $request,Pool $pool, Contender $contender)
     {
+        $contenderPrevious = Contender::firstWhere('team_id', $request->team_id);
+
         if($pool->stage !== 1 && $pool->id !== null){
-            $contender->team_id = explode(':', $request->team_id)[0];
-            $contender->pool_from_id = explode(':', $request->team_id)[1];
+            $contender->team_id = $contenderPrevious->team_id;
+            $contender->pool_from_id = $contenderPrevious->pool_id;
+            $contender->pool_from_rank = $contenderPrevious->rank_in_pool;
         }else{
             $contender->fill($request->all());
         }

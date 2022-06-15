@@ -257,32 +257,37 @@
                                         @endforeach
                                         <table title="Teams In" class="table table-bordered teamlist tableStyle">
                                             @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
-                                            <tr>
-                                                <td title="Team" id="{{ $pool->id.'-'.$contender->id }}">
-                                                    <form action="{{ route('pools.contenders.update', [$pool, $contender]) }}" method="post">
+                                                <tr>
+                                                    <td title="Team" id="{{ $pool->id.'-'.$contender->id }}">
+                                                        <form
+                                                            action="{{ route('pools.contenders.update', [$pool, $contender]) }}"
+                                                            method="post">
 
-                                                        @csrf
-                                                        @method('put')
-                                                        <select onchange="this.form.submit()" name="team_id">
-                                                            <option selected="true" disabled="disabled"> ---- </option>
-                                                            @if ($contender->team_id === null)
-                                                                @foreach ($tournament->getTeamsNotInAPool() as $team)
+                                                            @csrf
+                                                            @method('put')
+                                                            <select onchange="this.form.submit()" name="team_id">
+                                                                <option selected="true" disabled="disabled"> ----
+                                                                </option>
+                                                                @if ($contender->team_id === null)
+                                                                    @foreach ($tournament->getTeamsNotInAPool() as $team)
 
-                                                                    <option value="{{ $team->id }}">{{ $team->name  }}</option>
-                                                                @endforeach
-                                                            @else
-                                                            @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($contender)) as $team)
-                                                                <option value="{{ $team->id}}"  {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
-                                                            @endforeach
-                                                            @endif
+                                                                        <option
+                                                                            value="{{ $team->id }}">{{ $team->name  }}</option>
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach ($tournament->getTeamForPool(\App\Helpers\ContenderHelper::contenderDisplayName($contender)) as $team)
+                                                                        <option
+                                                                            value="{{ $team->id}}" {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
+                                                                    @endforeach
+                                                                @endif
 
 
-                                                        </select>
-                                                    </form>
-                                                 </td>
+                                                            </select>
+                                                        </form>
+                                                    </td>
 
-                                            </tr>
-                                        @endforeach
+                                                </tr>
+                                            @endforeach
 
                                         </table>
 
@@ -389,30 +394,40 @@
                                             @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
                                                 @if($contender->team_id == null)
                                                     <tr>
-                                                         <td title="Team" class="team">
-                                                            <form action="{{ route('pools.contenders.update', [$pool, $contender]) }}" method="post">
+                                                        <td title="Team" class="team">
+                                                            <form
+                                                                action="{{ route('pools.contenders.update', [$pool, $contender]) }}"
+                                                                method="post">
                                                                 @csrf
                                                                 @method('put')
-                                                            <select onchange="this.form.submit()" name="team_id">
-                                                                <option selected="true" disabled="disabled"> ---- </option>
-                                                                @foreach ($tournament->getPoolsOfStage($tournament->id, $stage-1) as $poolPrevious)
-                                                                    @foreach ($poolPrevious->contenders->sortBy('rank_in_pool') as $contenderPrevious)
+                                                                <select onchange="this.form.submit()" name="team_id">
+                                                                    <option selected="true" disabled="disabled"> ---- </option>
+                                                                    @foreach ($tournament->getPoolsOfStage($tournament->id, $stage-1) as $poolPrevious)
+                                                                        @foreach ($poolPrevious->contenders->sortBy('rank_in_pool') as $contenderPrevious)
 
-                                                                        @if($contenderPrevious->team_id != null &&  !\App\Helpers\ContenderHelper::isSelected($pool, $contenderPrevious->team_id, $poolPrevious->id))
-                                                                            <option value="{{ $contenderPrevious->team_id.':'.$poolPrevious->id }}" > {{ $contenderPrevious->rank_in_pool }} de {{ $poolPrevious->poolName }}</option>
-                                                                        @endif
+                                                                            @if($contenderPrevious->team_id != null &&  !\App\Helpers\ContenderHelper::isSelected($pool, $contenderPrevious->team_id, $poolPrevious->id))
+                                                                                <option
+                                                                                    value="{{ $contenderPrevious->team_id}}"> {{ $contenderPrevious->rank_in_pool }}
+                                                                                    de {{ $poolPrevious->poolName }}</option>
+                                                                            @endif
+                                                                        @endforeach
                                                                     @endforeach
-                                                                @endforeach
 
-                                                            </select>
+                                                                </select>
                                                             </form>
                                                         </td>
 
                                                     </tr>
                                                     @php $i++; @endphp
+                                                   {{-- @if($pool->poolState != 3)
+                                                        <tr>
+                                                            <td title="Team" class="team">
+                                                                <a>{{ $contender->pool_from_rank }}
+                                                                    de {{ $contender->fromPool->poolName }}</a>
+                                                            </td>
+                                                        </tr>--}}
                                                 @else
                                                     @foreach ($tournament->teams as $keyTeam => $team)
-
                                                         @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
                                                             @php $teamName = $team->name @endphp
 
@@ -470,8 +485,8 @@
                     @endforeach
                 </div>
 
-            @endif
-        @endforeach
+    @endif
+    @endforeach
     </body>
     <script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop

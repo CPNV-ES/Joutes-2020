@@ -24,7 +24,7 @@ class PoolController extends Controller
 
     public function store(CreatePoolRequest $request, Tournament $tournament)
     {
-        
+
         $pool = new Pool();
         $pool->fill($request->all() + ['tournament_id' => $tournament->id]);
 
@@ -34,7 +34,7 @@ class PoolController extends Controller
 
         $pool->save();
 
-        for ($i=1; $i <= $pool->poolSize ; $i++) { 
+        for ($i=1; $i <= $pool->poolSize ; $i++) {
             Contender::create([
                 'pool_id' => $pool->id,
                 'team_id' => null,
@@ -57,7 +57,7 @@ class PoolController extends Controller
         }
 
         $pool->fill($request->all());
-        
+
         $pool->save();
 
         return redirect()->route('tournaments.pools.show', [$tournament, $pool]);
@@ -66,18 +66,18 @@ class PoolController extends Controller
     public function show(Request $request, Tournament $tournament, Pool $pool)
     {
       $state = array('inprep','ready','inprogress','finished');
-  
+
       $pools = $tournament->pools;
       $maxStage = $pools->max('stage');
-  
+
       $contenders = $pool->contenders;
       $games = $pool->games->sortBy("start_time");
-      
+
       $courts = Court::all();
       $rankings = $pool->rankings();
-  
-     
-  
+
+
+
       $ranking_completed = true;
       foreach ($rankings as $ranking) {
           if ($ranking["team_id"] == -1) {
@@ -85,7 +85,7 @@ class PoolController extends Controller
               break;
           }
       }
-  
+
       $games_completed = true;
       foreach ($games as $game) {
           if ($game->score_contender1 === null || $game->score_contender2 === null) {
@@ -93,11 +93,11 @@ class PoolController extends Controller
               break;
           }
       }
-  
+
       $teamsNotInAPool = $tournament->getTeamsNotInAPool();
       $poolsInPreviousStage = $pool->poolsInPreviousStage();
-  
-  
+
+
       return view('pools.show.'.$state[$pool->poolState])->with(compact('tournament', 'maxStage', 'pool', 'contenders', 'ranking_completed', 'games_completed', 'games', 'rankings', 'teamsNotInAPool', 'poolsInPreviousStage','courts'));
     }
 
@@ -107,7 +107,7 @@ class PoolController extends Controller
         $pool->poolState = 3;
         $pool->save();
 
-        $rankings = $pool->rankings();
+      /*  $rankings = $pool->rankings();
 
         foreach ($pool->contenders as $contender) {
             for ($i = 0; $i < sizeof($rankings); $i++) {
@@ -135,7 +135,7 @@ class PoolController extends Controller
                 }
 
             }
-        }
+        }*/
 
 
         return back()->with('success', 'La pool a bien été fermée');
