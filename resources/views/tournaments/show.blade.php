@@ -395,10 +395,10 @@
                                                                 @method('put')
                                                             <select onchange="this.form.submit()" name="team_id">
                                                                 <option selected="true" disabled="disabled"> ---- </option>
-                                                                @foreach ($tournament->getPoolsOfStage($tournament->id, $stage-1) as $pool)
-                                                                    @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
+                                                                @foreach ($tournament->getPoolsOfStage($tournament->id, $stage-1) as $poolPrevious)
+                                                                    @foreach ($poolPrevious->contenders->sortBy('rank_in_pool') as $contender)
                                                                         @if($contender->team_id != null)
-                                                                            <option value="{{ $contender->team_id }}">{{ $contender->rank_in_pool }} de {{ $pool->poolName }}</option>
+                                                                            <option value="{{ $contender->team_id }}">{{ $contender->rank_in_pool }} de {{ $poolPrevious->poolName }}</option>
                                                                         @endif
                                                                     @endforeach
                                                                 @endforeach
