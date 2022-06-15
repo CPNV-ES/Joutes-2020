@@ -10,7 +10,7 @@ class Contender extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'pool_id', 'team_id', 'rank_in_pool', 'pool_from_id'
+        'pool_id', 'team_id', 'rank_in_pool', 'pool_from_id', 'pool_from_rank'
     ];
 
     public function team()
