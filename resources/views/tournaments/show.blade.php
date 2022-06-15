@@ -256,11 +256,11 @@
                                             @endif
                                         @endforeach
                                         <table title="Teams In" class="table table-bordered teamlist tableStyle">
-                                            @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender) 
+                                            @foreach ($pool->contenders->sortBy('rank_in_pool') as $contender)
                                             <tr>
                                                 <td title="Team" id="{{ $pool->id.'-'.$contender->id }}">
                                                     <form action="{{ route('pools.contenders.update', [$pool, $contender]) }}" method="post">
-                                                     
+
                                                         @csrf
                                                         @method('put')
                                                         <select onchange="this.form.submit()" name="team_id">
@@ -275,12 +275,12 @@
                                                                 <option value="{{ $team->id}}"  {{$team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender)?'selected':''}}>{{ $team->name  }}</option>
                                                             @endforeach
                                                             @endif
-                                                           
-                                                            
+
+
                                                         </select>
                                                     </form>
                                                  </td>
-                                                 
+
                                             </tr>
                                         @endforeach
 
@@ -390,23 +390,24 @@
                                                 @if($contender->team_id == null)
                                                     <tr>
                                                          <td title="Team" class="team">
-                                                            <form action="{{ route('pools.contenders.update', [$pool, $contender]) }}" method="post">                                                     
+                                                            <form action="{{ route('pools.contenders.update', [$pool, $contender]) }}" method="post">
                                                                 @csrf
                                                                 @method('put')
                                                             <select onchange="this.form.submit()" name="team_id">
                                                                 <option selected="true" disabled="disabled"> ---- </option>
                                                                 @foreach ($tournament->getPoolsOfStage($tournament->id, $stage-1) as $poolPrevious)
-                                                                    @foreach ($poolPrevious->contenders->sortBy('rank_in_pool') as $contender)
-                                                                        @if($contender->team_id != null)
-                                                                            <option value="{{ $contender->team_id }}">{{ $contender->rank_in_pool }} de {{ $poolPrevious->poolName }}</option>
+                                                                    @foreach ($poolPrevious->contenders->sortBy('rank_in_pool') as $contenderPrevious)
+
+                                                                        @if($contenderPrevious->team_id != null &&  !\App\Helpers\ContenderHelper::isSelected($pool, $contenderPrevious->team_id, $poolPrevious->id))
+                                                                            <option value="{{ $contenderPrevious->team_id.':'.$poolPrevious->id }}" > {{ $contenderPrevious->rank_in_pool }} de {{ $poolPrevious->poolName }}</option>
                                                                         @endif
                                                                     @endforeach
                                                                 @endforeach
-                                                                                                                        
+
                                                             </select>
                                                             </form>
                                                         </td>
-                                                        
+
                                                     </tr>
                                                     @php $i++; @endphp
                                                 @else

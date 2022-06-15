@@ -192,5 +192,4 @@ class Pool extends Model
         if($this->poolState == PoolState::Prep) return true;
 
     }
-
 }
