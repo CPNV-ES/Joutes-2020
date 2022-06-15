@@ -19,16 +19,10 @@ class CarouselController extends Controller
      */
     public function show($eventId)
     {
-        $event = Event::find($eventId);
+        $event = Event::findOrFail($eventId);
         $tournaments = $event->tournamentsReady();
-        if ($tournaments == null) {
+        if (empty($tournaments)) {
             return redirect()->route('events.index');
-        }
-        $pools = $tournaments[0]->poolsReady();
-        $games = $pools[0]->gamesWithoutScores();
-        $gamess = [];
-        foreach ($games as $game) {
-            dd($game);
         }
         return view('events.carousel.show')->with(compact('tournaments', 'event'));
     }
