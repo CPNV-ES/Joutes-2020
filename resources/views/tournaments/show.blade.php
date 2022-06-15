@@ -150,6 +150,10 @@
                        title="Ajouter une équipe au tournoi"><i class="fa fa-solid fa-plus fa-1x"
                                                                 aria-hidden="true"></i></a>
                 @endif
+                @if(Auth::check() && Auth::user()->role->slug == 'ADMIN')
+                        <a href="{{ route('pools.contenders.create', $pools->first()) }}"
+                           class="btn btn-main closeButton">Répartition aléatoire</a>
+                @endif
             </div>
 
             <div class="col-lg-6">

@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class ContenderController extends Controller
 {
+    public function create(Request $request, Pool $pool)
+    {
+        
+    }
+ 
     public function store(Request $request, Pool $pool)
     {
         $tournament = Tournament::find($pool->tournament_id);
