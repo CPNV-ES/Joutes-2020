@@ -15,7 +15,20 @@ class ContenderController extends Controller
 {
     public function create(Request $request, Pool $pool)
     {
-        
+        $tournament = Tournament::find($pool->tournament_id);
+
+        if($tournament->getTeamsNotInAPool()->count() > Contender::teamNotAssigned($tournament->pools)->count()) {
+            return redirect()->back()->with("error", "Il n'y a pas assez de poule pour toute l'équipe");
+        }
+
+
+        while(!$tournament->getTeamsNotInAPool()->isEmpty()){
+            $team = $tournament->getTeamsNotInAPool()->first();
+            $contender = Contender::teamNotAssigned($tournament->pools)->random();
+            $contender->team_id = $team->id;
+            $contender->save();
+        }
+        return redirect()->back()->with('success', "Toutes les équipes non assignées sont inscrites.");
     }
  
     public function store(Request $request, Pool $pool)

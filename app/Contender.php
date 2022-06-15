@@ -60,6 +60,19 @@ class Contender extends Model
         }
         return true;
     }
+    
+    public static function teamNotAssigned($pools){
+        $contenders_not_assigned = collect();
+        foreach ($pools as $pool){
+            foreach ($pool->contenders as $contender){
+                if (empty($contender->team_id)) $contenders_not_assigned->push($contender);
+            }   
+        }
+        return $contenders_not_assigned;
+
+    }
+
+
 
 
 }

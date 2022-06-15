@@ -151,8 +151,10 @@
                                                                 aria-hidden="true"></i></a>
                 @endif
                 @if(Auth::check() && Auth::user()->role->slug == 'ADMIN')
+                        @if ($pools->count() > 0)
                         <a href="{{ route('pools.contenders.create', $pools->first()) }}"
-                           class="btn btn-main closeButton">Répartition aléatoire</a>
+                            class="btn btn-main closeButton">Répartition aléatoire</a>
+                        @endif
                 @endif
             </div>
 
