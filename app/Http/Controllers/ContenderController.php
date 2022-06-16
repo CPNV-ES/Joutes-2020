@@ -64,18 +64,19 @@ class ContenderController extends Controller
 
     public function update(Request $request,Pool $pool, Contender $contender)
     {
-        $contenderPrevious = Contender::firstWhere('team_id', $request->team_id);
+        $contenderPrevious = Contender::Where('team_id', $request->team_id)->get()->last();
 
         if($pool->stage !== 1 && $pool->id !== null){
             $contender->team_id = $contenderPrevious->team_id;
             $contender->pool_from_id = $contenderPrevious->pool_id;
             $contender->pool_from_rank = $contenderPrevious->rank_in_pool;
+            $contender->save();
+            return redirect()->back();
         }else{
             $contender->fill($request->all());
+            $contender->save();
+            return redirect()->back()->with('success', "Equipe ".ContenderHelper::contenderDisplayName($contender) ." inscrite dans ".$pool->poolName);
         }
-
-        $contender->save();
-        return redirect()->back()->with('success', "Equipe ".ContenderHelper::contenderDisplayName($contender) ." inscrite dans ".$pool->poolName);
     }
 
     public function destroy( Contender $contender)

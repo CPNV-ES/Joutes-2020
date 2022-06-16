@@ -23,4 +23,9 @@ class ContenderHelper
               ->where('pool_from_id', $poolId);
       })->count();
   }
+  
+  public static function isPoolClosed(Contender $contender)
+  {
+    return Pool::find($contender->pool_from_id)->poolState == 3;
+  }
 }

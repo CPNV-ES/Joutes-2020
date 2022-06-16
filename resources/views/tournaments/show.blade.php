@@ -199,7 +199,6 @@
 
     </div>
 
-    <body>
     <div id="tournament" title="tournament" class="tournament">
         @foreach ($tournament->getStages() as $key => $stage)
             @if($key === 0)
@@ -425,38 +424,29 @@
 
                                                     </tr>
                                                     @php $i++; @endphp
-                                                   {{-- @if($pool->poolState != 3)
-                                                        <tr>
-                                                            <td title="Team" class="team">
-                                                                <a>{{ $contender->pool_from_rank }}
-                                                                    de {{ $contender->fromPool->poolName }}</a>
-                                                            </td>
-                                                        </tr>--}}
                                                 @else
                                                     @foreach ($tournament->teams as $keyTeam => $team)
                                                         @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
                                                             @php $teamName = $team->name @endphp
-
+                                                            
+                                                            @if (\App\Helpers\ContenderHelper::isPoolClosed($contender))
                                                             <tr>
                                                                 <td title="Team" class="team colorBackground"
                                                                     data-previous="{{ $contender->previousId() }}">
-                                                                    <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>
+                                                                    <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>                                                                    
                                                                 </td>
                                                             </tr>
-                                                        @endif
-                                                    @endforeach
-                                                    @foreach ($tournament->teams as $keyTeam => $team)
-                                                        @if ($team->name != \App\Helpers\ContenderHelper::contenderDisplayName($contender))
-                                                            @if (\App\Helpers\ContenderHelper::contenderDisplayName($contender) != $teamName)
-                                                                @if ($keyTeam === 0)
-
-                                                                    <tr>
-                                                                        <td title="Team" class="team "
-                                                                            data-previous="{{ $contender->previousId() }}">{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</td>
-                                                                    </tr>
-                                                                @endif
+                                                            @else
+                                                            <tr>
+                                                                <td title="Team" class="team">
+                                                                    <a>{{ $contender->pool_from_rank }}
+                                                                        de {{ $contender->fromPool->poolName }}</a>
+                                                                </td>
+                                                            </tr>
                                                             @endif
-                                                        @endif
+
+                                                           
+                                                        @endif                                                
                                                     @endforeach
                                                 @endif
                                             @endforeach
@@ -493,6 +483,6 @@
 
     @endif
     @endforeach
-    </body>
+    </div>
     <script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop
