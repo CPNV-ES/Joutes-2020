@@ -42,7 +42,7 @@ class Pool extends Model
     }
     public function gamesWithoutScores()
     {
-        return $this->games()->where('score_contender1', null)->where('score_contender2', null)->orderBy('date')->orderBy('start_time');
+        return $this->games()->where('score_contender1', null)->where('score_contender2', null)->orderBy('start_time');
     }
     //get games if game as scores
     public function gamesWithScores()
