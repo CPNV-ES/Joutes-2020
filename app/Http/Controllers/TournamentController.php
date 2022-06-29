@@ -151,12 +151,10 @@ class TournamentController extends Controller
 
     //Display a specific tournament
     public function show(Tournament $tournament)
-    {
+    {   
         $pools = $tournament->pools;
         $maxStage = $pools->max('stage');
-
         $tournament->getStages();
-
         return view('tournaments.show', compact('tournament', 'maxStage', 'pools'));
 
     }

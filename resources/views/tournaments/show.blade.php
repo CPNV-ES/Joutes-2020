@@ -104,39 +104,39 @@
                                         </td>
                                     @endif
 
-                                    @if ($team->isComplete() && !$team->isValid())
-                                        <td class="container pl-5">
-                                            <div class="row align-content-center">
-                                                <form action="{{ route('teams.update', $team) }}" method="post"
-                                                    title="Valider cette équipe ">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="flag_name" value="validation">
-                                                    <input type="hidden" name="flag_value" value="1">
-                                                    <input type="hidden" name="flag_message" value="est validée">
-                                                    <button class="btn btn-main">
-                                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>
-                                                <form action="{{ route('teams.update', $team) }}" method="post"
-                                                    title="Refuser cette équipe">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="flag_name" value="completion">
-                                                    <input type="hidden" name="flag_value" value="0">
-                                                    <input type="hidden" name="flag_message"
-                                                        value="n'est pas validée et son status 'Complète' est annulé*">
-                                                    <button class="btn btn-danger">
-                                                        <i class="fa fa-ban" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    @else
-                                        <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
-                                                aria-hidden="true"></i>
-                                        </td>
-                                    @endif
+                                @if($team->isComplete() && !$team->isValid())
+                                    <td class="container pl-5">
+                                        <div class="row align-content-center">
+                                            <form action="{{ route('teams.update', $team) }}" method="post"
+                                                  title="Valider cette équipe ">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="flag_name" value="validation">
+                                                <input type="hidden" name="flag_value" value="1">
+                                                <input type="hidden" name="flag_message" value="est validée">
+                                                <button class="btn btn-main">
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('teams.update', $team) }}" method="post"
+                                                  title="Refuser cette équipe">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="flag_name" value="completion">
+                                                <input type="hidden" name="flag_value" value="0">
+                                                <input type="hidden" name="flag_message"
+                                                       value="n'est pas validée et son status 'Complète' est annulé*">
+                                                <button class="btn btn-danger">
+                                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                @else
+                                    <td><i class="{{ $team->isValid() ? 'fa fa-check' : 'fa fa-close' }}"
+                                           aria-hidden="true"></i>
+                                    </td>
+                                @endif
 
                                 </tr>
                             @endforeach
@@ -151,6 +151,12 @@
                     <a href="{{ route('tournaments.teams.create', $tournament) }}" class="btn btn-main"
                         title="Ajouter une équipe au tournoi"><i class="fa fa-solid fa-plus fa-1x"
                             aria-hidden="true"></i></a>
+                @endif
+                @if(Auth::check() && Auth::user()->role->slug == 'ADMIN')
+                        @if ($pools->count() > 0)
+                        <a href="{{ route('pools.contenders.create', $pools->first()) }}"
+                            class="btn btn-main closeButton">Répartition aléatoire</a>
+                        @endif
                 @endif
             </div>
 
@@ -193,18 +199,18 @@
             </div>
         </div>
     </div>
-    <div id="tournament" class="container-fluid">
+    <div id="tournament" title="tournament" class="container-fluid">
         <div class="row">
             @foreach ($tournament->getStages() as $key => $stage)
                 <div class="col">
                     <h3> stage {{ $stage }}</h3>
                     @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
-                        <x-pool :tournament="$tournament" :stage="$stage" poolState="$key" :pool="$pool"></x-pool>
+                        <x-pool :tournament="$tournament" :stage="$stage" :key="$key" :pool="$pool"></x-pool>
                     @endforeach
                 </div>
             @endforeach
         </div>
     </div>
-
+    
     <script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop
