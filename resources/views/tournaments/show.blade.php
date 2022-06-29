@@ -152,11 +152,9 @@
                         title="Ajouter une équipe au tournoi"><i class="fa fa-solid fa-plus fa-1x"
                             aria-hidden="true"></i></a>
                 @endif
-                @if(Auth::check() && Auth::user()->role->slug == 'ADMIN')
-                        @if ($pools->count() > 0)
+                @if(Gate::allows('isOrg') && $pools->count() > 0)
                         <a href="{{ route('pools.contenders.create', $pools->first()) }}"
                             class="btn btn-main closeButton">Répartition aléatoire</a>
-                        @endif
                 @endif
             </div>
 
@@ -202,11 +200,8 @@
     <div id="tournament" title="tournament" class="container-fluid">
         <div class="row">
             @foreach ($tournament->getStages() as $key => $stage)
-                <div class="col">
-                    <h3> stage {{ $stage }}</h3>
-                    @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
-                        <x-pool :tournament="$tournament" :stage="$stage" :key="$key" :pool="$pool"></x-pool>
-                    @endforeach
+                <div>
+                    <x-pool :tournament="$tournament" :stage="$stage" :key="$key" :pool="$pools"></x-pool>
                 </div>
             @endforeach
         </div>
