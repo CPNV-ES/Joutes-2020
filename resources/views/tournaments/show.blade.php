@@ -200,7 +200,7 @@
     <div id="tournament" title="tournament" class="container-fluid">
         <div class="row">
             @foreach ($tournament->getStages() as $key => $stage)
-                <div>
+                <div class="col">
                     <x-pool :tournament="$tournament" :stage="$stage" :key="$key" :pool="$pools"></x-pool>
                 </div>
             @endforeach

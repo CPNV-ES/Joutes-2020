@@ -1,8 +1,8 @@
 @if($key === 0)
     <h3> stage {{ $stage }}</h3>
-    <div class="phase">
         @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
-            <div title="poule {{ $stage }}" class="pool">
+        <div class="row">
+            <div title="poule {{ $stage }}" class="col">{{ $pool->name }}
                 <table id="" class="tableTeamList table table-bordered ">
                     <thead class="{{\App\Enums\PoolState::poolStateClassColor($pool->poolState)}}">
                     <tr>
@@ -111,29 +111,31 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="btn-toolbar">
             @if (Gate::allows('isOrg') && $pool->areAllGamesPlayed())
-            <div class="col">
-                <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">
-                    Terminer la pool
-                </a>
-            </div>
-        @endif
-        @if ($pool->allowMatchesGeneration())
-            <div class="col">
-                <form name="generate-matches" method="post" action="{{ route('pools.gameManagers.store', $pool) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-main startButton">Générer les matches</button>
-                </form>
-            </div>
-        @endif
+                <div class="col">
+                    <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">
+                        Terminer la pool
+                    </a>
+                </div>
+                @endif
+            @if ($pool->allowMatchesGeneration())
+                <div class="col">
+                    <form name="generate-matches" method="post" action="{{ route('pools.gameManagers.store', $pool) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-main startButton">Générer les matches</button>
+                    </form>
+                </div>
+            @endif
+        </div>
         @endforeach
-    </div>
 @else
     <h3> stage {{ $stage }}</h3>
-    <div class="phase">
         @foreach ($tournament->getPoolsOfStage($tournament->id, $stage) as $pool)
 
-            <div title="poule {{ $stage }}" class="pool">{{ $pool->name }}
+        <div class="row">
+            <div title="poule {{ $stage }}" class="col">{{ $pool->name }}
                 <table id="" class="tableTeamList table table-bordered ">
                     <thead class="{{\App\Enums\PoolState::poolStateClassColor($pool->poolState)}}">
                     <tr>
@@ -277,6 +279,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
            {{--  @if (Gate::allows('isOrg') && $pool->areAllGamesPlayed())
                 <div class="col">
                     <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">
@@ -293,7 +296,8 @@
                 </div>
             @endif --}}
 
-            @if (Gate::allows('isOrg'))
+            <div class="btn-toolbar" >
+                @if (Gate::allows('isOrg'))
             <div class="col">
                 <a href="{{ route('tournaments.pools.close', $pool) }}" class="btn btn-main closeButton">
                     Terminer la pool
@@ -308,6 +312,6 @@
                 </form>
             </div>
             @endif
+            </div>
         @endforeach
-    </div>
 @endif
