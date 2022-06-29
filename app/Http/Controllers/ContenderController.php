@@ -15,6 +15,7 @@ class ContenderController extends Controller
 {
     public function create(Request $request, Pool $pool)
     {
+        
 
         $tournament = Tournament::find($pool->tournament_id);
 
@@ -24,7 +25,7 @@ class ContenderController extends Controller
 
         while(!$tournament->getTeamsNotInAPool()->isEmpty()){
             $team = $tournament->getTeamsNotInAPool()->first();
-            $contender = Contender::teamNotAssigned($tournament->pools)->random();
+            $contender = Contender::teamNotAssigned($tournament->getPoolStage1())->random();
             $contender->team_id = $team->id;
             $contender->save();
         }

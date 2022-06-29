@@ -62,6 +62,13 @@ class Tournament extends Model
     {
         return $this->pools()->whereIn('poolState', [PoolState::Ready, PoolState::Inprog])->get();
     }
+
+    public function getPoolStage1()
+    {
+        return $this->pools()->where('stage', '=', 1)->get();
+    }
+
+
     /**
      * Create a new belongs to many relationship instance between Tournament and Team
      *
@@ -118,4 +125,5 @@ class Tournament extends Model
             $q->where('name', $name)->where('tournament_id', $tournament['id']);
         })->count() === 0;
     }
+
 }
