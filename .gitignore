@@ -1,6 +1,7 @@
 /node_modules
 /public/build
 /public/hot
+/public/lib
 /public/storage
 /storage/*.key
 /vendor
@@ -17,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 /components
+

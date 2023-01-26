@@ -5,7 +5,6 @@ var __webpack_exports__ = {};
   \**********************************/
 $('.carousel').carousel({
   interval: 4000 //set the initial interval
-
 });
 /******/ })()
 ;
