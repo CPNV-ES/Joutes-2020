@@ -2,9 +2,8 @@
 
 namespace App\Helpers;
 
-use App\Contender;
-use App\Pool;
-use Illuminate\Support\Facades\DB;
+use App\Models\Contender;
+use App\Models\Pool;
 
 class ContenderHelper
 {
@@ -23,7 +22,7 @@ class ContenderHelper
               ->where('pool_from_id', $poolId);
       })->count();
   }
-  
+
   public static function isPoolClosed(Contender $contender)
   {
     return Pool::find($contender->pool_from_id)->poolState == 3;

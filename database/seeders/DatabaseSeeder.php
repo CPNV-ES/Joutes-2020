@@ -2,12 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Court;
-use Illuminate\Database\Seeder;
-
-use Illuminate\Support\Facades\Session;
 use Database\Seeders\Natives;
-use Laravel\SerializableClosure\Serializers\Native;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {

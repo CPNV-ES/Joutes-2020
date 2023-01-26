@@ -18,7 +18,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() &&  Gate::allows('isAdmin')) return $next($request);
+        if (Auth::user() &&  Gate::allows('isAdmin',)) return $next($request);
 
         return redirect()->route('homepage')->with('error', 'Vous n\'avez pas d\'accès admin');
     }

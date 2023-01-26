@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Role;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class StoreEventRoleUserRequest extends FormRequest
 {

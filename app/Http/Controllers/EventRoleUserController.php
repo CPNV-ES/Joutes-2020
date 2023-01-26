@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Event;
-use App\EventRoleUser;
 use App\Enums\EventState;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreEventRoleUserRequest;
 use App\Http\Requests\UpdateEventRoleUserRequest;
+use App\Models\Event;
+use App\Models\EventRoleUser;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class EventRoleUserController extends Controller
 {
@@ -54,7 +53,8 @@ class EventRoleUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EventRoleUser  $eventRoleUser
+     * @param  \App\Models\EventRoleUser $eventRoleUser
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateEventRoleUserRequest $request, Event $event, EventRoleUser $eventRoleUser)

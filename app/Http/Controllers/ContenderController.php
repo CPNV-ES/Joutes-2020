@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Contender;
-use App\Pool;
-use App\Team;
-use App\Game;
 use App\Helpers\ContenderHelper;
-use App\Tournament;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\Contender;
+use App\Models\Pool;
+use App\Models\Tournament;
+use Illuminate\Http\Request;
 
 class ContenderController extends Controller
 {
     public function create(Request $request, Pool $pool)
     {
-        
+
 
         $tournament = Tournament::find($pool->tournament_id);
 
@@ -31,7 +28,7 @@ class ContenderController extends Controller
         }
         return redirect()->back()->with('success', "Toutes les équipes non assignées sont inscrites.");
     }
- 
+
     public function store(Request $request, Pool $pool)
     {
         $tournament = Tournament::find($pool->tournament_id);

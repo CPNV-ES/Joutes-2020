@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Team;
-use App\Tournament;
+use App\Models\Team;
+use App\Models\TeamUser;
+use App\Models\Tournament;
 use App\User;
-use App\TeamUser;
 use Illuminate\Http\Request;
 
 class TeamUserController extends Controller

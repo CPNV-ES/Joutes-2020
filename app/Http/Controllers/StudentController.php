@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use App\Sport;
-use App\Student;
-use App\User;
-use Illuminate\Http\Request;
+use App\Models\Event;
+use App\Models\Student;
 use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
 class StudentController extends Controller

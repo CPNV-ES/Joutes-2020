@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Court;
 use App\Http\Controllers\Controller;
-use App\Sport;
+use App\Models\Court;
+use App\Models\Sport;
 use Illuminate\Http\Request;
 
 class CourtController extends Controller
@@ -42,7 +42,7 @@ class CourtController extends Controller
         $court->fill($request->all());
 
         $court->save();
-        
+
         return redirect()->route('courts.index');
     }
 
