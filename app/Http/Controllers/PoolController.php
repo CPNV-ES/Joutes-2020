@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Contender;
-use App\GameType;
 use App\Http\Requests\CreatePoolRequest;
-use App\Pool;
-use App\Team;
-use App\PoolMode;
-use App\Tournament;
-use App\Court;
+use App\Models\Contender;
+use App\Models\Court;
+use App\Models\GameType;
+use App\Models\Pool;
+use App\Models\PoolMode;
+use App\Models\Tournament;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 

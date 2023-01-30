@@ -2,8 +2,12 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Event;
+use App\Models\Role;
+use App\Models\Team;
+use App\Models\TeamUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use phpDocumentor\Reflection\Types\False_;
 
 class User extends Authenticatable
@@ -43,7 +47,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'team_users')->withPivot('isCaptain');
 
 
-        //return $this->hasManyThrough('App\Team', 'App\Participant', 'team_id','user_id' );
+        //return $this->hasManyThrough('App\Models\Team', 'App\Participant', 'team_id','user_id' );
     }
 
     // Returns whether the user is locally authenticated or remotely (SAML)

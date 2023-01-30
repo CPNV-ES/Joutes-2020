@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Pool;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Pool;
 
 class GameManagerController extends Controller
 {

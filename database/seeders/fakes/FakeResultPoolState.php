@@ -117,77 +117,77 @@ class FakeResultPoolState extends Seeder
             0 =>
             array(
                 'rank_in_pool' => 1,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Croustichocs')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Croustichocs')->get()->first()->id,
             ),
             1 =>
             array(
                 'rank_in_pool' => 2,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Marcelosss')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Marcelosss')->get()->first()->id,
             ),
             2 =>
             array(
                 'rank_in_pool' => 3,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Case De Papel')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Case De Papel')->get()->first()->id,
             ),
             3 =>
             array(
                 'rank_in_pool' => 4,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'BGdla Street')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'BGdla Street')->get()->first()->id,
             ),
             4 =>
             array(
                 'rank_in_pool' => 1,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé2')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Gwennouchka')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé2')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Gwennouchka')->get()->first()->id,
             ),
             5 =>
             array(
                 'rank_in_pool' => 2,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé2')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'TeamReact')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé2')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'TeamReact')->get()->first()->id,
             ),
             6 =>
             array(
                 'rank_in_pool' => 3,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé2')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Protecteur de data')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé2')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Protecteur de data')->get()->first()->id,
             ),
             7 =>
             array(
                 'rank_in_pool' => 4,
-                'pool_id' => \App\Pool::where('poolName', 'Terminé2')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Charoland')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'Terminé2')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Charoland')->get()->first()->id,
             ),
         ));
         DB::table('contenders')->insert(array(
             //second phase
             8 =>
             array(
-                'pool_id' => \App\Pool::where('poolName', 'En cours')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Croustichocs')->get()->first()->id,
-                'pool_from_id' => \App\Pool::where('poolName', 'Terminé')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'En cours')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Croustichocs')->get()->first()->id,
+                'pool_from_id' => \App\Models\Pool::where('poolName', 'Terminé')->get()->first()->id,
             ),
             9 =>
             array(
-                'pool_id' => \App\Pool::where('poolName', 'En cours')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Marcelosss')->get()->first()->id,
-                'pool_from_id' => \App\Pool::where('poolName', 'Terminé')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'En cours')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Marcelosss')->get()->first()->id,
+                'pool_from_id' => \App\Models\Pool::where('poolName', 'Terminé')->get()->first()->id,
             ),
             10 =>
             array(
-                'pool_id' => \App\Pool::where('poolName', 'En cours')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'Gwennouchka')->get()->first()->id,
-                'pool_from_id' => \App\Pool::where('poolName', 'Terminé2')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'En cours')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'Gwennouchka')->get()->first()->id,
+                'pool_from_id' => \App\Models\Pool::where('poolName', 'Terminé2')->get()->first()->id,
             ),
             11 =>
             array(
-                'pool_id' => \App\Pool::where('poolName', 'En cours')->get()->first()->id,
-                'team_id' => \App\Team::where('name', 'TeamReact')->get()->first()->id,
-                'pool_from_id' => \App\Pool::where('poolName', 'Terminé2')->get()->first()->id,
+                'pool_id' => \App\Models\Pool::where('poolName', 'En cours')->get()->first()->id,
+                'team_id' => \App\Models\Team::where('name', 'TeamReact')->get()->first()->id,
+                'pool_from_id' => \App\Models\Pool::where('poolName', 'Terminé2')->get()->first()->id,
             ),
         ));
         DB::table('games')->insert(array(

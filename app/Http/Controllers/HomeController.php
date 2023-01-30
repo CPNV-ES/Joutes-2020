@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
 use App\Enums\EventState;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

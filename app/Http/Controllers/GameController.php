@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use Illuminate\Http\Request;
-use App\Game;
 
 class GameController extends Controller
 {
@@ -15,7 +15,7 @@ class GameController extends Controller
     public function index()
     {
         $games = Game::all();
-        
+
     }
 
     /**
@@ -26,7 +26,7 @@ class GameController extends Controller
     public function create()
     {
         $games = Game::all();
-        
+
     }
 
     /**
@@ -37,7 +37,7 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $game = new Game();
         $game->date = $request->input('date');
         $game->start_time = $request->input('start_time');
@@ -67,7 +67,7 @@ class GameController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -79,9 +79,9 @@ class GameController extends Controller
      */
     public function update(Request $request,$state)
     {
-        
+
         foreach ($request->input("game") as $value) {
-          
+
             try {
                 if($state=="inprep"){
                     if($value["editedContender2"] && $value["editedContender1"])
@@ -91,7 +91,7 @@ class GameController extends Controller
                             $game->delete();
                         }else if(!$value["editedContender2"] || !$value["editedContender1"])
                         {
-                            
+
                         } else {
                             $game->start_time = $value["editedTime"];
                             $game->contender1_id = $value["editedContender1"];
@@ -111,8 +111,8 @@ class GameController extends Controller
                     $game->save();
                 }
 
-                
-            } 
+
+            }
             catch (\Throwable $th) {}
         }
         return redirect()->back()->with('success','Les modifications ont été sauvegardé.');

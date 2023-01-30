@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SchoolClass;
+use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
@@ -56,7 +56,8 @@ class SchoolClassController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\SchoolClass $schoolClass
+     * @param \App\Models\SchoolClass $schoolClass
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(SchoolClass $schoolClass)
@@ -67,7 +68,8 @@ class SchoolClassController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\SchoolClass $schoolClass
+     * @param \App\Models\SchoolClass $schoolClass
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(SchoolClass $schoolClass)
@@ -79,7 +81,8 @@ class SchoolClassController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\SchoolClass $schoolClass
+     * @param \App\Models\SchoolClass  $schoolClass
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $schoolClasses)
@@ -90,7 +93,8 @@ class SchoolClassController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\SchoolClass $schoolClass
+     * @param \App\Models\SchoolClass $schoolClass
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(SchoolClass $schoolClass)
