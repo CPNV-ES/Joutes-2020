@@ -14,7 +14,8 @@
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "socialiteproviders/microsoft-azure": "^5.1",
-        "socialiteproviders/vkontakte": "^5.0"
+        "socialiteproviders/vkontakte": "^5.0",
+      "ext-curl": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

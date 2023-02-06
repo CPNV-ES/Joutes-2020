@@ -6,6 +6,7 @@ use App\Enums\EventState;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\IntranetConnection;
 
 class Event extends Model
 {
@@ -44,10 +45,11 @@ class Event extends Model
         }
         return $tournamentsReady;
     }
+
     /**
      * Get all users related to this event
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {
@@ -78,7 +80,7 @@ class Event extends Model
     /**
      * Get percentage of participation related to this event from specific roles
      *
-     * @return void
+     * @return float
      */
     public function percentageParticipation()
     {
@@ -93,20 +95,11 @@ class Event extends Model
     public function getExpectedParticipants()
     {
 
-        $url = "https://intranet.cpnv.ch/sainte-croix/etudiants.json?alter[include]=current_class&api_key=demo&signature=49be40b0e7383ccd637804ad1faacfdf";
+        $location="sainte-croix";
+        $data="etudiants.json";
+        $params="alter[include]=current_class";
 
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        //for debug only!
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-
-        $resp = curl_exec($curl);
-        curl_close($curl);
-
-        $students_array = json_decode($resp);
+        $students_array = IntranetConnection::fetchDataFromIntranet($location, $data,$params);
         $schoolClass = SchoolClass::all();
 
         $studentsIntranet = [];
