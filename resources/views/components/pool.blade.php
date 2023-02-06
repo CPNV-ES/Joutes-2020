@@ -231,12 +231,12 @@
                                     @foreach ($tournament->teams as $keyTeam => $team)
                                         @if ($team->name == \App\Helpers\ContenderHelper::contenderDisplayName($contender))
                                             @php $teamName = $team->name @endphp
-                                            
+
                                             @if (\App\Helpers\ContenderHelper::isPoolClosed($contender))
                                             <tr>
                                                 <td title="Team" class="team colorBackground"
                                                     data-previous="{{ $contender->previousId() }}">
-                                                    <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>                                                                    
+                                                    <a>{{ \App\Helpers\ContenderHelper::contenderDisplayName($contender) }}</a>
                                                 </td>
                                             </tr>
                                             @else
@@ -248,8 +248,8 @@
                                             </tr>
                                             @endif
 
-                                           
-                                        @endif                                                
+
+                                        @endif
                                     @endforeach
                                 @endif
                             @endforeach

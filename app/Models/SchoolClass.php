@@ -4,32 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\IntranetConnection;
 
 class SchoolClass extends Model
 {
     use HasFactory;
 
+
     protected $fillable = ['name','year','holder','delegate'];
     //protected $guarded = [];
 
+    public static function generateSignature($params)
+    {
+        $queryParams = $params . getenv('API_KEY') . getenv('API_SECRET');
+        $signature = md5($queryParams);
+
+        return $signature;
+    }
     public static function fetchClassesFromIntranet()
     {
-        $url = "https://intranet.cpnv.ch/sainte-croix/classes.json?api_key=prod&signature=".env('INTRANET_SIGNATURE');
-
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-//for debug only!
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-
-        $resp = curl_exec($curl);
-        curl_close($curl);
-
-        $classes_array = json_decode($resp);
+        $location = "sainte-croix";
+        $data = "classes.json";
+        $classes_array = IntranetConnection::fetchDataFromIntranet($location,$data, "");
         $classesIntranet = [];
         foreach ($classes_array as $class) {
+
             $classesIntranet[$class->name] = [
                 "name" => $class->name,
                 "year" => explode(' ',$class->moment->link->name)[1],
@@ -37,6 +36,7 @@ class SchoolClass extends Model
                 "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
             ];
         }
+
         return $classesIntranet;
     }
     public static function identifyClass($classesIntranet){
