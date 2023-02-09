@@ -97,9 +97,9 @@ class Event extends Model
 
         $location="sainte-croix";
         $data="etudiants.json";
-        $params="alter[include]=current_class";
+        $params=["alter[include]" => "current_class"];
 
-        $students_array = IntranetConnection::fetchDataFromIntranet($location, $data,$params);
+        $students_array = IntranetConnection::fetchDataFromIntranet($location, $data, $params);
         $schoolClass = SchoolClass::all();
 
         $studentsIntranet = [];
