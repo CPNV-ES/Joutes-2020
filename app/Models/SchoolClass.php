@@ -25,7 +25,7 @@ class SchoolClass extends Model
     {
         $location = "sainte-croix";
         $data = "classes.json";
-        $classes_array = IntranetConnection::fetchDataFromIntranet($location,$data, "");
+        $classes_array = IntranetConnection::fetchDataFromIntranet($location,$data, []);
         $classesIntranet = [];
         foreach ($classes_array as $class) {
 

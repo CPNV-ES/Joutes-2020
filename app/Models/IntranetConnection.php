@@ -9,19 +9,26 @@ class IntranetConnection extends Model
 {
     use HasFactory;
 
-    public static function generateSignature($params)
+    public static function generateSignature(Array $params)
     {
-        $queryParams = $params . getenv('API_KEY') . getenv('API_SECRET');
-        $signature = md5($queryParams);
+        $params["api_key"] = env('API_KEY');
+        ksort($params);
+        $request_params = "";
+        foreach ($params as $key => $val){ $request_params = $request_params . $key . $val; }
+        $signature = md5($request_params . env('API_SECRET'));
 
         return $signature;
     }
     public static function fetchDataFromIntranet($location, $data, $params){
-        $url = "http://intranet.cpnv.ch/".$location."/".$data."?".$params."api_key=";
+        $params_string = "";
+        foreach($params as $key => $val) {
+            $params_string = $params_string . "" . $key . "=" . $val . "&";
+        }
+        $url = "http://intranet.cpnv.ch/".$location."/".$data."?".$params_string."api_key=";
 
         $connection = curl_init();
         curl_setopt_array($connection, [
-            CURLOPT_URL => $url . getenv('API_KEY') . "&signature=" . self::generateSignature("api_key"),
+            CURLOPT_URL => $url . getenv('API_KEY') . "&signature=" . self::generateSignature($params),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
