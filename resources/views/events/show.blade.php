@@ -64,10 +64,6 @@
                     @if (Gate::allows('isAdmin'))
                         <h3>État : {{ Helper::eventStateName($event->eventState) }}</h3>
 
-                        <form action="#" method="get">
-                            <button type="button" class="btn btn-main">Créer une équipe
-                            </button>
-                        </form>
                     @endif
                 @endif
             </div>
