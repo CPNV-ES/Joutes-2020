@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use PhpParser\Builder;
 
 

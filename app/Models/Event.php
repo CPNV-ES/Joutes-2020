@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EventState;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\IntranetConnection;
