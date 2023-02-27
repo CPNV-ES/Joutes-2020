@@ -192,7 +192,9 @@ class Pool extends Model
     public function isEditable()
     {
 
-        if (Gate::allows('isOrg') || Gate::allows('isGest') || Gate::allows('isAdmin')) return ($this->poolState == PoolState::Prep);
+        if (Gate::allows('isOrg') || Gate::allows('isGest') || Gate::allows('isAdmin')) {
+            return ($this->poolState == (PoolState::Prep || PoolState::Ready || PoolState::Inprog));
+        }
 
         return false;
     }

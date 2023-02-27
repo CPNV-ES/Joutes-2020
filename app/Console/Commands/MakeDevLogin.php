@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\Commands\FILE_APPEND;
 use App\Models\Role;
-use App\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class MakeDevLogin extends Command

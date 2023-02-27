@@ -20,6 +20,11 @@
 
                 <h2>Matches et Résultats</h2>
                 <h4>État: {{ \App\Enums\PoolState::poolStateName($pool->poolState) }}</h4>
+                @if ($pool->isEditable() && Helper::eventStateName($pool->tournament->event->eventState) == 'En cours')
+                    <button type="submit" class="btn btn-main" data-toggle="modal" data-target="#stagePoolModal">Passer à l'étape suivante : {{ \App\Enums\PoolState::poolStateName($pool->poolState + 1) }}</button>
+                @else
+                    <h5>En attente de l'activation de l'évènement</h5>
+                @endif
                 <h4>Date : {{ $tournament->start_date->format('d.m.Y') }}</h4>
             </div>
         </div>
@@ -205,7 +210,7 @@
                 <div class="modal-footer">
                     <form action="{{ route('tournaments.pools.update', [$tournament, $pool]) }}" method="POST">
                         @csrf
-                        <input hidden type="number" value="1" name="poolState">
+                        <input hidden type="number" value="3" name="poolState">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         <input type="hidden" name="_method" value="PATCH">
                         <button type="submit" name="changeStatePool" class="btn btn-success">Ok !</button>
