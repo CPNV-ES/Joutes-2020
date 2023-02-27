@@ -698,7 +698,7 @@ class Joutes2020Seeder extends Seeder
     private function users()
     {
         echo "Création d'un utilisateur ...";
-        $this->user = new \App\User([
+        $this->user = new \App\Models\User([
             'username' => 'AdminTest',
             'email' => 'Admin@cpnv.ch',
             'first_name' => 'Admin',

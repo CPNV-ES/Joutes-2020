@@ -23,7 +23,7 @@ class Role extends Model
 
     public function getUsers()
     {
-        return $this->hasMany('App\User', 'roles_id');
+        return $this->hasMany('App\Models\User', 'roles_id');
     }
 
     public function isUsed()

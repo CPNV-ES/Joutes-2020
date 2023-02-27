@@ -5,7 +5,7 @@ namespace App\Helpers;
 use App\Enums\EventState;
 use App\Models\Event;
 use App\Models\EventRoleUser;
-use App\User;
+use App\Models\User;
 
 class Helper
 {
