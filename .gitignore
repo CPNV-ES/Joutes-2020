@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 /components
 public/images/joutes
+temp.json
