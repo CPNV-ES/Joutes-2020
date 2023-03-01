@@ -193,7 +193,7 @@ class Pool extends Model
     {
 
         if (Gate::allows('isOrg') || Gate::allows('isGest') || Gate::allows('isAdmin')) {
-            return ($this->poolState == (PoolState::Prep || PoolState::Ready || PoolState::Inprog));
+            return ($this->poolState == PoolState::Prep || $this->poolState ==  PoolState::Ready || $this->poolState ==  PoolState::Inprog);
         }
 
         return false;
