@@ -48,7 +48,7 @@
                                 <td>{{$class['year']}}</td>
                                 <td>{{$class['holder']}}</td>
                                 <td>{{$class['delegate']}}</td>
-                                <td id="{{$class['name']}}">{{$class['name']}}</td>
+                                <td id="{{$class['name']}}">{{is_null($class['status'])?'Non syncronisé':$class['status']}}</td>
                                 <td colspan="2"><input class="col-lg-12 synchroniser classesboxes" name="{{$class['name']}}"
                                                        type="checkbox" {{$class['status']=='null'? 'checked':''}}></td>
                             </tr>
