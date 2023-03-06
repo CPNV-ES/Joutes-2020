@@ -67,6 +67,7 @@ class SchoolClass extends Model
                 "year"     => $class->year,
                 "holder"   => $class->holder,
                 "delegate" => $class->delegate,
+                "status" => $class->status,
             ];
         }
         return $classes_array;

@@ -36,21 +36,21 @@
                             </th>
                             <th scope="col">
                                 <button type="button" class="btn btn-main growIcon" id="checkAll"><span>Check All</span></button>
-                                <button type="button" class="btn btn-main growIcon" style="display: none" id="uncheckAll" ><span>Uncheck All</span></button>
+                                <button type="button" class="btn btn-main growIcon" style="display: none" id="uncheckAll"><span>Uncheck All</span></button>
                             </th>
 
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($classes as $class)
-                            <tr class="{{!$class['status']?'table-danger':($class['status']==='synchronisé'?'table-success':'table-secondary')}}">
+                            <tr class="{{!$class['status']?'table-danger':($class['status']=='null'?'table-success':'table-secondary')}}">
                                 <td>{{$class['name']}}</td>
                                 <td>{{$class['year']}}</td>
                                 <td>{{$class['holder']}}</td>
                                 <td>{{$class['delegate']}}</td>
-                                <td id="{{$class['name']}}">{{$class['status']?$class['status']:'inexistant'}}</td>
-                                <td colspan="2"><input  class="col-lg-12 synchroniser classesboxes" name="{{$class['name']}}"
-                                           type="checkbox" {{$class['status']==='synchronisé'? 'checked':''}}></td>
+                                <td id="{{$class['name']}}">{{$class['name']}}</td>
+                                <td colspan="2"><input class="col-lg-12 synchroniser classesboxes" name="{{$class['name']}}"
+                                                       type="checkbox" {{$class['status']=='null'? 'checked':''}}></td>
                             </tr>
                         @empty
                             <tr>
