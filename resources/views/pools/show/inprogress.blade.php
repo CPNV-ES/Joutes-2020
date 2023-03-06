@@ -43,7 +43,13 @@
                                     @if (!isset($game->score_contender1) && !isset($game->score_contender2))
                                         <tr>
                                             <td class="separator sepTime ">
-                                                {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
+                                            @if ($pool->isEditable())
+                                                <td><input type="time" id="appt" name="game[{{ $game->id }}][editedTime]"
+                                                           value="{{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}">
+                                                </td>
+                                            @else
+                                                <td>{{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
+                                            @endif
                                             <td class="contender1 ">
                                                 @if (empty($game->contender1->team))
                                                     {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
