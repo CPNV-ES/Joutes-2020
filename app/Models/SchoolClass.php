@@ -11,7 +11,8 @@ class SchoolClass extends Model
     use HasFactory;
 
 
-    protected $fillable = ['name','year','holder','delegate'];
+    protected $fillable = ['name', 'year', 'holder', 'delegate'];
+
     //protected $guarded = [];
 
     public static function generateSignature($params)
@@ -21,59 +22,67 @@ class SchoolClass extends Model
 
         return $signature;
     }
+
     public static function fetchClassesFromIntranet()
     {
         $location = "sainte-croix";
         $data = "classes.json";
-        $classes_array = IntranetConnection::fetchDataFromIntranet($location,$data, []);
+        $params = ['alter[include]' => 'students'];
+        $classes_array = IntranetConnection::fetchDataFromIntranet($location, $data, $params);
         $classesIntranet = [];
         foreach ($classes_array as $class) {
-
             $classesIntranet[$class->name] = [
-                "name" => $class->name,
-                "year" => explode(' ',$class->moment->link->name)[1],
-                "holder" => isset($class->master->link->name) ? $class->master->link->name : '',
+                "name"     => $class->name,
+                "year"     => explode(' ', $class->moment->link->name)[1],
+                "holder"   => isset($class->master->link->name) ? $class->master->link->name : '',
                 "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
             ];
+            //save users form the students array
+            foreach ($class->students as $student) {
+
+                //check if the user already exists
+                foreach (User::all() as $user) {
+                    if ($user->email != $student->email) {
+                        User::create([
+                            'email'      => $student->email,
+                            'first_name' => $student->firstname,
+                            'last_name'  => $student->lastname,
+                            'role_id'    => 3,
+                        ]);
+                    }
+                }
+            }
         }
 
         return $classesIntranet;
     }
-    public static function identifyClass($classesIntranet){
+    //get the classes from the database
+    public static function getClasses()
+    {
         $classes = SchoolClass::all();
         $classes_array = [];
         foreach ($classes as $class) {
             $classes_array[$class->name] = [
-                "name" => $class->name,
-                "year" => $class->year,
-                "holder" => $class->holder,
+                "name"     => $class->name,
+                "year"     => $class->year,
+                "holder"   => $class->holder,
                 "delegate" => $class->delegate,
-                "status" => $class->status,
             ];
         }
-        foreach ($classesIntranet as $classIntranet) {
-            if (array_key_exists($classIntranet['name'], $classes_array)) {
-                $classes_array[$classIntranet['name']]['status'] = 'synchronisé';
-            } else {
-                $classes_array[$classIntranet['name']] = [
-                    "name" => $classIntranet['name'],
-                    "year" => $classIntranet['year'],
-                    "holder" => $classIntranet['holder'],
-                    "delegate" => $classIntranet['delegate'],
-                    "status" => 'pas synchronisé',
-                ];
-            }
-        }
-
-        self::sort_array_of_array($classes_array,'status');
         return $classes_array;
+    }
+
+    public static function getAllSortedBy($keyToSortBy = 'id')
+    {
+        $classesIntranet = SchoolClass::getClasses();
+        self::sort_array_of_array($classesIntranet, 'status');
+        return $classesIntranet;
     }
 
     public static function sort_array_of_array(&$array, $subfield)
     {
         $sortarray = array();
-        foreach ($array as $key => $row)
-        {
+        foreach ($array as $key => $row) {
             $sortarray[$key] = $row[$subfield];
         }
 
@@ -83,19 +92,19 @@ class SchoolClass extends Model
     public static function synchronise($class)
     {
         SchoolClass::updateOrCreate([
-            'name' => $class['name']],
+            'name' => $class['name']
+        ],
             [
-                'name' => $class['name'],
-                'year' => $class['year'],
-                'holder' => $class['holder'],
+                'name'     => $class['name'],
+                'year'     => $class['year'],
+                'holder'   => $class['holder'],
                 'delegate' => $class['delegate']
             ]);
-}
+    }
 
-    public static function removeOldClasses($classes,$selected)
+    public static function removeOldClasses($classes, $selected)
     {
         foreach ($classes as $class) {
-
             if (array_key_exists($class['name'], $selected) && $class['status'] == null) {
                 SchoolClass::where('name', $class['name'])->delete();
             }

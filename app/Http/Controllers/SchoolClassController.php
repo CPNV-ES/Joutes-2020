@@ -10,13 +10,14 @@ class SchoolClassController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $classesIntranet = SchoolClass::fetchClassesFromIntranet();
-        $classes = SchoolClass::identifyClass($classesIntranet);
-        return view('classes.index', compact('classes', 'classesIntranet'));
+
+        $classes = SchoolClass::getAllSortedBy('status');
+
+        return view('classes.index', compact('classes'));
 
     }
 
@@ -39,7 +40,7 @@ class SchoolClassController extends Controller
      */
     public function store(Request $request)
     {
-        $classesIntranet = SchoolClass::fetchClassesFromIntranet();
+        $classesIntranet = SchoolClass::getClasses();
         $classes = SchoolClass::identifyClass($classesIntranet);
         $selected = $_POST;
         foreach ($classesIntranet as $class) {

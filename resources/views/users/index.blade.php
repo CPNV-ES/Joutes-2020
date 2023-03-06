@@ -10,6 +10,11 @@
     <link rel='stylesheet' href='lib/datatables/css/dataTables.bootstrap4.min.css'/>
     <link rel="stylesheet" href="lib/datatables/css/dataTables.responsive.bootstrap4.min.css">
     <div class="container">
+        <form action="{{route('classes.store')}}">
+        <button type="submit" class="btn btn-main growIcon btnSynchroniser ">
+            Synchroniser
+        </button>
+        </form>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <form method="POST" action="{{ route('users.destroy.all') }}">
             @csrf

@@ -65,27 +65,6 @@
         </div>
 
     </div>
-
-    {{-- <script>
-         let status = []
-         const statusSynchroniser = document.querySelectorAll('.synchroniser')
-         statusSynchroniser.forEach(checkbox => {
-             checkbox.addEventListener('click', function () {
-                 if (checkbox.checked) {
-                     checkbox.name
-
-                     {{$name = 'checkbox.name'}}
-                     {{session()->push('classes.name',$name)}}
-
-                     //alert(status)
-                 }else {
-                     status = status.filter(e => e !== checkbox.name)
-                     alert(status)
-                 }
-             })
-
-         })
-     </script>--}}
     <script src="{{ asset('js/classes.js') }}"></script>
 @stop
 
