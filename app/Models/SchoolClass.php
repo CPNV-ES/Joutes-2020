@@ -35,14 +35,15 @@ class SchoolClass extends Model
                 "name"     => $class->name,
                 "year"     => explode(' ', $class->moment->link->name)[1],
                 "holder"   => isset($class->master->link->name) ? $class->master->link->name : '',
-                "delegate" => isset($class->representative->link->id) ? $class->representative->link->id : '',
+                "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
                 "status"   => now(),
             ];
 
+            //create the class
+            $class_id = SchoolClass::create($classesIntranet[$class->name])->id;
 
             //save users form the students array
             foreach ($class->students as $student) {
-                $delegate = '';
 
                 //check if the user already exists
                 foreach (User::all() as $user) {
@@ -57,20 +58,15 @@ class SchoolClass extends Model
                         'first_name' => $student->firstname,
                         'last_name'  => $student->lastname,
                         'role_id'    => 3,
+                        'class_id'   => $class_id,
                     ]);
                 }
 
                 //delete the student from the array
                 unset($student);
-
             }
-
-
-            //create the class
-            SchoolClass::create($classesIntranet[$class->name]);
-
         }
-            return $classesIntranet;
+        return $classesIntranet;
     }
 
     //get the classes from the database
