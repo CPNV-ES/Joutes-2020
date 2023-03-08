@@ -35,27 +35,44 @@ class SchoolClass extends Model
                 "name"     => $class->name,
                 "year"     => explode(' ', $class->moment->link->name)[1],
                 "holder"   => isset($class->master->link->name) ? $class->master->link->name : '',
-                "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
+                "delegate" => isset($class->representative->link->id) ? $class->representative->link->id : '',
+                "status"   => now(),
             ];
+
+
             //save users form the students array
             foreach ($class->students as $student) {
+                $delegate = '';
 
                 //check if the user already exists
                 foreach (User::all() as $user) {
-                    if ($user->email != $student->email) {
-                        User::create([
-                            'email'      => $student->email,
-                            'first_name' => $student->firstname,
-                            'last_name'  => $student->lastname,
-                            'role_id'    => 3,
-                        ]);
+                    $exists = false;
+                    if ($user->email == $student->email) {
+                        $exists = true;
                     }
                 }
-            }
-        }
+                if (!$exists) {
+                    User::create([
+                        'email'      => $student->email,
+                        'first_name' => $student->firstname,
+                        'last_name'  => $student->lastname,
+                        'role_id'    => 3,
+                    ]);
+                }
 
-        return $classesIntranet;
+                //delete the student from the array
+                unset($student);
+
+            }
+
+
+            //create the class
+            SchoolClass::create($classesIntranet[$class->name]);
+
+        }
+            return $classesIntranet;
     }
+
     //get the classes from the database
     public static function getClasses()
     {
@@ -67,7 +84,7 @@ class SchoolClass extends Model
                 "year"     => $class->year,
                 "holder"   => $class->holder,
                 "delegate" => $class->delegate,
-                "status" => $class->status,
+                "status"   => $class->status,
             ];
         }
         return $classes_array;
@@ -99,7 +116,8 @@ class SchoolClass extends Model
                 'name'     => $class['name'],
                 'year'     => $class['year'],
                 'holder'   => $class['holder'],
-                'delegate' => $class['delegate']
+                'delegate' => $class['delegate'],
+                'status'   => now(),
             ]);
     }
 

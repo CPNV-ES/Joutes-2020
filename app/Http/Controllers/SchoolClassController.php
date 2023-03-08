@@ -41,7 +41,7 @@ class SchoolClassController extends Controller
     public function store(Request $request)
     {
         $classesIntranet = SchoolClass::getClasses();
-        $classes = SchoolClass::identifyClass($classesIntranet);
+        $classes = SchoolClass::fetchClassesFromIntranet();
         $selected = $_POST;
         foreach ($classesIntranet as $class) {
             if (array_key_exists($class['name'], $selected)) {

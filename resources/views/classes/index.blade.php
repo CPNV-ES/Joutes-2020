@@ -39,7 +39,7 @@
                                 <button type="button" class="btn btn-main growIcon" style="display: none" id="uncheckAll"><span>Uncheck All</span></button>
                             </th>
 
-                        </tr>
+
                         </thead>
                         <tbody>
                         @forelse($classes as $class)
@@ -48,7 +48,7 @@
                                 <td>{{$class['year']}}</td>
                                 <td>{{$class['holder']}}</td>
                                 <td>{{$class['delegate']}}</td>
-                                <td id="{{$class['name']}}">{{is_null($class['status'])?'Non syncronisé':$class['status']}}</td>
+                                <td id="{{$class['name']}}">{{!is_null($class['status'])?'Non syncronisé':$class['status']}}</td>
                                 <td colspan="2"><input class="col-lg-12 synchroniser classesboxes" name="{{$class['name']}}"
                                                        type="checkbox" {{$class['status']=='null'? 'checked':''}}></td>
                             </tr>
@@ -59,13 +59,11 @@
                         @endforelse
                         </tbody>
                     </table>
+
                 </form>
-            </div>
-
-        </div>
-
     </div>
     <script src="{{ asset('js/classes.js') }}"></script>
+
 @stop
 
 
