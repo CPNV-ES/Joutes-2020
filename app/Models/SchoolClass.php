@@ -36,7 +36,6 @@ class SchoolClass extends Model
                 "year"     => explode(' ', $class->moment->link->name)[1],
                 "holder"   => isset($class->master->link->name) ? $class->master->link->name : '',
                 "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
-                "status"   => now(),
             ];
 
             //create the class

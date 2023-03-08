@@ -15,7 +15,7 @@ class SchoolClassController extends Controller
     public function index()
     {
 
-        $classes = SchoolClass::getAllSortedBy('status');
+        $classes = SchoolClass::all();
 
         return view('classes.index', compact('classes'));
 

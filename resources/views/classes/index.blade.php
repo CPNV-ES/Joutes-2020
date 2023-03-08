@@ -43,12 +43,12 @@
                         </thead>
                         <tbody>
                         @forelse($classes as $class)
-                            <tr class="{{!$class['status']?'table-danger':($class['status']=='null'?'table-success':'table-secondary')}}">
+                            <tr class="{{!$class['updated_at']?'table-danger':'table-success'}}">
                                 <td>{{$class['name']}}</td>
                                 <td>{{$class['year']}}</td>
                                 <td>{{$class['holder']}}</td>
                                 <td>{{$class['delegate']}}</td>
-                                <td id="{{$class['name']}}">{{!is_null($class['status'])?'Non syncronisé':$class['status']}}</td>
+                                <td id="{{$class['name']}}">{{!is_null($class['updated_at'])?$class['updated_at']:'Non syncronisé'}}</td>
                                 <td colspan="2"><input class="col-lg-12 synchroniser classesboxes" name="{{$class['name']}}"
                                                        type="checkbox" {{$class['status']=='null'? 'checked':''}}></td>
                             </tr>
