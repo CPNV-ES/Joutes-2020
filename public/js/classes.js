@@ -1,24 +1,17 @@
-document.addEventListener('DOMContentLoaded', init);
-function init() {
-    checkall = document.getElementById('checkAll')
-    checkall.addEventListener('click', checkAll);
-    uncheckall = document.getElementById('uncheckAll')
-    uncheckall.addEventListener('click', uncheckAll);
-}
 function checkAll() {
-    var checkboxes = document.getElementsByClassName('classesboxes');
-    checkall.style.display = "none";
-    uncheckall.style.display = "block";
-    for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = true;
-    }
-}
-function uncheckAll() {
-    uncheckall.style.display = "none";
-    checkall.style.display = "block";
-    var checkboxes = document.getElementsByClassName('classesboxes');
-    for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = false;
+    checkAll(document.getElementById('checkAll')) // On initialise le label du bouton 'checkAll'
+    function checkAll(checkbox) {
+        // Get all the checkboxes
+        var checkboxes = document.getElementsByName('classesboxes');
+
+        // loop through the checkboxes
+        for (var i = 0; i < checkboxes.length; i++) {
+            // Set their state to the checkbox state
+            checkboxes[i].checked = checkbox.checked;
+        }
+
+        // change the label of the checkbox
+        checkbox.parentNode.querySelector('span').innerHTML = checkbox.checked ? 'Uncheck All' : 'Check All';
     }
 }
 

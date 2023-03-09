@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>Nom d'utilisateur / Nom + Prénom</th>
+                    <th>Nom + Prénom</th>
                     <th>Rôle</th>
                     <th>Participations</th>
                     <th>Équipes</th>
@@ -68,7 +68,7 @@
                             @endif
                         </td>
                         <td>
-                            {{ $user->username }} / {{ $user->last_name }} {{ $user->first_name }}</td>
+                            {{ $user->last_name }} {{ $user->first_name }}</td>
                         <td>
                             <select name='{{ $user->id }}' @if(($user->role->slug == "ADMIN")&&(Auth::user()->username == $user->username)) disabled @endif class="form-control-sm rolesSelect">
                                 @foreach ($roles as $role)

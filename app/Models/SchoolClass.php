@@ -30,24 +30,47 @@ class SchoolClass extends Model
         $params = ['alter[include]' => 'students'];
         $classes_array = IntranetConnection::fetchDataFromIntranet($location, $data, $params);
         $classesIntranet = [];
-        foreach ($classes_array as $class) {
-            $classesIntranet[$class->name] = [
-                "name"     => $class->name,
-                "year"     => explode(' ', $class->moment->link->name)[1],
-                "holder"   => isset($class->master->link->name) ? $class->master->link->name : '',
-                "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
-            ];
 
-            //create the class
-            $class_id = SchoolClass::create($classesIntranet[$class->name])->id;
+
+
+        foreach ($classes_array as $class) {
+
+            //check if the class already exists
+            $exists = false;
+            //check if the user already exists
+            foreach (SchoolClass::all() as $schoolClass) {
+                if ($schoolClass->name === $class->name) {
+                    $exists = true;
+                    $schoolClass_id = $schoolClass->id;
+                }
+            }
+            if (!$exists) {
+                $classesIntranet[$class->name] = [
+                    "name"     => $class->name,
+                    "year"     => explode(' ', $class->moment->link->name)[1],
+                    "holder"   => isset($class->master->link->name) ? $class->master->link->name : '',
+                    "delegate" => isset($class->representative->link->name) ? $class->representative->link->name : '',
+                ];
+
+                //create the class
+                $class_id = SchoolClass::create($classesIntranet[$class->name])->id;
+            }else{
+                //update the class
+                $schoolClassUpdate = SchoolClass::find($schoolClass_id);
+                $schoolClassUpdate->year = explode(' ', $class->moment->link->name)[1];
+                $schoolClassUpdate->holder = isset($class->master->link->name) ? $class->master->link->name : '';
+                $schoolClassUpdate->delegate = isset($class->representative->link->name) ? $class->representative->link->name : '';
+                $schoolClassUpdate->save();
+            }
+
 
             //save users form the students array
             foreach ($class->students as $student) {
 
+                $exists = false;
                 //check if the user already exists
                 foreach (User::all() as $user) {
-                    $exists = false;
-                    if ($user->email == $student->email) {
+                    if ($user->email === $student->email) {
                         $exists = true;
                     }
                 }
@@ -60,7 +83,6 @@ class SchoolClass extends Model
                         'class_id'   => $class_id,
                     ]);
                 }
-
                 //delete the student from the array
                 unset($student);
             }
