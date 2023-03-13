@@ -60,6 +60,7 @@ class SchoolClass extends Model
                 $schoolClassUpdate->year = explode(' ', $class->moment->link->name)[1];
                 $schoolClassUpdate->holder = isset($class->master->link->name) ? $class->master->link->name : '';
                 $schoolClassUpdate->delegate = isset($class->representative->link->name) ? $class->representative->link->name : '';
+                $schoolClassUpdate->updated_at = now();
                 $schoolClassUpdate->save();
             }
 
@@ -82,6 +83,12 @@ class SchoolClass extends Model
                         'role_id'    => 3,
                         'class_id'   => $class_id,
                     ]);
+                }else{
+                    $userUpdate = User::where('email', $student->email)->first();
+                    $userUpdate->first_name = $student->firstname;
+                    $userUpdate->last_name = $student->lastname;
+                    $userUpdate->class_id = $class_id;
+                    $userUpdate->updated_at = now();
                 }
                 //delete the student from the array
                 unset($student);
