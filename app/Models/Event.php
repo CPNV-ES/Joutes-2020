@@ -94,21 +94,15 @@ class Event extends Model
 
     public function getExpectedParticipants()
     {
-
-        $location="sainte-croix";
-        $data="etudiants.json";
-        $params=["alter[include]" => "current_class"];
-
         $students_array = User::all();
         $schoolClass = SchoolClass::all();
 
         $studentsIntranet = [];
         foreach ($students_array as $student) {
-            if ($schoolClass->contains('name', $student->current_class->name)) {
+            if ($schoolClass->contains('id', $student->attributes['class_id'])) {
                 $studentsIntranet[$student->id] = [
                     'firstname' => $student->first_name,
                     'lastname' =>  strtolower($student->last_name),
-                    'class' => $student->class_name,
                 ];
             }
         }

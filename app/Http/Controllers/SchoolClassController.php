@@ -40,14 +40,11 @@ class SchoolClassController extends Controller
      */
     public function store(Request $request)
     {
-        $classesIntranet = SchoolClass::getClasses();
-        $classes = SchoolClass::fetchClassesFromIntranet();
-        $selected = $_POST;
+        $classes = SchoolClass::getClasses();
+        $classesIntranet = SchoolClass::fetchClassesFromIntranet();
         foreach ($classesIntranet as $class) {
-            if (array_key_exists($class['name'], $selected)) {
-                SchoolClass::removeOldClasses($classes,$selected);
-                SchoolClass::synchronise($class);
-            }
+            SchoolClass::removeOldClasses($classes);
+            SchoolClass::synchronise($class);
         }
         /*$old = SchoolClass::where('name',$class['name']);
         $old->delete();*/
