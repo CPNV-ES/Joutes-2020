@@ -144,14 +144,4 @@ class SchoolClass extends Model
                 'status'   => now(),
             ]);
     }
-
-    public static function removeOldClasses($classes, $selected)
-    {
-        foreach ($classes as $class) {
-            if (array_key_exists($class['name'], $selected) && $class['status'] == null) {
-                SchoolClass::where('name', $class['name'])->delete();
-            }
-        }
-    }
-
 }

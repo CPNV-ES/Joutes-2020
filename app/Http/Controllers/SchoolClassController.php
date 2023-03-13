@@ -43,7 +43,6 @@ class SchoolClassController extends Controller
         $classes = SchoolClass::getClasses();
         $classesIntranet = SchoolClass::fetchClassesFromIntranet();
         foreach ($classesIntranet as $class) {
-            SchoolClass::removeOldClasses($classes);
             SchoolClass::synchronise($class);
         }
         /*$old = SchoolClass::where('name',$class['name']);
