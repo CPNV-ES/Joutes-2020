@@ -14,7 +14,7 @@ class EventsSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 2000; $i < 2023; $i++) {
+        for ($i = 2020; $i < 2023; $i++) {
             DB::table('events')->insert([
                 'name' => 'Joutes ' . $i,
                 'img' => 'joutes.jpg',

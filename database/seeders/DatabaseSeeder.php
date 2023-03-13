@@ -15,13 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(Natives\RoleSeeder::class);
-        $this->call(Natives\AdminUserSeeder::class);
         $this->call(Natives\GameTypeSeeder::class);
         $this->call(Natives\PoolModeSeeder::class);
         $this->call(Natives\SportSeeder::class);
         $this->call(Natives\CourtSeeder::class);
-        $this->call(Natives\SchoolClassSeeder::class);
         if (env('APP_ENV') == 'local') {
+            $this->call(Natives\AdminUserSeeder::class);
             $this->call(Fakes\Joutes2022Seeder::class);
             $this->call(Fakes\FakeResultPoolState::class);
             $this->call(Fakes\UserTableSeeder::class);

@@ -45,10 +45,7 @@ class SchoolClassController extends Controller
         foreach ($classesIntranet as $class) {
             SchoolClass::synchronise($class);
         }
-        /*$old = SchoolClass::where('name',$class['name']);
-        $old->delete();*/
         return redirect()->route('classes.index');
-
     }
 
     /**
