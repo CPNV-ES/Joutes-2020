@@ -90,9 +90,10 @@
     </div>
     <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/time.js') }}"></script>
     @stack('carousel')
     <script src="{{ asset('/js/carousel.js') }}"></script>
-
+    @yield('customScript')
 </body>
 
 <script>

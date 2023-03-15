@@ -44,7 +44,7 @@
                                         <tr>
                                             <td class="separator sepTime ">
                                             @if ($pool->isEditable())
-                                                <td><input type="time" id="appt" name="game[{{ $game->id }}][editedTime]"
+                                                <td><input type="time" name="game[{{ $game->id }}][editedTime]"
                                                            value="{{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}">
                                                 </td>
                                             @else
@@ -225,4 +225,16 @@
             </div>
         </div>
     </div>
+    @section('customScript')
+        <script>
+            $("input:regex(name, game\\[\\d*\\]\\[editedTime\\])").each((index, element)=>{
+                let items = $("input:regex(name, game\\[\\d*\\]\\[editedTime\\])")
+                $(element).change((event) => {
+                    for (let itemIndex = index + 1; itemIndex < items.length; itemIndex++){
+                        items[itemIndex].value = Time($(element).val()).addMinutes((itemIndex - index) * 10).toString();
+                    }
+                })
+            })
+        </script>
+    @stop
 @stop
