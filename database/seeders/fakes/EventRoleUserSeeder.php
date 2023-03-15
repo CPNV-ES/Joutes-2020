@@ -14,11 +14,11 @@ class EventRoleUserSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(1, 200) as $index) {
+        foreach (range(10, 35) as $index) {
             DB::table('event_role_user')->insert([
-                'user_id' => rand(1, 201),
+                'user_id' => 1,
                 'event_id' => rand(1, 12),
-                'role_id' => rand(2, 3),
+                'role_id' => 3,
             ]);
         }
     }
