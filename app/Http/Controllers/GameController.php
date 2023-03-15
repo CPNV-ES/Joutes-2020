@@ -106,6 +106,8 @@ class GameController extends Controller
                         $value["scorecontender2"]=0;
                     if(isset($value["scorecontender2"]) && empty($value["scorecontender1"]))
                         $value["scorecontender1"]=0;
+                    if(isset($value["editedTime"]) && !empty($value["editedTime"]))
+                        $game->start_time = $value["editedTime"];
                     $game->score_contender1 = $value["scorecontender1"];
                     $game->score_contender2 = $value["scorecontender2"];
                     $game->save();
@@ -113,7 +115,9 @@ class GameController extends Controller
 
 
             }
-            catch (\Throwable $th) {}
+            catch (\Throwable $th) {
+                dd($th);
+            }
         }
         return redirect()->back()->with('success','Les modifications ont été sauvegardé.');
     }
