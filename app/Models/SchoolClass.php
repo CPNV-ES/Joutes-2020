@@ -34,11 +34,11 @@ class SchoolClass extends Model
 
 
         foreach ($classes_array as $class) {
-
             //check if the class already exists
             $exists = false;
             //check if the user already exists
             foreach (SchoolClass::all() as $schoolClass) {
+
                 if ($schoolClass->name === $class->name) {
                     $exists = true;
                     $schoolClass_id = $schoolClass->id;
@@ -53,7 +53,7 @@ class SchoolClass extends Model
                 ];
 
                 //create the class
-                $class_id = SchoolClass::create($classesIntranet[$class->name])->id;
+                $schoolClass_id = SchoolClass::create($classesIntranet[$class->name])->id;
             }else{
                 //update the class
                 $schoolClassUpdate = SchoolClass::find($schoolClass_id);
@@ -80,14 +80,16 @@ class SchoolClass extends Model
                         'email'      => $student->email,
                         'first_name' => $student->firstname,
                         'last_name'  => $student->lastname,
+                        'class_name' => "a",
                         'role_id'    => 3,
-                        'class_id'   => $class_id,
+                        'class_id'   => $schoolClass_id,
                     ]);
                 }else{
                     $userUpdate = User::where('email', $student->email)->first();
                     $userUpdate->first_name = $student->firstname;
                     $userUpdate->last_name = $student->lastname;
-                    $userUpdate->class_id = $class_id;
+                    $userUpdate->class_name = "a";
+                    $userUpdate->class_id = $schoolClass_id;
                     $userUpdate->updated_at = now();
                 }
                 //delete the student from the array
@@ -143,5 +145,11 @@ class SchoolClass extends Model
                 'delegate' => $class['delegate'],
                 'status'   => now(),
             ]);
+    }
+
+    public static function getClassNameById($id)
+    {
+        $class = SchoolClass::find($id);
+        return $class->name;
     }
 }

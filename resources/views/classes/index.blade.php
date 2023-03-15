@@ -27,8 +27,7 @@
                             <th scope="col">Year</th>
                             <th scope="col">Titulaire</th>
                             <th scope="col">Délégué</th>
-                            <th scope="col">Status</th>
-
+                            <th scope="col">Mis à jour</th>
                             <th scope="col">
                                 <button type="submit" class="btn btn-main growIcon btnSynchroniser ">
                                     Synchroniser
