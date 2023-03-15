@@ -37,6 +37,6 @@
         "datatables.net-searchbuilder-bs4": "^1.0.1",
         "datatables.net-searchpanes-bs4": "^1.2.2",
         "jquery": "^3.6.0",
-        "webpack": "^5.68.0"
+        "webpack": "^5.76.0"
     }
 }
