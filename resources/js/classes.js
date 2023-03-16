@@ -1,4 +1,3 @@
-    alert('sadasd');
 function checkAll() {
     checkAll(document.getElementById('checkAll')) // On initialise le label du bouton 'checkAll'
     function checkAll(checkbox) {

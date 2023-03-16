@@ -10,6 +10,11 @@
     <link rel='stylesheet' href='lib/datatables/css/dataTables.bootstrap4.min.css'/>
     <link rel="stylesheet" href="lib/datatables/css/dataTables.responsive.bootstrap4.min.css">
     <div class="container">
+        <form action="{{route('classes.store')}}">
+        <button type="submit" class="btn btn-main growIcon btnSynchroniser ">
+            Synchroniser
+        </button>
+        </form>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <form method="POST" action="{{ route('users.destroy.all') }}">
             @csrf
@@ -48,7 +53,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>Nom d'utilisateur / Nom + Prénom</th>
+                    <th>Nom + Prénom</th>
                     <th>Rôle</th>
                     <th>Participations</th>
                     <th>Équipes</th>
@@ -63,7 +68,7 @@
                             @endif
                         </td>
                         <td>
-                            {{ $user->username }} / {{ $user->last_name }} {{ $user->first_name }}</td>
+                            {{ $user->last_name }} {{ $user->first_name }}</td>
                         <td>
                             <select name='{{ $user->id }}' @if(($user->role->slug == "ADMIN")&&(Auth::user()->username == $user->username)) disabled @endif class="form-control-sm rolesSelect">
                                 @foreach ($roles as $role)

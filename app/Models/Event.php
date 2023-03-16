@@ -85,6 +85,9 @@ class Event extends Model
     public function percentageParticipation()
     {
         $expectedPartipant = $this->getExpectedParticipants();
+        if (count($expectedPartipant) == 0) {
+            return 0;
+        }
         $actualParticipant = $this->users()
             ->where('users.role_id', Role::findBySlug('PART')->id)
             ->orWhere('users.role_id', Role::findBySlug('GEST')->id)
@@ -94,21 +97,15 @@ class Event extends Model
 
     public function getExpectedParticipants()
     {
-
-        $location="sainte-croix";
-        $data="etudiants.json";
-        $params=["alter[include]" => "current_class"];
-
-        $students_array = IntranetConnection::fetchDataFromIntranet($location, $data, $params);
+        $students_array = User::all();
         $schoolClass = SchoolClass::all();
 
         $studentsIntranet = [];
         foreach ($students_array as $student) {
-            if ($schoolClass->contains('name', $student->current_class->name)) {
+            if ($schoolClass->contains('id', $student->attributes['class_id'])) {
                 $studentsIntranet[$student->id] = [
-                    'firstname' => $student->firstname,
-                    'lastname' =>  strtolower($student->lastname),
-                    'class' => $student->current_class->name,
+                    'firstname' => $student->first_name,
+                    'lastname' =>  strtolower($student->last_name),
                 ];
             }
         }

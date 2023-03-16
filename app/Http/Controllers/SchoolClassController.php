@@ -10,13 +10,14 @@ class SchoolClassController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $classesIntranet = SchoolClass::fetchClassesFromIntranet();
-        $classes = SchoolClass::identifyClass($classesIntranet);
-        return view('classes.index', compact('classes', 'classesIntranet'));
+
+        $classes = SchoolClass::all();
+
+        return view('classes.index', compact('classes'));
 
     }
 
@@ -39,19 +40,12 @@ class SchoolClassController extends Controller
      */
     public function store(Request $request)
     {
+        $classes = SchoolClass::getClasses();
         $classesIntranet = SchoolClass::fetchClassesFromIntranet();
-        $classes = SchoolClass::identifyClass($classesIntranet);
-        $selected = $_POST;
         foreach ($classesIntranet as $class) {
-            if (array_key_exists($class['name'], $selected)) {
-                SchoolClass::removeOldClasses($classes,$selected);
-                SchoolClass::synchronise($class);
-            }
+            SchoolClass::synchronise($class);
         }
-        /*$old = SchoolClass::where('name',$class['name']);
-        $old->delete();*/
         return redirect()->route('classes.index');
-
     }
 
     /**

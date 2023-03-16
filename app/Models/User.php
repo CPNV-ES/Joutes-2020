@@ -19,9 +19,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'role_id',
+        'class_id'
     ];
 
     /**
@@ -68,7 +71,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'team_users')->withPivot('isCaptain');
 
 
-        //return $this->hasManyThrough('App\Team', 'App\Participant', 'team_id','user_id' );
+        //return $this->hasManyThrough('App\Models\Team', 'App\Participant', 'team_id','user_id' );
     }
 
     // Returns whether the user is locally authenticated or remotely (SAML)
@@ -105,4 +108,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class, 'event_role_user');
     }
+
+
 }
