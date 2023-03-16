@@ -85,6 +85,9 @@ class Event extends Model
     public function percentageParticipation()
     {
         $expectedPartipant = $this->getExpectedParticipants();
+        if (count($expectedPartipant) == 0) {
+            return 0;
+        }
         $actualParticipant = $this->users()
             ->where('users.role_id', Role::findBySlug('PART')->id)
             ->orWhere('users.role_id', Role::findBySlug('GEST')->id)
