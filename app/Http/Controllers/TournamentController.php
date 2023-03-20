@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Contender;
-use App\Event;
 use App\Http\Requests\CreateTournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
-use App\Pool;
-use App\Tournament;
-use App\Sport;
-use App\Game;
-
+use App\Models\Contender;
+use App\Models\Event;
+use App\Models\Game;
+use App\Models\Pool;
+use App\Models\Sport;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
@@ -151,7 +150,7 @@ class TournamentController extends Controller
 
     //Display a specific tournament
     public function show(Tournament $tournament)
-    {   
+    {
         $pools = $tournament->pools;
         $maxStage = $pools->max('stage');
         $tournament->getStages();

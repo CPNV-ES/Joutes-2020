@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+use Acaronlex\LaravelCalendar\Calendar;
+use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Acaronlex\LaravelCalendar\Calendar;
 
 class ScheduleController extends Controller
 {

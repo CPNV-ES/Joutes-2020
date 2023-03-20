@@ -19,10 +19,7 @@
                             title="Affichage écran géant">Affichage écran geant</a>
                     @endif
                     @if (Auth::check() && Auth::user()->role == 'administrator')
-                        <a href="{{ route('tournaments.export', $tournament->id) }}" class="greenBtn">Exporter en
-                            CSV
-                            les
-                            équipes et participants</a>
+                        <a href="{{ route('tournaments.export', $tournament->id) }}" class="greenBtn">Exporter en CSV les équipes et participants</a>
                     @endif
                     <button type="button" class="btn btn-main"
                         onclick="location.href='{{ route('tournaments.edit', $tournament) }}'">
@@ -206,6 +203,6 @@
             @endforeach
         </div>
     </div>
-    
+
     <script src="{{ asset('js/tournamentView.js') }}"></script>
 @stop

@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\User;
-use App\Role;
 use App\Console\Commands\FILE_APPEND;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Env;
 
 class MakeDevLogin extends Command
 {

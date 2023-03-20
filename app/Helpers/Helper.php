@@ -2,18 +2,19 @@
 
 namespace App\Helpers;
 
-use App\User;
-use App\Event;
-use App\EventRoleUser;
 use App\Enums\EventState;
+use App\Models\Event;
+use App\Models\EventRoleUser;
+use App\Models\User;
 
 class Helper
 {
     /**
      * Get EventRoleUser by $user and $event
      *
-     * @param User $user
-     * @param Event $event
+     * @param User              $user
+     * @param \App\Models\Event $event
+     *
      * @return void
      */
     public static function eventRoleUser(User $user, Event $event)

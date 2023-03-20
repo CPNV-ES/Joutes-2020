@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateEventRequest;
-use App\Role;
+use App\Models\Event;
+use App\Models\Sport;
 use Illuminate\Http\Request;
-use App\Event;
-use App\Sport;
 
 class EventController extends Controller
 {

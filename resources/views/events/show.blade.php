@@ -14,7 +14,7 @@
                     Tournois de l'évenement {{ $event->name }}
 
                     @if (Auth::check())
-                        @if (Auth::user()->role->slug == 'ADMIN')
+                        @if (Auth::user()->role->slug == 'ADMIN' && $event->eventState < 2)
                             <button type="button" class="btn btn-main"
                                 onclick="location.href='{{ route('events.tournaments.create', $event->id) }}'">
                                 <i class="fa fa-solid fa-plus fa-1x" aria-hidden="true"></i>
@@ -64,10 +64,6 @@
                     @if (Gate::allows('isAdmin'))
                         <h3>État : {{ Helper::eventStateName($event->eventState) }}</h3>
 
-                        <form action="#" method="get">
-                            <button type="button" class="btn btn-main">Créer une équipe
-                            </button>
-                        </form>
                     @endif
                 @endif
             </div>

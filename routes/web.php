@@ -1,6 +1,25 @@
 <?php
 
+use App\Http\Controllers\Admin\AdministrationController;
+use App\Http\Controllers\Admin\CourtController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\ContenderController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventRoleUserController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\GameManagerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PoolController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SchoolClassController;
+use App\Http\Controllers\SportController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamUserController;
+use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -14,50 +33,54 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+
+
+
+
 Route::get('/', [HomeController::class, 'index'])->name('homepage');
 
-Route::post('pools/contenders/unlink', 'ContenderController@detachContender');
+Route::post('pools/contenders/unlink', [ContenderController::class,'detachContender']);
 
 
-Route::resource('events', 'EventController')->register();
-Route::resource('tournaments', 'TournamentController')->register();
+Route::resource('events', EventController::class)->register();
+Route::resource('tournaments', TournamentController::class)->register();
 //Route::post('/events/tournaments/copy',  'TournamentController@copy')->name('events.tournaments.copy');
-Route::resource('events.tournaments', 'TournamentController')->register();
-
-Route::resource('teams', 'TeamController')->register();
-Route::resource('team.user', 'TeamUserController')->register();
-Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
-Route::resource('users', 'UserController')->register();
-Route::resource('tournaments.teams', 'TeamController')->register();
-Route::resource('tournaments.pools', 'PoolController')->register();
-Route::get('/tournaments/pools/{pool}', 'PoolController@close')->name('tournaments.pools.close');
-Route::resource('pools.contenders', 'ContenderController')->register();
-Route::resource('pools.gameManagers', 'GameManagerController')->only([
+Route::resource('events.tournaments', TournamentController::class)->register();
+Route::resource('teams', TeamController::class)->register();
+Route::resource('team.user', TeamUserController::class)->register();
+Route::delete('users/destroy', [UserController::class,'destroyAll'])->name('users.destroy.all');
+Route::resource('users', UserController::class);
+Route::resource('tournaments.teams', TeamController::class);
+Route::resource('tournaments.pools', PoolController::class);
+Route::get('/tournaments/pools/{pool}', [PoolController::class,'close'])->name('tournaments.pools.close');
+Route::resource('pools.contenders', ContenderController::class);
+Route::resource('pools.gameManagers', GameManagerController::class)->only([
     'store'
-])->register();
-Route::resource('games', 'GameController')->register();
+]);
+Route::resource('games', GameController::class);
 Route::resource('events.eventRoleUsers', EventRoleUserController::class)->only([
     'create', 'store', 'update'
 ]);
 
-Route::resource('events.schedules', 'ScheduleController')->only(['index']);
+Route::resource('events.schedules', ScheduleController::class)->only(['index']);
 
-Route::resource('classes', 'SchoolClassController')->register();
-Route::resource('students', 'StudentController')->register();
-Route::resource('carousel', 'CarouselController')->register();
+
+Route::resource('students', StudentController::class);
+Route::resource('carousel', CarouselController::class);
 
 //Administration resources
 Route::group(['middleware' => ['admin']], function () {
-    Route::delete('users/destroy', 'UserController@destroyAll')->name('users.destroy.all');
-    Route::resource('users', 'UserController')->middleware('admin')->register();
-    Route::resource('administrations', 'Admin\AdministrationController')->register();
-    Route::resource('courts', 'Admin\CourtController')->register();
-    Route::resource('sports', 'SportController')->register();
+    Route::delete('users/destroy', [UserController::class,'destroyAll'])->name('users.destroy.all');
+    Route::resource('users', UserController::class);
+    Route::resource('administrations', AdministrationController::class);
+    Route::resource('courts', CourtController::class);
+    Route::resource('sports', SportController::class);
+    Route::resource('classes', SchoolClassController::class);
 });
 
 
+
 //Azure
-//Azure
-Route::get('/auth/azure', 'Auth\AuthController@redirectToProvider')->name('login');
-Route::get('/callback', 'Auth\AuthController@handleProviderCallback');
-Route::get('/auth/logout', 'Auth\AuthController@logoutUser')->name('logout');
+Route::get('/auth/azure', [AuthController::class,'redirectToProvider'])->name('login');
+Route::get('/callback', [AuthController::class,'handleProviderCallback']);
+Route::get('/auth/logout', [AuthController::class,'logoutUser'])->name('logout');
