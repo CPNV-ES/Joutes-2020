@@ -39,7 +39,11 @@ class AuthController extends Controller
     public function handleProviderCallback()
     {
         try {
-            $user = Socialite::driver('azure')->user();
+            $codeVerifier = \Illuminate\Support\Str::random(64);
+            $codeChallenge = base64url_encode(hash('sha256', $codeVerifier, true));
+            $user = Socialite::driver('azure')
+                ->with(['code_challenge' => $codeChallenge])
+                ->user();
         } catch (Exception $e) {
             return Redirect::to('/auth/azure');
         }
@@ -84,5 +88,11 @@ class AuthController extends Controller
     public function logoutUser(){
         Auth::logout();
         return Redirect::to('/');
+    }
+
+    public function base64url_encode($data) {
+        $encoded = base64_encode($data);
+        $encoded = str_replace(['+','/','='], ['-','_',''], $encoded);
+        return $encoded;
     }
 }
