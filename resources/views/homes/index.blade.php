@@ -3,8 +3,8 @@
 
 @section('content')
     <div class="container">
+        @if(Auth::user())
         <h1>Bonjour {{Auth::user()->first_name}},</h1>
-        @dd(Auth::user()->events())
         @foreach ($userEvents as $userEvent)
             @if ($userEvent === 0)
                 <div class="row mb-4">
@@ -70,6 +70,7 @@
                         </x-event>
                     @endforeach
                 </div>
-                <h2>Aucun événement prévu</h2>
+            @endif
+                <h2>Veuillez vous connecter</h2>
     </div>
 @stop
