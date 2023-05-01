@@ -20,13 +20,10 @@ class AuthController extends Controller
      */
     public function redirectToProvider()
     {
-        if(env('USER_ID'))
-        {
+        if (env('USER_ID')) {
             $this->localLogin(env('USER_ID'));
             return Redirect::to('/');
-        }
-        else
-        {
+        } else {
             return Socialite::with('azure')->with(["prompt" => "select_account"])->redirect();
         }
     }
@@ -39,19 +36,16 @@ class AuthController extends Controller
     public function handleProviderCallback()
     {
         try {
-            $codeVerifier = \Illuminate\Support\Str::random(64);
-            $codeChallenge = base64url_encode(hash('sha256', $codeVerifier, true));
-            $user = Socialite::driver('azure')
-                ->with(['code_challenge' => $codeChallenge])
-                ->user();
+            $user = Socialite::driver('azure')->user();
         } catch (Exception $e) {
             return Redirect::to('/auth/azure');
         }
         $authUser = $this->findOrCreateUser($user);
-        if(!empty($authUser)){
+        if (!empty($authUser)) {
             Auth::login($authUser);
-
-        }else{
+        }
+        else
+        {
             return Redirect::to('/')->withErrors(['Votre utilisateur ne fait pas parti de l\'application']);;
         }
         return Redirect::to('/');
@@ -61,6 +55,7 @@ class AuthController extends Controller
      * Return user if exists; create and return if doesn't
      *
      * @param $azureUser
+     *
      * @return User
      */
     private function findOrCreateUser($azureUser)
@@ -80,19 +75,16 @@ class AuthController extends Controller
         return $authUser;
     }
 
-    public function localLogin($id){
+    public function localLogin($id)
+    {
         $authUser = User::find($id);
         Auth::login($authUser);
     }
 
-    public function logoutUser(){
+    public function logoutUser()
+    {
         Auth::logout();
         return Redirect::to('/');
     }
 
-    public function base64url_encode($data) {
-        $encoded = base64_encode($data);
-        $encoded = str_replace(['+','/','='], ['-','_',''], $encoded);
-        return $encoded;
-    }
 }
