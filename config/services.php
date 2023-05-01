@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'azure' => [
+        'client_id' => env('AZURE_KEY'),
+        'client_secret' => env('AZURE_SECRET'),
+        'redirect' => env('AZURE_REDIRECT_URI')
+    ],
+
+
 ];
