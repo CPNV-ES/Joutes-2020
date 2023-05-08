@@ -14,4 +14,3 @@ function checkAll() {
         checkbox.parentNode.querySelector('span').innerHTML = checkbox.checked ? 'Uncheck All' : 'Check All';
     }
 }
-

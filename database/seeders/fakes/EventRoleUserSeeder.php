@@ -14,6 +14,7 @@ class EventRoleUserSeeder extends Seeder
      */
     public function run()
     {
+
         foreach (range(1, 10) as $index) {
             DB::table('event_role_user')->insert([
                 'user_id' => rand(1, 10),
