@@ -71,7 +71,7 @@ Route::resource('carousel', CarouselController::class);
 //Administration resources
 Route::group(['middleware' => ['admin']], function () {
     Route::delete('users/destroy', [UserController::class,'destroyAll'])->name('users.destroy.all');
-    Route::resource('users', UserController::class)->middleware('admin');
+    Route::resource('users', UserController::class);
     Route::resource('administrations', AdministrationController::class);
     Route::resource('courts', CourtController::class);
     Route::resource('sports', SportController::class);

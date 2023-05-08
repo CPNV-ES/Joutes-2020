@@ -19,4 +19,10 @@ yarn-error.log
 /.vscode
 /components
 public/images/joutes
+temp.json
+log/capistrano.log
+public/css/main.css
+public/js/app.js
+public/js/carousel.js
+public/mix-manifest.json
 .DS_Store
