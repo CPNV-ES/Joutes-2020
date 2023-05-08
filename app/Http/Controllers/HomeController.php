@@ -12,19 +12,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        /*   $eventReady = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Ready)->get() : new Collection([]);
-           $eventFinished = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Finished)->get() : new Collection([]);
-           $states = Event::where('eventState', EventState::Register)->get()->merge($eventReady)->merge($eventFinished)->groupBy('eventState');
-           return view('homes.index', compact('states'));
-       }*/
-
-            $userEvents = Auth::user() ? Auth::user()->events()->pluck('eventState') : new Collection([]);
-            $allEvents = Event::pluck('eventState');
-            //$eventsReady = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Ready)->get() : new Collection([]);
-           // $eventsFinished = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Finished)->get() : new Collection([]);
-
-        // $events = Auth::user()->events()->pluck('eventState'); -> pluck can get the whole column in the table
-        return view('homes.index', compact('userEvents', 'allEvents'));
+        $eventPrep = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Prep)->get() : new Collection([]);
+        $eventRegister = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Register)->get() : new Collection([]);
+        $eventReady = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Ready)->get() : new Collection([]);
+        $eventFinished = Auth::user() ? Auth::user()->events()->where('eventState', EventState::Finished)->get() : new Collection([]);
+        $states = $eventPrep->merge($eventRegister)->merge($eventReady)->merge($eventFinished)->groupBy('eventState');
+        return view('homes.index', compact('states'));
     }
 }
 
