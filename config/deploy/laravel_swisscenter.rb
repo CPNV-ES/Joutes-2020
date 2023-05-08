@@ -6,11 +6,12 @@ set :use_sudo, false
 set :laravel_set_acl_paths, false
 set :laravel_upload_dotenv_file_on_deploy, false
 set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
+set :tmp_dir, "/home/#{fetch(:swisscenter_username)}/tmp"
 
 SSHKit.config.command_map[:composer] = "php -d allow_url_fopen=true #{shared_path.join('composer')}"
 
 server fetch(:swisscenter_servername), user: fetch(:swisscenter_username), roles: %w{app db web}, ssh_options: {
-  keys: ["./config/#{fetch(:swisscenter_username)}_rsa"],
+#  keys: ["./config/#{fetch(:swisscenter_username)}_rsa"],
   forward_agent: false,
   auth_methods: %w(publickey)
 }
@@ -18,7 +19,7 @@ server fetch(:swisscenter_servername), user: fetch(:swisscenter_username), roles
 before 'composer:run', 'set_php_version'
 after  'composer:run', 'copy_dotenv'
 after  'composer:run', 'laravel:migrate'
-        
+
 # Determine the PHP version chosen in the swisscenter control panel
 task :set_php_version do
   on roles(:all) do
@@ -29,7 +30,7 @@ end
 # Copy .env in the current release
 task :copy_dotenv do
   on roles(:all) do
-    execute :cp, "#{shared_path}/.env #{release_path}/.env" 
+    execute :cp, "#{shared_path}/.env #{release_path}/.env"
   end
 end
 

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +13,8 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('sports', function (Blueprint $table) {
-            $table->string('description', 250)->change();
+        Schema::table('events', function (Blueprint $table) {
+        $table->unique('name');// update event's name to unique
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        //
+    //
     }
 };

@@ -43,7 +43,13 @@
                                     @if (!isset($game->score_contender1) && !isset($game->score_contender2))
                                         <tr>
                                             <td class="separator sepTime ">
-                                                {{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
+                                            @if ($pool->isEditable())
+                                                <td><input type="time" name="game[{{ $game->id }}][editedTime]"
+                                                           value="{{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}">
+                                                </td>
+                                            @else
+                                                <td>{{ Carbon\Carbon::parse($game->start_time)->format('H:i') }}</td>
+                                            @endif
                                             <td class="contender1 ">
                                                 @if (empty($game->contender1->team))
                                                     {{ $game->contender1->rank_in_pool . ($game->contender1->rank_in_pool == 1 ? 'er ' : 'ème ') . 'de ' . $game->contender1->fromPool->poolName }}
@@ -219,4 +225,16 @@
             </div>
         </div>
     </div>
+    @section('customScript')
+        <script>
+            $("input:regex(name, game\\[\\d*\\]\\[editedTime\\])").each((index, element)=>{
+                let items = $("input:regex(name, game\\[\\d*\\]\\[editedTime\\])")
+                $(element).change((event) => {
+                    for (let itemIndex = index + 1; itemIndex < items.length; itemIndex++){
+                        items[itemIndex].value = Time($(element).val()).addMinutes((itemIndex - index) * 10).toString();
+                    }
+                })
+            })
+        </script>
+    @stop
 @stop
