@@ -1,4 +1,3 @@
-    alert('sadasd');
 function checkAll() {
     checkAll(document.getElementById('checkAll')) // On initialise le label du bouton 'checkAll'
     function checkAll(checkbox) {
@@ -15,4 +14,3 @@ function checkAll() {
         checkbox.parentNode.querySelector('span').innerHTML = checkbox.checked ? 'Uncheck All' : 'Check All';
     }
 }
-
