@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('require')->default(false)->after('password');
+            $table->boolean('required')->default(false)->after('password');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->removeColumn('require');
+            $table->removeColumn('required');
         });
     }
 };
