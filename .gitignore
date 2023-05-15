@@ -20,3 +20,4 @@ yarn-error.log
 /components
 public/images/joutes
 temp.json
+/.DS_Store
