@@ -7,7 +7,7 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <h1>
-                       Mes événements {{ Helper::eventStateName($state) }}
+                        Mes événements {{ Helper::eventStateName($state) }}
                     </h1>
                     <hr>
                 </div>

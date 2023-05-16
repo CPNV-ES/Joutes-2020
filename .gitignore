@@ -20,4 +20,11 @@ yarn-error.log
 /components
 public/images/joutes
 temp.json
-**/.DS_Store
+
+log/capistrano.log
+public/css/main.css
+public/js/app.js
+public/js/carousel.js
+public/mix-manifest.json
+.DS_Store
+
