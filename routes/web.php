@@ -19,6 +19,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamUserController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -76,6 +77,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('courts', CourtController::class);
     Route::resource('sports', SportController::class);
     Route::resource('classes', SchoolClassController::class);
+    Route::get('registrations', [RegistrationController::class, 'index'])->name('users.registrations');
 });
 
 
