@@ -15,6 +15,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
+        "qcod/laravel-settings": "^1.2",
         "socialiteproviders/microsoft-azure": "^5.1"
     },
     "require-dev": {
