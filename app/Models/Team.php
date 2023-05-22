@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\Auth;
 class Team extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name','isCaptain','owner_id','validation', 'completion'];
+    protected $fillable = ['name', 'isCaptain', 'owner_id', 'validation', 'completion'];
 
     public function participants()
     {
         return $this->belongsToMany(User::class, 'team_users')->withPivot('isCaptain');
     }
 
-    public function teamUser(){
+    public function teamUser()
+    {
         return $this->hasMany(TeamUser::class);
     }
 
@@ -61,22 +62,15 @@ class Team extends Model
         else return false;
     }
 
-
-    public function isOwner($id)
-    {
-        $participant = User::find($id);
-        $user_id = $participant->id;
-        if ($this->owner_id == $user_id) return true;
-        else return false;
-    }
-
     public function captain()
     {
         $captain = $this->participants()->firstwhere('isCaptain', 1);
-        return  $captain !== null && Auth::check()  ? $captain->getOriginal()['id'] == Auth::id() :false;
+        return $captain !== null && Auth::check() ? $captain->getOriginal()['id'] == Auth::id() : false;
     }
-    public function pools(){
-        return $this->belongsToMany(Pool::class,'Contenders');
+
+    public function pools()
+    {
+        return $this->belongsToMany(Pool::class, 'Contenders');
     }
 
     public function setFlag($flagName, $value)
@@ -86,7 +80,7 @@ class Team extends Model
         }
     }
 
-    public static function newTeam($tournament,$data)
+    public static function newTeam($tournament, $data)
     {
         $team = new Team();
         $team->fill($data);
