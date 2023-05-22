@@ -24,7 +24,8 @@ class UserTableSeeder extends Seeder
                 'email' => $faker->email,
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
-                'role_id' => 3
+                'role_id' => 3,
+                'isCaptain' => 0,
             ]);
             DB::table('team_users')->insert([
                 'user_id' => $index,
