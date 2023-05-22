@@ -27,7 +27,7 @@
                         <th>Prénom</th>
                         <th>Nom</th>
                         <th>email</th>
-                        <th>Capitain</th>
+                        <th>Capitaine</th>
                         @if($team->captain())
                             <th>
                                 <button id="capitain" class="btn btn-main growIcon" title="élu un successeur">
@@ -51,8 +51,8 @@
                             @if($team->captain())
                                 <td>
                                     <form action="{{ route('team.user.update', [$team,$member->user]) }}" method="post"
-                                          title="choisi un nouveau capitain"
-                                          onsubmit="return confirm('Vous êtes sûr de ne pas vouloir être le capitain ?');">
+                                          title="choisi un nouveau capitaine"
+                                          onsubmit="return confirm('Vous êtes sûr de ne pas vouloir être le capitaine ?');">
                                         @csrf
                                         @method('PUT')
                                         <button class=" chooseCapitain btn btn-main invisible">

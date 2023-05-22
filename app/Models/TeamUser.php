@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TeamUser extends Model
 {
     use HasFactory;
-    public $fillable = ['user_id','team_id','isCaptain'];
+
+    public $fillable = ['user_id', 'team_id', 'isCaptain'];
 
     public function user()
     {
@@ -21,9 +21,9 @@ class TeamUser extends Model
         return $this->belongsTo(Team::class, 'team_id');
     }
 
-    public static function newCapitain($members,$user)
+    public static function newCaptain($members, $user)
     {
-        foreach ($members as $member){
+        foreach ($members as $member) {
             $member->isCaptain = 0;
             $member->save();
         }

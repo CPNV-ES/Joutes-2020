@@ -33,7 +33,7 @@ class TeamUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class TeamUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,7 +55,7 @@ class TeamUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -66,24 +66,24 @@ class TeamUserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Team $team, User $user)
     {
-        $members = TeamUser::where('team_id',$team->id)->get();
+        $members = TeamUser::where('team_id', $team->id)->get();
         $tournament = Tournament::find($team->tournament_id);
-        TeamUser::newCapitain($members,$user);
+        TeamUser::newCaptain($members, $user);
 
-        return redirect()->route('teams.show',compact('members', 'team','tournament'))
-            ->with('success', "$user->username est le nouveau capitain." . $request['flag_message']);
+        return redirect()->route('teams.show', compact('members', 'team', 'tournament'))
+            ->with('success', "$user->username est le nouveau capitaine." . $request['flag_message']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
