@@ -29,7 +29,6 @@ class UserTableSeeder extends Seeder
             DB::table('team_users')->insert([
                 'user_id' => $index,
                 'team_id' => rand(1, 68),
-                'isCaptain' => 0,
             ]);
         }
     }
