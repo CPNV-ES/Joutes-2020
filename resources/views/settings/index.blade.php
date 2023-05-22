@@ -7,10 +7,10 @@
             @csrf
             <table>
                 <thead>
-                <th class="text-left">
+                <th>
                     Paramètre
                 </th>
-                <th class="text-left">
+                <th>
                     Valeur
                 </th>
                 @if(env('APP_DEBUG'))
@@ -18,6 +18,7 @@
                         <a href="{{route('settings.create')}}">New Params</a>
                     </th>
                 @endif
+                <th>Delete</th>
                 </thead>
                 <tbody>
                 @foreach ($settings as $key => $value)
@@ -30,6 +31,13 @@
                                    class="bg-gray-50 rounded text-gray-700"
                                    value="{{ $value }}" />
                         </td>
+                        <td>
+                            <form action="{{ route('settings.delete', $key) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>

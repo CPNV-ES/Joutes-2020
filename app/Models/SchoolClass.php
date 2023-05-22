@@ -25,7 +25,8 @@ class SchoolClass extends Model
 
     public static function fetchClassesFromIntranet()
     {
-        $location = "sainte-croix";
+        $location = settings('CLASSES_ORIGIN_NAME');
+        $requiredClasses = settings('CLASSES_REQUIRED');
         $data = "classes.json";
         $params = ['alter[include]' => 'students'];
         $classes_array = IntranetConnection::fetchDataFromIntranet($location, $data, $params);

@@ -31,4 +31,9 @@ class SettingsController extends Controller
         }
         return redirect()->route('settings.index');
     }
+    public function destroy($id)
+    {
+        settings()->remove($id);
+        return redirect()->route('settings.index');
+    }
 }
