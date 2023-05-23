@@ -62,12 +62,18 @@
                                     href="{{ route('profile.index') }}"> <i class="fa fa-user"
                                         aria-hidden="true"></i> Profile</a></li>
                         @endif
+                            @if (Gate::allows('isAdmin'))
+                                <li class="@if (Route::is('settings.index')) active @endif"><a
+                                        href="{{ route('settings.index') }}"> <i class="fa fa-cog"
+                                                                                 aria-hidden="true"></i> Settings</a></li>
+                            @endif
                         <li><a href="{{ route('logout') }}"> <i class="fa fa-user" aria-hidden="true"></i> Logout
                                 - {{ Auth::user()->username }}</a></li>
                     @elseif(!Auth::check())
                         <li><a href="{{ route('login') }}"> <i class="fa fa-user" aria-hidden="true"></i>
                                 Login</a></li>
                     @endif
+
                 </ul>
 
                 <div class="navbar-bottom">

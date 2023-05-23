@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Natives\PoolModeSeeder::class);
         $this->call(Natives\SportSeeder::class);
         $this->call(Natives\CourtSeeder::class);
+        $this->call(Natives\SettingSeeder::class);
         if (env('APP_ENV') == 'local') {
             $this->call(Natives\AdminUserSeeder::class);
             $this->call(Fakes\Joutes2022Seeder::class);

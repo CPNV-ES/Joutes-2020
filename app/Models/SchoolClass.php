@@ -25,13 +25,12 @@ class SchoolClass extends Model
 
     public static function fetchClassesFromIntranet()
     {
-        $location = "sainte-croix";
+        $location = settings('CLASSES_ORIGIN_NAME');
+        $requiredClasses = settings('CLASSES_REQUIRED');
         $data = "classes.json";
         $params = ['alter[include]' => 'students'];
         $classes_array = IntranetConnection::fetchDataFromIntranet($location, $data, $params);
         $classesIntranet = [];
-
-
 
         foreach ($classes_array as $class) {
             //check if the class already exists
@@ -64,6 +63,7 @@ class SchoolClass extends Model
                 $schoolClassUpdate->save();
             }
 
+            $required = strpos($class->name, $requiredClasses);
 
             //save users form the students array
             foreach ($class->students as $student) {
@@ -75,11 +75,13 @@ class SchoolClass extends Model
                         $exists = true;
                     }
                 }
+
                 if (!$exists) {
                     User::create([
                         'email'      => $student->email,
                         'first_name' => $student->firstname,
                         'last_name'  => $student->lastname,
+                        "required"   => $required ? "1" : "0",
                         'class_name' => "a",
                         'role_id'    => 3,
                         'class_id'   => $schoolClass_id,
@@ -88,6 +90,7 @@ class SchoolClass extends Model
                     $userUpdate = User::where('email', $student->email)->first();
                     $userUpdate->first_name = $student->firstname;
                     $userUpdate->last_name = $student->lastname;
+                    $userUpdate->required = $required ? "1" : "0";
                     $userUpdate->class_name = "a";
                     $userUpdate->class_id = $schoolClass_id;
                     $userUpdate->updated_at = now();
