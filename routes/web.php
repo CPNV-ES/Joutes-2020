@@ -19,6 +19,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamUserController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -84,3 +85,11 @@ Route::group(['middleware' => ['admin']], function () {
 Route::get('/auth/azure', [AuthController::class,'redirectToProvider'])->name('login');
 Route::get('/callback', [AuthController::class,'handleProviderCallback']);
 Route::get('/auth/logout', [AuthController::class,'logoutUser'])->name('logout');
+
+
+//Settings
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::get('/settings/create', [SettingsController::class, 'create'])->name('settings.create');
+Route::post('/settings/create', [SettingsController::class, 'store'])->name('settings.store');
+Route::post('/settings', [SettingsController::class, 'update '])->name('settings.update');
+Route::post('/settings/{setting}', [SettingsController::class, 'destroy'])->name('settings.delete');
