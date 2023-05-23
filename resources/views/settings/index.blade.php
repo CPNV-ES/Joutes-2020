@@ -13,12 +13,8 @@
                 <th>
                     Valeur
                 </th>
-                @if(env('APP_DEBUG'))
-                    <th class="text-left">
-                        <a href="{{route('settings.create')}}">New Params</a>
-                    </th>
-                @endif
-                <th>Delete</th>
+
+
                 </thead>
                 <tbody>
                 @foreach ($settings as $key => $value)
@@ -42,6 +38,11 @@
                 @endforeach
                 </tbody>
             </table>
+            @if(env('APP_DEBUG'))
+                <button class="btn btn-main">
+                    <a href="{{route('settings.create')}}" style="color:white">Nouveau paramètre</a>
+                </button>
+            @endif
             <button type="submit"
                     class="btn btn-main">
                 Sauver les paramètres
