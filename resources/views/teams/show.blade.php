@@ -34,6 +34,7 @@
                                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                 </button>
                             </th>
+                            <th>Manage</th>
                         @endif
                     </tr>
                     </thead>
@@ -59,6 +60,26 @@
                                             <i class="fa fa-check growIcon" aria-hidden="true"></i>
                                         </button>
                                     </form>
+                                </td>
+                                <td>
+                                @if(!$member->isCaptain && !$member->accepted)
+                                    <form action="{{ route('team.user.update', [$team,$member->user]) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="id" value="{{ $member->id }}">
+                                        <button class="btn btn-main">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                    <form  action="{{ route('team.user.destroy', [$team,$member->user]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{ $member->id }}">
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-times" aira-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                @endif
                                 </td>
                             @endif
                         </tr>
