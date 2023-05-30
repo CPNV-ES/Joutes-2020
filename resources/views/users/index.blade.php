@@ -57,6 +57,7 @@
                     <th>Rôle</th>
                     <th>Participations</th>
                     <th>Équipes</th>
+                    <th>Requis</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,7 +74,7 @@
                             <select name='{{ $user->id }}' @if(($user->role->slug == "ADMIN")&&(Auth::user()->username == $user->username)) disabled @endif class="form-control-sm rolesSelect">
                                 @foreach ($roles as $role)
 
-                                    <option  @if ($user->role->slug == $role->slug) selected @endif id={{ $role->id }}>
+                                    <option @if ($user->role->slug == $role->slug) selected @endif id={{ $role->id }}>
                                         {{ $role->name }}</option>
                                 @endforeach
                             </select>
@@ -105,6 +106,12 @@
                                     ,
                                 @endif
                             @endforeach
+                        </td>
+                        <td>
+                            <select name='{{ $user->id }}' @if(($user->role->slug == "ADMIN")&&(Auth::user()->username == $user->username)) disabled @endif class="form-control-sm requiredSelect">
+                                <option @if($user->required == 1)selected @endif id=1>Requis</option>
+                                <option @if($user->required == 0)selected @endif id=0>Non-requis</option>
+                            </select>
                         </td>
                     </tr>
                 @endforeach

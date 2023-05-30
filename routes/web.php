@@ -73,6 +73,7 @@ Route::resource('carousel', CarouselController::class);
 Route::group(['middleware' => ['admin']], function () {
     Route::delete('users/destroy', [UserController::class,'destroyAll'])->name('users.destroy.all');
     Route::resource('users', UserController::class);
+    Route::put('/users/{user}/required', [UserController::class, 'required'])->name('users.required');
     Route::resource('administrations', AdministrationController::class);
     Route::resource('courts', CourtController::class);
     Route::resource('sports', SportController::class);

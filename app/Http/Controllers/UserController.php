@@ -44,8 +44,13 @@ class UserController extends Controller
         }else{
             $user->role_id = $request->input('role_id');
             $user->save();
-            return redirect()->back()->with('success', "Les permissions de ".$user->username." / ".$user->last_name." ".$user->first_name." ont été changées");
+            return redirect()->back()->with('success', "Les permissions de ".$user->last_name." ".$user->first_name." ont été changées");
         }
 
+    }
+    public function required(Request $request, User $user){
+        $user->required = $request->input('required');
+        $user->save();
+        return redirect()->back()->with('success', "Le status d'inscription de ".$user->last_name." ".$user->first_name." à été changé");
     }
 }

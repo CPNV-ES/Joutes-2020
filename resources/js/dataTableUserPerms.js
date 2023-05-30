@@ -116,7 +116,7 @@ $(document).ready(function () {
         let eventRoleUserId = this.name;
         let eventId = $(this).attr("data-event");
         let roleId = $(this).children(":selected").attr("id");
-        
+
         //Create an object to parse in JSON
         let data = { "engagement": roleId }
         let url = location.origin + '/events/' + eventId + '/eventRoleUsers/' + eventRoleUserId
@@ -132,4 +132,20 @@ $(document).ready(function () {
         });
     });
 
+    $('#persons tbody').on('change', '.requiredSelect', function () {
+        let userId = this.name;
+        let requiredId = $(this).children(":selected").attr("id");
+        //Create an object to parse in JSON
+        let data = { "required": requiredId }
+        let url = location.href + "/" + userId + "/required"
+        //Create the patch request
+        $.ajax({
+            url: url,
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            type: "PUT",
+        }).always(function () {
+            location.reload();
+        });
+    });
 });
