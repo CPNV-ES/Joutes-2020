@@ -72,12 +72,18 @@ class TeamUserController extends Controller
      */
     public function update(Request $request, Team $team, User $user)
     {
-        $members = TeamUser::where('team_id',$team->id)->get();
+        $member = TeamUser::find($request->id);
+        $member->accepted = true;
+        $member->save();
+
+        return redirect()->route('teams.show',compact('member', 'team', 'tournament'))
+            ->with('success', "$user->username a été accepté." . $request['flag_message']);
+        /*$members = TeamUser::where('team_id',$team->id)->get();
         $tournament = Tournament::find($team->tournament_id);
         TeamUser::newCapitain($members,$user);
 
         return redirect()->route('teams.show',compact('members', 'team','tournament'))
-            ->with('success', "$user->username est le nouveau capitain." . $request['flag_message']);
+            ->with('success', "$user->username est le nouveau capitain." . $request['flag_message']);*/
     }
 
     /**
@@ -86,8 +92,10 @@ class TeamUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Team $team, User $user)
     {
-        //
+        TeamUser::find($request->id)->delete();
+        return redirect()->route('teams.show',compact('team'))
+            ->with('success', "$user->username a été refusé." . $request['flag_message']);
     }
 }

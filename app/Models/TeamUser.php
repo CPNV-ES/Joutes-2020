@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class TeamUser extends Model
 {
     use HasFactory;
-    public $fillable = ['user_id','team_id','isCaptain'];
+    public $fillable = ['user_id','team_id','isCaptain','accepted'];
 
     public function user()
     {
